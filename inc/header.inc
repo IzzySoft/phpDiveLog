@@ -3,9 +3,9 @@
  <title><?=$title?></title>
  <meta name="description" content="Logbook of Izzys Dives">
  <meta name="author" content="Izzy">
- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
  <link rel="stylesheet" type="text/css" href="<?=$pdl->config->tpl_url?>divelog.css">
- <script language="JavaScript">//<!--
+ <script language="JavaScript" type="text/javascript">//<!--
   function show_img(url,sx,sy) {
     sx += 20; sy += 20;
 //    var pos = (screen.width/2)-400;
