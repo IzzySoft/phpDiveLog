@@ -15,7 +15,7 @@
  </tr>
 </table>
 
-</td><td><img src="{tpl_dir}images/logo.gif" height="23" align="right">
+</td><td><img src="{tpl_dir}images/logo.gif" height="23" align="right" alt="Logo">
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 
 <table class="outer" border="1" cellpadding="2" align="center" style="margin-top:7">
