@@ -1,4 +1,4 @@
-<table align="center" style="background-color:transparent;" border="0"><tr class="td_blank"><td class="td_transp">
+<table align="center" style="background-color:transparent;" border="0"><tr class="td_transp"><td class="td_transp">
 
 <table cellpadding="0" align="left" style="background-color:transparent;" border="1">
  <tr style="background-color:transparent;">
@@ -19,13 +19,13 @@
     </tr></table></td>
 </table>
 
-</td></tr><tr class="td_blank"><td class="td_transp">
+</td></tr><tr class="td_transp"><td class="td_transp">
  <table border="0" cellpadding="2" width="100%" style="background-color:transparent;"><tr>
   <td class="td_transp" align="left">{nav_left}</td>
   <td class="td_transp" align="right">{nav_right}</td>
  </tr></table>
 
-</td></tr><tr class="td_blank"><td class="td_transp">
+</td></tr><tr class="td_transp"><td class="td_transp">
 
 <table border="1" cellpadding="2" align="center">
  <tr><th>Dive</th><th>Date</th><th>Time</th><th>Location</th><th>Rating</th>
