@@ -12,11 +12,11 @@
 
  /* $Id$ */
 
- $pdl->config->version  = "0.1.1";
+ $pdl->config->version  = "0.1.2";
 
  #==========================================================[ directories ]===
- $pdl->config->tpl_url  = "templates/default/";
- $pdl->config->tpl_path = "templates/default/";
+ $pdl->config->tpl_url  = "templates/$template_set/";
+ $pdl->config->tpl_path = "templates/$template_set/";
 
  #=============================================================[ database ]===
  $pdl->config->db_type  = $database["type"];
@@ -27,5 +27,5 @@
 
  #==========================================================[ preferences ]===
  $pdl->config->display_limit = $display_limit;
- unset($display_limit);
+ unset($display_limit,$template_set);
 ?>

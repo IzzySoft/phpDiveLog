@@ -18,4 +18,5 @@
 
  #==========================================================[ preferences ]===
  $display_limit = 10;     # how may records/page should be displayed for lists
+ $template_set  = "aqua"; # prefered template set: default|aqua
 ?>

@@ -18,3 +18,7 @@ v0.1.1 (23.06.2004)
 + time in the schedule (if available) is now correctly formated
 * moved the icon definitions into the templates (HTML2HTML ;)
 * moved hardcoded fieldnames out of templates (for later translation)
+
+v0.1.2
+-------------------
++ added the Aqua template set

@@ -1,0 +1,134 @@
+/* === Common === */
+  BODY {
+   font-family: Verdana,Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   background-color: #ffffff;
+   color: #0000ee;
+   background-image:url(images/aqua.jpg);
+   background-attachment:fixed;
+  }
+  P {
+   text-align: justify;
+  }
+  H1 {
+   text-align: center;
+   font-size: 150%;
+  }
+  H2 {
+   text-align: center;
+   font-size: 140%;
+  }
+  H3 {
+   text-align: center;
+   font-size: 130%;
+  }
+  .footer {
+   font-size: 9px;
+   font-weight: bold;
+   color: #ffffff;
+   margin-top: 5;
+  }
+  .footer a:link { color: #eeeeee; }
+  .footer a:visited { color: #dddddd; }
+  .footer a:hover { color: #000000; }
+
+/* === Tables === */
+
+  TABLE {
+   background-image:url(images/aqua-light.jpg);
+   background-attachment:fixed;
+   empty-cells: show;
+   border:0;
+   border-spacing:0;
+  }
+  TABLE.nav {
+   background-color: #4444dd;
+/*   background-image:url(images/aqua.jpg);
+   border:2; */
+   border-spacing:1;
+  }
+  TABLE.transp {
+   background-image:url(images/aqua.jpg);
+   border-spacing:0;
+  }
+  TD,TH {
+   font-size: 80%;
+   font-family: Verdana,Arial,Helvetica,sans-serif;
+  }
+  TH {
+   background-image:url(images/sand-light.jpg);
+  }
+  TD {
+/*   background-color: #FFFFCC; */
+  }
+  TH.big {
+    font-size: 120%;
+  }
+  TH.head {
+    font-size: 105%;
+    font-weight: bold;
+  }
+  .td_blank {
+   background-color: #ffffff;
+   border: 0;
+  }
+  .td_transp {
+   background-color: transparent;
+   background-image:url(images/aqua.jpg);
+   text-color:#ffffff;
+  }
+  .tab_active {
+   background-image:url(images/ia.jpg);
+   background-color: #aaeeee;
+   border: 0;
+  }
+  .tab_inactive {
+   background-image:url(images/a.jpg);
+   background-color: #4444dd;
+   color: #eeeeee;
+   border: 0;
+   border-spacing:0;
+  }
+  .tab_inactive a { text-decoration: none;color: #eeeeee; }
+  .tab_inactive a:link { text-decoration: none;color: #eeeeee; }
+  .tab_inactive a:visited { text-decoration: none;color: #eeeeee; }
+
+/* === Links === */
+
+  a {
+    text-decoration: none;
+  }
+  a:active {
+    background: #ffff00;
+    color: #000099;
+  }
+  a:hover,.tab_inactive a:hover {
+    background: #ccffff;
+    color: #000099;
+  }
+  a:link {
+    text-decoration: none;
+    color: #000099;
+  }
+
+/* === Images === */
+
+  span.thumbnail-right,span.thumbnail-left {
+    padding:2px;
+  /* border:1px solid #8888aa; */
+    background: #e5e5e5;
+    margin:0.3em 0 0.5em;
+    font-size:75%;
+    text-align:center;
+    color: #000000;
+  }
+  span.thumbnail-right {
+    float:right;
+    margin-left:0.5em;
+  }
+  span.thumbnail-left {
+    float:left;
+    margin-right:0.5em;
+  }
+  IMG { border:0; }
+//--></style>
