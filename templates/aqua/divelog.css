@@ -42,10 +42,12 @@
    border-spacing:0;
   }
   TABLE.nav {
-   background-color: #4444dd;
-/*   background-image:url(images/aqua.jpg);
-   border:2; */
-   border-spacing:1;
+   background-image:url(images/aqua.jpg);
+   border-style: ridge;
+   border-width: 2;
+   border-color: #3399ff;
+   border-collapse: separate;
+   border-spacing: 1;
   }
   TABLE.transp {
    background-image:url(images/aqua.jpg);
@@ -78,21 +80,28 @@
    text-color:#ffffff;
   }
   .tab_active {
-   background-image:url(images/a.jpg);
-   background-color: #4444dd;
-   color: #eeeeee;
+   background-image:url(images/sand-light.jpg);
    border: 0;
    border-spacing:0;
+   margin-top: 0;
+   margin-bottom: 0;
   }
   .tab_inactive {
-   background-image:url(images/ia.jpg);
-   background-color: #aaeeee;
+   background-image:url(images/aqua-light.jpg);
    border: 0;
+   border-spacing: 0;
+   margin-top: 0;
+   margin-bottom: 0;
   }
-  .tab_active a { text-decoration: none;color: #eeeeee; }
-  .tab_active a:link { text-decoration: none;color: #eeeeee; }
-  .tab_active a:visited { text-decoration: none;color: #eeeeee; }
-  .tab_active a:hover { text-decoration: none;background: #6060ff; }
+  .tab_active a, .tab_active a:visited {
+    color: #0000ff;
+    text-decoration: none;
+  }
+  .tab_active a:hover { background: #ffff00; }
+  .tab_inactive a, .tab_inactive a:visited {
+    color: #000000;
+    text-decoration: none;
+  }
 
 /* === Links === */
 
