@@ -16,15 +16,11 @@
    function tabs() {
      GLOBAL $t,$pdl;
      $t->set_block("template","homeblock","home");
-/*     if ( $pdl->config->enable_index ){
-       if ( basename($_SERVER["SCRIPT_FILENAME"])=="buddylist.php" ) {
-         $img = "<img src='".$pdl->config->tpl_url."images/tab_buddylist.gif'>";
-       } else {
-         $img = $pdl->link->linkurl("buddylist.php","<img src='".$pdl->config->tpl_url."images/tab_home.gif'>");
-       }
+     if ( !empty($_GET["diver"]) ) {
+       $img = $pdl->link->linkurl("index.php","<img src='".$pdl->config->tpl_url."images/tab_home.gif'>");
        $t->set_var("home_ref",$img);
        $t->parse("home","homeblock");
-     } */
+     }
      $this->add_tab("diver","buddylist.php","tab_buddylist.gif");
      $this->add_tab("sites","places.php","tab_sites.gif");
      $this->add_tab("prefs","prefs.php?tab2=1","tab_preferences.gif");
