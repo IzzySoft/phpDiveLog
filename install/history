@@ -9,6 +9,8 @@ v0.1.7
   available if no diver was specified with the url, but $default_page="user"
 ! the global site list did not honour the enable_index option of the config.inc
 ! the display_limit was ignored as well when a place was selected
+! still some vars missing with register_globals=off
+* tuned the db_text class (PDL got very slow with large DiveLogs)
 
 v0.1.6 (21.07.2004)
 -------------------

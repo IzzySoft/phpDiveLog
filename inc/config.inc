@@ -22,9 +22,9 @@
  $title = "phpDiveLog Dev"; # site name
  $enable_index  = TRUE;   # whether the buddylist index is available
  $default_page  = "user"; # where to route requests without the "?diver=nick"
-                          # to: user|index|error ("index" needs enable_index
-                          # set to TRUE)
- $default_user  = "demo"; # if default_page=user: which user is the default?
+                          # to: user|index|error ("index" is not supported yet
+                          # and will be handled as "error")
+ $default_user  = "izzy"; # if default_page=user: which user is the default?
                           # must be a valid account (subdir diver/<user>)
  $allow_override = "title lang display_limit template_set"; 
                           # which settings may be adjusted via the

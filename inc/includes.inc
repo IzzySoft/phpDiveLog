@@ -12,6 +12,9 @@
 
  /* $Id$ */
 
+ $diver = $_GET["diver"];
+ $lang  = $_GET["lang"];
+ $tpl   = $_GET["tpl"];
  #==========================================================[ include API ]===
  include("inc/config.inc");
  include("inc/config_internal.inc");

@@ -20,6 +20,7 @@
    include("inc/footer.inc");
    exit;
  }
+ $start = $_GET["start"];
  if (!$start) $start = 0;
  $end = $start + $pdl->config->display_limit;
 

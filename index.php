@@ -15,6 +15,7 @@
  include("inc/includes.inc");
  $title .= ": DiveIndex";
  include("inc/header.inc");
+ $start = $_GET["start"];
  if (!$start) $start = 0;
  $end = $start + $pdl->config->display_limit;
 
