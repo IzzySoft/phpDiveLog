@@ -32,6 +32,8 @@
 
  #=================================================[ general template data ]===
  include("inc/tab_setup.inc");
+ $pdl->tabs->activate("dives");
+ $pdl->tabs->parse();
  $t->set_var("cond_name",lang("conditions"));
  $t->set_var("notes_name",lang("notes"));
  $t->set_var("equi_name",lang("equipment"));
@@ -41,12 +43,12 @@
 
  #=============================================[ set up the navigation bar ]===
  if ($prev=$dive["prev_dive#"]) {
-   $t->set_var("nav_left","<a href='$PHP_SELF?nr=$prev'><img src='".$pdl->config->tpl_url."images/left.gif'></a>");
+   $t->set_var("nav_left",$pdl->link->linkurl("$PHP_SELF?nr=$prev","<img src='".$pdl->config->tpl_url."images/left.gif'>"));
  } else {
    $t->set_var("nav_left","<img src='".$pdl->config->tpl_url."images/left-grey.gif'>");
  }
  if ($next=$dive["next_dive#"]) {
-   $t->set_var("nav_right","<a href='$PHP_SELF?nr=$next'><img src='".$pdl->config->tpl_url."images/right.gif'></a>");
+   $t->set_var("nav_right",$pdl->link->linkurl("$PHP_SELF?nr=$next","<img src='".$pdl->config->tpl_url."images/right.gif'>"));
  } else {
    $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif'>");
  }
@@ -56,7 +58,7 @@
  $t->set_var("time",$dive["time"]);
  $t->set_var("date",$dive["date"]);
  $t->set_var("location",$dive["location"]);
- $t->set_var("place","<a href='site.php?id=".$dive["site_id"]."'>".$dive["place"]."</a>");
+ $t->set_var("place",$pdl->link->linkurl("site.php?id=".$dive["site_id"],$dive["place"]));
  #--------------------------[ Summary ]---
  $t->set_var("item_name",lang("max_depth").":");
  $t->set_var("item_data",$dive["depth"]);

@@ -58,6 +58,9 @@
    background-image:url(images/aqua.jpg);
    border-spacing:0;
   }
+  TR.tab_active {
+    background-color:transparent;
+  }
   TD,TH {
    font-size: 80%;
    font-family: Verdana,Arial,Helvetica,sans-serif;

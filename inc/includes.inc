@@ -25,6 +25,7 @@
  include("inc/class.template.inc");
  include("inc/class.translation.inc");
  $pdl->trans = new trans($_GET["lang"]);
+ include("inc/class.link.inc");
 
  #======================================================[ setup shortkeys ]===
  function lang($key,$m1="",$m2="",$m3="",$m4="",$m5="") {

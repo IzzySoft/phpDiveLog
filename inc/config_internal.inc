@@ -14,6 +14,7 @@
 
  $pdl->config->version = "0.1.3";
  $pdl->config->user    = "";
+ if ( !empty($_GET["tpl"]) ) $template_set = $_GET["tpl"];
 
  #==========================================================[ directories ]===
  $pdl->config->base_path = ""; # if set, has to include trailing slash - if

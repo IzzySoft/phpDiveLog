@@ -31,10 +31,12 @@
 
  #=============================================[ set up the navigation bar ]===
  include("inc/tab_setup.inc");
+ $pdl->tabs->activate("dives",TRUE);
+ $pdl->tabs->parse();
  if ($start) {
    $prev = $start - $pdl->config->display_limit;
    if ($prev<0) $prev=0;
-   $t->set_var("nav_left","<a href='$PHP_SELF?start=$prev'><img src='".$pdl->config->tpl_url."images/left.gif'></a>");
+   $t->set_var("nav_left",$pdl->link->linkurl("$PHP_SELF?start=$prev","<img src='".$pdl->config->tpl_url."images/left.gif'>"));
  } else {
    $t->set_var("nav_left","<img src='".$pdl->config->tpl_url."images/left-grey.gif'>");
  }
@@ -42,7 +44,7 @@
    $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif'>");
  } else {
    $next = $start + $pdl->config->display_limit;
-   $t->set_var("nav_right","<a href='$PHP_SELF?start=$next'><img src='".$pdl->config->tpl_url."images/right.gif'></a>");
+   $t->set_var("nav_right",$pdl->link->linkurl("$PHP_SELF?start=$next","<img src='".$pdl->config->tpl_url."images/right.gif'>"));
  }
 
  #===============================================[ set up the table header ]===
@@ -61,8 +63,8 @@
      $t->set_var("$detail",$dives[$i][$detail]);
    }
    $t->set_var("rating",$pdl->config->tpl_url."images/".$dives[$i]["rating"]."star.gif");
-   $t->set_var("dive#","<a href='dive.php?nr=".$dives[$i]["dive#"]."'>".$dives[$i]["dive#"]."</a>");
-   $t->set_var("place","<a href='site.php?id=".$dives[$i]["site_id"]."'>".$dives[$i]["place"]."</a>");
+   $t->set_var("dive#",$pdl->link->linkurl("dive.php?nr=".$dives[$i]["dive#"],$dives[$i]["dive#"]));
+   $t->set_var("place",$pdl->link->linkurl("site.php?id=".$dives[$i]["site_id"],$dives[$i]["place"]));
    if ( $f->havePix($dives[$i]["dive#"],"dive") ) {
      $t->set_var("pix",'<img src="'.$pdl->config->tpl_url.'images/camera.gif" valign="middle">');
    } else {

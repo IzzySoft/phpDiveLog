@@ -2,21 +2,14 @@
 
 <table cellpadding="0" align="left" style="background-color:transparent;" border="1">
  <tr style="background-color:transparent;">
-   <td class="tab_inactive"><table class="tab_inactive" border="0">
+<!-- BEGIN tabblock -->
+   <td class="{tab_class}"><table class="{tab_class}" border="0">
     <tr style="background-color:transparent;">
-     <td class="tab_inactive" style="vertical-align:middle"><a href="{dives_ref}"><IMG SRC="{tpl_dir}images/dive_flag2.gif" width="20" height="15" alt="DiveFlag"></a></td>
-     <td class="tab_inactive" style="vertical-align:middle"><a href="{dives_ref}">{dive_tab_name}</a></td>
+     <td class="{tab_class}" style="vertical-align:middle"><a href="{dives_ref}"><img src="{tpl_dir}images/{tab_img}" width="20" height="15" alt="DiveFlag"></a></td>
+     <td class="{tab_class}" style="vertical-align:middle">{tab_name}</td>
     </tr></table></td>
-   <td class="tab_inactive"><a href="stats.php"><table class="tab_inactive" border="0">
-    <tr style="background-color:transparent;">
-     <td class="tab_inactive" style="vertical-align:middle"><a href="{stats_ref}"><IMG SRC="{tpl_dir}images/btn_notes.gif" width="20" height="15" alt="Stats" align="middle"></a></td>
-     <td class="tab_inactive" style="vertical-align:middle"><a href="{stats_ref}">{stats_tab_name}</a></td>
-    </tr></table></td>
-   <td class="tab_active"><table class="tab_active" border="0">
-    <tr style="background-color:transparent;">
-     <td class="tab_active" style="vertical-align:middle"><IMG SRC="{tpl_dir}images/globe.gif" width="15" height="15" alt="Globe" align="middle"></td>
-     <td class="tab_active" style="vertical-align:middle">{sites_tab_name}</td></tr>
-    </tr></table></td>
+<!-- END tabblock -->
+ </tr>
 </table>
 
 </td></tr><tr class="td_transp"><td class="td_transp">
@@ -31,7 +24,7 @@
  <tr><th></th><th>{loc_name}</th><th>{place_name}</th><th>{md_name}</th><th>&nbsp;</th></tr>
 
 <!-- BEGIN itemblock -->
- <tr><td align="right"><a href="{site_ref}">{id}</a></td>
+ <tr><td align="right">{site_ref}</td>
   <td align="center">{loc}</td>
   <td align="center">{place}</td>
   <td align="right">{depth}</td>

@@ -12,13 +12,48 @@
 
  # $Id$
 
+ class tabs {
+   function tabs() {
+     GLOBAL $t,$pdl;
+     $this->add_tab("dives","index.php","dive_flag2.gif");
+     $this->add_tab("stats","stats.php","btn_notes.gif");
+     $this->add_tab("sites","sitelist.php","globe.gif");
+     $t->set_block("template","tabblock","tab");
+   }
+
+   function add_tab($name,$url,$img) {
+     $this->tab[$name]->url     = $url;
+     $this->tab[$name]->active  = FALSE;
+     $this->tab[$name]->hideurl = FALSE;
+     $this->tab[$name]->img     = $img;
+     $this->tabnames[] = $name;
+   }
+
+   function activate($name,$hideurl=FALSE) {
+     $this->tab[$name]->active = TRUE;
+     if ($hideurl) $this->tab[$name]->hideurl = TRUE;
+   }
+
+   function parse() {
+     GLOBAL $t,$pdl;
+     $tc = count($this->tabnames);
+     for ($i=0;$i<$tc;++$i) {
+       if ($this->tab[$this->tabnames[$i]]->active) {
+         $class = "tab_active"; } else { $class = "tab_inactive"; }
+       $t->set_var("tab_class","$class");
+       $name = lang($this->tabnames[$i]);
+       $t->set_var("tab_img",$this->tab[$name]->img);
+       if (!$this->tab[$name]->hideurl)
+         $name = $pdl->link->linkurl($this->tab[$name]->url,lang("tab_".$name));
+	 else $name = lang("tab_".$name);
+       $t->set_var("tab_name",$name);
+       $t->parse("tab","tabblock",TRUE);
+     }
+   }
+ }
+
  #================================================[ set up navigation tabs ]===
  $t->set_var("tpl_dir",$pdl->config->tpl_url);
- $t->set_var("dive_tab_name","Dives");
- $t->set_var("dives_ref","index.php");
- $t->set_var("stats_tab_name","Stats");
- $t->set_var("stats_ref","stats.php");
- $t->set_var("sites_tab_name","Sites");
- $t->set_var("sites_ref","sitelist.php");
+ $pdl->tabs = new tabs;
 
 ?>

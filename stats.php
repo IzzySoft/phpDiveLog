@@ -21,6 +21,8 @@
 
  #================================================[ set up navigation tabs ]===
  include("inc/tab_setup.inc");
+ $pdl->tabs->activate("stats",TRUE);
+ $pdl->tabs->parse();
 
  #==================================================[ Set up table headers ]===
  $t->set_var("title",lang("dive_stats"));
