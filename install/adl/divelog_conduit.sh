@@ -54,14 +54,14 @@ java -jar conduit.jar -$UNITS $* >/dev/null
 # SCP transfer to REMOTE machine
 if [ $USESCP -eq 1 ]; then
   echo `date +"$DATEFORMAT"` "Copying files to the remote web target dir..."
-  scp $LOGDIR/csv/* $SCPBASE/data
+  scp $LOGDIR/csv/* $SCPBASE/data &>/dev/null
   scp $LOGDIR/images/* $SCPBASE/images/ &>/dev/null
 fi
 
 # transfer CSV files to LOCAL web target
 if [ $USELOCAL -eq 1 ]; then
   echo `date +"$DATEFORMAT"` "Copying files to the local web target dir..."
-  cp $LOGDIR/csv/* $PDLBASE/data/
+  cp $LOGDIR/csv/* $PDLBASE/data/ &>/dev/null
   cp $LOGDIR/images/* $PDLBASE/images/ &>/dev/null
 fi
 
