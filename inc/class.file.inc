@@ -50,6 +50,23 @@
      return $type.sprintf("%05d",$id);
    }
 
+   /** Get notes from the notes/* file for the given dive/site
+    * @class file
+    * @method getNotes
+    * @param integer num# Dive#/Site# to retrieve the notes for
+    * @param string type "dive" (default) or "site"
+    * @return string content of notes file
+    */
+   function getNotes($id,$type="dive") {
+     GLOBAL $pdl;
+     if ( empty($type) ) return "";
+     $file = $pdl->config->user_path."notes/".$this->mkADLprefix($id,$type).".txt";
+     if ( file_exists($file) ) {
+       return $this->read_file($file);
+     }
+     return "";
+   }
+
    /** Find dive pictures
     * @class file
     * @method getDivePix

@@ -28,6 +28,7 @@
     $this->dir->sitepix   = "fotos/site";
     $this->dir->divepix   = "fotos/dive";
     $this->dir->privpix   = "fotos/person";
+    $this->dir->notes     = "notes";
     $this->dir->text      = "text";
   }
 
@@ -59,6 +60,7 @@
       }
       switch(substr($string,1,1)) {
         case "d" : $root.=$this->dir->divepix; break;
+	case "n" : $root.=$this->dir->notes; break;
 	case "p" : $root.=$this->dir->privpix; break;
 	case "s" : $root.=$this->dir->sitepix; break;
 	case "t" : $root.=$this->dir->text; break;

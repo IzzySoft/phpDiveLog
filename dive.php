@@ -149,7 +149,13 @@
  }
 
  #-------------------------------[ Notes ]---
- $t->set_var("notes_text",$pdl->common->tagreplace(nl2br($dive["notes"])));
+ $notes[1] = $pdl->common->tagreplace(nl2br($dive["notes"]));
+ $notes[2] = $pdl->file->getNotes($nr,"dive");
+ if ( !empty($notes[2]) ) {
+   if ( !empty($notes[1]) ) $notes[1] .= "<br>";
+   $notes[2] = $pdl->common->tagreplace(nl2br($notes[2]));
+ }
+ $t->set_var("notes_text",$notes[1].$notes[2]);
 
  #-------------------------------[ Fotos ]---
  $fotos = $pdl->file->getDivePix($nr);

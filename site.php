@@ -54,7 +54,14 @@
    $t->set_var("$detail",$site[$detail]);
  }
  #-------------------------------[ Notes ]---
- $t->set_var("description",$pdl->common->tagreplace(nl2br($site["description"])));
+ $notes[1] = $pdl->common->tagreplace(nl2br($site["description"));
+ $notes[2] = $pdl->file->getNotes($id,"site");
+ if ( !empty($notes[2]) ) {
+   if ( !empty($notes[1]) ) $notes[1] .= "<br>";
+   $notes[2] = $pdl->common->tagreplace(nl2br($notes[2]));
+ }
+ $t->set_var("description",$notes[1].$notes[2]);
+
 #   $t->set_var("rating",$pdl->config->tpl_url."images/".$dives[$i]["rating"]."star.gif");
 # $t->parse("item","itemblock",TRUE);
 
