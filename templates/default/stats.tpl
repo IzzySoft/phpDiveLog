@@ -1,4 +1,4 @@
-<table align="center"  style="background-color:transparent;" border="0"><tr class="td_blank"><td class="td_blank">
+<table align="center"  style="background-color:transparent;" border="0"><tr class="td_transp"><td class="td_transp">
 
 <table cellpadding="0" align="left" style="background-color:transparent;" border="1">
  <tr style="background-color:transparent;">
@@ -19,5 +19,5 @@
     </tr></table></td>
 </table>
 
-</td></tr><tr class="td_blank"><td class="td_blank">
+</td></tr><tr class="td_transp"><td class="td_transp">
 <!--/table -->

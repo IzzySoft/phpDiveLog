@@ -1,4 +1,4 @@
-<table align="center"  style="background-color:transparent;" border="0"><tr class="td_blank"><td class="td_blank">
+<table align="center"  style="background-color:transparent;" border="0"><tr class="td_transp"><td class="td_transp">
 
 <table cellpadding="0" align="left" style="background-color:transparent;" border="1">
  <tr style="background-color:transparent;">
@@ -19,23 +19,23 @@
     </tr></table></td>
 </table>
 
-</td></tr><tr class="td_blank"><td class="td_blank"><!-- Navigation -->
+</td></tr><tr class="td_transp"><td class="td_transp"><!-- Navigation -->
  <table border="0" cellpadding="2" width="100%" style="background-color:transparent;"><tr>
-  <td class="td_blank" colspan="5" height="5"></td></tr><tr>
-  <td class="td_blank" align="left" width="12">{nav_left}</td>
+  <td class="td_transp" colspan="5" height="5"></td></tr><tr>
+  <td class="td_transp" align="left" width="12">{nav_left}</td>
   <td align="left" class="td_big" style="vertical-align:middle">Dive#: {dive#}</td>
   <td width="20"></td>
-  <td style="vertical-align:middle;background-color:transparent;">{loc_img}</td>
-  <td class="td_big" style="vertical-align:middle;background-color:transparent;"><h2>{location} / {place}</h2></td>
+  <td class="td_blank" style="vertical-align:middle;">{loc_img}</td>
+  <td class="td_blank" style="vertical-align:middle;"><h2>{location} / {place}</h2></td>
   <td width="20"></td>
   <td align="right" class="td_big" style="vertical-align:middle">{date} {time}</td>
-  <td class="td_blank" align="right" width="12">{nav_right}</td>
+  <td class="td_transp" align="right" width="12">{nav_right}</td>
  </tr></table>
 
-</td></tr><tr class="td_blank"><td class="td_blank">
+</td></tr><tr class="td_transp"><td class="td_transp">
  <table align="center" border="0" cellpadding="2"><!-- Conditions -->
    <tr><th colspan="3" valign="middle"><h3>{cond_img} {cond_name}</h3></th></tr>
-   <tr class="td_blank"><td class="td_blank" valign="top">
+   <tr class="td_transp"><td class="td_transp" valign="top">
      <table align="center" border="0" cellpadding="2">
 <!-- BEGIN sumblock -->
        <tr><th>{item_name}</th><td>{item_data}</td></tr>
@@ -50,7 +50,7 @@
    </td></tr>
  </table>
 
-</td></tr><tr class="td_blank"><td class="td_blank">
+</td></tr><tr class="td_transp"><td class="td_transp">
 <table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Equipment -->
  <tr><th colspan="2" valign="middle"><h3>{equi_img} {equi_name}</h3></th></tr>
 <!-- BEGIN equiblock -->
@@ -59,7 +59,7 @@
 {tank}
 </table>
 
-</td></tr><tr class="td_blank"><td class="td_blank">
+</td></tr><tr class="td_transp"><td class="td_transp">
 <table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Notes -->
  <tr><th valign="middle"><h3>{notes_img} {notes_name}</h3></th></tr>
  <tr><td>{notes_text}</td></tr>

@@ -1,4 +1,4 @@
-<table align="center"  style="background-color:transparent;" border="0"><tr class="td_blank"><td class="td_blank">
+<table align="center"  style="background-color:transparent;" border="0"><tr class="td_transp"><td class="td_transp">
 
 <table cellpadding="0" align="left" style="background-color:transparent;" border="1">
  <tr style="background-color:transparent;">
@@ -19,23 +19,23 @@
     </tr></table></td>
 </table>
 
-</td></tr><tr class="td_blank"><td class="td_blank">
+</td></tr><tr class="td_transp"><td class="td_transp">
  <table border="0" cellpadding="2" width="100%" style="background-color:transparent;"><tr>
-  <td class="td_blank" align="left">{nav_left}</td>
-  <td class="td_blank" align="right">{nav_right}</td>
+  <td class="td_transp" align="left">{nav_left}</td>
+  <td class="td_transp" align="right">{nav_right}</td>
  </tr></table>
 
-</td></tr><tr class="td_blank"><td class="td_blank">
+</td></tr><tr class="td_transp"><td class="td_transp">
 
 <table cellpadding="2" border="0" align="center">
  <tr><th colspan="5"><h3>{site_img} {loc}: {place}</h3></th></tr>
  <tr>
   <th style="text-align:right">Latitude:</th> <td>{latitude}</td>
-  <td class="td_blank"></td>
+  <td class="td_transp"></td>
   <th style="text-align:right">Longitude:</th> <td>{longitude}</td>
  </tr><tr>
   <th style="text-align:right">Altitude:</th> <td>{altitude}</td>
-  <td class="td_blank"></td>
+  <td class="td_transp"></td>
   <th style="text-align:right">MaxDepth:</th> <td>{depth}m</td>
  </tr>
 </table>
