@@ -205,6 +205,26 @@
      return $this->get_sites($id,"",TRUE);
    }
 
+  #======================================================[ Dive Statistics ]===
+   /** Get dive statistics
+    * @class db_text
+    * @method get_stats
+    * @return array stats (properties: max_depth,max_time,avg_depth,cum_time)
+    */
+  function get_stats() {
+     GLOBAL $pdl;
+     $file = $pdl->config->datadir."global.";
+     switch ($pdl->config->db_type) {
+       case "csv"  :
+       default     :
+         $file .= "csv";
+         if (!file_exists($file)) return FALSE;
+         $csv = new csv(";",'"',TRUE);
+         $csv->import($file);
+         return $csv->data[0];
+     }    
+  }
+
  } // end class db_text
 
  /** Dive data: array[0..n] of imported dive records.
