@@ -35,12 +35,34 @@
 	 $this->dives    = count($this->divedata);
 	 $this->setup_dive_records();
 	 $csv->clear_data();
+	 if (!file_exists($pdl->config->sites)) die ("DiveSites file '".$pdl->config->sites."' not found!<br>\n");
 	 $csv->import($pdl->config->sites);
          $this->sitedata = $csv->data;
          $this->sites    = count($this->sitedata);
 	 $this->setup_site_records(); // temporary - see func *!*
      }
    }
+
+  #========================================================[ Dive Schedule ]===
+   /** Get dive schedule for a given dive#
+    * @class db_text
+    * @method get_schedule
+    * @param integer dive# to retrieve the schedule for
+    * @return mixed schedule (boolean FALSE if no schedule exists, array otherwise)
+    */
+  function get_schedule($nr) {
+     GLOBAL $pdl;
+     $file = $pdl->config->datadir."dive".sprintf("%05d",$nr)."_schedule.";
+     switch ($pdl->config->db_type) {
+       case "csv"  :
+       default     :
+         $file .= "csv";
+         if (!file_exists($file)) return FALSE;
+         $csv = new csv(";",'"',TRUE);
+         $csv->import($file);
+         return $csv->data;
+     }    
+  }
 
   #============================================================[ Dive Data ]===
    function setup_dive_records() {
