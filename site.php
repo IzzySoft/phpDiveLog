@@ -23,6 +23,7 @@
  $t->set_block("template","notesblock","notb");
  $t->set_block("template","fotoblock","fotos");
  $t->set_block("fotoblock","fotoitemblock","pic");
+ $t->set_block("fotoblock","multifotoblock","multi");
 
  function mk_coord($str) {
    if ( preg_match("/([0-9]+)[^0-9]+([0-9]+)[^0-9.]+([0-9.]+)[^0-9]+/",$str,$match) ) {
@@ -104,6 +105,9 @@
      $t->set_var("foto",$fotos[$i]->url);
      $t->set_var("fdesc",$fotos[$i]->desc);
      $t->parse("pic","fotoitemblock",TRUE);
+     if ( ($i+1)%3==0 && $fc>3 && $i+1!=$fc ) {
+       $t->parse("pic","multifotoblock",TRUE);
+     }
    }
    $t->set_var("fotos_name",lang("fotos"));
    $t->parse("fotos","fotoblock");

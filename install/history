@@ -8,6 +8,8 @@ v0.2.2
 ! with RSync, some of the data have not correctly been transfered by the conduit
   wrapper
 + divelog_conduit.sh now logs the process also to a file (not screen only)
++ if there are more than 3 pictures associated with a dive[site], PDL now starts
+  a new row after each third image
 
 v0.2.1 (31.08.2004)
 -------------------

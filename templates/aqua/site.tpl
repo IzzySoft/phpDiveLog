@@ -52,6 +52,9 @@
 <!-- BEGIN fotoitemblock -->
    <td><span class="thumbnail">{bigref}<img src="{foto}" align="center">{unref}<br>{fdesc}</span></td>
 <!-- END fotoitemblock -->
+<!-- BEGIN multifotoblock -->
+   </tr><tr>
+<!-- END multifotoblock -->
    </tr></table></td></tr>
 </table>
 <!-- END fotoblock -->
