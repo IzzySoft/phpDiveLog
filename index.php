@@ -22,20 +22,13 @@
  $t->set_file(array("template"=>"logbook.tpl"));
  $t->set_block("template","itemblock","item");
 
- #================================================[ set up navigation tabs ]===
- $t->set_var("tpl_dir",$pdl->config->tpl_url);
- $t->set_var("dive_tab_name","Dives");
- $t->set_var("stats_tab_name","Stats");
- $t->set_var("stats_ref","stats.php");
- $t->set_var("sites_tab_name","Sites");
- $t->set_var("sites_ref","sitelist.php");
-
  #==============================================[ Import dive data from DB ]===
  $dives = $pdl->db->get_dives($start,$pdl->config->display_limit);
  $max   = count($dives);
  $records = $pdl->db->dives;
 
  #=============================================[ set up the navigation bar ]===
+ include("inc/tab_setup.inc");
  if ($start) {
    $prev = $start - $pdl->config->display_limit;
    if ($prev<0) $prev=0;

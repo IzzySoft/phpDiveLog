@@ -25,16 +25,8 @@
  $t->set_block("template","scheduleblock","sched");
  $t->set_block("scheduleblock","scheditemblock","scheditem");
 
- #================================================[ set up navigation tabs ]===
- $t->set_var("tpl_dir",$pdl->config->tpl_url);
- $t->set_var("dive_tab_name","Dives");
- $t->set_var("dives_ref","index.php");
- $t->set_var("stats_tab_name","Stats");
- $t->set_var("stats_ref","stats.php");
- $t->set_var("sites_tab_name","Sites");
- $t->set_var("sites_ref","sitelist.php");
-
  #=================================================[ general template data ]===
+ include("inc/tab_setup.inc");
  $t->set_var("cond_name","Conditions");
  $t->set_var("notes_name","Notes");
  $t->set_var("equi_name","Equipment");
