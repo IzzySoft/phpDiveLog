@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.1.7
+v0.1.7 (27.07.2004)
 -------------------
 * switch button on global pages (to reach the personal pages) is now also
   available if no diver was specified with the url, but $default_page="user"
