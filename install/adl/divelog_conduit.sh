@@ -18,6 +18,8 @@ LOGDIR=log
 UNITS=bothunits
 # date format for logging
 DATEFORMAT="%Y-%m-%d %H:%M:%S"
+# where to log the process - you need write access to that directory!
+LOGFILE=./pdltransfer.log
 #------------------------------------------------------[ Local Transfers ]---
 # Do we use the local transfer? [0|1]
 USELOCAL=1
@@ -45,25 +47,25 @@ echo "
 #=========================================================[ Let's do it! ]===
 # clean up data from possible previous run - the conduit does not update
 # correctly otherwise
-echo `date +"$DATEFORMAT"` "Initializing..."
+echo `date +"$DATEFORMAT"` "Initializing..." | tee -a $LOGFILE
 for i in csv images dives divesites; do
   rm $LOGDIR/$i/* &>/dev/null
 done
 
 # get the DiveLog data
-echo `date +"$DATEFORMAT"` "Converting AquaDiveLog Data..."
+echo `date +"$DATEFORMAT"` "Converting AquaDiveLog Data..." | tee -a $LOGFILE
 java -jar conduit.jar -$UNITS $* >/dev/null
 
 # transfer CSV files to LOCAL web target
 if [ $USELOCAL -eq 1 ]; then
-  echo `date +"$DATEFORMAT"` "Copying files to the local web target dir..."
+  echo `date +"$DATEFORMAT"` "Copying files to the local web target dir..." | tee -a $LOGFILE
   cp $LOGDIR/csv/* $PDLBASE/data/ &>/dev/null
   cp $LOGDIR/images/* $PDLBASE/images/ &>/dev/null
 fi
 
 # SCP transfer to REMOTE machine
 if [ $USESCP -eq 1 ]; then
-  echo `date +"$DATEFORMAT"` "Copying files to the remote web target dir via SCP..."
+  echo `date +"$DATEFORMAT"` "Copying files to the remote web target dir via SCP..." | tee -a $LOGFILE
   scp $LOGDIR/csv/* $SCPBASE/data &>/dev/null
   scp $LOGDIR/images/* $SCPBASE/images/ &>/dev/null
 
@@ -71,23 +73,26 @@ if [ $USESCP -eq 1 ]; then
 elif [ $USESCP -eq 2 ]; then
   if [ $RSYNCBASE -eq 1 ]; then
     RLOGDIR=$PDLBASE
+    LDATADIR=$PDLBASE/data
   else
     RLOGDIR=$LOGDIR
+    LDATADIR=$LOGDIR/csv
   fi
-  echo `date +"$DATEFORMAT"` "Syncronizing with remote web target dir via RSync..."
-  echo `date +"$DATEFORMAT"` "- Sync DataFiles..."
-  rsync -ae ssh $RLOGDIR/csv $SCPBASE/data &>/dev/null
-  echo `date +"$DATEFORMAT"` "- Sync DiveProfiles..."
-  rsync -ae ssh $RLOGDIR/images $SCPBASE/images &>/dev/null
-  echo `date +"$DATEFORMAT"` "- Sync Fotos..."
+  echo `date +"$DATEFORMAT"` "Syncronizing with remote web target dir via RSync..." | tee -a $LOGFILE
+  echo `date +"$DATEFORMAT"` "- Sync DataFiles..." | tee -a $LOGFILE
+  rsync -ae ssh $LDATADIR/* $SCPBASE/data &>/dev/null
+  echo `date +"$DATEFORMAT"` "- Sync DiveProfiles..." | tee -a $LOGFILE
+  rsync -ae ssh $RLOGDIR/images/* $SCPBASE/images &>/dev/null
+  echo `date +"$DATEFORMAT"` "- Sync Fotos..." | tee -a $LOGFILE
   rsync -ae ssh $RLOGDIR/fotos/* $SCPBASE/fotos &>/dev/null
-  echo `date +"$DATEFORMAT"` "- Sync TextFiles..."
+  echo `date +"$DATEFORMAT"` "- Sync TextFiles..." | tee -a $LOGFILE
   rsync -ae ssh $RLOGDIR/notes/* $SCPBASE/notes &>/dev/null
   rsync -ae ssh $RLOGDIR/text/* $SCPBASE/text &>/dev/null
 fi
 
 # Finito
-echo `date +"$DATEFORMAT"` "Finnished.
+echo `date +"$DATEFORMAT"` "Finnished." | tee -a $LOGFILE
+echo "">>$LOGFILE
 
 #############################################################################"
 
