@@ -14,8 +14,12 @@
 #========================================================[ Configuration ]===
 # location of the Conduit output (must match the confuration in divelog.ini)
 LOGDIR=log
-# the location of phpDiveLogs data dir
-DATADIR=/web/divelog/data
+# the location of phpDiveLogs user dir (where the data/ and images/ dirs are)
+PDLBASE=/web/divelog
+# which units to use for the values: imperial|metric|bothunits
+UNITS=bothunits
+# date format for logging
+DATEFORMAT="%Y-%m-%d %H:%M:%S"
 
 #=========================================================[ Intro Output ]===
 echo "
@@ -30,27 +34,23 @@ echo "
 #=========================================================[ Let's do it! ]===
 # clean up data from possible previous run - the conduit does not update
 # correctly otherwise
-echo "Initializing..."
-for i in csv dives divesites; do
+echo `date +"$DATEFORMAT"` "Initializing..."
+for i in csv images dives divesites; do
   rm $LOGDIR/$i/* &>/dev/null
 done
 
 # get the DiveLog data
-echo "Converting AquaDiveLog Data..."
-java -jar conduit.jar -bothunits %1 %2 %3 %4 %5 >/dev/null
+echo `date +"$DATEFORMAT"` "Converting AquaDiveLog Data..."
+java -jar conduit.jar -$UNITS $* >/dev/null
 
 # transfer CSV files to web target
-echo "Moving datafiles to the web target dir..."
-mv $LOGDIR/csv/* $DATADIR
-
-# cleanup
-echo "Cleanup..."
-for i in csv dives divesites; do
-  rm $LOGDIR/$i/* &>/dev/null
-done
+echo `date +"$DATEFORMAT"` "Moving files to the web target dir..."
+mv $LOGDIR/csv/* $PDLBASE/data/
+mv $LOGDIR/images/* $PDLBASE/images/ &>/dev/null
 
 # Finito
-echo "Finnished.
+echo `date +"$DATEFORMAT"` "Finnished.
+
 #############################################################################"
 
 exit
