@@ -17,11 +17,11 @@
  $tpl   = $_GET["tpl"];
  #==========================================================[ include API ]===
  include("inc/config.inc");
+ include("inc/class.csv.inc");
  include("inc/config_internal.inc");
  switch($pdl->config->db_type) {
    case "cvs"   :
    default      :
-     include("inc/class.csv.inc");
      include("inc/class.db_text.inc");
  }
  $pdl->db = new db_text();

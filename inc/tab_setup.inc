@@ -16,10 +16,15 @@
    function tabs() {
      GLOBAL $t,$pdl;
      $t->set_block("template","homeblock","home");
-     if ( $pdl->config->enable_index ){
+     if ( $pdl->config->enable_index ){ // switch-button
        $img = $pdl->link->linkurl("buddylist.php","<img src='".$pdl->config->tpl_url."images/tab_switch.gif' alt='switch'>");
        $t->set_var("home_ref",$img);
        $t->parse("home","homeblock");
+     }
+     if ( $pdl->config->user_pwd ) { // import-button
+       $img = $pdl->link->linkurl("import.php","<img src='".$pdl->config->tpl_url."images/tab_import.gif' alt='import'>");
+       $t->set_var("home_ref",$img);
+       $t->parse("home","homeblock",TRUE);
      }
      $this->add_tab("dives","index.php","tab_dives.gif");
      $this->add_tab("stats","stats.php","tab_stats.gif");

@@ -49,6 +49,7 @@
    }
    if ($uconf["personal"]) $pdl->config->display_personal = TRUE;
  }
+ $pdl->config->user_pwd = $pdl->file->getPwd();
 
  #==========================================================[ preferences ]===
  if ( !empty($_GET["tpl"]) )  $template_set = $_GET["tpl"];

@@ -260,6 +260,25 @@
      return $conf;
    }
 
+   /** Retrieve the password for the current user
+    * @class file
+    * @method getPwd
+    * @return string pwdHash (md5) (or empty string if nothing found)
+    */
+   function getPwd() {
+     GLOBAL $pdl;
+     if (file_exists($pdl->config->pwdfile)) {
+       $csv = new csv(";",'"',TRUE);
+       $csv->import($pdl->config->pwdfile);
+       $uc  = count($csv->data);
+       for ($i=0;$i<$uc;++$i) {
+         if ( $csv->data[$i]["user"] == $pdl->config->user_name )
+	   return $csv->data[$i]["pwd"];
+       }
+       return "";
+     }
+   }
+
    /** Get all subdirectory names of a specified directory
     * @class file
     * @method get_subdirs
