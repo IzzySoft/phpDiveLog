@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.1.5
+v0.1.5 (12.07.2004)
 -------------------
 + some settings (such as display_limit, default language, etc.) can now be
   (re-)defined on a per-diver-base (i.e. each logbook can have its own defaults)
