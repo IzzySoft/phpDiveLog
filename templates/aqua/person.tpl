@@ -53,8 +53,11 @@
  <tr><th class="head" valign="middle"><img src="{tpl_dir}images/btn_fotos.gif" width="37" height="15" alt="Fotos"> {fotos_name}</th></tr>
  <tr><td align="center"><table><tr>
 <!-- BEGIN fotoitemblock -->
-   <td><span class="thumbnail"><img src="{foto}" align="center"><br>{fdesc}</span></td>
+   <td><span class="thumbnail">{bigref}<img src="{foto}" align="center">{unref}<br>{fdesc}</span></td>
 <!-- END fotoitemblock -->
+<!-- BEGIN multifotoblock -->
+   </tr><tr>
+<!-- END multifotoblock -->
    </tr></table></td></tr>
 </table>
 <!-- END fotoblock -->

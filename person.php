@@ -31,6 +31,7 @@
  $t->set_block("template","fotoblock","fotos");
  $t->set_block("template","notesblock","notb");
  $t->set_block("fotoblock","fotoitemblock","pic");
+ $t->set_block("fotoblock","multifotoblock","multi");
 
  #=================================================[ general template data ]===
  include("inc/tab_setup.inc");
@@ -103,22 +104,31 @@
  }
 
  #-------------------------------[ Fotos ]---
-/*
- $fotos = $pdl->file->getDivePix($nr);
+ $fotos = $pdl->file->getPersonPix();
  $fc = count($fotos);
  if ($fc>0) {
    $picdir = $pdl->config->user_url;
    for ($i=0;$i<$fc;++$i) {
+     if (!empty($fotos[$i]->bigurl)) {
+       $t->set_var("unref","</a>");
+       $t->set_var("bigref","<a href=\"".$fotos[$i]->bigurl."\">");
+     } else {
+       $t->set_var("unref","");
+       $t->set_var("bigref","");
+     }
      $t->set_var("foto",$fotos[$i]->url);
      $t->set_var("fdesc",$fotos[$i]->desc);
      $t->parse("pic","fotoitemblock",TRUE);
+     if ( ($i+1)%3==0 && $fc>3 && $i+1!=$fc ) {
+       $t->parse("pic","multifotoblock",TRUE);
+     }
    }
    $t->set_var("fotos_name",lang("fotos"));
    $t->parse("fotos","fotoblock");
  } else {
    $t->set_var("fotos","");
  }
-*/
+
  $t->pparse("out","template");
 
  include("inc/footer.inc");

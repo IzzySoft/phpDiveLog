@@ -11,7 +11,7 @@
 #===[ Diver & Dive Data ]============================[ Diver & Dive Data ]===
 
 [title]
-Placing fotos with your dives/sites
+Placing fotos with your dives/sites and personal page
 
 [text]
 You can advise phpDiveLog to display fotos connected to your dives and/or
@@ -39,6 +39,10 @@ image count, you could render your page unreadable otherwise - since the
 table gets too wide. I may fix this problem in the future, but no promise ;)
 
 [text]
+For the personal page, the image files must reside in the
+<code>diver/*/person/</code> directory and be named <code>diverYYY.*</code>.
+
+[text]
 Things to consider:<ul>
 <li>recommended size for these "thumbnails" is 192x144 pixel</li>
 <li>make the file extensions lower case (i.e. *.jpg|png|gif|txt)</li>
@@ -49,7 +53,8 @@ Things to consider:<ul>
 
 [text]
 More possibility of linking informations (not only images) with your dive
-and/or dive site information are to be found below:
+and/or dive site information as well as your personal page are to be found
+below:
 
 #===============================================================================
 

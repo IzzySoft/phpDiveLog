@@ -89,11 +89,23 @@
      return $this->getPix($id,"site");
    }
 
+   /** Find personal pictures
+    * @class file
+    * @method getPersonPix
+    * @return array [0..n] of object pix (properties: url,desc)
+    */
+   function getPersonPix() {
+     return $this->getPix(0,"person");
+   }
+
    function getPix($id,$type="dive") {
      GLOBAL $pdl;
      $dirname = $pdl->config->user_path."fotos/$type";
      if (!is_dir($dirname)) return FALSE;
-     $prefix = $this->mkADLprefix($id,$type)."-";
+     switch ($type) {
+       case "person" : $prefix = "diver"; break;
+       default       : $prefix = $this->mkADLprefix($id,$type)."-";
+     }
      $plen   = strlen($prefix);
      $dir = dir($dirname);
      while ( $file=$dir->read() ) {
