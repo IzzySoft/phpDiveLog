@@ -14,9 +14,9 @@
 
  class tabs {
    function tabs() {
-     GLOBAL $t,$pdl;
+     GLOBAL $t,$pdl,$default_page;
      $t->set_block("template","homeblock","home");
-     if ( !empty($_GET["diver"]) ) {
+     if ( !empty($_GET["diver"]) || $default_page=="user" ) {
        $img = $pdl->link->linkurl("index.php","<img src='".$pdl->config->tpl_url."images/tab_switch2.gif' alt='switch'>");
        $t->set_var("home_ref",$img);
        $t->parse("home","homeblock");
