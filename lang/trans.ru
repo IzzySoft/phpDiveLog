@@ -42,7 +42,7 @@ statistics;"Статистика"
 preferences;"Преимущества"
 languages;"Языкы"
 tpl_sets;"Набор шаблона"
-lang_de;"Немецлий"
+lang_de;"Немецкий"
 lang_en;"Английский"
 lang_ru;"Русский"
 
