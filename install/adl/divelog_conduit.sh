@@ -11,38 +11,42 @@
 # move them to their location in the web tree                               #
 #############################################################################
 
-#========================================================[ Configuration ]===
-# location of the Conduit output (must match the confuration in divelog.ini)
-LOGDIR=log
-# which units to use for the values: imperial|metric|bothunits
-UNITS=bothunits
-# date format for logging
-DATEFORMAT="%Y-%m-%d %H:%M:%S"
-# where to log the process - you need write access to that directory!
-LOGFILE=./pdltransfer.log
-#------------------------------------------------------[ Local Transfers ]---
-# Do we use the local transfer? [0|1]
-USELOCAL=1
-# the location of phpDiveLogs user dir (where the data/ and images/ dirs are)
-PDLBASE=/web/divelog/diver/demo
-#-----------------------------------------------------[ Remote Transfers ]---
-# Do we intend to use SCP transfers? [0|1|2] (0=No,1=SCP,2=RSync)
-USESCP=0
-# If so, we need the target base directory
-SCPBASE=user@machine:/path_to_PDL/diver/demo
-# for RSync, specify whether to copy from your local PDL installation (1 - needs
-# USELOCAL=1) or from the ADL logdir (2)
-RSYNCBASE=1
-
 #=========================================================[ Intro Output ]===
 echo "
 #############################################################################
-# Aqua DiveLog                               (c) 2001-2003 by Stephan Veigl #
+# Aqua DiveLog                               (c) 2001-2004 by Stephan Veigl #
 # phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
 # ------------------------------------------------------------------------- #
 # Data Conversion Unit                                                      #
 #############################################################################
 "
+
+#========================================================[ Configuration ]===
+#BINDIR=`pwd`
+BINDIR=${0%/*}
+SCRIPT=${0##*/}
+CONFIG=$BINDIR/config
+
+function syntax() {
+  echo "Syntax: ${SCRIPT} [Options]"
+  echo "  Options:"
+  echo "     -c <ConfigFile> (Default: 'config' in the scripts directory)"
+  echo "     -h              (Print this help screen and exit)"
+  exit;
+}
+
+while [ "$1" != "" ] ; do
+  case "$1" in
+    -?) syntax;;
+    -h) syntax;;
+    --help) syntax;;
+    -c) shift; CONFIG=$1;;
+  esac
+  shift
+done
+
+cd $BINDIR
+. $CONFIG
 
 #=========================================================[ Let's do it! ]===
 # clean up data from possible previous run - the conduit does not update

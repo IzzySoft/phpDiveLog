@@ -3,6 +3,13 @@ $Id$
 History for phpDiveLog
 ======================
 
+v0.2.5
+-------------------
+* separated the configuration part from the conduit wrapper script (outsourced
+  to a separate file) to a) ease updating and b) use the same config with
+  multiple scripts (to come)
++ added resync.sh to update the local installation from a remote server
+
 v0.2.4 (08.09.2004)
 -------------------
 + updated help pages concerning localized notes
