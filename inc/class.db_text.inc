@@ -24,25 +24,6 @@
     * @constructor db_text
     */
    function db_text() {
-     GLOBAL $pdl;
-     switch ($pdl->config->db_type) {
-       case "csv"  :
-       default     :
-         $csv = new csv(";",'"',TRUE);
-         if (file_exists($pdl->config->divedata)) {
-           $csv->import($pdl->config->divedata);
-           $this->divedata = $csv->data;
-           $this->dives    = count($this->divedata);
-           $this->setup_dive_records();
-           $csv->clear_data();
-         }
-	 if (file_exists($pdl->config->sites)) {
-           $csv->import($pdl->config->sites);
-           $this->sitedata = $csv->data;
-           $this->sites    = count($this->sitedata);
-           $this->setup_site_records(); // temporary - see func *!*
-         }
-     }
    }
 
   #=========================================================[ Translations ]===
@@ -103,6 +84,27 @@
   }
 
   #============================================================[ Dive Data ]===
+   /** Read the dive data file and setup the dive data
+    * @class db_text
+    * @method read_divedata
+    */
+   function read_divedata() {
+     GLOBAL $pdl;
+     if ($this->dives) return; // prevent multiple reads
+     switch ($pdl->config->db_type) {
+       case "csv"  :
+       default     :
+         $csv = new csv(";",'"',TRUE);
+         if (file_exists($pdl->config->divedata)) {
+           $csv->import($pdl->config->divedata);
+           $this->divedata = $csv->data;
+           $this->dives    = count($this->divedata);
+           $this->setup_dive_records();
+           $csv->clear_data();
+         }
+     }
+   }
+
    function setup_dive_records() {
      for ($i=0;$i<$this->dives;++$i) {
        # split up the tank data
@@ -152,6 +154,7 @@
     * @return array divedata (either array of dive records or single record)
     */
    function get_dives($start="",$end="",$id=FALSE) {
+     $this->read_divedata();
      if ($start!=="") {
        if ($id) { // identify by dive#
          if ($end!=="") { // range of records
@@ -196,6 +199,26 @@
    }
 
   #============================================================[ Locations ]===
+   /** Read the site data file and setup the site data
+    * @class db_text
+    * @method read_divedata
+    */
+   function read_sitedata() {
+     GLOBAL $pdl;
+     if ($this->sites) return; // prevent multiple reads
+     switch ($pdl->config->db_type) {
+       case "csv"  :
+       default     :
+         $csv = new csv(";",'"',TRUE);
+	 if (file_exists($pdl->config->sites)) {
+           $csv->import($pdl->config->sites);
+           $this->sitedata = $csv->data;
+           $this->sites    = count($this->sitedata);
+           $this->setup_site_records(); // temporary - see func *!*
+         }
+     }
+   }
+
    function setup_site_records() { // temporary: we need an ID for reference
      for ($i=0;$i<$this->sites;++$i) {
 #       $this->sitedata[$i]["site#"] = $i;
@@ -206,7 +229,21 @@
      unset($this->sitedata[$this->sites -1]["next_site#"]);
    }
 
+   /** Get site records
+    *  Retrieve a list of sites or a single record. Returns all sites if neither
+    *  $start nor $end are specified, a range if both and the specified dive
+    *  record if $start is specified but $end is not
+    *  If id=FALSE, $end specifies the maximal count of records to return
+    * @class db_text
+    * @method get_sites
+    * @param optional string start first site# to return
+    * @param optional string end last site# to return
+    * @param optional boolean id whether to identify by site# (TRUE) or
+    *  record set (FALSE), defaults to FALSE
+    * @return array sitedata (either array of site records or single record)
+    */
    function get_sites($start="",$end="",$id=FALSE) {
+     $this->read_sitedata();
      if ($start==="") { // all records
        return $this->sitedata;
      } else {
@@ -320,6 +357,7 @@
     */
   function get_stats() {
      GLOBAL $pdl;
+     $this->read_sitedata();
      $file = $pdl->config->datadir."global.";
      switch ($pdl->config->db_type) {
        case "csv"  :

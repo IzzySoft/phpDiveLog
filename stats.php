@@ -42,10 +42,10 @@
  $t->set_var("avg_depth",$stats["avg_depth"]);
  $t->set_var("avg_time",$stats["avg_time"]);
 # $t->set_var("dive_num",$stats["dive_num"]);
- $t->set_var("dive_num",$pdl->db->dives);
+ $t->set_var("dive_num",$stats["num_dives"]);
  $t->set_var("cum_time",$stats["cum_dive_time"]);
  $t->set_var("site_num",$pdl->db->sites);
- $t->set_var("avg_sd",round($pdl->db->dives / $pdl->db->sites,3));
+ $t->set_var("avg_sd",round($stats["num_dives"] / $pdl->db->sites,3));
 
  $t->pparse("out","template");
 
