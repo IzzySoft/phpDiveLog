@@ -26,6 +26,5 @@
  #$database["password"]  = "";  # this users password for the db
 
  # the following lines apply for text databases (CSV/UDDF) only
- $database["divedata"]  = "data/logbook.csv";
- $database["sites"]  = "data/sites.csv";
+ $database["datadir"]   = "data/";
 ?>
