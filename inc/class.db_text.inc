@@ -258,6 +258,7 @@
      $udirs = $pdl->file->get_subdirs($pdl->config->base_path."diver");
      $dircount = count($udirs);
      for ($i=0;$i<$dircount;++$i) {
+       if ( !file_exists($pdl->config->base_path."diver/".$udirs[$i]."/public") ) continue;
        $file = $pdl->config->base_path."diver/".$udirs[$i]."/data/divesites.csv";
        if (file_exists($file)) {
          $csv->import($file);
