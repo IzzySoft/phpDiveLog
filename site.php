@@ -45,7 +45,7 @@
  }
 
  #==============================================[ Import dive data from DB ]===
- $site = $pdl->db->get_site($id); // $start,$pdl->config->display_limit);
+ $site = $pdl->db->get_site($id);
 
  #=============================================[ set up the navigation bar ]===
  include("inc/tab_setup.inc");
@@ -95,7 +95,7 @@
    $t->parse("notb","notesblock");
  }
 
-#   $t->set_var("rating",$pdl->config->tpl_url."images/".$dives[$i]["rating"]."star.gif");
+# $t->set_var("rating",$pdl->config->tpl_url."images/".$dives[$i]["rating"]."star.gif");
 # $t->parse("item","itemblock",TRUE);
 
  #-------------------------------[ Fotos ]---
@@ -125,8 +125,6 @@
  }
 
  $t->pparse("out","template");
-
-# echo "<b>SiteData:</b><pre>";print_r($site);echo "</pre>";
 
  include("inc/footer.inc");
 ?>

@@ -14,7 +14,7 @@
 
  #================================================[ Initialize environment ]===
  include("inc/includes.inc");
-# $title .= ": ".lang("dive#")." $nr";
+ if ( !empty($_GET["diver"]) ) $title .= ": ".ucfirst($_GET["diver"]);
  include("inc/header.inc");
  if (!$pdl->config->display_personal) {
    $pdl->common->alert(lang("personal_no_public"));

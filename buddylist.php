@@ -57,7 +57,6 @@
  }
 
  #===============================================[ set up the table header ]===
-# $t->set_var("dive_name",lang("dive"));
  $t->set_var("nick_name",lang("buddy"));
  $t->set_var("name_name",lang("person_name"));
  $t->set_var("loc_name",lang("location"));

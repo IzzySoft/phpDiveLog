@@ -221,7 +221,6 @@
 
    function setup_site_records() { // temporary: we need an ID for reference
      for ($i=0;$i<$this->sites;++$i) {
-#       $this->sitedata[$i]["site#"] = $i;
        $this->sitedata[$i]["prev_site#"] = $this->sitedata[$i-1]["id"];
        $this->sitedata[$i]["next_site#"] = $this->sitedata[$i+1]["id"];
      }
