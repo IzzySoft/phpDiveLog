@@ -280,6 +280,10 @@
      }
      if ( !empty($showPlace) ) {
        sort($place); reset($place);
+       $this->allplaces = count($place);
+       if ( $start!=="" ) { // return subset
+         return $this->subset_places($place,$start,$end);
+       }
        return $place;
      }
      foreach ($place as $key => $val) $tmp[$key] = serialize($val);
@@ -292,15 +296,20 @@
      sort($splace); reset($splace);
      $this->allplaces = count($splace);
      if ( $start!=="" ) { // return subset
-       if ( empty($end) || $end > $this->allplaces ) $end = $this->allplaces;
-       if ( $end - $start > $pdl->config->display_limit )
-         $end = $start + $pdl->config->display_limit;
-       for ($i=$start;$i<$end;++$i) {
-         $place[] = $splace[$i];
-       }
-       return $place;
+       return $this->subset_places($splace,$start,$end);
      }
      return $splace; // return all otherwise
+   }
+
+   function subset_places($arr,$start,$end) {
+     GLOBAL $pdl;
+     if ( empty($end) || $end > $this->allplaces ) $end = $this->allplaces;
+     if ( $end - $start > $pdl->config->display_limit )
+       $end = $start + $pdl->config->display_limit;
+     for ($i=$start;$i<$end;++$i) {
+       $place[] = $arr[$i];
+     }
+     return $place;
    }
 
   #======================================================[ Dive Statistics ]===
