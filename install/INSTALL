@@ -22,7 +22,8 @@
 3. Diver and dive data
 3.1. Set up a diver
 3.2. The divers system.conf
-3.3. Data conversion and transfer
+3.3. The divers diver.conf
+3.4. Data conversion and transfer
 
 ===[ Aqua DiveLog ]=======================================[ Aqua DiveLog ]===
 
@@ -162,7 +163,41 @@ lines and lines beginning with a "#" are ignored. Which system defaults are
 allowed to be overriden is defined in the inc/config.inc file by the parameter
 $allow_override (see above in the phpDiveLog configuration description).
 
-3.3. Data conversion and transfer
+One additional parameter in the system.conf is "personal". It defines whether
+the diver wants to display his/her personal data (see diver.conf) or not. If
+this parameter is missing (or commented out), noone will be able to browse
+them via the "person.php" page, even if a complete diver.conf exists. The same
+applies if it is set to "0". Set "personal = 1" if you want the page to be
+displayed.
+
+3.3. The divers diver.conf
+--------------------------
+This file, if available, must reside in the same directory as the system.conf
+file (see above). It is intended to provide data for the divers personal page,
+i.e. name and place of living as well as certifications.
+
+The diver.conf is divided into several blocks - block names are encloses in
+square brackets. If you do not want to provide data for a specific block at
+all, you may just completely remove it (or comment it out) at all.
+
+The [person] block, as the name suggests contains the personal data. Available
+options in this block are name, firstname, country, state, city and status
+(where "status" means your highest certification, e.g. AOWD, DM or Instructor).
+If you want to omit something, just delete or comment out that line.
+
+With the [certification] block, there are stronger rules to observe. Data for
+a certification must include the course (i.e. the certification - makes no
+sense without ;) and may include the date and place where it was gained. Thus
+we have three items that belong together, and we may have multiple of this
+groups. So we group them together by arrays. The consequence is you have to
+keep the three items together if they belong together, and you must not miss
+the square brackets at the end of the options name. Plus you have to include
+either none or all three options - if you don't want to publish e.g. the date,
+just leave the parameter blank. Otherwise, if you specify it for the next
+course, the parser will count it to the previous ;) Available options in this
+block are course[], date[] and place[].
+
+3.4. Data conversion and transfer
 ---------------------------------
 In order to get you web installation running with useful data, you now only
 need to change to the conduit directory and run the divelog_conduit.sh script.

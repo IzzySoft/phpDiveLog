@@ -72,7 +72,8 @@ for the impatient:
   check the inc/config.inc file for parameters you may want to adjust. Create
   your own diver profile by copying the diver/demo directory to
   diver/<your_nick_here>, directory structure only. This directory you should
-  specify as PDLBASE in the ADL divelog_conduit.sh
+  specify as PDLBASE in the ADL divelog_conduit.sh. Optionally set up the
+  system.conf and diver.conf files in this directory.
 - Data transfer: if both sides are configured, just run the divelog_conduit.sh
   once - then point your browser to
   http://<your_server>/<PDL_URL>/index.php?diver=<your_nick_here>
