@@ -41,6 +41,7 @@
   .footer a:link { color: #eeeeee; }
   .footer a:visited { color: #dddddd; }
   .footer a:hover { color: #000000; }
+  .notes { text-align: justify; }
 
 /* === Tables === */
 

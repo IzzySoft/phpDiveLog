@@ -83,13 +83,9 @@
  }
 
  #-------------------------------[ Notes ]---
- $notes[1] = $pdl->common->tagreplace(nl2br($site["description"]));
+ $notes[1] = $pdl->common->nl2br($site["description"]);
  $notes[2] = $pdl->file->getNotes($id,"site");
- if ( !empty($notes[2]) ) {
-   if ( !empty($notes[1]) ) $notes[1] .= "<br>";
-   $notes[2] = $pdl->common->tagreplace(nl2br($notes[2]));
- }
- $notb = $notes[1].$notes[2];
+ $notb = $pdl->common->nl2br($notes[1].$notes[2]);
  if ( !empty($notb) ) {
    $t->set_var("description",$notb);
    $t->parse("notb","notesblock");
