@@ -28,7 +28,7 @@
 </td></tr><tr class="td_transp"><td class="td_transp">
 
 <table border="1" cellpadding="2" align="center">
- <tr><th></th><th>Location</th><th>Place</th><th>Max.Depth</th></tr>
+ <tr><th></th><th>{loc_name}</th><th>{place_name}</th><th>{md_name}</th></tr>
 
 <!-- BEGIN itemblock -->
  <tr><td align="right"><a href="{site_ref}">{id}</a></td>

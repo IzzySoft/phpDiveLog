@@ -30,18 +30,18 @@
 <table cellpadding="2" border="0" align="center">
  <tr><th colspan="5"><h3><IMG SRC="{tpl_dir}images/globe.gif" width="15" height="15" alt="Conditions"> {loc}: {place}</h3></th></tr>
  <tr>
-  <th style="text-align:right">Latitude:</th> <td>{latitude}</td>
+  <th style="text-align:right">{lat_name}</th> <td>{latitude}</td>
   <td class="td_transp"></td>
-  <th style="text-align:right">Longitude:</th> <td>{longitude}</td>
+  <th style="text-align:right">{long_name}</th> <td>{longitude}</td>
  </tr><tr>
-  <th style="text-align:right">Altitude:</th> <td>{altitude}</td>
+  <th style="text-align:right">{alt_name}</th> <td>{altitude}</td>
   <td class="td_transp"></td>
-  <th style="text-align:right">MaxDepth:</th> <td>{depth}m</td>
+  <th style="text-align:right">{md_name}</th> <td>{depth}</td>
  </tr>
 </table>
 <br>
 <table cellpadding="2" border="0" align="center">
- <tr><th>Notes:</th></tr>
+ <tr><th>{notes_name}</th></tr>
  <tr><td>{description}</td></tr>
 </table>
 

@@ -43,6 +43,15 @@
    $t->set_var("nav_right","<a href='$PHP_SELF?start=$next'><img src='".$pdl->config->tpl_url."images/right.gif'></a>");
  }
 
+ #===============================================[ set up the table header ]===
+ $t->set_var("dive_name","Dive");
+ $t->set_var("date_name","Date");
+ $t->set_var("time_name","Time");
+ $t->set_var("loc_name","Location");
+ $t->set_var("rat_name","Rating");
+ $t->set_var("ddt_name","Depth &amp; Dive Time");
+ $t->set_var("buddy_name","Buddy");
+
  #============================[ Walk through the list and set up the table ]===
  $details = array ("dive#","date","time","location","depth","divetime","buddy","rating");
  for ($i=0;$i<$max;++$i) {

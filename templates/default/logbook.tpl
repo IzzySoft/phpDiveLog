@@ -28,9 +28,9 @@
 </td></tr><tr class="td_transp"><td class="td_transp">
 
 <table border="1" cellpadding="2" align="center">
- <tr><th>Dive</th><th>Date</th><th>Time</th><th>Location</th><th>Rating</th>
+ <tr><th>{dive_name}</th><th>{date_name}</th><th>{time_name}</th><th>{loc_name}</th><th>{rat_name}</th>
      <td class="td_blank"></td>
-     <th>Depth and Dive Time</td><th>Buddy</th></tr>
+     <th>{ddt_name}</td><th>{buddy_name}</th></tr>
 
 <!-- BEGIN itemblock -->
  <tr><td align="right"><a href="{dive_ref}">{dive#}</a></td>

@@ -43,6 +43,11 @@
    $t->set_var("nav_right","<a href='$PHP_SELF?start=$next'><img src='".$pdl->config->tpl_url."images/right.gif'></a>");
  }
 
+ #===============================================[ set up the table header ]===
+ $t->set_var("loc_name","Location");
+ $t->set_var("place_name","Place");
+ $t->set_var("md_name","MaxDepth");
+
  #============================[ Walk through the list and set up the table ]===
  $details = array ("id","loc","place","depth");
  for ($i=0;$i<$max;++$i) {

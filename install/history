@@ -17,3 +17,4 @@ v0.1.1
 + site list now supports the display limit setting
 + time in the schedule (if available) is now correctly formated
 * moved the icon definitions into the templates (HTML2HTML ;)
+* moved hardcoded fieldnames out of templates (for later translation)

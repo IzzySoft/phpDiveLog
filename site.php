@@ -35,6 +35,13 @@
    $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif'>");
  }
 
+ #===============================================[ set up the table header ]===
+ $t->set_var("lat_name","Latitude:");
+ $t->set_var("long_name","Longitude:");
+ $t->set_var("alt_name","Altitude:");
+ $t->set_var("md_name","MaxDepth:");
+ $t->set_var("notes_name","Notes:");
+
  #============================[ Walk through the list and set up the table ]===
  $details = array ("id","loc","place","depth","latitude","longitude","altitude");
  foreach($details AS $detail) {
