@@ -24,7 +24,7 @@
  $pdl->db = new db_text();
  include("inc/class.template.inc");
  include("inc/class.translation.inc");
- $pdl->trans = new trans($lang);
+ $pdl->trans = new trans();
  include("inc/class.link.inc");
 
  #======================================================[ setup shortkeys ]===
@@ -32,5 +32,12 @@
    GLOBAL $pdl;
    return $pdl->trans->transl($key,$m1,$m2,$m3,$m4,$m5);
  }
+
+ #======================================================[ setup prefs ]===
+ if ( !empty($_GET["tpl"]) )  $template_set = $_GET["tpl"];
+ if ( empty($_GET["lang"]) && !empty($pdl->trans->browserpref) ) {
+   $lang = $pdl->trans->browserpref;
+ }
+ $pdl->trans->get_translations($lang);
 
 ?>

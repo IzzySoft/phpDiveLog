@@ -12,10 +12,8 @@
 
  /* $Id$ */
 
- $pdl->config->version = "0.1.3";
+ $pdl->config->version = "0.1.4";
  $pdl->config->user    = "";
- if ( !empty($_GET["tpl"]) )  $template_set = $_GET["tpl"];
- if ( !empty($_GET["lang"]) ) $lang = $_GET["lang"];
 
  #==========================================================[ directories ]===
  $pdl->config->base_path = ""; # if set, has to include trailing slash - if
@@ -35,5 +33,8 @@
 
  #==========================================================[ preferences ]===
  $pdl->config->display_limit = $display_limit;
- unset($display_limit);
+ if ( !empty($_GET["lang"]) ) {
+   $lang = $_GET["lang"];
+ }
+ unset($display_limit,$want);
 ?>

@@ -32,7 +32,7 @@
  $t->set_var("tpl_title",lang("tpl_sets"));
 
  #=================================================[ Set up language block ]===
- $lavail = $pdl->trans->avail();
+ $lavail = $pdl->trans->avail;
  $lc     = count($lavail);
  for ($i=0;$i<$lc;++$i) {
    $t->set_var("lang_ref",$pdl->link->slink("$PHP_SELF?lang=".$lavail[$i]));

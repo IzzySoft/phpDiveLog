@@ -23,7 +23,17 @@
    /** Initialize
     * @constructor trans
     */
-   function trans($lang_id) {
+   function trans() {
+     $this->avail        = $this->avail();
+     $this->browserpref  = $this->get_browserlang();
+   }
+
+   /** read the translations
+    * @class trans
+    * @method get_translations
+    * @param string lang_id ISO code of the prefered language
+    */
+   function get_translations($lang_id) {
      GLOBAL $pdl;
      if ( empty($lang_id) ) $lang_id = "en";
      $this->translations = $pdl->db->get_translations($lang_id);
@@ -92,6 +102,37 @@
      }
      return $trans;
    }
+
+   /** retrieve users prefered languages from browser info
+    * @class trans
+    * @method get_browserlang
+    * @return string language (ISO language code) - empty if we can't support any
+    */
+   function get_browserlang() {
+     $langs = explode(",",$_SERVER["HTTP_ACCEPT_LANGUAGE"]);
+     $lc    = count($langs);
+     for ($i=0;$i<$lc;++$i) { // check if we have a suitable file
+       $want = substr($langs[$i],0,2);
+       if (in_array($want,$this->avail)) {
+         $this->browserpref = $want;
+         return $want;
+       }
+     }
+     return "";
+   }
+
+   /** Visitors prefered language according to browser info
+    * @class trans
+    * @attribute string browserpref
+    */
+   /** Translations
+    * @class trans
+    * @attribute array translations
+    */
+   /** Available languages
+    * @class trans
+    * @attribute array avail
+    */
 
  } // end class trans
 
