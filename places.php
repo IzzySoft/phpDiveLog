@@ -28,7 +28,11 @@
  $t->set_block("siteblock","sitemblock","sitem");
 
  #==============================================[ Import dive data from DB ]===
- $places = $pdl->db->getAllPlaces($start,$end);
+ if ( !empty($showPlace) ) {
+   $places = $pdl->db->getAllPlaces($start,$end,$showPlace);
+ } else {
+   $places = $pdl->db->getAllPlaces($start,$end);
+ }
  $max   = count($places);
  $records = $pdl->db->allplaces;
 
@@ -52,42 +56,33 @@
 
  #===============================================[ set up the table header ]===
  $t->set_var("place_name",lang("location"));
- $t->set_var("hit_name",lang("hit_count"));
- if ( !empty($showPlace) ) {
+ if ( empty($showPlace) ) {
+   $t->set_var("hit_name",lang("hit_count"));
+ } else {
    $t->set_var("site_name",lang("place"));
+   $t->set_var("hit_name",lang("diver"));
  }
 
  #============================[ Walk through the list and set up the table ]===
- if ( empty($showPlaces) ) {
+ if ( empty($showPlace) ) {
    for ($i=0;$i<count($places);++$i) {
-     $t->set_var("place",$places[$i]->name);
+     $t->set_var("place",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?place=".urlencode($places[$i]->name),$places[$i]->name));
      $t->set_var("hits",$places[$i]->num);
      $t->parse("pitem","pitemblock",TRUE);
    }
    $t->parse("place","placeblock");
+   $t->set_var("site","");
+ } else {
+   for ($i=0;$i<count($places);++$i) {
+     $t->set_var("place",$places[$i]->name);
+     $t->set_var("site",$places[$i]->sitename);
+     $t->set_var("hits",$pdl->link->linkurl("site.php?diver=".$places[$i]->diver."&id=".$places[$i]->id,ucfirst($places[$i]->diver)));
+     $t->parse("sitem","sitemblock",TRUE);
+   }
+   $t->parse("site","siteblock");
+   $t->set_var("place","");
  }
 
-/*
- $details = array ("id","loc","place","depth");
- for ($i=0;$i<$max;++$i) {
-   foreach($details AS $detail) {
-     $t->set_var("$detail",$sites[$i][$detail]);
-   }
-   if (!$sites[$i]["depth"]) {
-     $t->set_var("depth","&nbsp;");
-   } else {
-     $t->set_var("depth",$sites[$i]["depth"]."m");
-   }
-   $t->set_var("site_ref",$pdl->link->linkurl("site.php?id=".$sites[$i]["id"],$sites[$i]["id"]));
-#   $t->set_var("rating",$pdl->config->tpl_url."images/".$sites[$i]["rating"]."star.gif");
-   if ( $pdl->file->havePix($sites[$i]["id"],"site") ) {
-     $t->set_var("pix",'<img src="'.$pdl->config->tpl_url.'images/camera.gif" valign="middle">');
-   } else {
-     $t->set_var("pix","");
-   }
-   $t->parse("item","itemblock",TRUE);
- }
-*/
  $t->pparse("out","template");
 
  include("inc/footer.inc");

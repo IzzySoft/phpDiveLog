@@ -247,9 +247,12 @@
     *  (not to be confused with the dive sites - it's just the location here)
     * @class db_text
     * @method getAllPlaces
+    * @param optional integer start
+    * @param optional integer end
+    * @param optional string place
     * @return array places
     */
-   function getAllPlaces($start="",$end="") {
+   function getAllPlaces($start="",$end="",$showPlace="") {
      GLOBAL $pdl;
      $csv = new csv(";",'"',TRUE);
      $udirs = $pdl->file->get_subdirs($pdl->config->base_path."diver");
@@ -260,10 +263,23 @@
          $csv->import($file);
          $sitecount = count($csv->data);
          for ($k=0;$k<$sitecount;++$k) {
-           $place[] = $csv->data[$k]["loc"];
-           ++$cnum[$csv->data[$k]["loc"]];
+           if ( !empty($showPlace) ) {
+             if ( $showPlace != $csv->data[$k]["loc"] ) continue;
+             $data->name     = $csv->data[$k]["loc"];
+             $data->sitename = $csv->data[$k]["place"];
+             $data->diver    = $udirs[$i];
+             $data->id       = $csv->data[$k]["id"];
+             $place[] = $data;
+           } else {
+             $place[] = $csv->data[$k]["loc"];
+             ++$cnum[$csv->data[$k]["loc"]];
+           }
          }
        }
+     }
+     if ( !empty($showPlace) ) {
+       sort($place); reset($place);
+       return $place;
      }
      foreach ($place as $key => $val) $tmp[$key] = serialize($val);
      foreach (array_unique($tmp) as $key => $val) {
