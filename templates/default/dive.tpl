@@ -23,12 +23,12 @@
  <table border="0" cellpadding="2" width="100%" style="background-color:transparent;"><tr>
   <td class="td_transp" colspan="5" height="5"></td></tr><tr>
   <td class="td_transp" align="left" width="12">{nav_left}</td>
-  <td align="left" class="td_big" style="vertical-align:middle">Dive#: {dive#}</td>
+  <td align="left" class="td_big" style="vertical-align:middle;width:12em;">Dive#: {dive#}</td>
   <td width="20"></td>
   <td class="td_blank" style="vertical-align:middle;">{loc_img}</td>
   <td class="td_blank" style="vertical-align:middle;"><h2>{location} / {place}</h2></td>
   <td width="20"></td>
-  <td align="right" class="td_big" style="vertical-align:middle">{date} {time}</td>
+  <td align="right" class="td_big" style="vertical-align:middle;width:12em;">{date} {time}</td>
   <td class="td_transp" align="right" width="12">{nav_right}</td>
  </tr></table>
 
