@@ -15,6 +15,7 @@
 2. phpDiveLog
 2.1. Installing
 2.2. Configuration
+2.3. Updating
 
 ===[ Aqua DiveLog ]=======================================[ Aqua DiveLog ]===
 
@@ -49,5 +50,11 @@ DATADIR only (and did not change any file names), and the directory structure
 in your ADL installation stayed the same as shipped, no more changes have to be
 made. Run the conduit script once (otherwise you have my old dive data
 displayed - if you didn't wipe them in step 2.1. above), and enjoy!
+
+2.3. Updating
+-------------
+When updating, you generally follow the steps 2.1 and 2.2 above - but probably
+you will NOT want to copy the contents of the data/ subdir from tha archive
+to not overwrite your own data.
 
 ===[ EOF ]========================================================[ EOF ]===
