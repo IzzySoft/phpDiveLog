@@ -87,8 +87,16 @@
 </table>
 <!-- END scheduleblock -->
 
-</td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
-<table class="outer" align="center" border="0" cellpadding="2" cellspacing="0" style="margin-top:3px"><!-- Notes -->
+<!-- BEGIN profileblock -->
+</td></tr><tr class="td_transp"><td class="td_transp" colspan="2"><!-- Profile -->
+<table class="outer" align="center" border="0" cellpadding="0" cellspacing="0" style="margin-top:3px">
+ <tr><th class="head" valign="middle"><img src="{tpl_dir}images/btn_profile.gif" width="37" height="15" alt="Fotos"> {prof_name}</th></tr>
+ <tr><td><span class="thumbnail" style="margin:0"><img src="{prof_img}" alt="DiveProfile"></span></td></tr>
+</table>
+<!-- END profileblock -->
+
+</td></tr><tr class="td_transp"><td class="td_transp" colspan="2"><!-- Notes -->
+<table class="outer" align="center" border="0" cellpadding="2" cellspacing="0" style="margin-top:3px">
  <tr><th class="head" valign="middle"><img src="{tpl_dir}images/btn_notes.gif" width="37" height="15" alt="Notes"> {notes_name}</th></tr>
  <tr><td>{notes_text}</td></tr>
 </table>

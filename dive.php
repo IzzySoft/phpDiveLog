@@ -16,6 +16,7 @@
  $title .= ": Dive# $nr";
  include("inc/header.inc");
  include("inc/class.file.inc");
+ $f = new file();
 
  $t = new Template($pdl->config->tpl_path);
  $t->set_file(array("template"=>"dive.tpl"));
@@ -25,6 +26,7 @@
  $t->set_block("template","tankblock","tank");
  $t->set_block("template","scheduleblock","sched");
  $t->set_block("scheduleblock","scheditemblock","scheditem");
+ $t->set_block("template","profileblock","profile");
  $t->set_block("template","fotoblock","fotos");
  $t->set_block("fotoblock","fotoitemblock","pic");
 
@@ -136,11 +138,17 @@
  } else {
    $t->set_var("sched","");
  }
+ #-----------------------------[ Profile ]---
+ if ( strlen($prof_img=$f->getProfPic($nr)) ) {
+   $t->set_var("prof_name","Profile");
+   $t->set_var("prof_img",$prof_img);
+   $t->parse("profile","profileblock");
+ }
+
  #-------------------------------[ Notes ]---
  $t->set_var("notes_text",nl2br($dive["notes"]));
 
  #-------------------------------[ Fotos ]---
- $f = new file();
  $fotos = $f->getDivePix($nr);
  $fc = count($fotos);
  if ($fc>0) {

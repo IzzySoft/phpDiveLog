@@ -110,6 +110,19 @@
      return FALSE;
    }
 
+   /** Find profile pictures
+    * @class file
+    * @method getProfPic
+    * @param integer dive# Dive# to retrieve the pic for
+    * @return string filename (empty if none found)
+    */
+   function getProfPic($id) {
+     GLOBAL $pdl;
+     $filename = $pdl->config->user_path."images/".$this->mkADLprefix($id,"dive")."_profile.png";
+     if ( file_exists($filename) ) return $filename;
+     return "";
+   }
+
  } // end class file
 
 ?>

@@ -12,7 +12,7 @@
 
  /* $Id$ */
 
- $pdl->config->version = "0.1.2";
+ $pdl->config->version = "0.1.3";
  $pdl->config->user    = "";
 
  #==========================================================[ directories ]===
