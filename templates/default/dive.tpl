@@ -93,7 +93,7 @@
 </td></tr><tr class="td_transp"><td class="td_transp"><!-- Notes -->
 <table align="center" border="0" cellpadding="2" style="margin-top:2px">
  <tr><th valign="middle"><h3 style="margin-bottom:0;"><img src="{tpl_dir}images/btn_notes.gif" width="37" height="15" alt="Notes"> {notes_name}</h3></th></tr>
- <tr><td>{notes_text}</td></tr>
+ <tr><td class="notes">{notes_text}</td></tr>
 </table>
 <!-- END notesblock -->
 

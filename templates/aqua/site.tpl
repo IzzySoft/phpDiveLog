@@ -40,7 +40,7 @@
 <!-- BEGIN notesblock -->
 <table class="outer" cellpadding="2" cellspacing="0" align="center" style="margin-top:4px">
  <tr><th>{notes_name}</th></tr>
- <tr><td>{description}</td></tr>
+ <tr><td class="notes">{description}</td></tr>
 </table>
 <!-- END notesblock -->
 

@@ -39,7 +39,7 @@
 <!-- BEGIN notesblock -->
 <table cellpadding="2" border="0" align="center">
  <tr><th><h3 style="margin-bottom:0;"><img src="{tpl_dir}images/btn_notes.gif" width="37" height="15" alt="Notes"> {notes_name}</h3></th></tr>
- <tr><td>{description}</td></tr>
+ <tr><td class="notes">{description}</td></tr>
 </table>
 <!-- END notesblock -->
 

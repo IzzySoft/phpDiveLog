@@ -158,7 +158,6 @@
     $pee = preg_replace('!<br />(\s*</?(?:p|li|div|th|pre|td|ul|ol)>)!', '$1', $pee);
     $pee = preg_replace('/&([^#])(?![a-z]{1,8};)/', '&#038;$1', $pee);
     $pee = str_replace("<p><hr></p>","<hr>",$pee);
-    $pee = "<DIV CLASS='notes'>$pee</DIV>";
     return $pee; 
   }
 
