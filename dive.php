@@ -24,6 +24,7 @@
  $t->set_block("template","condblock","cond");
  $t->set_block("template","equiblock","equi");
  $t->set_block("template","tankblock","tank");
+ $t->set_block("template","notesblock","notb");
  $t->set_block("template","scheduleblock","sched");
  $t->set_block("scheduleblock","scheditemblock","scheditem");
  $t->set_block("template","profileblock","profile");
@@ -155,7 +156,11 @@
    if ( !empty($notes[1]) ) $notes[1] .= "<br>";
    $notes[2] = $pdl->common->tagreplace(nl2br($notes[2]));
  }
- $t->set_var("notes_text",$notes[1].$notes[2]);
+ $notb = $notes[1].$notes[2];
+ if (!empty($notb)) {
+   $t->set_var("notes_text",$notb);
+   $t->parse("notb","notesblock");
+ }
 
  #-------------------------------[ Fotos ]---
  $fotos = $pdl->file->getDivePix($nr);
