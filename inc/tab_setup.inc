@@ -18,6 +18,8 @@
      $this->add_tab("dives","index.php","tab_dives.gif");
      $this->add_tab("stats","stats.php","tab_stats.gif");
      $this->add_tab("sites","sitelist.php","tab_sites.gif");
+     if ($pdl->config->display_personal)
+       $this->add_tab("person","person.php","tab_person.gif");
      $this->add_tab("prefs","prefs.php","tab_preferences.gif");
      $t->set_block("template","tabblock","tab");
    }
@@ -42,7 +44,7 @@
        if ($this->tab[$this->tabnames[$i]]->active) {
          $class = "tab_active"; } else { $class = "tab_inactive"; }
        $t->set_var("tab_class","$class");
-       $name = lang($this->tabnames[$i]);
+       $name = $this->tabnames[$i];
        $t->set_var("tab_img",$this->tab[$name]->img);
        if (!$this->tab[$name]->hideurl)
          $name = $pdl->link->linkurl($this->tab[$name]->url,lang("tab_".$name));

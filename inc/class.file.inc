@@ -127,7 +127,7 @@
     * @class file
     * @method read_conf
     * @param string filename config file to read
-    * @return array (var=value)
+    * @return array (var=value for "flat" files, block[var]=value with [blocks])
     */
    function read_conf($file) {
      $def = file($file);
@@ -136,11 +136,28 @@
        switch(substr(trim($def[$i]),0,1)) {
          case "#" :
          case ""  : break;
+         case "[" : $var = trim($def[$i]);
+                    $len = strlen($var)-2;
+                    $block = substr($var,1,$len);
          default  : $pos = strpos($def[$i],"=");
                     if (!$pos) break; // invalid syntax in conf file
                     $var   = trim(substr($def[$i],0,$pos));
                     $value = trim(substr($def[$i],$pos+1));
-                    $conf[$var] = $value;
+                    if (empty($block)) {
+                      if ( $pos= strpos($var,"[]") ) {
+                        $var = substr($var,0,$pos);
+                        $conf[$var][] = $value;
+                      } else {
+                        $conf[$var] = $value;
+                      }
+                    } else {
+                      if ( $pos= strpos($var,"[]") ) {
+                        $var = substr($var,0,$pos);
+                        $conf[$block][$var][] = $value;
+                      } else {
+                        $conf[$block][$var] = $value;
+                      }
+                    }
        }
      }
      return $conf;

@@ -37,16 +37,17 @@
      if ( !empty($uconf[$allowed[$i]]) ) 
        ${$allowed[$i]} = $uconf[$allowed[$i]];
    }
+   if ($uconf["personal"]) $pdl->config->display_personal = TRUE;
  }
 
  #==========================================================[ preferences ]===
- $pdl->config->tpl_path  = $pdl->config->base_path."templates/$template_set/";
- $pdl->config->tpl_url   = $pdl->config->base_url."templates/$template_set/";
  if ( !empty($_GET["tpl"]) )  $template_set = $_GET["tpl"];
  $pdl->config->display_limit = $display_limit;
  if ( !empty($_GET["lang"]) ) {
    $lang = $_GET["lang"];
  }
+ $pdl->config->tpl_path  = $pdl->config->base_path."templates/$template_set/";
+ $pdl->config->tpl_url   = $pdl->config->base_url."templates/$template_set/";
 
  #=============================================================[ database ]===
  $pdl->config->db_type  = $database["type"];
