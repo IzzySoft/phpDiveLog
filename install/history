@@ -3,6 +3,11 @@ $Id$
 History for phpDiveLog
 ======================
 
+v0.2.4
+-------------------
++ updated help pages concerning localized notes
++ added help on "how to navigate phpVideoPro"
+
 v0.2.3 (05.09.2004)
 -------------------
 + improved formating of included textfiles
