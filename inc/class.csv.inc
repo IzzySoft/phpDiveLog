@@ -65,6 +65,11 @@
 	 $this->field[$i]->name = $fields[$i];
        }
      }
+     if ( $this->field[$fc -1]->txt ) {
+       $this->rec_end = $this->txt."\n";
+     } else {
+       $this->rec_end = "\n";
+     }
    }
 
    /** Get the file content
@@ -90,7 +95,7 @@
      $fc = count($this->field);
      $rec = 0;
      while (!empty($this->text)) {
-       $pos  = strpos($this->text,$this->txt."\n");
+       $pos  = strpos($this->text,$this->rec_end);
        $line = trim(substr($this->text,0,$pos));
        if (empty($line)) {
          $this->text = substr($this->text,$pos+1);
@@ -133,8 +138,6 @@
    }
 
  } // end class csv
-
-# $pvp->cvs = new cvs();
 
  /** CVS data: array[0..n] of imported records.
   *  Each Record is an array[0..n] of objects with the properties: name,data
