@@ -92,6 +92,7 @@
   .tab_active a { text-decoration: none;color: #eeeeee; }
   .tab_active a:link { text-decoration: none;color: #eeeeee; }
   .tab_active a:visited { text-decoration: none;color: #eeeeee; }
+  .tab_active a:hover { text-decoration: none;background: #6060ff; }
 
 /* === Links === */
 
