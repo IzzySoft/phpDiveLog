@@ -66,7 +66,7 @@
    for ($i=0;$i<$fc;++$i) {
      if (!empty($fotos[$i]->bigurl)) {
        $t->set_var("unref","</a>");
-       $t->set_var("bigref","<a href=\"JavaScript:show_img('".$fotos[$i]->bigurl."',".$fotos[$i]->bigSizeX.",".$fotos[$i]->bigSizeY.")\">");
+       $t->set_var("bigref","<a href=\"".$fotos[$i]->bigurl."\">");
      } else {
        $t->set_var("unref","");
        $t->set_var("bigref","");

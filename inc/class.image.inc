@@ -23,7 +23,7 @@
   /** Constructor: Initiate
    * @constructor image
    */
-  function link() {
+  function image() {
   }
 
   /** Get the size of a given image
@@ -35,6 +35,21 @@
   function getSize($file) {
     if ( !function_exists(getimagesize) ) return array(0,0);
     return getimagesize($file);
+  }
+
+  /** Create the HREF for the popup
+   * @class image
+   * @method mkPopup
+   * @param string path
+   * @param string url
+   * @param string filename
+   * @return string href
+   */
+  function mkPopup($path,$url,$file) {
+    $size = $this->getSize($path.$file);
+    if ( $size[0] == 0 ) $size[0] = 640;
+    if ( $size[1] == 0 ) $size[1] = 480;
+    return "JavaScript:show_img('".$url.$file."',".$size[0].",".$size[1].")";
   }
 
  } // end class image

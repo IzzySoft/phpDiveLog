@@ -74,10 +74,8 @@
            case "png" :
              $list[$pic]->url = $pdl->config->user_url."fotos/$type/$file";
 	     if ( file_exists($pdl->config->user_path."fotos/$type/large/$file") ) {
-	       $size = $pdl->image->getSize($pdl->config->user_path."fotos/$type/large/$file");
-	       $list[$pic]->bigSizeX = $size[0];
-	       $list[$pic]->bigSizeY = $size[1];
-               $list[$pic]->bigurl = $pdl->config->user_url."fotos/$type/large/$file"; }
+               $list[$pic]->bigurl = $pdl->image->mkPopup($pdl->config->user_path."fotos/$type/large/",$pdl->config->user_url."fotos/$type/large/",$file);
+	     }
 	     break;
            case "txt" :
              $text = file($pdl->config->user_path."fotos/$type/$file");

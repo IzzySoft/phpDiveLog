@@ -104,17 +104,21 @@ image count, you could render your page unreadable otherwise - since the
 table gets too wide. I may fix this problem in the future, but no promise ;)
 
 Things to consider:
+- recommended size for these "thumbnails" is 192x144 pixel
 - make the file extensions lower case (i.e. *.jpg|png|gif|txt)
 - when re-numbering your dives, your fotos need to be renumbered accordingly
+- if you want PDL to link the "thumbnail" to the original (larger) image,
+  give the latter the same file name and place it into the "large" subdirectory
+  of the directory the "thumbnail" was placed into
 
 ===============================================================================
 
 5.) Localization
 ----------------
 
-phpDiveLog now ships with language support for English and German. If you want
-to localize it for your language: this should be very easy following the steps
-described here.
+phpDiveLog now ships with language support for English, German and Russian. If
+you want to localize it for your language: this should be very easy following
+the steps described here.
 
 The localization files are located in the lang/ subdirectory. The content has
 to be conform with the UTF-8 charset. In order to create your own "locale file",
@@ -142,6 +146,9 @@ it into the templates/*/images/ directories. For our example, the file name
 had to be lang_ru.jpg (it MUST be a jpeg file). Some additional flag images
 already exist there for the languages I hope to have supported soon - with
 your help!
+
+If you created a new language file I would appreciate to receive a copy to
+be included with future releases. Please send it to izzysoft@qumran.org
 
 ===============================================================================
 

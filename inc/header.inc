@@ -7,16 +7,7 @@
  <link rel="stylesheet" type="text/css" href="<?=$pdl->config->tpl_url?>divelog.css">
  <script language="JavaScript">//<!--
   function show_img(url,sx,sy) {
-    if (sx<1) { sx = 640;
-    } else {
-      if (sx>screen.width) { sx = screen.width;
-      } else { sx += 20; }
-    }
-    if (sy<1) { sy = 480;
-    } else {
-      if (sy>screen.height) { sy = screen.height;
-      } else { sy += 20; }
-    }
+    sx += 20; sy += 20;
 //    var pos = (screen.width/2)-400;
     var pos = 200;
     campus=eval("window.open(url,'image','toolbar=no,location=no,titlebar=no,directories=no,status=yes,resizable=yes,scrollbars=yes,copyhistory=no,width=" + sx + ",height=" + sy + ",top=0,left=" + pos + "')");
