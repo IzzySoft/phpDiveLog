@@ -1,0 +1,119 @@
+#############################################################################
+# phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+# written by Itzchak Rehberg <izzysoft@qumran.org>                          #
+# http://www.qumran.org/homes/izzy/                                         #
+# ------------------------------------------------------------------------- #
+# This program is free software; you can redistribute and/or modify it      #
+# under the terms of the GNU General Public License (see doc/LICENSE)       #
+# ------------------------------------------------------------------------- #
+# Basic information                                                         #
+#############################################################################
+
+[title]
+Localization
+
+[text]
+phpDiveLog now ships with language support for English, German and Russian. If
+you want to localize it for your language: this should be very easy following
+the steps described here.
+
+[text]
+The localization files are located in the <code>lang/</code> subdirectory. The
+content has to be conform with the UTF-8 charset. In order to create your own
+"locale file", I assume Russian here as an example, you just have to...
+
+[text]
+<ul>
+<li>copy the <code>trans.en</code> file to <code>trans.ru</code> (extension is
+  the ISO language code)</li>
+<li>open it with your favorite text editor (preferably one supporting UTF-8).
+  The file is in simple CSV format: leave the first line and first column
+  untouched, and just replace the translations. If the translation would look
+  the same as the original from the lang.en file, simply delete the line;
+  PDL falls back to English if the translation is not found. In fact, by
+  deleting the line (instead of keeping the duplicate) the application may
+  slightly be sped up since the setup process is shorter ;)</li>
+<li>save the file with UTF-8 encoding. If your editor does not support UTF-8,
+  you need to convert the file to UTF-8 after saving it. On *nix systems you
+  can use the <code>recode</code> command for it (see <code>man recode</code>
+  for details).</li>
+<li>now you are done: since the new <code>trans.ru</code> file resides in the
+  <code>lang/</code> directory, it will be found by PDL automagically. In your
+  browser, go to the preferences page - the language should show up in the list.</li></ul>
+
+[text]
+If you followed all these steps, and the language showed up but has no
+"clickable area" (i.e. associated flag), you need to find an image of the
+flag representing your language (size should be about 30x20 pixels) and copy
+it into the <code>templates/*/images/</code> directories. For our example, the
+file name had to be <code>lang_ru.jpg</code> (it MUST be a jpeg file). Some
+additional flag images already exist there for the languages I hope to have
+supported soon - with your help!
+
+[text]
+If you created a new language file I would appreciate to receive a copy to
+be included with future releases. Please send it to {mailto}.
+
+#===============================================================================
+
+[title]
+The web page - multi user issues
+
+[text]
+If you now point your browser to the PDL start page, it needs to know whose
+data you requested. This is done by adding the parameter
+<code>diver=&lt;nickname&gt;</code> to the URL, so it would e.g. look like
+"http://localhost/divelog/index.php?diver=zorro" for the divelog of zorro
+(assuming, you created a divers account for "zorro" as described in the
+installation instructions).
+
+[text]
+What happens if you ommit that parameter? PDL then does not know whose divelog
+you want to browse. Depending on the setting of <code>$default_page</code> in
+your <code>inc/config.inc</code> file, this leads to one of the following
+results:
+[text]
+<table class="nav" align="center" border="0" style="width:90%">
+ <tr><td class="td_blank"><b>error</b></td>
+  <td class="td_blank">an error message is displayed to the visitor informing
+    him/her about the problem and how to solve it (i.e. include the
+    <code>diver=</code> parameter in the URL)</td></tr>
+ <tr><td class="td_blank"><b>index</b></td>
+  <td class="td_blank">PDL will display a list of available DiveLogs. This requires
+   the parameter <code>$enable_index</code> to be set to TRUE. The created list
+   will only contain PUBLIC DiveLogs, i.e. those where the diver has put the
+   file named <code>public</code> into his/her "home directory".</td></tr>
+ <tr><td class="td_blank"><b>user</b></td>
+  <td class="td_blank">PDL will display the data of the user specified by the
+   <code>$default_user</code> setting in your <code>inc/config.inc</code>.</td></tr></table>
+[text]
+This way you can set up PDL to always display your own divelog by default
+(useful e.g. for single user installation) by just setting the
+<code>$default_user</code> to your nick name used with PDL.
+
+#===============================================================================
+[title]
+Set up a diver
+
+[text]
+All data now are located in the divers directory. This is a kind of "home
+directory" located below the diver/ directory. In order to set up an account,
+just create a new directory here with a name of your choice - a good
+recommendation would be the divers nick name in lower case. This "home
+directory" then must have the following subdirectory structure (compare with
+the <code>diver/demo/</code> directory structure):<ul>
+<pre>
+  -+ data     (holding the *.csv data files)
+   + fotos
+   | + dive   (fotos of the dives)
+   | + site   (fotos of the dive sites)
+   + images   (dive profiles generated by ADL are placed here)
+</pre>
+
+[text]
+If the diver wants his account to be listed with the buddylist, just put a file
+named <code>public</code> in his homedir. If that file is missing, the account
+will be treated as "privat", i.e. it is only accessible if one invokes PDL with
+the correct <code>diver=&lt;nickname&gt;</code> parameter.
+
+[eof]

@@ -1,0 +1,181 @@
+#############################################################################
+# phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+# written by Itzchak Rehberg <izzysoft@qumran.org>                          #
+# http://www.qumran.org/homes/izzy/                                         #
+# ------------------------------------------------------------------------- #
+# This program is free software; you can redistribute and/or modify it      #
+# under the terms of the GNU General Public License (see doc/LICENSE)       #
+# ------------------------------------------------------------------------- #
+# Installation instructions for the patient ;)                              #
+#############################################################################
+
+[title]
+For the impatient: QuickInstall
+
+[text]
+<table class="nav" align="center" border="0">
+ <tr><td class="td_blank"><b>ADL</b></td>
+   <td class="td_blank">copy the contents of the <code>install/adl/template/</code>
+   dir to ADLs <code>template/</code> dir and the contents of the
+   <code>install/adl/</code> dir to ADLs directory. Then adjust the settings
+   for <code>TablePDBFile</code> and <code>DivePDBFile</code> in the
+   <code>divelog.ini</code>, plus <code>PDLBASE</code> in the
+   <code>divelog_conduit.sh<code></td></tr>
+ <tr><td class="td_blank"><b>PDL</b></td>
+   <td class="td_blank">copy everything except the <code>install/</code> subdir into
+    your web tree and then check the <code>inc/config.inc</code> file for
+    parameters you may want to adjust. Create your own diver profile by copying
+    the <code>diver/demo</code> directory to <code>diver/&lt;your_nick_here&gt;</code>,
+    directory structure only. This directory you should specify as
+    <code>PDLBASE</code> in the ADL <code>divelog_conduit.sh</code>. Optionally
+    set up the <code>system.conf</code> and <code>diver.conf</code> files in
+    this directory.</td></tr>
+ <tr><td class="td_blank"><b>Data transfer</b></td>
+   <td class="td_blank">if both sides are configured, just run the
+    <code>divelog_conduit.sh</code> once - then point your browser to
+    http://&lt;your_server&gt;/&lt;PDL_URL&gt;/index.php?diver=&lt;your_nick_here&gt;
+ </td></tr></table>
+
+#===[ AquaDiveLog ]========================================[ AquaDiveLog ]===
+[title]
+Aqua DiveLog
+
+[text]
+<b>Installation:</b><ul>
+<li>copy the contents of the <code>install/adl/template/</code> dir to ADLs
+    <code>template/</code> dir</li>
+<li>copy the contents of the <code>install/adl/</code> dir to ADLs directory</li>
+
+[text]
+<b>Conduit configuration:</b><br>
+This takes place in the <code>divelog.ini</code> file as described in the Aqua
+DiveLog <a href="http://www.aquadivelog.org/docs/index.html"
+target="_blank">documentation</a> (see there for detailed description). In this
+little document I will assume that you only change the following parameters:<ul>
+<li><code>TablePDBFile&nbsp;</code>: location and name of your
+    <code>AquaPalm-TableDB.pdb</code> file</li>
+<li><code>DivePDBFile&nbsp;&nbsp;</code>: location and name of your
+    <code>AquaPalm-DiveDB.pdb</code> file</li></ul>
+[text]
+I will not explain all combinations of the other parameters - this is not the
+topic of this short documentation, but to get you started quick. If you want/
+need to change more, you will have to find out yourself ;)
+
+[text]
+<b>Script configuration:</b><br>
+The script is to be configured in the <code>divelog_conduit.sh</code> itself.
+In the head of the file you find the configuration section: Even if you are not
+familiar with Shell scripts, it should be easy for you to set up. One hint:
+never place spaces around the "=" sign or it will not work. The following
+options will need your attention:
+<table class="nav" align="center" border="0" width="90%">
+ <tr><td class="td_blank"><b><code>LOGDIR</code></b></td>
+  <td class="td_blank">if you followed my advice for the conduit configuration above,
+    you can leave it as is. If not: this value has to match the
+    <code>LogBookPath</code> in the <code>divelog.ini</code></td></tr>
+ <tr><td class="td_blank"><b><code>PDLBASE</code></b></td>
+  <td class="td_blank">the divers directory of your phpDiveLog installation, i.e.
+   where the subdirectories <code>data/</code> and <code>images/</code> reside.
+   Will certainly look like &lt;PDL root dir&gt;/diver/&lt;nickname&gt; - see
+   "Set up a diver" on the <a href="admin.php">Admin page</a> for details.</td></tr>
+ <tr><td class="td_blank"><b><code>UNITS</code></b></td>
+  <td class="td_blank">which kind of units you prefer - can be set either to
+   "metric", "imperial" or "bothunits"</td></tr>
+ <tr><td class="td_blank"><b><code>DATEFORMAT</code></b></td>
+  <td class="td_blank">just for the "progress display" on the screen to give you an
+   idea how long which step took ;)</td></tr></table>
+
+
+#===[ phpDiveLog ]==========================================[ phpDiveLog ]===
+[title]
+phpDiveLog: Installation
+
+[text]
+<ol><li>copy everything except the <code>install/</code> subdir into your web
+    tree</li>
+<li>if you don't want to start with the demo data, remove all files from
+  the <code>data/</code> , <code>fotos/</code> and <code>images/</code>
+  subdir</li></ol>
+
+[title]
+phpDiveLog: Konfiguration
+
+[text]
+All the "user-based" configuration takes place in the <code>inc/config.inc</code>
+file. I strongly recommend not to try some configuration in other places (which
+would make it harder for YOU to update your installation later) - if you miss
+some configuration option, just let me know and I will see if and how I can
+implement this.
+
+[text]
+Each configuration option is documented within the config file, so
+"QuickStarters" can skip here to the next section. For all others: here comes
+a short documentation for the available parameters and their effects:
+[text]
+<table class="nav" align="center" border="0" width="90%">
+ <tr><td class="td_blank"><b><code>$database["type"]</code></b></td>
+  <td class="td_blank">right now you can set this to "csv" only. In the future,
+    there my be more formats available, such as UDDF for the Universal Dive
+    Data Format (again a file), or even "real databases" such as MySQL,
+    PostgreSQL, etc.</td></tr>
+ <tr><td class="td_blank"><b><code>$display_limit</code></b></td>
+  <td class="td_blank">with pages containing lists, as e.g. the sitelist, this
+    value will advise PDL how many entries (i.e. table data rows) to display per
+    page. This saves you from scrolling through long pages - but of course you
+    can set this to e.g. 999999999 and everything will fit on one page (but not
+    necessarily one screen).</td></tr>
+ <tr><td class="td_blank"><b><code>$template_set</code></b></td>
+  <td class="td_blank">to which template set PDL should default. Right now the
+    values "aqua" and "default" are available. The visitor can overwrite this
+    value (for his/her browser session only, of course) by selecting a different
+    template set on the preferences page.</td></tr>
+ <tr><td class="td_blank"><b><code>$lang</code></b></td>
+  <td class="td_blank">the default language to use. This is a 2 character ISO
+    code, like "en" for English or "de" for German. You can set this to any
+    language you like - if no translations are found, PDL will fall back to
+    English. Of course you can create your own translations, which is discussed
+    on the <a href="admin.php">Admin</a> page.</td></tr>
+ <tr><td class="td_blank"><b><code>$title</code></b></td>
+  <td class="td_blank">for now the site name to be displayed in the browsers
+    title bar. At the end of this, some page information will be added: if you
+    e.g. set the <code>title</code> to "MyDiveLog", by browsing the dive #5 the
+    browsers title probably looks like "MyDiveLog: Dive# 5" - where "Dive"
+    could be localized even...</td></tr>
+ <tr><td class="td_blank"><b><code>$enable_index</code></b></td>
+  <td class="td_blank">whether visitors should be allowed to browse the
+    buddylist. Needs to be set to "TRUE" if you want to use
+    <code>$default_page="index"</code> (see below).</td></tr>
+ <tr><td class="td_blank"><b><code>$default_page</code></b></td>
+  <td class="td_blank">what to do if there's no diver specified with the URL
+    (and thus PDL does not know where to look for the data - normally this has
+    to be done on the URL with the <code>diver=nickname</code> parameter)? The
+    options are:<ul>
+      <li>"user"  - we have a default user (see <code>$default_user</code>)</li>
+      <li>"index" - display the index page with available nicks (needs
+          <code>enable_index</code> to be set to TRUE - see above)</li>
+      <li>"error" - display an error message to the visitor</li></ul></td></tr>
+ <tr><td class="td_blank"><b><code>$default_user</code></b></td>
+  <td class="td_blank">only evaluated if <code>$default_page="user"</code>:
+    which is the default logbook we should route the request to? Must be a
+    valid account (see "set up a diver"), otherwise results in
+    <code>$default_page="error"</code>.</td></tr>
+ <tr><td class="td_blank"><b><code>$allow_override</code></b></td>
+  <td class="td_blank">some configuration values can be defined on a
+    per-logbook-base, so each diver can provide his/her default preferences to
+    it. We do not want them to mess up things, so here we define which
+    parameters may be overridden by the <code>diver/*/system.conf</code> file.
+    The value of this parameter is a space separated list of options. As shipped,
+    these is set to "title lang display_limit template_set", which seems to me
+    being a good choice.</td></tr></table>
+
+[title]
+phpDiveLog: Updating
+
+[text]
+When updating, you generally follow the steps above (replacing the files with
+the updates, check the configuration). A good idea for a clean installation
+would be deleting all but the <code>diver/</code> dir (after a backup) and
+installing the new files then, followed by a check of the <code>inc/config.inc</code>
+file which may contain some new options.
+
+[eof]

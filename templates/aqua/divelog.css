@@ -22,6 +22,16 @@
    text-align: center;
    font-size: 130%;
   }
+  CODE {
+   font-size: 12px;
+   font-family: monospace;
+   color: #660033;
+  }
+  PRE {
+   font-size: 12px;
+   margin: 7px;
+   color: #000000;
+  }
   .footer {
    font-size: 9px;
    font-weight: bold;
