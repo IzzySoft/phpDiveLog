@@ -12,8 +12,8 @@
 
  # $Id$
 
- $title = "Izzys Dive LogBook";
  include("inc/includes.inc");
+ $title .= ": DiveIndex";
  include("inc/header.inc");
  if (!$start) $start = 0;
  $end = $start + $pdl->config->display_limit;

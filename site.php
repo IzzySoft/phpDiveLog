@@ -12,8 +12,8 @@
 
  # $Id$
 
- $title = "Izzys Dive LogBook";
  include("inc/includes.inc");
+ $title .= ": Site# $id";
  include("inc/header.inc");
 
  $t = new Template($pdl->config->tpl_path);

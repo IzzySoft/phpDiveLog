@@ -12,8 +12,8 @@
 
  # $Id$
 
- $title = "Izzys Dive LogBook: Dive# $nr";
  include("inc/includes.inc");
+ $title .= ": Dive# $nr";
  include("inc/header.inc");
  include("inc/class.file.inc");
 
