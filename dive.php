@@ -67,6 +67,9 @@
  $t->set_var("item_name","Rating:");
  $t->set_var("item_data","<img src='".$pdl->config->tpl_url."images/".$dive["rating"]."star.gif"."' alt='Rating:".$dive["rating"]."'");
  $t->parse("sum","sumblock",TRUE);
+ $t->set_var("item_name","&nbsp;"); // dummy empty line to match the
+ $t->set_var("item_data","&nbsp;"); // neighbour table
+ $t->parse("sum","sumblock",TRUE);
  #--------------------------[ Conditions ]---
  $t->set_var("item_name","Visibility:");
  $t->set_var("item_data",$dive["visibility"]);

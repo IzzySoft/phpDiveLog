@@ -33,7 +33,7 @@
  </tr></table>
 
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
- <table align="center" border="0" style="margin-top:3px"><!-- Conditions -->
+ <table align="center" border="0" cellpadding="0" style="margin-top:3px;border-spacing:0;"><!-- Conditions -->
    <tr><th class="head" colspan="3" valign="middle"><img src="{tpl_dir}images/btn_conditions.gif" width="37" height="15" alt="Conditions"> {cond_name}</th></tr>
    <tr><td valign="top">
      <table align="center" border="0" cellpadding="2">
