@@ -66,3 +66,5 @@ no_public_divelogs;"Sorry, but currently there are no public divelogs available 
 index_disabled;"Sorry - but the buddy index has been disabled by the admin."
 num_sites;"Number of Sites"
 avg_dives_per_site;"Avg. Dives/Site"
+hit_count;"Hits"
+tab_diver;"Divers"

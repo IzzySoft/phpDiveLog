@@ -195,6 +195,23 @@
      return $conf;
    }
 
+   /** Get all subdirectory names of a specified directory
+    * @class file
+    * @method get_subdirs
+    * @param string directoryname
+    * @return array directories [1..n]
+    */
+   function get_subdirs($dirname) {
+     $dir = dir($dirname);
+     $exclude = array(".","..","CVS");
+     while ( $file=$dir->read() ) {
+       if (!in_array($file,$exclude) ) {
+         if ( is_dir("$dirname/$file") ) $sub[] = $file;
+       }
+     }
+     return $sub;
+   }
+
  } // end class file
 
 ?>

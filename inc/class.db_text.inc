@@ -243,6 +243,38 @@
      return $this->get_sites($id,"",TRUE);
    }
 
+   /** Get an alphabetical list of all dive places from all divers
+    *  (not to be confused with the dive sites - it's just the location here)
+    * @class db_text
+    * @method getAllPlaces
+    * @return array places
+    */
+   function getAllPlaces() {
+     GLOBAL $pdl;
+     $csv = new csv(";",'"',TRUE);
+     $udirs = $pdl->file->get_subdirs($pdl->config->base_path."diver");
+     $dircount = count($udirs);
+     for ($i=0;$i<$dircount;++$i) {
+       $file = $pdl->config->base_path."diver/".$udirs[$i]."/data/divesites.csv";
+       if (file_exists($file)) {
+         $csv->import($file);
+         $sitecount = count($csv->data);
+         for ($k=0;$k<$sitecount;++$k) {
+           $place[] = $csv->data[$k]["loc"];
+           ++$cnum[$csv->data[$k]["loc"]];
+         }
+       }
+     }
+     foreach ($place as $key => $val) $tmp[$key] = serialize($val);
+     foreach (array_unique($tmp) as $key => $val) {
+       $p->name = $place[$key];
+       $p->num  = $cnum[$place[$key]];
+       $splace[] = $p;
+     }
+     sort($splace); reset($splace);
+     return $splace;
+   }
+
   #======================================================[ Dive Statistics ]===
    /** Get dive statistics
     * @class db_text
