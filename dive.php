@@ -63,7 +63,7 @@
  $t->set_var("time",$dive["time"]);
  $t->set_var("date",$dive["date"]);
  $t->set_var("location",$dive["location"]);
- $t->set_var("place",$dive["place"]);
+ $t->set_var("place","<a href='site.php?id=".$dive["site_id"]."'>".$dive["place"]."</a>");
  #--------------------------[ Summary ]---
  $t->set_var("item_name","Max. Depth:");
  $t->set_var("item_data",$dive["depth"]);
