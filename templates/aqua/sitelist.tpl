@@ -20,17 +20,10 @@
 </table>
 
 </td><td><img src="{tpl_dir}images/logo.gif" height="23" align="right">
-
-</td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
- <table border="0" cellpadding="2" width="100%" class="transp"><tr>
-  <td class="td_transp" align="left">{nav_left}</td>
-  <td class="td_transp" align="right">{nav_right}</td>
- </tr></table>
-
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 
-<table border="1" cellpadding="2" align="center">
- <tr><td></td><th>{loc_name}</th><th>{place_name}</th><th>{md_name}</th><td></td></tr>
+<table class="outer" border="1" cellpadding="2" align="center" style="margin-top:7">
+ <tr><td>{nav_left}</td><th>{loc_name}</th><th>{place_name}</th><th>{md_name}</th><td align="right">{nav_right}</td></tr>
 
 <!-- BEGIN itemblock -->
  <tr><th align="right"><a href="{site_ref}">{id}</a></th>

@@ -34,20 +34,25 @@
 
 /* === Tables === */
 
-  TABLE {
+  TABLE, TABLE.outer {
    background-image:url(images/aqua-light.jpg);
    background-attachment:fixed;
    empty-cells: show;
    border:0;
    border-spacing:0;
   }
-  TABLE.nav {
-   background-image:url(images/aqua.jpg);
+  TABLE.outer, TABLE.nav {
    border-style: ridge;
    border-width: 2;
    border-color: #3399ff;
-   border-collapse: separate;
+  }
+  TABLE.outer {
+   border-spacing: 0;
+  }
+  TABLE.nav {
    border-spacing: 1;
+   border-collapse: separate;
+   background-image:url(images/aqua.jpg);
   }
   TABLE.transp {
    background-image:url(images/aqua.jpg);
@@ -70,6 +75,9 @@
   TH.head {
     font-size: 105%;
     font-weight: bold;
+  }
+  TD.tdl {
+   background-image:url(images/aqua-light.jpg);
   }
   .td_blank {
    background-color: #ffffff;

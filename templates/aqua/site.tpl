@@ -20,35 +20,35 @@
 </table>
 
 </td><td><img src="{tpl_dir}images/logo.gif" height="23" align="right">
-
-</td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
- <table class="transp" width="100%"><tr>
-  <td class="td_transp" align="left">{nav_left}</td>
-  <td class="td_transp" align="right">{nav_right}</td>
- </tr></table>
-
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 
-<table cellpadding="2" border="0" align="center">
- <tr><th class="head" colspan="5"><IMG SRC="{tpl_dir}images/globe.gif" width="15" height="15" alt="Location"> {loc}: {place}</th></tr>
+<table class="outer" cellspacing="0" cellpadding="2" align="center" style="margin-top:7;">
+ <tr><td>{nav_left}</td>
+     <th class="head" colspan="5"><IMG SRC="{tpl_dir}images/globe.gif" width="15" height="15" alt="Location"> {loc}: {place}</th>
+     <td align="right">{nav_right}</td>
+     </tr>
  <tr>
+  <th>&nbsp;</th>
   <th style="text-align:right">{lat_name}</th> <td>{latitude}</td>
-  <td class="td_transp"></td>
+  <th>&nbsp;</th>
   <th style="text-align:right">{long_name}</th> <td>{longitude}</td>
+  <th>&nbsp;</th>
  </tr><tr>
+  <th>&nbsp;</th>
   <th style="text-align:right">{alt_name}</th> <td>{altitude}</td>
-  <td class="td_transp"></td>
+  <th>&nbsp;</th>
   <th style="text-align:right">{md_name}</th> <td>{depth}</td>
+  <th>&nbsp;</th>
  </tr>
 </table>
-<table cellpadding="2" border="0" align="center" style="margin-top:4px">
+<table class="outer" cellpadding="2" cellspacing="0" align="center" style="margin-top:4px">
  <tr><th>{notes_name}</th></tr>
  <tr><td>{description}</td></tr>
 </table>
 
 <!-- BEGIN fotoblock -->
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
-<table align="center" border="0" cellpadding="2" style="margin-top:3px"><!-- Fotos -->
+<table class="outer" align="center" cellpadding="2" cellspacing="0" style="margin-top:3px"><!-- Fotos -->
  <tr><th class="head" valign="middle"><img src="{tpl_dir}images/btn_fotos.gif" width="37" height="15" alt="Fotos"> {fotos_name}</th></tr>
  <tr><td align="center"><table><tr>
 <!-- BEGIN fotoitemblock -->

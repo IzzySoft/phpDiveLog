@@ -23,26 +23,26 @@
 
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2"><!-- Navigation -->
 
- <table border="0" cellpadding="2" width="100%" class="transp" style="margin-top:7"><tr>
-  <td class="td_transp" align="left" width="12">{nav_left}</td>
+ <table class="outer" border="0" cellpadding="2" cellspacing="0" width="100%" style="margin-top:7"><tr>
+  <td class="tdl" align="left" width="12">{nav_left}</td>
   <td align="left" class="td_blank" style="vertical-align:middle;width:12em;">Dive#: {dive#}</td>
   <th class="big" style="vertical-align:middle;"><img src="{tpl_dir}images/dive_flag1.gif" width="23" height="15" alt="Globe" valign="middle" style="margin-left:20;">
     <span style="margin-right:20;vertical-align:middle;">{location} / {place}</span></td>
   <td align="right" class="td_blank" style="vertical-align:middle;width:12em;">{date} {time}</td>
-  <td class="td_transp" align="right" width="12">{nav_right}</td>
+  <td class="tdl" align="right" width="12">{nav_right}</td>
  </tr></table>
 
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
- <table align="center" border="0" cellpadding="0" style="margin-top:3px;border-spacing:0;"><!-- Conditions -->
+ <table class="outer" align="center" border="0" cellpadding="0" cellspacing="0" style="margin-top:3px;"><!-- Conditions -->
    <tr><th class="head" colspan="3" valign="middle"><img src="{tpl_dir}images/btn_conditions.gif" width="37" height="15" alt="Conditions"> {cond_name}</th></tr>
    <tr><td valign="top">
-     <table align="center" border="0" cellpadding="2">
+     <table align="center" border="0" cellpadding="2" cellspacing="0">
 <!-- BEGIN sumblock -->
        <tr><th>{item_name}</th><td>{item_data}</td></tr>
 <!-- END sumblock -->
      </table>
    </td><td>&nbsp;</td><td valign="top">
-     <table align="center" border="0" cellpadding="2">
+     <table align="center" border="0" cellpadding="2" cellspacing="0">
 <!-- BEGIN condblock -->
        <tr><th>{item_name}</th><td>{item_data}</td></tr>
 <!-- END condblock -->
@@ -51,7 +51,7 @@
  </table>
 
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
-<table align="center" border="0" cellpadding="2" style="margin-top:3px"><!-- Equipment -->
+<table class="outer" align="center" border="0" cellpadding="2" cellspacing="0" style="margin-top:3px"><!-- Equipment -->
  <tr><th class="head" colspan="2" valign="middle"><img src="{tpl_dir}images/btn_equipment.gif" width="37" height="15" alt="Equipment"> {equi_name}</th></tr>
 <!-- BEGIN equiblock -->
  <tr><th>{item_name}</th><td>{item_data}</td></tr>
@@ -68,7 +68,7 @@
 
 <!-- BEGIN scheduleblock -->
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
-<table align="center" border="0" cellpadding="2" style="margin-top:3px"><!-- Schedule -->
+<table class="outer" align="center" border="0" cellpadding="2" cellspacing="0" style="margin-top:3px"><!-- Schedule -->
  <tr><th class="head" colspan="4" valign="middle"><img src="{tpl_dir}images/btn_schedule.gif" width="37" height="15" alt="Schedule"> {sched_name}</th></tr>
  <tr>
    <td align="center"><b>{s_depth_name}</b></td>
@@ -88,14 +88,14 @@
 <!-- END scheduleblock -->
 
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
-<table align="center" border="0" cellpadding="2" style="margin-top:3px"><!-- Notes -->
+<table class="outer" align="center" border="0" cellpadding="2" cellspacing="0" style="margin-top:3px"><!-- Notes -->
  <tr><th class="head" valign="middle"><img src="{tpl_dir}images/btn_notes.gif" width="37" height="15" alt="Notes"> {notes_name}</th></tr>
  <tr><td>{notes_text}</td></tr>
 </table>
 
 <!-- BEGIN fotoblock -->
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
-<table align="center" border="0" cellpadding="2" style="margin-top:3px"><!-- Fotos -->
+<table class="outer" align="center" border="0" cellpadding="2" cellspacing="0" style="margin-top:3px"><!-- Fotos -->
  <tr><th class="head" valign="middle"><img src="{tpl_dir}images/btn_fotos.gif" width="37" height="15" alt="Fotos"> {fotos_name}</th></tr>
  <tr><td align="center"><table><tr>
 <!-- BEGIN fotoitemblock -->
