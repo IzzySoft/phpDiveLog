@@ -38,9 +38,9 @@
  }
 
  #=============================================[ set up the navigation bar ]===
- include("inc/tab_setup.inc");
-# $pdl->tabs->activate("dives",TRUE);
-# $pdl->tabs->parse();
+ include("inc/tab_setup2.inc");
+ $pdl->tabs->activate("diver",TRUE);
+ $pdl->tabs->parse();
  if ($start) {
    $prev = $start - $pdl->config->display_limit;
    if ($prev<0) $prev=0;
