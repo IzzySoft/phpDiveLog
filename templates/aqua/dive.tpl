@@ -26,7 +26,7 @@
  <table border="0" cellpadding="2" width="100%" class="transp" style="margin-top:7"><tr>
   <td class="td_transp" align="left" width="12">{nav_left}</td>
   <td align="left" class="td_blank" style="vertical-align:middle;width:12em;">Dive#: {dive#}</td>
-  <th class="big" style="vertical-align:middle;"><img src="{tpl_dir}images/dive_flag1.gif" width="23" height="15" alt="Globe" align="middle" style="margin-left:20;">
+  <th class="big" style="vertical-align:middle;"><img src="{tpl_dir}images/dive_flag1.gif" width="23" height="15" alt="Globe" valign="middle" style="margin-left:20;">
     <span style="margin-right:20;vertical-align:middle;">{location} / {place}</span></td>
   <td align="right" class="td_blank" style="vertical-align:middle;width:12em;">{date} {time}</td>
   <td class="td_transp" align="right" width="12">{nav_right}</td>
