@@ -7,6 +7,7 @@ v0.1.5
 -------------------
 + some settings (such as display_limit, default language, etc.) can now be
   (re-)defined on a per-diver-base (i.e. each logbook can have its own defaults)
++ added "Quick installation" for the impatient to the doc/README file
 
 v0.1.4 (05.07.2004)
 -------------------

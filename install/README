@@ -62,7 +62,20 @@ phpDiveLog itself only requires a running web server with PHP4 support.
 3) Installation
 ---------------
 See the file INSTALL (which should reside in the same directory as this file
-you are reading now).
+you are reading now) for a detailed installation description. The short variant
+for the impatient:
+- ADL: copy the contents of the install/adl/template/ dir to ADLs template/ dir
+  and the contents of the install/adl/ dir to ADLs directory. Then adjust the
+  settings for TablePDBFile and DivePDBFile in the divelog.ini, plus PDLBASE
+  in the divelog_conduit.sh
+- PDL: copy everything except the install/ subdir into your web tree and then
+  check the inc/config.inc file for parameters you may want to adjust. Create
+  your own diver profile by copying the diver/demo directory to
+  diver/<your_nick_here>, directory structure only. This directory you should
+  specify as PDLBASE in the ADL divelog_conduit.sh
+- Data transfer: if both sides are configured, just run the divelog_conduit.sh
+  once - then point your browser to
+  http://<your_server>/<PDL_URL>/index.php?diver=<your_nick_here>
 
 ===============================================================================
 
