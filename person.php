@@ -16,6 +16,11 @@
  include("inc/includes.inc");
 # $title .= ": ".lang("dive#")." $nr";
  include("inc/header.inc");
+ if (!$pdl->config->display_personal) {
+   $pdl->common->alert(lang("personal_no_public"));
+   include("inc/footer.inc");
+   exit;
+ }
 
  $t = new Template($pdl->config->tpl_path);
  $t->set_file(array("template"=>"person.tpl"));
