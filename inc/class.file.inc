@@ -123,6 +123,29 @@
      return "";
    }
 
+   /** Read a user-defined config file
+    * @class file
+    * @method read_conf
+    * @param string filename config file to read
+    * @return array (var=value)
+    */
+   function read_conf($file) {
+     $def = file($file);
+     $lc  = count($def);
+     for ($i=0;$i<$lc;++$i) {
+       switch(substr(trim($def[$i]),0,1)) {
+         case "#" :
+         case ""  : break;
+         default  : $pos = strpos($def[$i],"=");
+                    if (!$pos) break; // invalid syntax in conf file
+                    $var   = trim(substr($def[$i],0,$pos));
+                    $value = trim(substr($def[$i],$pos+1));
+                    $conf[$var] = $value;
+       }
+     }
+     return $conf;
+   }
+
  } // end class file
 
 ?>
