@@ -16,7 +16,7 @@
  if (!empty($_GET["diver"])) {
    $relPath = "diver/".$_GET["diver"]."/";
  } else {
-   $relPath = "diver/demo/";
+   $relPath = "diver/$default_user/";
  }
 
  #==========================================================[ directories ]===

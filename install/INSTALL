@@ -105,6 +105,21 @@ a short documentation for the available parameters and their effects:
                         by browsing the dive #5 the browsers title probably
                         looks like "MyDiveLog: Dive# 5" - where "Dive" could
                         be localized even...
+- $default_page       : what to do if there's no diver specified with the
+                        URL (and thus PDL does not know where to look for the
+                        data - normally this has to be done on the URL with
+                        the "diver=nickname" parameter)? The options are:
+                        * "user"  - we have a default user (see $default_user)
+                        * "index" - display the index page with available nicks
+                        * "error" - display an error message to the visitor
+                        Right now, only "user" is a valid option (although
+                        setting it to "error" will result in an error ;) - the
+                        other options will come available with one of the next
+                        versions of PDL (hopefully soon).
+- $default_user       : only evaluated if $default_page="user": which is the
+                        default logbook we should route the request to? Must
+                        be a valid account (see "set up a diver"), otherwise
+                        results in $default_page="error".
 
 2.3. Updating
 -------------

@@ -20,4 +20,8 @@
  $template_set  = "aqua"; # prefered template set: default|aqua
  $lang          = "en";   # default language if not (yet) specified by visitor
  $title = "phpDiveLog Dev"; # site name
+ $default_page  = "user"; # where to route requests without the "?diver=nick"
+                          # to: user|index|error (only "user" supported for now)
+ $default_user  = "demo"; # if default_page=user: which user is the default?
+                          # must be a valid account (subdir diver/<user>)
 ?>
