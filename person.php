@@ -29,6 +29,7 @@
  $t->set_block("template","certblock","cert");
  $t->set_block("certblock","cdetailblock","cdetail");
  $t->set_block("template","fotoblock","fotos");
+ $t->set_block("template","notesblock","notb");
  $t->set_block("fotoblock","fotoitemblock","pic");
 
  #=================================================[ general template data ]===
@@ -40,6 +41,11 @@
 
  #=====================================================[ Import diver data ]===
  $diver = $pdl->file->read_conf($pdl->config->user_path."diver.conf");
+ if ( file_exists($pdl->config->user_path."diver.txt.$lang") ) {
+   $diver["notes"] = $pdl->file->read_file($pdl->config->user_path."diver.txt.$lang");
+ } elseif ( file_exists($pdl->config->user_path."diver.txt") ) {
+   $diver["notes"] = $pdl->file->read_file($pdl->config->user_path."diver.txt");
+ }
 
  #=================================================[ set up the diver data ]===
  #-------------------------[ personal data ]---
@@ -89,7 +95,12 @@
  }
 
  #-------------------------------[ Notes ]---
-# $t->set_var("notes_text",$pdl->common->nl2br($dive["notes"]));
+ $notes = $pdl->common->nl2br($diver["notes"]);
+ if (!empty($notes)) {
+   $t->set_var("notes_name",lang("notes"));
+   $t->set_var("notes_text",$notes);
+   $t->parse("notb","notesblock");
+ }
 
  #-------------------------------[ Fotos ]---
 /*

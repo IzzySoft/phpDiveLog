@@ -40,6 +40,13 @@
 </table>
 <!-- END certblock -->
 
+<!-- BEGIN notesblock -->
+<table class="outer" cellpadding="2" cellspacing="0" align="center" style="margin-top:4px">
+ <tr><th class="head" valign="middle"><img src="{tpl_dir}images/btn_notes.gif" width="37" height="15" alt="Notes"> {notes_name}</th></tr>
+ <tr><td class="notes">{notes_text}</td></tr>
+</table>
+<!-- END notesblock -->
+
 <!-- BEGIN fotoblock -->
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 <table class="outer" align="center" cellpadding="2" cellspacing="0" style="margin-top:3px"><!-- Fotos -->

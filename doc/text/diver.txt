@@ -67,6 +67,7 @@ and site descriptions with phpDiveLog. This can be done in different ways:
  <li>Using "external notes files" special to phpDiveLog</li>
  <li>Doing both at the same time</li>
 </ul>
+Also your personal page can be enhanced with "external notes files".
 
 [text]
 I implemented the "external notes files" to save you the act of editing all
@@ -98,6 +99,12 @@ These files will automatically be appended to your notes field, if they exist.
 Additionally it should be said that you shouldn't use HTML formating to
 extensive (e.g. by changing background colors etc.) to not mess up the general
 design of the site.
+
+[text]
+For the personal page it works similiarly - but here we consider just the
+<code>diver.txt[.&lt;lang&gt;]</code> file(s) in the divers "home directory",
+i.e. the directory where the divers <code>system.conf</code> and
+<code>diver.conf</code> reside.
 
 #===============================================================================
 
@@ -311,6 +318,11 @@ publish e.g. the date, just leave the parameter blank. Otherwise, if you
 specify it for the next course, the parser will count it to the previous ;)
 Available options in this block are <code>course[]</code>, <code>date[]</code>
 and <code>place[]</code>.
+
+[text]
+To add more descriptive context, you can make use of other "external sources",
+such as a text file in your diver "home directory". See "Using other external
+sources" for details on this.
 
 #===============================================================================
 
