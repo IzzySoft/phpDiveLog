@@ -109,7 +109,7 @@ a short documentation for the available parameters and their effects:
                         be localized even...
 - $enable_index       : whether visitors should be allowed to browse the
                         buddylist. Needs to be set to "TRUE" if you want to
-                        use $defaultpage="index" (see below).
+                        use $default_page="index" (see below).
 - $default_page       : what to do if there's no diver specified with the
                         URL (and thus PDL does not know where to look for the
                         data - normally this has to be done on the URL with
@@ -133,9 +133,11 @@ a short documentation for the available parameters and their effects:
 
 2.3. Updating
 -------------
-When updating, you generally follow the steps 2.1 and 2.2 above - but probably
-you will NOT want to copy the contents of the data/ subdir from tha archive
-to not overwrite your own data.
+When updating, you generally follow the steps 2.1 (replacing the files with
+the updates) and 2.2 (check the configuration) above. A good idea for a clean
+installation would be deleting all but the diver/ dir (after a backup) and
+installing the new files then, followed by a check of the inc/config.inc file
+which may contain some new options.
 
 ===[ Diver & Dive Data ]============================[ Diver & Dive Data ]===
 
@@ -153,6 +155,11 @@ directory" then must have the following subdirectory structure:
 - images (here go the dive profiles to)
 To have your Aqua DiveLog data transfered to the right directory, you may
 want to set up PDLBASE in the conduit script accordingly (see above).
+
+If the diver wants his account to be listed with the buddylist, just put a
+file named "public" in his homedir. If that file is missing, the account will
+be treated as "privat", i.e. it is only accessible if one invokes PDL with
+the correct "diver=<nickname>" parameter.
 
 3.2. The divers system.conf
 ---------------------------
@@ -186,7 +193,11 @@ options in this block are name, firstname, country, state, city and status
 You can include a photo of yours using the "foto" option also available in this
 block. The image used here must be stored in the diver/*/fotos/person/
 subdirectory. If you don't specify one, a "dummy" will be used instead.
-If you want to omit something, just delete or comment out that line.
+If you want to omit something, just delete or comment out that line. With the
+"buddylist" option you define whether these personal data may be included in
+the buddy list (if enabled by the admin in the inc/config.inc) by setting it
+to "1" - or not, by either setting it to "0", commenting it out or removing
+that line completely.
 
 With the [certification] block, there are stronger rules to observe. Data for
 a certification must include the course (i.e. the certification - makes no
