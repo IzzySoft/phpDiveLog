@@ -64,6 +64,13 @@
  if ($fc>0) {
    $picdir = $pdl->config->user_url;
    for ($i=0;$i<$fc;++$i) {
+     if (!empty($fotos[$i]->bigurl)) {
+       $t->set_var("unref","</a>");
+       $t->set_var("bigref","<a href=\"JavaScript:show_img('".$fotos[$i]->bigurl."',".$fotos[$i]->bigSizeX.",".$fotos[$i]->bigSizeY.")\">");
+     } else {
+       $t->set_var("unref","");
+       $t->set_var("bigref","");
+     }
      $t->set_var("foto",$fotos[$i]->url);
      $t->set_var("fdesc",$fotos[$i]->desc);
      $t->parse("pic","fotoitemblock",TRUE);

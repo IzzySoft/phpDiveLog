@@ -27,6 +27,7 @@
  $pdl->trans = new trans();
  include("inc/class.link.inc");
  include("inc/class.common.inc");
+ include("inc/class.image.inc");
 
  #======================================================[ setup shortkeys ]===
  function lang($key,$m1="",$m2="",$m3="",$m4="",$m5="") {
