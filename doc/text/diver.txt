@@ -125,64 +125,43 @@ include other plain text/html files stored on the machine serving your PDL files
 
 [text]
 Embedded links are enclosed by the <code>[url]</code> and <code>[/url]</code>
-tags. Embedded images are
- enclosed by the <code>[img]</code> and <code>[/img]</code>
-(left aligned) or <code>[imgr]</code> and <code>[/imgr]</code> (right
- aligned)
+tags. Embedded images are enclosed by the <code>[img]</code> and <code>[/img]</code>
+(left aligned) or <code>[imgr]</code> and <code>[/imgr]</code> (right aligned)
 tags. External (text/html) files can be included by using the <code>[file]</code>
-and <code>[/file]
-</code> tags, nesting of tags (i.e. using the tags in a file
-included by the <code>[file]</code> tag,
- and using images as anchors for URLs)
-is possible. Everything from the opening
- to the closing tag (including the tags
-themselves) has to be on the same line
- (i.e. the string must NOT contain any
-line breaks). The syntax of the part
- between the tags is as follows, where
-square brackets mark optional and angle
- brackets mandatory parts:
+and <code>[/file]</code> tags, nesting of tags (i.e. using the tags in a file
+included by the <code>[file]</code> tag, and using images as anchors for URLs)
+is possible. Everything from the opening to the closing tag (including the tags
+themselves) has to be on the same line (i.e. the string must NOT contain any
+line breaks). The syntax of the part between the tags is as follows, where
+square brackets mark optional and angle brackets mandatory parts:
 
 [text]
 <table class="nav" align="center" border="0">
  <tr><td class="td_blank"><b>file</b></td>
-   <td class="td_blank">&lt;location&gt;
-</td></tr>
+   <td class="td_blank">&lt;location&gt;</td></tr>
  <tr><td class="td_blank"><b>url,img,imgr</b></td>
-   <td class="td_blank">&lt;location&gt;[|&lt;description&gt;]
-</td></tr>
+   <td class="td_blank">&lt;location&gt;[|&lt;description&gt;]</td></tr>
  <tr><td colspan="2"></td></tr>
-
  <tr><td class="td_blank"><b>location</b></td>
-  <td class="td_blank">[root|protocol]&lt;file&gt;
-</td></tr>
+  <td class="td_blank">[root|protocol]&lt;file&gt;</td></tr>
  <tr><td class="td_blank"><b>description</b></td>
-  <td class="td_blank">plain text
-</td></tr>
+  <td class="td_blank">plain text</td></tr>
  <tr><td colspan="2"></td></tr>
-
  <tr><td class="td_blank"><b>root</b></td>
-  <td class="td_blank">~dir[@&lt;buddy&gt;]
-<br><pre>
+  <td class="td_blank">~dir[@&lt;buddy&gt;]<br><pre>
    where "dir" is: d = ...fotos/dive
                    s = ...fotos/site
                    p = ...fotos/person
-                   t = diver/&lt;buddy&gt;/text
-</pre></td></tr>
+                   t = diver/&lt;buddy&gt;/text</pre></td></tr>
  <tr><td colspan="2"></td></tr>
-
  <tr><td class="td_blank"><b>buddy</b></td>
   <td class="td_blank">nick of the buddy (= subdir under diver/) to refer to.
-    If not
- specified, it is the own nick assumed.
-</td></tr>
+    If not specified, it is the own nick assumed.</td></tr>
  <tr><td class="td_blank"><b>file</b></td>
-  <td class="td_blank">file name, optionally including directory names
-</td></tr>
+  <td class="td_blank">file name, optionally including directory names</td></tr>
  <tr><td class="td_blank"><b>protocol</b></td>
   <td class="td_blank">any browser supported protocol
-    (e.g. "http://" or "ftp://")
-</td></tr>
+    (e.g. "http://" or "ftp://")</td></tr>
 </table>
 
 [text]
@@ -192,38 +171,28 @@ below:
 [text]
 <table class="nav" align="center" border="0" width="90%">
  <tr><td class="td_blank"><b>Input:</b></td>
-  <td class="td_blank">Look here: [url]http://somewhere.com[/url]
-</td></tr>
+  <td class="td_blank">Look here: [url]http://somewhere.com[/url]</td></tr>
  <tr><td class="td_blank"><b>Output:</b></td>
   <td class="td_blank">Look here: <a HREF='http://somewhere.com/'
-    TARGET='_blank'>http://somewhere.com/</a>
-</td></tr>
+    TARGET='_blank'>http://somewhere.com/</a></td></tr>
  <tr><td class="td_blank"><b>Comment:</b></td>
   <td class="td_blank">Easy example - you just specify the URL, and you will
-    see it
- clickable.
-</td></tr>
+    see it clickable.</td></tr>
 
  <tr><td colspan="2"></td></tr>
  <tr><td class="td_blank"><b>Input:</b></td>
   <td class="td_blank">See the [url]~t@demo/sample.html|sample link[/url]: This
-    is an &lt;b&gt;important&lt;/b&gt; example.
-</td></tr>
+    is an &lt;b&gt;important&lt;/b&gt; example.</td></tr>
  <tr><td class="td_blank"><b>Output:</b></td>
   <td class="td_blank">See the <A HREF="diver/demo/text/sample.html"
-    TARGET='_blank'>sample
- link</a>: This is an <b>important</b> example.
-</td></tr>
+    TARGET='_blank'>sample link</a>: This is an <b>important</b> example.</td></tr>
  <tr><td class="td_blank"><b>Comment:</b></td>
   <td class="td_blank">Like above, but you will see the DESCRIPTION ("sample
-    link") clickable
- and linked to the target.
-</td></tr>
+    link") clickable and linked to the target.</td></tr>
 
  <tr><td colspan="2"></td></tr>
  <tr><td class="td_blank"><b>Input:</b></td>
-  <td class="td_blank">[img]~s@demo/site00011-002.jpg|Big cave![/img]
- All
+  <td class="td_blank">[img]~s@demo/site00011-002.jpg|Big cave![/img] All
     following text...</td></tr>
  <tr><td class="td_blank"><b>Output:</b></td>
   <td class="td_blank"><span CLASS='thumbnail-left'><img ALIGN='center'
@@ -231,11 +200,8 @@ below:
     All following text...</td></tr>
  <tr><td class="td_blank"><b>Comment:</b></td>
   <td class="td_blank">This will result in a left-aligned image having a
-    description
- ("Big cave!") centered below itself. "All following text..."
-    will float
- around this block on the right hand side.
-</td></tr>
+    description ("Big cave!") centered below itself. "All following text..."
+    will float around this block on the right hand side.</td></tr>
 
  <tr><td colspan="2"></td></tr>
  <tr><td class="td_blank"><b>Input:</b></td>
@@ -244,19 +210,14 @@ below:
     Dive here - this is a great place to go...</td></tr>
  <tr><td class="td_blank"><b>Output:</b></td>
   <td class="td_blank"><a HREF='http://www.padi.com/'
-    TARGET='_blank'><span
- CLASS='thumbnail-right'><img ALIGN='center'
+    TARGET='_blank'><span CLASS='thumbnail-right'><img ALIGN='center'
     SRC='../diver/demo/fotos/dive/dive00014-003.jpg'><br>Great Dive!</span></a>
     Dive here - this is a great place to go...</td></tr>
  <tr><td class="td_blank"><b>Comment:</b></td>
   <td class="td_blank">Image will be right aligned with the description ("Great
-    Site!") sticking
- centered underneath, while the text ("This is a great place
-    to go...") flows left around it.
- Image and its description are linked to the
-    target
- ("http://www.padi.com/")
-</td></tr>
+    Site!") sticking centered underneath, while the text ("This is a great place
+    to go...") flows left around it. Image and its description are linked to the
+    target ("http://www.padi.com/")</td></tr>
 </table>
 
 #===============================================================================
@@ -341,7 +302,16 @@ the {install_page} page). In order to get your web installation running with
 useful data, you now only need to change to the conduit directory and run the
 <code>divelog_conduit.sh</code> script. Provided you followed all above steps
 carefully, your dive data should then be displayed when you invoke the URL to
-your PDL installation.
+your PDL installation. The administrator of the PDL web site will provide you
+with the server-side data (login, password, directory and transfer method).
+
+[text]
+If the site admin informs you that the "single OS user transfer" is used, you
+need one additional step after running the conduit wrapper transfer: on your
+divelov web site, click the import button, fill in your password, and submit
+the form to finally import your divelog to the website. The password used here
+will certainly be different from the one to use with your FTP/SCP/RSync
+transfers, so don't mess them up!
 
 [text]
 If you re-organized some dive data (especially renumbering the dives and/or

@@ -64,6 +64,7 @@ above mentioned ADL documentation and not the topic of this short documentation,
 which is to get you started quick. If you want/need to change more, you will
 have to find out yourself ;)
 
+#===[ Data Transfer ]====================================[ Data Transfer ]===
 [title]
 Data transfer: Configuring the <code>divelog_conduit.sh</code>
 
@@ -115,7 +116,9 @@ options will need your attention:
   <td class="td_blank">the divers directory of the <b><i>remote</i></b>
    phpDiveLog installation, i.e. where the subdirectories <code>data/</code>
    and <code>images/</code> on the remote server reside. Will certainly look like
-   <code>&lt;nickname&gt;@www.domain.com:/&lt;PDL root dir&gt;/diver/&lt;nickname&gt;</code>
+   <code>&lt;nickname&gt;@www.domain.com:/&lt;PDL root dir&gt;/diver/&lt;nickname&gt;</code>,
+   where &lt;PDL root dir&gt; is the base directory of the PDL webtree or, if
+   the "single OS user transfer" is used, the home directory of that OS user
    - see "Set up a diver" on the {admin_page} page for details.</td></tr>
  <tr><td class="td_blank"><b><code>RSYNCBASE</code></b></td>
   <td class="td_blank">this defines which source directory should be used with
@@ -143,11 +146,32 @@ phpDiveLog: Installation
  <li>copy everything except the <code>install/</code> subdir into your web tree</li>
  <li>if you don't want to start with the demo data, remove all files from the
      <code>data/</code> , <code>fotos/</code> and <code>images/</code> subdir</li>
- <li>if you don't need this Online Docu (anymore), you can remove the
-     <code>doc/</code> subdirectory</li>
 </ol>
 
+[text]
+If you plan to use the data transfer for all divers with just one OS user, you
+need to create this user on your OS. On *nix Systems (Unix, Linux, etc.), this
+should work like this:
 
+[text]
+<ol>
+ <li>Become root (<code>su -</code>)</li>
+ <li>To create the user, run 
+     <code>useradd -g &lt;webgroup&gt; -m -c "phpDiveLog transfers user" &lt;user&gt;</code>.
+     Replace &lt;webgroup&gt; with the group your web server is using (it needs
+     at least read access here), and &lt;user&gt; with the username you wish to
+     use for this.</li>
+ <li>Set a OS password for this user: <code>passwd &lt;user&gt;</code></li>
+ <li>Below the users homedir, create a directory for the divers data:
+     <code>mkdir /home/&lt;user&gt;/transfer</code></li>
+ <li>Make sure the group has read access to the transfer directory (and ALL
+     directories/files contained - this step you may need to repeat for each
+     diver you set up here later): <code>chmod -R g+w /home/&lt;user&gt;/transfer</code></li>
+</ol>
+This account info will be needed for the PDL config on your server, plus for
+the setup of the conduit wrapper script on the divers client.
+
+#---[ Configuration ]------------------------------------[ Configuration ]---
 [title]
 phpDiveLog: Konfiguration
 
@@ -217,8 +241,24 @@ a short documentation for the available parameters and their effects:
     parameters may be overridden by the <code>diver/*/system.conf</code> file.
     The value of this parameter is a space separated list of options. As shipped,
     these is set to "title lang display_limit template_set", which seems to me
-    being a good choice.</td></tr></table>
+    being a good choice.</td></tr>
+ <tr><td class="td_blank"><b><code>$pwdfile</code></b></td>
+  <td class="td_blank">If you want to allow your buddies to transfer their
+    divelog data using a single OS account, you need to set up a password
+    file (so only the diver him-/herself can import their transfered data
+    into the PDL installation). This file should NOT reside inside your
+    web tree, but it must be readable by the web server. A good idea is to
+    let this file be owned by the web servers users group, and apply read
+    permission for the group. The web server should not have write permission
+    to the file.</td></tr>
+ <tr><td class="td_blank"><b><code>$transfer_dir</code></b></td>
+  <td class="td_blank">The base directory for the transfered logbook data when
+    using the "single OS user transfer". This should be the directory containing
+    the diver directories directly below it (i.e. the counterpart to the PDL
+    <code>diver/</code> directory).</td></tr>
+</table>
 
+#---[ Updating ]----------------------------------------------[ Updating ]---
 [title]
 phpDiveLog: Updating
 
