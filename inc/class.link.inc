@@ -24,6 +24,11 @@
    * @constructor link
    */
   function link() {
+    $this->mapsite   = "http://www.mapquest.com/maps/map.adp";
+    $this->mapparam  = "latlongtype=decimal";
+    $this->coordtype = "decimal";
+    $this->maplat    = "latitude";
+    $this->maplong   = "longitude";
   }
 
   /** Provide a link with session info, if necessary
@@ -74,6 +79,30 @@
     if ($opt) $url .= " $opt";
     $url .= ">$desc</A>";
     return $url;
+  }
+
+  /** Create link to map site
+   * @class link
+   * @method map
+   * @param array latitude Latitude with details grad, minute, second
+   * @param array longitude Longitude with details grad, minute, second
+   * @return string url
+   */
+  function map($lat,$long) {
+    if ($lat[0]+$lat[1]+$lat[2]==0) return "";
+    if ($this->coordtype == "decimal") {
+      $min  = $lat[1] + $lat[2]/60;
+      $lati = $lat[0] + $min/60;
+      $min  = $long[1] + $long[2]/60;
+      $longi= $long[0] + $min/60;
+      $url = $this->mapsite."?";
+      if (!empty($this->mapparam)) {
+        $url .= $this->mapparam."&";
+      }
+      $url .= $this->maplat."=".$lati."&".$this->maplong."=".$longi;
+      return $url;
+    }
+    return "";
   }
 
  } // end class link

@@ -23,6 +23,13 @@
  $t->set_block("template","fotoblock","fotos");
  $t->set_block("fotoblock","fotoitemblock","pic");
 
+ function mk_coord($str) {
+   if ( preg_match("/([0-9]+)[^0-9]+([0-9]+)[^0-9]+([0-9.]+)[^0-9]+/",$str,$match) ) {
+     $code[0] = $match[1]; $code[1] = $match[2]; $code[2] = $match[3];
+   }
+   return $code;
+ }
+
  #==============================================[ Import dive data from DB ]===
  $site = $pdl->db->get_site($id); // $start,$pdl->config->display_limit);
 
@@ -53,6 +60,14 @@
  foreach($details AS $detail) {
    $t->set_var("$detail",$site[$detail]);
  }
+ $lat  = mk_coord($site["latitude"]);
+ $long = mk_coord($site["longitude"]);
+ $maplink = $pdl->link->map($lat,$long);
+ if ( !empty($maplink) ) {
+   $t->set_var("mapunlink","</A>");
+   $t->set_var("maplink","<A HREF='$maplink' TARGET='pdlmap'>");
+ }
+
  #-------------------------------[ Notes ]---
  $notes[1] = $pdl->common->tagreplace(nl2br($site["description"]));
  $notes[2] = $pdl->file->getNotes($id,"site");

@@ -6,6 +6,8 @@ History for phpDiveLog
 v0.2.1
 -------------------
 ! fixed a syntax error in the sitelist script
++ if coordinates are given, a click on the globe in the site details opens a
+  new window with a map of the area, having the given location marked
 
 v0.2.0 (18.08.2004)
 -------------------

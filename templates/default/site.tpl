@@ -24,7 +24,7 @@
 </td></tr><tr class="td_transp"><td class="td_transp">
 
 <table cellpadding="2" border="0" align="center">
- <tr><th colspan="5"><h3 style="margin-bottom:0;"><IMG SRC="{tpl_dir}images/globe.gif" width="15" height="15" alt="Conditions"> {loc}: {place}</h3></th></tr>
+ <tr><th colspan="5"><h3 style="margin-bottom:0;">{maplink}<IMG SRC="{tpl_dir}images/globe.gif" width="15" height="15" alt="Conditions">{mapunlink} {loc}: {place}</h3></th></tr>
  <tr>
   <th style="text-align:right">{lat_name}</th> <td>{latitude}</td>
   <td class="td_transp"></td>

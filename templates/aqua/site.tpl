@@ -20,7 +20,7 @@
 
 <table class="outer" cellspacing="0" cellpadding="2" align="center" style="margin-top:7;">
  <tr><td>{nav_left}</td>
-     <th class="head" colspan="5"><IMG SRC="{tpl_dir}images/globe.gif" width="15" height="15" alt="Location"> {loc}: {place}</th>
+     <th class="head" colspan="5">{maplink}<IMG SRC="{tpl_dir}images/globe.gif" width="15" height="15" alt="Location">{mapunlink} {loc}: {place}</th>
      <td align="right">{nav_right}</td>
      </tr>
  <tr>
