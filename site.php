@@ -24,8 +24,11 @@
  $t->set_block("fotoblock","fotoitemblock","pic");
 
  function mk_coord($str) {
-   if ( preg_match("/([0-9]+)[^0-9]+([0-9]+)[^0-9]+([0-9.]+)[^0-9]+/",$str,$match) ) {
+   if ( preg_match("/([0-9]+)[^0-9]+([0-9]+)[^0-9.]+([0-9.]+)[^0-9]+/",$str,$match) ) {
      $code[0] = $match[1]; $code[1] = $match[2]; $code[2] = $match[3];
+   } elseif ( preg_match("/([0-9]+)[^0-9]+([0-9.]+)[^0-9.]+/",$str,$match) ) {
+     $code[0] = $match[1]; $code[1] = floor($match[2]);
+     $code[2] = ($match[2] - floor($match[2])) * 60;
    }
    return $code;
  }
