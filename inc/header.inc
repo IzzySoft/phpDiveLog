@@ -11,5 +11,11 @@
     var pos = 200;
     campus=eval("window.open(url,'image','toolbar=no,location=no,titlebar=no,directories=no,status=yes,resizable=yes,scrollbars=yes,copyhistory=no,width=" + sx + ",height=" + sy + ",top=0,left=" + pos + "')");
   }
+  function open_help(page) {
+    sx = 600; sy = 500;
+    var pos = 300;
+    url = 'doc/'+page;
+    campus=eval("window.open(url,'help','toolbar=no,location=no,titlebar=no,directories=no,status=yes,resizable=yes,scrollbars=yes,copyhistory=no,width=" + sx + ",height=" + sy + ",top=0,left=" + pos + "')");
+  }
  //--></script>
 </head><body>

@@ -27,14 +27,16 @@
      if ($pdl->config->display_personal)
        $this->add_tab("person","person.php","tab_person.gif");
      $this->add_tab("prefs","prefs.php","tab_preferences.gif");
+     $this->add_tab("help","visitor.php","tab_help.gif",1);
      $t->set_block("template","tabblock","tab");
    }
 
-   function add_tab($name,$url,$img) {
+   function add_tab($name,$url,$img,$jswin=FALSE) {
      $this->tab[$name]->url     = $url;
      $this->tab[$name]->active  = FALSE;
      $this->tab[$name]->hideurl = FALSE;
      $this->tab[$name]->img     = $img;
+     if ($jswin) $this->tab[$name]->jswin = TRUE;
      $this->tabnames[] = $name;
    }
 
@@ -54,9 +56,12 @@
        if ($name=="person") { $sname = ucfirst($pdl->config->user_name);
        } else { $sname = lang("tab_".$name); }
        $t->set_var("tab_img",$this->tab[$name]->img);
-       if (!$this->tab[$name]->hideurl)
-         $name = $pdl->link->linkurl($this->tab[$name]->url,$sname);
-	 else $name = lang("tab_".$name);
+       if (!$this->tab[$name]->hideurl) {
+         if ($this->tab[$name]->jswin) {
+           $name = "<A HREF='JavaScript:open_help(\"".$this->tab[$name]->url."\")'>$sname</A>";
+         } else
+           $name = $pdl->link->linkurl($this->tab[$name]->url,$sname);
+       } else { $name = lang("tab_".$name); }
        $t->set_var("tab_name",$name);
        $t->parse("tab","tabblock",TRUE);
      }
