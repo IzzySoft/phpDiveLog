@@ -22,7 +22,7 @@
 </td><td><img src="{tpl_dir}images/logo.gif" height="23" align="right">
 
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
- <table border="0" cellpadding="2" width="100%" style="background-color:transparent;"><tr>
+ <table border="0" cellpadding="2" width="100%" class="transp"><tr>
   <td class="td_transp" align="left">{nav_left}</td>
   <td class="td_transp" align="right">{nav_right}</td>
  </tr></table>

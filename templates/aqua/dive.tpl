@@ -59,9 +59,9 @@
 <!-- BEGIN tankblock -->
  <tr><th rowspan="2">{tank_trans} {tank_nr}:</th>
      <td><table border="0">
-       <tr><td>{tank_name_name}/{tank_gas_name}</td><td>{tank_name} / {tank_gas}</td></tr>
-       <tr><td>{tank_type_name},{tank_volume_name}:</td><td>{tank_type}, {tank_volume}</td></tr>
-       <tr><td>{pressure}:</td><td>{tank_in_name}: {tank_in}, {tank_out_name}: {tank_out}</td></tr>
+       <tr><td><b>{tank_name_name}/{tank_gas_name}:</b></td><td>{tank_name} / {tank_gas}</td></tr>
+       <tr><td><b>{tank_type_name},{tank_volume_name}:</b></td><td>{tank_type}, {tank_volume}</td></tr>
+       <tr><td><b>{pressure}:</b></td><td>{tank_in_name}: {tank_in}, {tank_out_name}: {tank_out}</td></tr>
      </table></td></tr>
 <!-- END tankblock -->
 </table>

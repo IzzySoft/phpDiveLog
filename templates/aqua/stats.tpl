@@ -22,18 +22,12 @@
 </td><td><img src="{tpl_dir}images/logo.gif" height="23" align="right">
 
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
- <table class="transp" width="100%"><tr>
-  <td class="td_transp" align="left">{nav_left}</td>
-  <td class="td_transp" align="right">{nav_right}</td>
- </tr></table>
 
-</td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
-
-<table cellpadding="5" align="center" style="background-color:transparent;" border="0">
+<table cellpadding="5" align="center" style="background-color:transparent;margin-top:7;" border="0">
  <tr class="td_blank"></tr>
 </table>
 <table border="0" cellpadding="4" align="center">
- <tr><th colspan="6"><img src="{tpl_dir}images/btn_notes.gif" width="20" height="15" border="0" alt="Stats" align="middle"> {title}</th></tr>
+ <tr><th class="big" colspan="6"><img src="{tpl_dir}images/btn_notes.gif" width="20" height="15" border="0" alt="Stats" align="middle"> {title}</th></tr>
  <tr><th>{max_depth_name}</th><td align="right">{max_depth}</td>
   <td class="td_blank"></td>
   <th>{max_time_name}</th><td align="right">{max_time}</td><th>&nbsp;</th></tr>

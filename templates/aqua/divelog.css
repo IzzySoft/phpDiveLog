@@ -78,20 +78,20 @@
    text-color:#ffffff;
   }
   .tab_active {
-   background-image:url(images/ia.jpg);
-   background-color: #aaeeee;
-   border: 0;
-  }
-  .tab_inactive {
    background-image:url(images/a.jpg);
    background-color: #4444dd;
    color: #eeeeee;
    border: 0;
    border-spacing:0;
   }
-  .tab_inactive a { text-decoration: none;color: #eeeeee; }
-  .tab_inactive a:link { text-decoration: none;color: #eeeeee; }
-  .tab_inactive a:visited { text-decoration: none;color: #eeeeee; }
+  .tab_inactive {
+   background-image:url(images/ia.jpg);
+   background-color: #aaeeee;
+   border: 0;
+  }
+  .tab_active a { text-decoration: none;color: #eeeeee; }
+  .tab_active a:link { text-decoration: none;color: #eeeeee; }
+  .tab_active a:visited { text-decoration: none;color: #eeeeee; }
 
 /* === Links === */
 
