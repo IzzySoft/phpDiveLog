@@ -30,7 +30,7 @@
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 
 <table cellpadding="2" border="0" align="center">
- <tr><th colspan="5"><h3><IMG SRC="{tpl_dir}images/globe.gif" width="15" height="15" alt="Conditions"> {loc}: {place}</h3></th></tr>
+ <tr><th class="head" colspan="5"><IMG SRC="{tpl_dir}images/globe.gif" width="15" height="15" alt="Conditions"> {loc}: {place}</th></tr>
  <tr>
   <th style="text-align:right">{lat_name}</th> <td>{latitude}</td>
   <td class="td_transp"></td>
