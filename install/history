@@ -10,6 +10,9 @@ v0.1.6
   the diver/*/fotos/*/large/ subdirectory)
 * the "Person" tab (if available) now shows the divers nick instead of "Person"
 + added number of sites and avg dives/site to the stats page
++ added global site list to list up all places contained within the DiveLogs.
+  A click then brings the visitor to a list of all DiveSites at the selected
+  place, which contains links to the divers' descriptions
 
 v0.1.5 (12.07.2004)
 -------------------
