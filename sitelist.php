@@ -46,9 +46,9 @@
  }
 
  #===============================================[ set up the table header ]===
- $t->set_var("loc_name","Location");
- $t->set_var("place_name","Place");
- $t->set_var("md_name","MaxDepth");
+ $t->set_var("loc_name",lang("location"));
+ $t->set_var("place_name",lang("place"));
+ $t->set_var("md_name",lang("max_depth"));
 
  #============================[ Walk through the list and set up the table ]===
  $details = array ("id","loc","place","depth");

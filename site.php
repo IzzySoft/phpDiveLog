@@ -39,11 +39,11 @@
  }
 
  #===============================================[ set up the table header ]===
- $t->set_var("lat_name","Latitude:");
- $t->set_var("long_name","Longitude:");
- $t->set_var("alt_name","Altitude:");
- $t->set_var("md_name","MaxDepth:");
- $t->set_var("notes_name","Notes:");
+ $t->set_var("lat_name",lang("latitude").":");
+ $t->set_var("long_name",lang("longitude").":");
+ $t->set_var("alt_name",lang("altitude").":");
+ $t->set_var("md_name",lang("max_depth").":");
+ $t->set_var("notes_name",lang("notes").":");
 
  #============================[ Walk through the list and set up the table ]===
  $details = array ("id","loc","place","depth","latitude","longitude","altitude");
@@ -66,7 +66,7 @@
      $t->set_var("fdesc",$fotos[$i]->desc);
      $t->parse("pic","fotoitemblock",TRUE);
    }
-   $t->set_var("fotos_name","Fotos");
+   $t->set_var("fotos_name",lang("fotos"));
    $t->parse("fotos","fotoblock");
  } else {
    $t->set_var("fotos","");

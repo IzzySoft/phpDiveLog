@@ -43,6 +43,34 @@
      }
    }
 
+  #=========================================================[ Translations ]===
+  /** Read in all available translations for a given language
+   * @class db_text
+   * @method get_translations
+   * @param string lang_id two character language ID (ISO)
+   * @return array translations (ref=>trans)
+   */
+   function get_translations($lang_id="en") {
+     GLOBAL $pdl;
+     $filename = $pdl->config->base_path."lang/trans.$lang_id";
+     if ( !file_exists($filename) ) {
+       if ($lang_id=="en") return array();
+       $filename = $pdl->config->base_path."lang/trans.en";
+       if ( !file_exists($filename) ) return array();
+     }
+     switch ($pdl->config->db_type) {
+       case "csv"  :
+       default     :
+         $csv = new csv(";",'"',TRUE);
+	 $csv->import($filename);
+         $dc = count($csv->data);
+	 for ($i=0;$i<$dc;++$i) {
+	   $trans[$csv->data[$i]["ref"]] = $csv->data[$i]["trans"];
+	 }
+	 return $trans;
+     }
+   }
+
   #========================================================[ Dive Schedule ]===
    /** Get dive schedule for a given dive#
     * @class db_text

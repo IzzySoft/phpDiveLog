@@ -32,9 +32,9 @@
 
  #=================================================[ general template data ]===
  include("inc/tab_setup.inc");
- $t->set_var("cond_name","Conditions");
- $t->set_var("notes_name","Notes");
- $t->set_var("equi_name","Equipment");
+ $t->set_var("cond_name",lang("conditions"));
+ $t->set_var("notes_name",lang("notes"));
+ $t->set_var("equi_name",lang("equipment"));
 
  #==============================================[ Import dive data from DB ]===
  $dive = $pdl->db->get_dive($nr);
@@ -57,53 +57,53 @@
  $t->set_var("location",$dive["location"]);
  $t->set_var("place","<a href='site.php?id=".$dive["site_id"]."'>".$dive["place"]."</a>");
  #--------------------------[ Summary ]---
- $t->set_var("item_name","Max. Depth:");
+ $t->set_var("item_name",lang("max_depth").":");
  $t->set_var("item_data",$dive["depth"]);
  $t->parse("sum","sumblock");
- $t->set_var("item_name","Dive Time:");
+ $t->set_var("item_name",lang("dive_time").":");
  $t->set_var("item_data",$dive["divetime"]);
  $t->parse("sum","sumblock",TRUE);
- $t->set_var("item_name","Buddy:");
+ $t->set_var("item_name",lang("buddy").":");
  $t->set_var("item_data",$dive["buddy"]);
  $t->parse("sum","sumblock",TRUE);
- $t->set_var("item_name","Rating:");
+ $t->set_var("item_name",lang("rating").":");
  $t->set_var("item_data","<img src='".$pdl->config->tpl_url."images/".$dive["rating"]."star.gif"."' alt='Rating:".$dive["rating"]."'");
  $t->parse("sum","sumblock",TRUE);
  $t->set_var("item_name","&nbsp;"); // dummy empty line to match the
  $t->set_var("item_data","&nbsp;"); // neighbour table
  $t->parse("sum","sumblock",TRUE);
  #--------------------------[ Conditions ]---
- $t->set_var("item_name","Visibility:");
+ $t->set_var("item_name",lang("visibility").":");
  $t->set_var("item_data",$dive["visibility"]);
  $t->parse("cond","condblock");
- $t->set_var("item_name","Water Temp.:");
+ $t->set_var("item_name",lang("water_temp").":");
  $t->set_var("item_data",$dive["watertemp"]);
  $t->parse("cond","condblock",TRUE);
- $t->set_var("item_name","Air Temp.:");
+ $t->set_var("item_name",lang("air_temp").":");
  $t->set_var("item_data",$dive["airtemp"]);
  $t->parse("cond","condblock",TRUE);
- $t->set_var("item_name","Current:");
+ $t->set_var("item_name",lang("current").":");
  $t->set_var("item_data",$dive["current"]);
  $t->parse("cond","condblock",TRUE);
- $t->set_var("item_name","Workload:");
+ $t->set_var("item_name",lang("workload").":");
  $t->set_var("item_data",$dive["workload"]);
  $t->parse("cond","condblock",TRUE);
  #---------------------------[ Equipment ]---
- $t->set_var("item_name","Suit:");
+ $t->set_var("item_name",lang("suit").":");
  $t->set_var("item_data",$dive["suittype"].", ".$dive["suitname"]);
  $t->parse("equi","equiblock");
- $t->set_var("item_name","Weight:");
+ $t->set_var("item_name",lang("weight").":");
  $t->set_var("item_data",$dive["weight"]);
  $t->parse("equi","equiblock",TRUE);
  $tc = count($dive["tank"]);
- $t->set_var("tank_trans","Tank");
- $t->set_var("tank_name_name","Name");
- $t->set_var("tank_gas_name","Gas");
- $t->set_var("tank_type_name","Type");
- $t->set_var("tank_volume_name","Volume");
- $t->set_var("pressure","Pressure");
- $t->set_var("tank_in_name","In");
- $t->set_var("tank_out_name","Out");
+ $t->set_var("tank_trans",lang("tank"));
+ $t->set_var("tank_name_name",lang("name"));
+ $t->set_var("tank_gas_name",lang("gas"));
+ $t->set_var("tank_type_name",lang("type"));
+ $t->set_var("tank_volume_name",lang("volume"));
+ $t->set_var("pressure",lang("pressure"));
+ $t->set_var("tank_in_name",lang("tank_in"));
+ $t->set_var("tank_out_name",lang("tank_out"));
  for ($i=0;$i<$tc;++$i) {
    $t->set_var("tank_nr",$dive[tank][$i]->nr);
    $t->set_var("tank_name",$dive[tank][$i]->name);
@@ -117,11 +117,11 @@
  #----------------------------[ Schedule ]---
  $sched = $pdl->db->get_schedule($nr);
  if ($sched) {
-   $t->set_var("sched_name","Schedule");
-   $t->set_var("s_depth_name","Depth");
-   $t->set_var("s_time_name","Time");
-   $t->set_var("s_runtime_name","Runtime");
-   $t->set_var("s_gas_name","Gas");
+   $t->set_var("sched_name",lang("schedule"));
+   $t->set_var("s_depth_name",lang("depth"));
+   $t->set_var("s_time_name",lang("time"));
+   $t->set_var("s_runtime_name",lang("runtime"));
+   $t->set_var("s_gas_name",lang("gas"));
    $sc = count($sched);
    for ($i=0;$i<$sc;++$i) {
      $t->set_var("s_depth",$sched[$i]["depth"]);
@@ -140,7 +140,7 @@
  }
  #-----------------------------[ Profile ]---
  if ( strlen($prof_img=$f->getProfPic($nr)) ) {
-   $t->set_var("prof_name","Profile");
+   $t->set_var("prof_name",lang("profile"));
    $t->set_var("prof_img",$prof_img);
    $t->parse("profile","profileblock");
  }
@@ -158,7 +158,7 @@
      $t->set_var("fdesc",$fotos[$i]->desc);
      $t->parse("pic","fotoitemblock",TRUE);
    }
-   $t->set_var("fotos_name","Fotos");
+   $t->set_var("fotos_name",lang("fotos"));
    $t->parse("fotos","fotoblock");
  } else {
    $t->set_var("fotos","");

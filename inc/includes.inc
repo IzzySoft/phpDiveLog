@@ -23,5 +23,13 @@
  }
  $pdl->db = new db_text();
  include("inc/class.template.inc");
+ include("inc/class.translation.inc");
+ $pdl->trans = new trans($_GET["lang"]);
+
+ #======================================================[ setup shortkeys ]===
+ function lang($key,$m1="",$m2="",$m3="",$m4="",$m5="") {
+   GLOBAL $pdl;
+   return $pdl->trans->transl($key,$m1,$m2,$m3,$m4,$m5);
+ }
 
 ?>
