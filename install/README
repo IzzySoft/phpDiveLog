@@ -87,6 +87,10 @@ you should not use more than 3 or 4. Since phpDiveLog does no check on the
 image count, you could render your page unreadable otherwise - since the
 table gets too wide. I may fix this problem in the future, but no promise ;)
 
+Things to consider:
+- make the file extensions lower case (i.e. *.jpg|png|gif|txt)
+- when re-numbering your dives, your fotos need to be renumbered accordingly
+
 ===============================================================================
 
 5.) CopyRight (and CopyLeft)

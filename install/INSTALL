@@ -12,18 +12,52 @@
 
 ===[ TOC ]=========================================================[ TOC ]===
 1. Aqua DiveLog
+1.1. Installation
+1.2. Conduit configuration
+1.3. Script configuration
 2. phpDiveLog
 2.1. Installing
 2.2. Configuration
 2.3. Updating
+3. Data conversion and transfer
 
 ===[ Aqua DiveLog ]=======================================[ Aqua DiveLog ]===
 
+1.1. Installation
+-----------------
 - copy the contents of the install/adl/template/ dir to ADLs template/ dir
 - copy the contents of the install/adl/ dir to ADLs directory
-- adjust the DATADIR setting in the beginning of divelog_conduit.sh
-- adjust the settings for TablePDBFile and DivePDBFile in both the divelog.data
-  and divelog.sites files in the ADL directory
+
+1.2. Conduit configuration
+--------------------------
+This takes place in the divelog.ini file as described in the Aqua DiveLog
+documentation (see there for detailed description). In this little document
+I will assume that you only change the following parameters:
+- TablePDBFile : location and name of your AquaPalm-TableDB.pdb file
+- DivePDBFile  : location and name of your AquaPalm-DiveDB.pdb file
+I will not explain all combinations of the other parameters - this is not the
+topic of this short documentation, but to get you started quick. If you want/
+need to change more, you will have to find out yourself ;)
+
+1.3. Script configuration
+-------------------------
+The script is to be configured in the divelog_conduit.sh itself. In the head
+of the file you find the configuration section: Even if you are not familiar
+with Shell scripts, it should be easy for you to set up. One hint: never place
+spaces around the "=" sign or it will not work. The following options will
+need your attention:
+- LOGDIR     : if you followed my advice in 1.2., you can leave it as is. If
+               not: this value has to match the LogBookPath in the divelog.ini
+- PDLBASE    : for now the root directory of your phpDiveLog installation, i.e.
+               where the subdirectories data/ and images/ reside. With one of
+               the following versions of PDL I will introduce MultiUser
+               functionality; then you will have to change this to the users
+               base directory, which will probably be
+               <PDL root dir>/user/<username>
+- UNITS      : which kind of units you prefer - can be set either to "metric",
+               "imperial" or "bothunits"
+- DATEFORMAT : just for the "progress display" on the screen to give you an
+               idea how log which step took ;)
 
 ===[ phpDiveLog ]==========================================[ phpDiveLog ]===
 
@@ -31,30 +65,71 @@
 -----------------
 - copy everything except the install/ subdir into your web tree
 - if you don't want to start with the demo data, remove all files from
-  the data/ and fotos/ subdir
+  the data/ , fotos/ and images/ subdir
 
 2.2. Configuration
 ------------------
 All the "user-based" configuration takes place in the inc/config.inc file. I
-strongly recommend not to try some configuration in other places - if you
-miss some configuration option, just let me know and I will see if and how I
-can implement this.
+strongly recommend not to try some configuration in other places (which would
+make it harder for YOU to update your installation later) - if you miss some
+configuration option, just let me know and I will see if and how I can
+implement this.
 
-Each configuration option is documented within the config file, so I assume
-there's no further explanation needed what the options stand for. Plus they
-match all on one screen, so there are no hints required where to look for
-what ;)
-
-If in the divelog_conduit.sh file (see above in block 1) you adjusted the
-DATADIR only (and did not change any file names), and the directory structure
-in your ADL installation stayed the same as shipped, no more changes have to be
-made. Run the conduit script once (otherwise you have my old dive data
-displayed - if you didn't wipe them in step 2.1. above), and enjoy!
+Each configuration option is documented within the config file, so
+"QuickStarters" can skip here to the next section. For all others: here comes
+a short documentation for the available parameters and their effects:
+- $database["type"]   : right now you can set this to "csv" only. In the
+                        future, there my be more formats available, such as
+                        UDDF for the Universal Dive Data Format (again a file),
+                        or even "real databases" such as MySQL, PostgreSQL, etc.
+- $database["datadir"]: applies to "file databases" (CSV and UDDF) only and
+                        specifies the name of the directory where the database
+                        files (i.e. *.csv) reside. Should be relative to (and
+                        below) the PDL root directory. With the MultiUser
+                        functionality added, a directory with the same name
+                        will be expected in every users directory, containing
+                        his/her dive data. In this case, the name given here
+                        will be evaluated as relative to the users dir.
+- $display_limit      : with pages containing lists, as e.g. the sitelist,
+                        this value will advise PDL how many entries (i.e.
+                        table data rows) to display per page. This saves you
+                        from scrolling through long pages - but of course
+                        you can set this to e.g. 999999999 and everything
+                        will fit on one page (but not necessarily one screen).
+- $template_set       : to which template set PDL should default. Right now
+                        the values "aqua" and "default" are available. The
+                        visitor can overwrite this value (for his/her browser
+                        session only, of course) by selecting a different
+                        template set on the preferences page.
+- $lang               : the default language to use. This is a 2 character
+                        ISO code, like "en" for English or "de" for German.
+                        You can set this to any language you like - if no
+                        translations are found, PDL will fall back to English.
+                        Of course you can create your own translations, which
+                        will be discussed at another place (OT here).
+- $title              : for now the site name to be displayed in the browsers
+                        title bar. At the end of this, some page information
+                        will be added: if you e.g. set the title to "MyDiveLog",
+                        by browsing the dive #5 the browsers title probably
+                        looks like "MyDiveLog: Dive# 5" - where "Dive" could
+                        be localized even...
 
 2.3. Updating
 -------------
 When updating, you generally follow the steps 2.1 and 2.2 above - but probably
 you will NOT want to copy the contents of the data/ subdir from tha archive
 to not overwrite your own data.
+
+===[ Data conversion ]==================================[ Data Transfer ]===
+
+In order to get you web installation running with useful data, you now only
+need to change to the conduit directory and run the divelog_conduit.sh script.
+Provided you followed all above steps carefully, your dive data should then
+be displayed when you invoke the URL to your PDL installation.
+
+If you re-organized some dive data (especially renumbering the dives and/or
+sites), you may need to clean the images/ directory (which contains the dive
+profile images). I will think a bit about it - maybe I can include that with
+the divelog_conduit.sh script to save you this work...
 
 ===[ EOF ]========================================================[ EOF ]===
