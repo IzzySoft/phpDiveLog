@@ -12,7 +12,9 @@
 
  # $Id$
 
+ #================================================[ Initialize environment ]===
  include("inc/includes.inc");
+ $nr = $_GET["nr"];
  $title .= ": ".lang("dive#")." $nr";
  include("inc/header.inc");
  include("inc/class.file.inc");

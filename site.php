@@ -12,7 +12,9 @@
 
  # $Id$
 
+ #================================================[ Initialize environment ]===
  include("inc/includes.inc");
+ $id = $_GET["id"];
  $title .= ": Site# $id";
  include("inc/header.inc");
  include("inc/class.file.inc");
