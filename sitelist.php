@@ -34,7 +34,7 @@
 
 
  #==============================================[ Import dive data from DB ]===
- $sites = $pdl->db->get_sites(); // $start,$pdl->config->display_limit);
+ $sites = $pdl->db->get_sites($start,$pdl->config->display_limit);
  $max   = count($sites);
  $records = $pdl->db->sites;
 
@@ -46,7 +46,7 @@
  } else {
    $t->set_var("nav_left","<img src='".$pdl->config->tpl_url."images/left-grey.gif'>");
  }
- if (TRUE) { // ($records - $start < $pdl->config->display_limit) {
+ if ($records - $start < $pdl->config->display_limit) {
    $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif'>");
  } else {
    $next = $start + $pdl->config->display_limit;
@@ -70,8 +70,6 @@
  }
 
  $t->pparse("out","template");
-
-# echo "<b>SiteData:</b><pre>";print_r($pdl->db->sitedata);echo "</pre>";
 
  include("inc/footer.inc");
 ?>
