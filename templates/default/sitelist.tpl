@@ -31,5 +31,6 @@
   <td align="center">{pix}</td>
  </tr>
 <!-- END itemblock -->
+</table>
 
 </td></tr></table>
