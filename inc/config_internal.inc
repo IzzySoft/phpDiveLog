@@ -12,14 +12,20 @@
 
  /* $Id$ */
 
+ $pdl->config->version  = "0.1.1";
+
  #==========================================================[ directories ]===
  $pdl->config->tpl_url  = "templates/default/";
  $pdl->config->tpl_path = "templates/default/";
- $pdl->config->version  = "0.1.1";
- $pdl->config->display_limit = 10;
+
+ #=============================================================[ database ]===
  $pdl->config->db_type  = $database["type"];
  $pdl->config->datadir  = $database["datadir"];
  $pdl->config->divedata = $database["datadir"]."logbook.csv";
  $pdl->config->sites    = $database["datadir"]."divesites.csv";
  unset($database);
+
+ #==========================================================[ preferences ]===
+ $pdl->config->display_limit = $display_limit;
+ unset($display_limit);
 ?>

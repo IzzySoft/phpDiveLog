@@ -12,19 +12,10 @@
 
  /* $Id$ */
 
- #==========================================================[ directories ]===
- #$base_url   = ""; # path relative to web server's DOCUMENT_ROOT
- #$base_path  = ""; # absolute file systems path
-
  #=============================================================[ database ]===
- $database["type"]      = "csv";     # csv|mysql|pgsql (only csv supported now)
- #$database["host"]      = "";        # your hosts name
- #$database["database"]  = "";        # what database holds the tables
- #$database["user"]      = "";        # db user with at least following
-                                      # privileges on these tables:
-				      # SELECT,UPDATE,INSERT,DELETE
- #$database["password"]  = "";  # this users password for the db
+ $database["type"]      = "csv";   # csv|mysql|pgsql (only csv supported now)
+ $database["datadir"]   = "data/"; # applies to text databases (CSV/UDDF) only
 
- # the following lines apply for text databases (CSV/UDDF) only
- $database["datadir"]   = "data/";
+ #==========================================================[ preferences ]===
+ $display_limit = 10;     # how may records/page should be displayed for lists
 ?>
