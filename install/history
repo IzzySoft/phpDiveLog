@@ -10,6 +10,8 @@ v0.2.2
 + divelog_conduit.sh now logs the process also to a file (not screen only)
 + if there are more than 3 pictures associated with a dive[site], PDL now starts
   a new row after each third image
+! GPS evaluation now also considers the case that only (decimal) grad values
+  are given (and no separate minutes/seconds are available)
 
 v0.2.1 (31.08.2004)
 -------------------

@@ -31,6 +31,10 @@
    } elseif ( preg_match("/([0-9]+)[^0-9]+([0-9.]+)[^0-9.]+/",$str,$match) ) {
      $code[0] = $match[1]; $code[1] = floor($match[2]);
      $code[2] = ($match[2] - floor($match[2])) * 60;
+   } elseif ( preg_match("/([0-9.]+)[^0-9.]+/",$str,$match) ) {
+     $code[0] = floor($match[1]);
+     $code[1] = floor( ($match[1] - $code[0]) * 60);
+     $code[2] = floor( (($match[1] - $code[0]) * 60 - $code[1]) * 60 );
    }
    return $code;
  }
