@@ -56,8 +56,36 @@
 <!-- BEGIN equiblock -->
  <tr><td><b>{item_name}</b></td><td>{item_data}</td></tr>
 <!-- END equiblock -->
-{tank}
+<!-- BEGIN tankblock -->
+ <tr><td rowspan="2"><b>{tank_trans} {tank_nr}:</b></td>
+     <td><table border="0">
+       <tr><td>{tank_name_name}/{tank_gas_name}</td><td>{tank_name} / {tank_gas}</td></tr>
+       <tr><td>{tank_type_name},{tank_volume_name}:</td><td>{tank_type}, {tank_volume}</td></tr>
+       <tr><td>{pressure}:</td><td>{tank_in_name}: {tank_in}, {tank_out_name}: {tank_out}</td></tr>
+     </table></td></tr>
+<!-- END tankblock -->
 </table>
+
+</td></tr><tr class="td_transp"><td class="td_transp">
+<!-- BEGIN scheduleblock -->
+<table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Schedule -->
+ <tr><th colspan="4" valign="middle"><h3>{sched_img} {sched_name}</h3></th></tr>
+ <tr>
+   <td align="center"><b>{s_depth_name}</b></td>
+   <td align="center"><b>{s_time_name}</b></td>
+   <td align="center"><b>{s_runtime_name}</b></td>
+   <td align="center"><b>{s_gas_name}</b></td>
+ </tr>
+<!-- BEGIN scheditemblock -->
+ <tr>
+   <td align="center">{s_depth}</td>
+   <td align="center">{s_time}</td>
+   <td align="center">{s_runtime}</td>
+   <td align="center">{s_gas}</td>
+ </tr>
+<!-- END scheditemblock -->
+</table>
+<!-- END scheduleblock -->
 
 </td></tr><tr class="td_transp"><td class="td_transp">
 <table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Notes -->
