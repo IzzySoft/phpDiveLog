@@ -6,6 +6,7 @@ History for phpDiveLog
 v0.2.3
 -------------------
 + improved formating of included textfiles
++ added first/last buttons to the navigation in dive[site] lists
 
 v0.2.2 (02.09.2004)
 -------------------
