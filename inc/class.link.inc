@@ -1,0 +1,70 @@
+<?php
+ #############################################################################
+ # phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+ # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
+ # http://www.qumran.org/homes/izzy/                                         #
+ # ------------------------------------------------------------------------- #
+ # This program is free software; you can redistribute and/or modify it      #
+ # under the terms of the GNU General Public License (see doc/LICENSE)       #
+ # ------------------------------------------------------------------------- #
+ # Link related stuff: highlighting, linking targets etc.                    #
+ #############################################################################
+
+ /* $Id$ */
+
+ /** Link related stuff: highlighting, linking targets etc.
+  * @package Api
+  * @class link
+  * @author Izzy (izzysoft@qumran.org)
+  * @copyright (c) 2001-2004 by Itzchak Rehberg and IzzySoft
+  */
+ class link {
+
+  /** Constructor: Initiate
+   * @constructor link
+   */
+  function link() {
+  }
+
+  /** Provide a link with session info, if necessary
+   * @class link
+   * @method slink
+   * @param string target url
+   * @return string target url
+   */
+  function slink($target) {
+#    GLOBAL $pdl;
+    GLOBAL $lang, $template_set;
+    $tpl=$_GET["tpl"];
+    if ( empty($lang) ) $lang="en";
+    if ( empty($tpl) ) $tpl=$template_set;
+#    if (!$pdl->config->enable_cookies) {
+      $pos = strpos($target,"?");
+      if ($pos) {
+        $target .= "&lang=$lang&tpl=$tpl";
+      } else {
+        $target .= "?lang=$lang&tpl=$tpl";
+      }
+#    }
+    return $target;
+  }
+
+  /** Create a complete HREF for an URL and description
+   * @class link
+   * @method linkurl
+   * @param string target url
+   * @param string desc url-desc
+   * @param string opt options for the HREF tag
+   * @return string target complete href tag
+   */
+  function linkurl($target,$desc,$opt="") {
+    $url = "<A HREF='" .$this->slink($target). "'";
+    if ($opt) $url .= " $opt";
+    $url .= ">$desc</A>";
+    return $url;
+  }
+
+ } // end class link
+
+ $pdl->link = new link;
+?>
