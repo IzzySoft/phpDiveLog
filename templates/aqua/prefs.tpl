@@ -23,7 +23,7 @@
 </td></tr><tr><td class="td_transp" valign="top" colspan="2">
  <table align="center" class="transp" cellpadding="7"><tr><td>
 <table class="outer" border="0" cellpadding="4" cellspacing="0" align="center">
- <tr><th colspan="2"><img src="{tpl_dir}images/btn_notes.gif" width="20" height="15" border="0" alt="Stats" align="middle"> {lang_title}</th></tr>
+ <tr><th colspan="2"><img src="{tpl_dir}images/btn_lang.gif" width="20" height="15" border="0" alt="Stats" align="middle"> {lang_title}</th></tr>
 <!-- BEGIN langblock -->
  <tr><td align="center"><a href="{lang_ref}">{lang_img}</a></td>
      <td>{lang_name}</td></tr>
@@ -32,7 +32,7 @@
 
 </td><td class="td_transp" valign="top">
 <table class="outer" border="0" cellpadding="4" cellspacing="0" align="center">
- <tr><th colspan="2"><img src="{tpl_dir}images/btn_notes.gif" width="20" height="15" border="0" alt="Stats" align="middle"> {tpl_title}</th></tr>
+ <tr><th colspan="2"><img src="{tpl_dir}images/btn_tpl.gif" width="20" height="15" border="0" alt="Stats" align="middle"> {tpl_title}</th></tr>
 <!-- BEGIN tplblock -->
  <tr><td><a href="{tpl_ref}">{tpl_img}</a></td>
      <td>{tpl_name}</td></tr>
