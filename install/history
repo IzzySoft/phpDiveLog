@@ -3,12 +3,12 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.1.8
+v0.2.0 (18.08.2004)
 -------------------
 + now the [url], [img]/[imgr] and [file] tags can be used in the notes fields of
   dives and sites
 * updated Russian translations
-+ added OnLine Documentation
++ added OnLine Documentation (English)
 + Conduit wrapper script now optionally transfers via SCP to remote web server
 + added "external note fields" for dive[site] notes (see online help in the
   "diver" section for details)
