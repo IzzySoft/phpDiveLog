@@ -58,10 +58,12 @@
     * @return string content of notes file
     */
    function getNotes($id,$type="dive") {
-     GLOBAL $pdl;
+     GLOBAL $pdl,$lang;
      if ( empty($type) ) return "";
      $file = $pdl->config->user_path."notes/".$this->mkADLprefix($id,$type).".txt";
-     if ( file_exists($file) ) {
+     if ( file_exists("$file.$lang") ) {
+       return $this->read_file("$file.$lang");
+     } elseif ( file_exists($file) ) {
        return $this->read_file($file);
      }
      return "";

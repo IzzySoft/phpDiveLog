@@ -9,6 +9,12 @@ v0.2.3
 + added first/last buttons to the navigation in dive[site] lists
 + clicking on the location in the dives list now brings you to the (global)
   list of all divesites at this place
++ added support for language specific versions of notes files (applies to the
+  dive* and site* files in the notes/ directory; just name the file e.g.
+  *.txt.de for German -- but make sure, that a "default" version (*.txt) is
+  available there as well). Supported are all languages PDL has translations
+  installed for - at this time as shipped, these are English, German and
+  Russian.
 
 v0.2.2 (02.09.2004)
 -------------------
