@@ -80,6 +80,14 @@ paragraph on placing fotos). This file may contain HTML formatings (e.g. for
 All newlines will be replaced by line breaks ("&lt;BR&gt;") to form paragraphs.
 
 [text]
+Make sure that all text files are using the <b>UTF-8</b> character set! For
+Windows, e.g. the standard editor (notepad) can save files in UTF-8 if you
+select "Save as", and then in the dialog you find some "encodings" box where
+you can select "UTF-8". With *nix, if your editor does not support this, you
+can use the <code>recode</code> command for this task (for details, see the
+man page with <code>man recode</code>).
+
+[text]
 If you like to create localized versions of your notes, you can do so for all
 languages that are directly supported by phpDiveLog (see the Setup page). For
 these, name the files as described above plus add the language code to the end
