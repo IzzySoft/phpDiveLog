@@ -26,6 +26,17 @@
    function file() {
    }
 
+   /** Get the ADL formated file prefix
+    * @class file
+    * @method mkADLprefix
+    * @param integer dive# Dive# to retrieve the pix for
+    * @param string type [dive|site]
+    * @return string formated prefix
+    */
+   function mkADLprefix($id,$type) {
+     return $type.sprintf("%05d",$id);
+   }
+
    /** Find dive pictures
     * @class file
     * @method getDivePix
@@ -50,7 +61,7 @@
      GLOBAL $pdl;
      $dirname = $pdl->config->user_path."fotos/$type";
      if (!is_dir($dirname)) return FALSE;
-     $prefix = $type.sprintf("%05d",$id)."-";
+     $prefix = $this->mkADLprefix($id,$type)."-";
      $plen   = strlen($prefix);
      $dir = dir($dirname);
      while ( $file=$dir->read() ) {
@@ -76,6 +87,27 @@
        $result[] = $foto;
      }
      return $result;
+   }
+
+   function havePix($id,$type="dive") {
+     GLOBAL $pdl;
+     $dirname = $pdl->config->user_path."fotos/$type";
+     if (!is_dir($dirname)) return FALSE;
+     $prefix = $this->mkADLprefix($id,$type)."-";
+     $plen   = strlen($prefix);
+     $dir = dir($dirname);
+     while ( $file=$dir->read() ) {
+       if ( strpos($file,$prefix)===0 ) {
+         $pos = strpos($file,".");
+         $pic = substr($file,0,$pos);
+         switch ($suffix = substr($file,$pos+1)) {
+           case "jpg" :
+           case "gif" :
+           case "png" : return TRUE; break;
+         }
+       }
+     }
+     return FALSE;
    }
 
  } // end class file
