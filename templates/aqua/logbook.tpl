@@ -30,12 +30,12 @@
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 
 <table border="1" cellpadding="2" align="center">
- <tr><th>{dive_name}</th><th>{date_name}</th><th>{time_name}</th><th>{loc_name}</th><th>{rat_name}</th>
+ <tr><td></td><th>{date_name}</th><th>{time_name}</th><th>{loc_name}</th><th>{rat_name}</th>
      <td class="td_blank"></td>
      <th>{ddt_name}</td><th>{buddy_name}</th></tr>
 
 <!-- BEGIN itemblock -->
- <tr><td align="right"><a href="{dive_ref}">{dive#}</a></td>
+ <tr><th align="right"><a href="{dive_ref}">{dive#}</a></th>
   <td align="center">{date}</td>
   <td align="center">{time}</td>
   <td align="center">{location}:<br>{place}</td>

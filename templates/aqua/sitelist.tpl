@@ -30,10 +30,10 @@
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 
 <table border="1" cellpadding="2" align="center">
- <tr><th></th><th>{loc_name}</th><th>{place_name}</th><th>{md_name}</th></tr>
+ <tr><td></td><th>{loc_name}</th><th>{place_name}</th><th>{md_name}</th></tr>
 
 <!-- BEGIN itemblock -->
- <tr><td align="right"><a href="{site_ref}">{id}</a></td>
+ <tr><th align="right"><a href="{site_ref}">{id}</a></th>
   <td align="center">{loc}</td>
   <td align="center">{place}</td>
   <td align="right">{depth}</td>
