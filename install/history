@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.1.6
+v0.1.6 (21.07.2004)
 -------------------
 + for the dive and site fotos we now link to "large" pictures (open via
   JavaScript in a new window) if they exist (picture with the same name in
