@@ -13,7 +13,7 @@
 ---------------
 - copy the contents of the install/adl/template/ dir to ADLs template/ dir
 - copy the contents of the install/adl/ dir to ADLs directory
-- adjust the PDLROOT setting in the beginning of divelog_conduit.sh
+- adjust the DATADIR setting in the beginning of divelog_conduit.sh
 - adjust the settings for TablePDBFile and DivePDBFile in both the divelog.data
   and divelog.sites files in the ADL directory
 
@@ -23,7 +23,7 @@
 
 3) Config
 ---------
-If you adjusted the PDLROOT only (and did not change any file names), and the
+If you adjusted the DATADIR only (and did not change any file names), and the
 directory structure in your ADL installation stayed the same as shipped, no more
 changes have to be made. Run the conduit script once (otherwise you have my old
 dive data displayed), and enjoy!
