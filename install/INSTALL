@@ -107,6 +107,9 @@ a short documentation for the available parameters and their effects:
                         by browsing the dive #5 the browsers title probably
                         looks like "MyDiveLog: Dive# 5" - where "Dive" could
                         be localized even...
+- $enable_index       : whether visitors should be allowed to browse the
+                        buddylist. Needs to be set to "TRUE" if you want to
+                        use $defaultpage="index" (see below).
 - $default_page       : what to do if there's no diver specified with the
                         URL (and thus PDL does not know where to look for the
                         data - normally this has to be done on the URL with
@@ -114,9 +117,6 @@ a short documentation for the available parameters and their effects:
                         * "user"  - we have a default user (see $default_user)
                         * "index" - display the index page with available nicks
                         * "error" - display an error message to the visitor
-                        Right now, only "user" and "error" are supported -
-                        index hopefully will be available with one of the next
-                        versions of PDL.
 - $default_user       : only evaluated if $default_page="user": which is the
                         default logbook we should route the request to? Must
                         be a valid account (see "set up a diver"), otherwise

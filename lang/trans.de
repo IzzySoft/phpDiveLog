@@ -42,3 +42,5 @@ diver_url_syntax;"Ein Taucher kann in der URL mit dem Parameter "diver=&lt;nickn
 certifications;"Zertifizierungen"
 course;"Kurs"
 personal_no_public;"Tut mir leid - aber dieser Taucher gewährt keinen Einblick in seine Personalien."
+no_public_divelogs;"Tut mir leid - aber derzeit gibt es keine öffentlichen DiveLogs hier."
+index_disabled;"Tut mir leid - aber der Buddy Index wurde vom Admin deaktiviert."

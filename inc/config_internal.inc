@@ -13,10 +13,16 @@
  /* $Id$ */
 
  $pdl->config->version = "0.1.5";
+ $pdl->config->enable_index = $enable_index;
  if (!empty($_GET["diver"])) {
    $relPath = "diver/".$_GET["diver"]."/";
  } elseif (strtolower($default_page) == "user") {
    $relPath = "diver/$default_user/";
+ } elseif (strtolower($default_page) == "index") {
+   if ( basename($PHP_SELF)!= "buddylist.php" ) {
+     header("Location: buddylist.php");
+     exit;
+   }
  }
 
  include("inc/class.file.inc");
@@ -56,5 +62,5 @@
  $pdl->config->sites    = $pdl->config->datadir."divesites.csv";
 
  #=============================================================[ clean up ]===
- unset($database,$display_limit,$allow_override,$uconf,$allowed,$ac);
+ unset($database,$display_limit,$allow_override,$enable_index,$uconf,$allowed,$ac);
 ?>

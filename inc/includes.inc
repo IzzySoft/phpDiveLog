@@ -40,16 +40,18 @@
  }
  $pdl->trans->get_translations($lang);
 
- if (empty($relPath)) { // no account specified
-   include("inc/header.inc");
-   $pdl->common->alert(lang("no_diver",lang("diver_url_syntax")));
-   include("inc/footer.inc");
-   exit;
- } elseif (!is_dir($pdl->config->user_path)) { // unknown account
-   include("inc/header.inc");
-   $pdl->common->alert(lang("no_such_diver",ucfirst($diver)));
-   include("inc/footer.inc");
-   exit;
+ if ( basename($PHP_SELF)!= "buddylist.php" ) {
+   if (empty($relPath)) { // no account specified
+     include("inc/header.inc");
+     $pdl->common->alert(lang("no_diver",lang("diver_url_syntax")));
+     include("inc/footer.inc");
+     exit;
+   } elseif (!is_dir($pdl->config->user_path)) { // unknown account
+     include("inc/header.inc");
+     $pdl->common->alert(lang("no_such_diver",ucfirst($diver)));
+     include("inc/footer.inc");
+     exit;
+   }
  }
 
 ?>

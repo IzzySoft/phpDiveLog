@@ -10,6 +10,9 @@ v0.1.5
 + added "Quick installation" for the impatient to the doc/README file
 + added (optional) personal page
 + now photo can be added to personal page
++ added buddylist. You can now set $default_page="index" in your inc/config.inc
+  so all calls without a given diver will result in the buddylist to be
+  displayed
 
 v0.1.4 (05.07.2004)
 -------------------

@@ -123,6 +123,34 @@
      return "";
    }
 
+   /** Obtain list of public buddy profiles (directories)
+    * @class file
+    * @method get_buddies
+    * @return array (0..n of buddy nick names)
+    */
+   function get_buddies($start="",$limit="") {
+     GLOBAL $pdl;
+     $dirname = $pdl->config->base_path."diver";
+     if (!is_dir($dirname)) return FALSE;
+     $dir = dir($dirname);
+     while ( $file=$dir->read() ) {
+       if ( is_dir("$dirname/$file") && $file != "." && $file != ".."
+          && file_exists("$dirname/$file/public") )
+         $list[] = $file;
+     }
+     $this->buddies = count($list);
+     if ( $start!=="" && $limit !=="" ) {
+       $max = $start + $limit;
+       if ( $max > $this->buddies ) $max = $this->buddies;
+       for ($i=$start;$i<$max;++$i) {
+         $llist[] = $list[$i];
+       }
+       return $llist;
+     } else {
+       return $list;
+     }
+   }
+
    /** Read a user-defined config file
     * @class file
     * @method read_conf
