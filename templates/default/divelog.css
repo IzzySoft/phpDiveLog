@@ -6,6 +6,8 @@
    color: #0000ee;
    link: #bb0000;
    vlink: #ff0000;
+   background-image:url(images/bg.gif);
+   background-attachment:fixed;
   }
   P {
    text-align: justify;
