@@ -36,6 +36,11 @@
      $code[1] = floor( ($match[1] - $code[0]) * 60);
      $code[2] = floor( (($match[1] - $code[0]) * 60 - $code[1]) * 60 );
    }
+   if ( substr($str,strlen($str)-1)=="N" || substr($str,strlen($str)-1)=="E" ) {
+     $code[4] = 1;
+   } else {
+     $code[4] = -1;
+   }
    return $code;
  }
 

@@ -12,6 +12,7 @@ v0.2.2
   a new row after each third image
 ! GPS evaluation now also considers the case that only (decimal) grad values
   are given (and no separate minutes/seconds are available)
+! maplink now handles southern and western GPS data correctly
 
 v0.2.1 (31.08.2004)
 -------------------

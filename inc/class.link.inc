@@ -92,9 +92,9 @@
     if ($lat[0]+$lat[1]+$lat[2]==0) return "";
     if ($this->coordtype == "decimal") {
       $min  = $lat[1] + $lat[2]/60;
-      $lati = $lat[0] + $min/60;
+      $lati = ($lat[0] + $min/60) * $lat[4];
       $min  = $long[1] + $long[2]/60;
-      $longi= $long[0] + $min/60;
+      $longi= ($long[0] + $min/60) * $long[4];
       $url = $this->mapsite."?";
       if (!empty($this->mapparam)) {
         $url .= $this->mapparam."&";
