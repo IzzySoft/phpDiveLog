@@ -21,7 +21,8 @@
  $lang          = "en";   # default language if not (yet) specified by visitor
  $title = "phpDiveLog Dev"; # site name
  $default_page  = "user"; # where to route requests without the "?diver=nick"
-                          # to: user|index|error (only "user" supported for now)
+                          # to: user|index|error ("index" is not supported yet
+                          # and will be handled as "error")
  $default_user  = "demo"; # if default_page=user: which user is the default?
                           # must be a valid account (subdir diver/<user>)
 ?>

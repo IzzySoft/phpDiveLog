@@ -112,10 +112,9 @@ a short documentation for the available parameters and their effects:
                         * "user"  - we have a default user (see $default_user)
                         * "index" - display the index page with available nicks
                         * "error" - display an error message to the visitor
-                        Right now, only "user" is a valid option (although
-                        setting it to "error" will result in an error ;) - the
-                        other options will come available with one of the next
-                        versions of PDL (hopefully soon).
+                        Right now, only "user" and "error" are supported -
+                        index hopefully will be available with one of the next
+                        versions of PDL.
 - $default_user       : only evaluated if $default_page="user": which is the
                         default logbook we should route the request to? Must
                         be a valid account (see "set up a diver"), otherwise

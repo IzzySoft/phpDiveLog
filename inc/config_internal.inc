@@ -15,7 +15,7 @@
  $pdl->config->version = "0.1.4";
  if (!empty($_GET["diver"])) {
    $relPath = "diver/".$_GET["diver"]."/";
- } else {
+ } elseif (strtolower($default_page) == "user") {
    $relPath = "diver/$default_user/";
  }
 
@@ -39,5 +39,5 @@
  $pdl->config->datadir  = $pdl->config->user_path."data/";
  $pdl->config->divedata = $pdl->config->datadir."logbook.csv";
  $pdl->config->sites    = $pdl->config->datadir."divesites.csv";
- unset($database,$display_limit,$relPath);
+ unset($database,$display_limit);
 ?>
