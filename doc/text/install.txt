@@ -75,6 +75,15 @@ never place spaces around the "=" sign or it will not work. The following
 options will need your attention:
 [text]
 <table class="nav" align="center" border="0" width="90%">
+ <tr><td class="td_blank"><b><code>PALMLOCALE</code></b></td>
+  <td class="td_blank">Don't mess this up with your PCs locale settings - we
+   don't touch them. But if they differ from your Palms locale (which will
+   certainly be the case if you run SuSE 9.1 or higher with UTF-8 locale),
+   special characters may get messed up or, in the worst case, the Java
+   Conduit hangs if this is not set correctly. In most cases, the setting of
+   <code>de_DE@euro</code> (Latin-1 plus Euro sign) will be the correct choice.
+   For non-Western charsets on your Palm, you may have to experiment a bit
+   until all special chars are drawn correctly.</td></tr>
  <tr><td class="td_blank"><b><code>LOGDIR</code></b></td>
   <td class="td_blank">if you followed my advice for the <code>divelog.ini</code>
    configuration above, you can leave it as is. If not: this value has to match

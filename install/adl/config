@@ -13,6 +13,8 @@
 #############################################################################
 
 #========================================================[ Configuration ]===
+# Locale settings of your PALM (don't mess up with your PCs settings)
+PALMLOCALE=de_DE@euro
 # location of the Conduit output (must match the confuration in divelog.ini)
 LOGDIR=log
 # which units to use for the values: imperial|metric|bothunits

@@ -58,7 +58,10 @@ done
 
 # get the DiveLog data
 echo `date +"$DATEFORMAT"` "Converting AquaDiveLog Data..." | tee -a $LOGFILE
+oriLang=$LANG
+export LANG=$PALMLOCALE
 java -jar conduit.jar -$UNITS $* >/dev/null
+export LANG=$oriLang
 
 # transfer CSV files to LOCAL web target
 if [ $USELOCAL -eq 1 ]; then

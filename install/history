@@ -11,6 +11,9 @@ v0.2.5
 + added resync.sh to update the local installation from a remote server
 + both sync scripts now accept command line params (-c for alternate config,
   plus -h for help screen)
+! hopefully fixed the problem with "special characters" (e.g. German Umlauts)
+  for the Java Conduit when running it on a locale different from Latin-1[5]
+  (divelog_conduit.sh)
 
 v0.2.4 (08.09.2004)
 -------------------
