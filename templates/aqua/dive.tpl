@@ -33,7 +33,7 @@
  </tr></table>
 
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
- <table align="center" border="0" style="margin-top:2px"><!-- Conditions -->
+ <table align="center" border="0" style="margin-top:3px"><!-- Conditions -->
    <tr><th class="head" colspan="3" valign="middle"><img src="{tpl_dir}images/btn_conditions.gif" width="37" height="15" alt="Conditions"> {cond_name}</th></tr>
    <tr><td valign="top">
      <table align="center" border="0" cellpadding="2">
@@ -51,7 +51,7 @@
  </table>
 
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
-<table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Equipment -->
+<table align="center" border="0" cellpadding="2" style="margin-top:3px"><!-- Equipment -->
  <tr><th class="head" colspan="2" valign="middle"><img src="{tpl_dir}images/btn_equipment.gif" width="37" height="15" alt="Equipment"> {equi_name}</th></tr>
 <!-- BEGIN equiblock -->
  <tr><th>{item_name}</th><td>{item_data}</td></tr>
@@ -68,7 +68,7 @@
 
 <!-- BEGIN scheduleblock -->
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
-<table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Schedule -->
+<table align="center" border="0" cellpadding="2" style="margin-top:3px"><!-- Schedule -->
  <tr><th class="head" colspan="4" valign="middle"><img src="{tpl_dir}images/btn_schedule.gif" width="37" height="15" alt="Schedule"> {sched_name}</th></tr>
  <tr>
    <td align="center"><b>{s_depth_name}</b></td>
@@ -88,14 +88,14 @@
 <!-- END scheduleblock -->
 
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
-<table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Notes -->
+<table align="center" border="0" cellpadding="2" style="margin-top:3px"><!-- Notes -->
  <tr><th class="head" valign="middle"><img src="{tpl_dir}images/btn_notes.gif" width="37" height="15" alt="Notes"> {notes_name}</th></tr>
  <tr><td>{notes_text}</td></tr>
 </table>
 
 <!-- BEGIN fotoblock -->
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
-<table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Fotos -->
+<table align="center" border="0" cellpadding="2" style="margin-top:3px"><!-- Fotos -->
  <tr><th class="head" valign="middle"><img src="{tpl_dir}images/btn_fotos.gif" width="37" height="15" alt="Fotos"> {fotos_name}</th></tr>
  <tr><td align="center"><table><tr>
 <!-- BEGIN fotoitemblock -->

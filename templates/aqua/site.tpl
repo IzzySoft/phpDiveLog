@@ -41,15 +41,14 @@
   <th style="text-align:right">{md_name}</th> <td>{depth}</td>
  </tr>
 </table>
-<br>
-<table cellpadding="2" border="0" align="center">
+<table cellpadding="2" border="0" align="center" style="margin-top:4px">
  <tr><th>{notes_name}</th></tr>
  <tr><td>{description}</td></tr>
 </table>
 
 <!-- BEGIN fotoblock -->
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
-<table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Fotos -->
+<table align="center" border="0" cellpadding="2" style="margin-top:3px"><!-- Fotos -->
  <tr><th class="head" valign="middle"><img src="{tpl_dir}images/btn_fotos.gif" width="37" height="15" alt="Fotos"> {fotos_name}</th></tr>
  <tr><td align="center"><table><tr>
 <!-- BEGIN fotoitemblock -->
