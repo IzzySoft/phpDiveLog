@@ -15,9 +15,9 @@
  class tabs {
    function tabs() {
      GLOBAL $t,$pdl;
-     $this->add_tab("dives","index.php","dive_flag2.gif");
-     $this->add_tab("stats","stats.php","btn_notes.gif");
-     $this->add_tab("sites","sitelist.php","globe.gif");
+     $this->add_tab("dives","index.php","tab_dives.gif");
+     $this->add_tab("stats","stats.php","tab_stats.gif");
+     $this->add_tab("sites","sitelist.php","tab_sites.gif");
      $t->set_block("template","tabblock","tab");
    }
 

@@ -5,7 +5,7 @@
 <!-- BEGIN tabblock -->
    <td><table class="{tab_class}">
     <tr class="{tab_class}">
-     <td class="{tab_class}" style="vertical-align:middle"><IMG SRC="{tpl_dir}images/{tab_img}" width="20" height="15" alt="DiveFlag"></td>
+     <td class="{tab_class}" style="vertical-align:middle"><IMG SRC="{tpl_dir}images/{tab_img}" alt="TabImg"></td>
      <td class="{tab_class}" style="vertical-align:middle">{tab_name}</td>
     </tr></table></td>
 <!-- END tabblock -->
