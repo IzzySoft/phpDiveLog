@@ -69,7 +69,7 @@
      switch ($pdl->config->db_type) {
        case "csv"  :
        default     :
-         $csv = new csv(";",'"',TRUE);
+         $csv = new csv(";",'"',TRUE,FALSE);
 	 $csv->import($filename);
          $dc = count($csv->data);
 	 for ($i=0;$i<$dc;++$i) {

@@ -57,7 +57,7 @@
      return $this->favail();
    }
 
-   /** get translate a given reference
+   /** translate a given reference
     *  if no translation is found, the content of the passed param $key is
     *  returned instead
     * @class trans
