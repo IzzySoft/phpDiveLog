@@ -13,7 +13,7 @@
  # $Id$
 
  include("inc/includes.inc");
- $title .= ": Statistics";
+ $title .= ": ".lang("statistics");
  include("inc/header.inc");
 
  $t = new Template($pdl->config->tpl_path);

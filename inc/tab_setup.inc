@@ -18,6 +18,7 @@
      $this->add_tab("dives","index.php","tab_dives.gif");
      $this->add_tab("stats","stats.php","tab_stats.gif");
      $this->add_tab("sites","sitelist.php","tab_sites.gif");
+     $this->add_tab("prefs","prefs.php","tab_preferences.gif");
      $t->set_block("template","tabblock","tab");
    }
 

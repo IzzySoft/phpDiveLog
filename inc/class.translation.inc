@@ -29,12 +29,38 @@
      $this->translations = $pdl->db->get_translations($lang_id);
    }
 
+   /** Get list of available language files
+    * @class trans
+    * @method favail
+    * @return array lang_keys ( n=&gt;key )
+    */
+   function favail() {
+     GLOBAL $pdl;
+     $dirname = $pdl->config->base_path."lang";
+     $prefix  = "trans";
+     $dir = dir($dirname);
+     while ( $file=$dir->read() ) {
+       if ( strpos($file,$prefix)===0 ) {
+         $pos    = strpos($file,".");
+         $lang[] = substr($file,$pos+1);
+       }
+     }
+     return $lang;
+   }
+
+   /** Get list of available languages
+    * @class trans
+    * @method avail
+    * @return array lang_keys ( n=&gt;key )
+    */
+   function avail() {
+     return $this->favail();
+   }
+
    /** get translate a given reference
     *  if no translation is found, the content of the passed param $key is
     *  returned instead
-    * @package Api
-    * @author Izzy (izzysoft@qumran.org)
-    * @copyright (c) 2001-2004 by Itzchak Rehberg and IzzySoft
+    * @class trans
     * @method trans
     * @param string key translation key
     * @param optional array m1 replace placeholder (%1..%10 in translations)
@@ -50,9 +76,7 @@
    }
 
    /** build the translations (helper func to method trans)
-    * @package Api
-    * @author Izzy (izzysoft@qumran.org)
-    * @copyright (c) 2001-2004 by Itzchak Rehberg and IzzySoft
+    * @class trans
     * @method translate
     * @param string key translation key
     * @param optional array vars array of replacement strings (see function lang)
