@@ -24,7 +24,7 @@
  $pdl->db = new db_text();
  include("inc/class.template.inc");
  include("inc/class.translation.inc");
- $pdl->trans = new trans($_GET["lang"]);
+ $pdl->trans = new trans($lang);
  include("inc/class.link.inc");
 
  #======================================================[ setup shortkeys ]===
