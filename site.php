@@ -54,7 +54,7 @@
    $t->set_var("$detail",$site[$detail]);
  }
  #-------------------------------[ Notes ]---
- $t->set_var("description",nl2br($site["description"]));
+ $t->set_var("description",$pdl->common->tagreplace(nl2br($site["description"])));
 #   $t->set_var("rating",$pdl->config->tpl_url."images/".$dives[$i]["rating"]."star.gif");
 # $t->parse("item","itemblock",TRUE);
 
