@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.1.4
+v0.1.4 (05.07.2004)
 -------------------
 + prefered language is now checked via browser info, too. Priorities:
   1-user selected language (selectable on prefs page/"lang=xx" in request string)
