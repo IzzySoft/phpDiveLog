@@ -20,6 +20,6 @@
  $pdl->config->db_type  = $database["type"];
  $pdl->config->datadir  = $database["datadir"];
  $pdl->config->divedata = $database["datadir"]."logbook.csv";
- $pdl->config->sites    = $database["datadir"]."sites.csv";
+ $pdl->config->sites    = $database["datadir"]."divesites.csv";
  unset($database);
 ?>
