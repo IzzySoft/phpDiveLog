@@ -16,8 +16,10 @@
  $pdl->config->enable_index = $enable_index;
  if (!empty($_GET["diver"])) {
    $relPath = "diver/".$_GET["diver"]."/";
+   $pdl->config->user_name = $_GET["diver"];
  } elseif (strtolower($default_page) == "user") {
    $relPath = "diver/$default_user/";
+   $pdl->config->user_name = $default_user;
  } elseif (strtolower($default_page) == "index") {
    if ( basename($_SERVER["SCRIPT_FILENAME"])!= "buddylist.php" ) {
      header("Location: buddylist.php");

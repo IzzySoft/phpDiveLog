@@ -55,9 +55,11 @@
          $class = "tab_active"; } else { $class = "tab_inactive"; }
        $t->set_var("tab_class","$class");
        $name = $this->tabnames[$i];
+       if ($name=="person") { $sname = ucfirst($pdl->config->user_name);
+       } else { $sname = lang("tab_".$name); }
        $t->set_var("tab_img",$this->tab[$name]->img);
        if (!$this->tab[$name]->hideurl)
-         $name = $pdl->link->linkurl($this->tab[$name]->url,lang("tab_".$name));
+         $name = $pdl->link->linkurl($this->tab[$name]->url,$sname);
 	 else $name = lang("tab_".$name);
        $t->set_var("tab_name",$name);
        $t->parse("tab","tabblock",TRUE);
