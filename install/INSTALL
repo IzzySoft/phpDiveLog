@@ -6,7 +6,7 @@
 # This program is free software; you can redistribute and/or modify it      #
 # under the terms of the GNU General Public License (see doc/LICENSE)       #
 # ------------------------------------------------------------------------- #
-# Installation instructions for the impatient ;)                            #
+# Installation instructions for the patient ;)                              #
 #############################################################################
 # $Id$
 
@@ -21,7 +21,8 @@
 2.3. Updating
 3. Diver and dive data
 3.1. Set up a diver
-3.2. Data conversion and transfer
+3.2. The divers system.conf
+3.3. Data conversion and transfer
 
 ===[ Aqua DiveLog ]=======================================[ Aqua DiveLog ]===
 
@@ -119,6 +120,15 @@ a short documentation for the available parameters and their effects:
                         default logbook we should route the request to? Must
                         be a valid account (see "set up a diver"), otherwise
                         results in $default_page="error".
+- $allow_override     : some configuration values can be defined on a per-
+                        logbook-base, so each diver can provide his/her
+                        default preferences to it. We do not want them to
+                        mess up things, so here we define which parameters
+                        may be overridden by the diver/*/system.conf file.
+                        The value of this parameter is a space separated
+                        list of options. As shipped, these is set to
+                        "title lang display_limit template_set", which seems to
+                        me being a good choice.
 
 2.3. Updating
 -------------
@@ -143,7 +153,16 @@ directory" then must have the following subdirectory structure:
 To have your Aqua DiveLog data transfered to the right directory, you may
 want to set up PDLBASE in the conduit script accordingly (see above).
 
-3.2. Data conversion and transfer
+3.2. The divers system.conf
+---------------------------
+Optionally, each diver can override some of the systems default settings by
+putting a file named "system.conf" in his/her "home directory". The syntax
+of this file is easy: one parameter per line in the form "var=value". Empty
+lines and lines beginning with a "#" are ignored. Which system defaults are
+allowed to be overriden is defined in the inc/config.inc file by the parameter
+$allow_override (see above in the phpDiveLog configuration description).
+
+3.3. Data conversion and transfer
 ---------------------------------
 In order to get you web installation running with useful data, you now only
 need to change to the conduit directory and run the divelog_conduit.sh script.
