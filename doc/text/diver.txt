@@ -33,14 +33,9 @@ phpDiveLog is able to connect the images with the according data records, using
 the latter you can define the order the images are displayed.
 
 [text]
-Although you could specify an unlimited number of fotos per dive, for now
-you should not use more than 3 or 4. Since phpDiveLog does no check on the
-image count, you could render your page unreadable otherwise - since the
-table gets too wide. I may fix this problem in the future, but no promise ;)
-
-[text]
 For the personal page, the image files must reside in the
-<code>diver/*/person/</code> directory and be named <code>diverYYY.*</code>.
+<code>diver/*/fotos/person/</code> directory and be named
+<code>diverYYY.*</code>.
 
 [text]
 Things to consider:<ul>
