@@ -79,8 +79,8 @@
 <!-- BEGIN scheditemblock -->
  <tr>
    <td align="center">{s_depth}</td>
-   <td align="center">{s_time}</td>
-   <td align="center">{s_runtime}</td>
+   <td align="right">{s_time}</td>
+   <td align="right">{s_runtime}</td>
    <td align="center">{s_gas}</td>
  </tr>
 <!-- END scheditemblock -->
