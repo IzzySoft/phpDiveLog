@@ -20,6 +20,7 @@
 
  $t = new Template($pdl->config->tpl_path);
  $t->set_file(array("template"=>"site.tpl"));
+ $t->set_block("template","notesblock","notb");
  $t->set_block("template","fotoblock","fotos");
  $t->set_block("fotoblock","fotoitemblock","pic");
 
@@ -78,7 +79,11 @@
    if ( !empty($notes[1]) ) $notes[1] .= "<br>";
    $notes[2] = $pdl->common->tagreplace(nl2br($notes[2]));
  }
- $t->set_var("description",$notes[1].$notes[2]);
+ $notb = $notes[1].$notes[2];
+ if ( !empty($notb) ) {
+   $t->set_var("description",$notb);
+   $t->parse("notb","notesblock");
+ }
 
 #   $t->set_var("rating",$pdl->config->tpl_url."images/".$dives[$i]["rating"]."star.gif");
 # $t->parse("item","itemblock",TRUE);

@@ -37,10 +37,12 @@
   <th>&nbsp;</th>
  </tr>
 </table>
+<!-- BEGIN notesblock -->
 <table class="outer" cellpadding="2" cellspacing="0" align="center" style="margin-top:4px">
  <tr><th>{notes_name}</th></tr>
  <tr><td>{description}</td></tr>
 </table>
+<!-- END notesblock -->
 
 <!-- BEGIN fotoblock -->
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
