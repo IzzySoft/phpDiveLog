@@ -8,6 +8,7 @@ v0.1.7
 * switch button on global pages (to reach the personal pages) is now also
   available if no diver was specified with the url, but $default_page="user"
 ! the global site list did not honour the enable_index option of the config.inc
+! the display_limit was ignored as well when a place was selected
 
 v0.1.6 (21.07.2004)
 -------------------
