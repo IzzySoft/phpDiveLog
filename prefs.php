@@ -14,6 +14,10 @@
 
  include("inc/includes.inc");
  $title .= ": ".lang("preferences");
+ if ( !empty($_GET["tab2"]) ) {
+   $tab2 = TRUE;
+   $urladd = "&tab2=1";
+ }
  include("inc/header.inc");
 
  $t = new Template($pdl->config->tpl_path);
@@ -22,7 +26,11 @@
  $t->set_block("template","tplblock","tpl");
 
  #================================================[ set up navigation tabs ]===
- include("inc/tab_setup.inc");
+ if ($tab2) {
+   include("inc/tab_setup2.inc");
+ } else {
+   include("inc/tab_setup.inc");
+ }
  $pdl->tabs->activate("prefs",TRUE);
  $pdl->tabs->parse();
 
@@ -35,7 +43,7 @@
  $lavail = $pdl->trans->avail;
  $lc     = count($lavail);
  for ($i=0;$i<$lc;++$i) {
-   $t->set_var("lang_ref",$pdl->link->slink($_SERVER["SCRIPT_NAME"]."?lang=".$lavail[$i]));
+   $t->set_var("lang_ref",$pdl->link->slink($_SERVER["SCRIPT_NAME"]."?lang=".$lavail[$i].$urladd));
    $imgfile = "images/lang_".$lavail[$i].".jpg";
    if ( file_exists($pdl->config->tpl_path.$imgfile ) )
      $img = "<img src='".$pdl->config->tpl_url.$imgfile."' width='30' height='20'>";
@@ -56,7 +64,7 @@
  }
  $tc = count($tset);
  for ($i=0;$i<$tc;++$i) {
-   $t->set_var("tpl_ref",$pdl->link->slink($_SERVER["SCRIPT_NAME"]."?tpl=".$tset[$i]));
+   $t->set_var("tpl_ref",$pdl->link->slink($_SERVER["SCRIPT_NAME"]."?tpl=".$tset[$i].$urladd));
    $imgfile = "images/tpl_".$tset[$i].".gif";
    if ( file_exists($pdl->config->tpl_path.$imgfile ) )
      $img = "<img src='".$pdl->config->tpl_url.$imgfile."'>";

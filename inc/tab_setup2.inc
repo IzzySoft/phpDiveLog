@@ -27,7 +27,7 @@
      } */
      $this->add_tab("diver","buddylist.php","tab_buddylist.gif");
      $this->add_tab("sites","places.php","tab_sites.gif");
-     $this->add_tab("prefs","prefs.php","tab_preferences.gif");
+     $this->add_tab("prefs","prefs.php?tab2=1","tab_preferences.gif");
      $t->set_block("template","tabblock","tab");
    }
 
