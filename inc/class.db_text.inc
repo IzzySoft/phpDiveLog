@@ -33,7 +33,7 @@
 	 $csv->import($pdl->config->divedata);
 	 $this->divedata = $csv->data;
 	 $this->dives    = count($this->divedata);
-	 $this->setup_dive_records(); // temporary - see func *!*
+	 $this->setup_dive_records();
 	 $csv->clear_data();
 	 $csv->import($pdl->config->sites);
          $this->sitedata = $csv->data;
@@ -43,8 +43,36 @@
    }
 
   #============================================================[ Dive Data ]===
-   function setup_dive_records() { # temporary until the prev/next are available in CSV data
+   function setup_dive_records() {
      for ($i=0;$i<$this->dives;++$i) {
+       # split up the tank data
+       $pos = strpos(":",$this->divedata[$i]["tank#"]);
+       $tank_nr      = explode(":",$this->divedata[$i]["tank#"]);
+       $tank_id      = explode(":",$this->divedata[$i]["tank_id"]);
+       $tank_name    = explode(":",$this->divedata[$i]["tank_name"]);
+       $tank_volume  = explode(":",$this->divedata[$i]["tank_volume"]);
+       $tank_type    = explode(":",$this->divedata[$i]["tank_type"]);
+       $tank_gas     = explode(":",$this->divedata[$i]["tank_gas"]);
+       $tank_in      = explode(":",$this->divedata[$i]["tank_in"]);
+       $tank_out     = explode(":",$this->divedata[$i]["tank_out"]);
+       $tank_count   = count($tank_nr);
+       for ($k=0;$k<$tank_count;++$k) {
+         $tank->nr     = $tank_nr[$k];
+         $tank->id     = $tank_id[$k];
+         $tank->name   = $tank_name[$k];
+         $tank->volume = $tank_volume[$k];
+         $tank->type   = $tank_type[$k];
+         $tank->gas    = $tank_gas[$k];
+         $tank->in     = $tank_in[$k];
+         $tank->out    = $tank_out[$k];
+         $this->divedata[$i]["tank"][$k] = $tank;
+       }
+       unset ($this->divedata[$i]["tank#"],$this->divedata[$i]["tank_id"],
+              $this->divedata[$i]["tank_name"],$this->divedata[$i]["tank_volume"],
+              $this->divedata[$i]["tank_type"],$this->divedata[$i]["tank_gas"],
+              $this->divedata[$i]["tank_in"],$this->divedata[$i]["tank_out"]);
+
+       # temporary until the prev/next are available in CSV data
        $this->divedata[$i]["prev_dive#"] = $this->divedata[$i-1]["dive#"];
        $this->divedata[$i]["next_dive#"] = $this->divedata[$i+1]["dive#"];
      }
