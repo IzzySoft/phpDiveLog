@@ -4,17 +4,17 @@
  <tr style="background-color:transparent;">
    <td class="tab_active"><table class="tab_active" border="0">
     <tr style="background-color:transparent;">
-     <td class="tab_active" style="vertical-align:middle"><a href="{dives_ref}">{dive_tab_img}</a></td>
+     <td class="tab_active" style="vertical-align:middle"><a href="{dives_ref}"><img src="{tpl_dir}images/dive_flag2.gif" width="20" height="15" alt="DiveFlag"></a></td>
      <td class="tab_active" style="vertical-align:middle"><a href="{dives_ref}">{dive_tab_name}</a></td>
     </tr></table></td>
    <td class="tab_inactive"><a href="stats.php"><table class="tab_inactive" border="0">
     <tr style="background-color:transparent;">
-     <td class="tab_inactive" style="vertical-align:middle"><a href="{stats_ref}">{stats_tab_img}</a></td>
+     <td class="tab_inactive" style="vertical-align:middle"><a href="{stats_ref}"><img src="{tpl_dir}images/btn_notes.gif" width="20" height="15" alt="Stats" align="middle"></a></td>
      <td class="tab_inactive" style="vertical-align:middle"><a href="{stats_ref}">{stats_tab_name}</a></td>
     </tr></table></td>
    <td class="tab_inactive"><table class="tab_inactive" border="0">
     <tr style="background-color:transparent;">
-     <td class="tab_inactive" style="vertical-align:middle"><a href="{sites_ref}">{sites_tab_img}</a></td>
+     <td class="tab_inactive" style="vertical-align:middle"><a href="{sites_ref}"><img src="{tpl_dir}images/globe.gif" width="15" height="15" alt="Globe" align="middle"></a></td>
      <td class="tab_inactive" style="vertical-align:middle"><a href="{sites_ref}">{sites_tab_name}</a></td></tr>
     </tr></table></td>
 </table>
@@ -25,7 +25,7 @@
   <td class="td_transp" align="left" width="12">{nav_left}</td>
   <td align="left" class="td_big" style="vertical-align:middle;width:12em;">Dive#: {dive#}</td>
   <td width="20"></td>
-  <td class="td_blank" style="vertical-align:middle;">{loc_img}</td>
+  <td class="td_blank" style="vertical-align:middle;"><img src="{tpl_dir}images/dive_flag1.gif" width="23" height="15" alt="Globe" align="middle"></td>
   <td class="td_blank" style="vertical-align:middle;"><h2>{location} / {place}</h2></td>
   <td width="20"></td>
   <td align="right" class="td_big" style="vertical-align:middle;width:12em;">{date} {time}</td>
@@ -34,7 +34,7 @@
 
 </td></tr><tr class="td_transp"><td class="td_transp">
  <table align="center" border="0" cellpadding="2"><!-- Conditions -->
-   <tr><th colspan="3" valign="middle"><h3>{cond_img} {cond_name}</h3></th></tr>
+   <tr><th colspan="3" valign="middle"><h3><img src="{tpl_dir}images/btn_conditions.gif" width="37" height="15" alt="Conditions"> {cond_name}</h3></th></tr>
    <tr class="td_transp"><td class="td_transp" valign="top">
      <table align="center" border="0" cellpadding="2">
 <!-- BEGIN sumblock -->
@@ -52,7 +52,7 @@
 
 </td></tr><tr class="td_transp"><td class="td_transp">
 <table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Equipment -->
- <tr><th colspan="2" valign="middle"><h3>{equi_img} {equi_name}</h3></th></tr>
+ <tr><th colspan="2" valign="middle"><h3><img src="{tpl_dir}images/btn_equipment.gif" width="37" height="15" alt="Equipment"> {equi_name}</h3></th></tr>
 <!-- BEGIN equiblock -->
  <tr><td><b>{item_name}</b></td><td>{item_data}</td></tr>
 <!-- END equiblock -->
@@ -69,7 +69,7 @@
 </td></tr><tr class="td_transp"><td class="td_transp">
 <!-- BEGIN scheduleblock -->
 <table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Schedule -->
- <tr><th colspan="4" valign="middle"><h3>{sched_img} {sched_name}</h3></th></tr>
+ <tr><th colspan="4" valign="middle"><h3><img src="{tpl_dir}images/btn_schedule.gif" width="37" height="15" alt="Schedule"> {sched_name}</h3></th></tr>
  <tr>
    <td align="center"><b>{s_depth_name}</b></td>
    <td align="center"><b>{s_time_name}</b></td>
@@ -89,7 +89,7 @@
 
 </td></tr><tr class="td_transp"><td class="td_transp">
 <table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Notes -->
- <tr><th valign="middle"><h3>{notes_img} {notes_name}</h3></th></tr>
+ <tr><th valign="middle"><h3><img src="{tpl_dir}images/btn_notes.gif" width="37" height="15" alt="Notes"> {notes_name}</h3></th></tr>
  <tr><td>{notes_text}</td></tr>
 </table>
 
