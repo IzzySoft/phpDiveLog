@@ -64,6 +64,7 @@
          $this->field[$i]->txt  = FALSE;
 	 $this->field[$i]->name = $fields[$i];
        }
+       if ($this->trim) $this->field[$i]->name = trim($this->field[$i]->name);
      }
      if ( $this->field[$fc -1]->txt ) {
        $this->rec_end = $this->txt."\n";
