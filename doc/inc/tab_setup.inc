@@ -20,6 +20,7 @@
      $this->add_tab("install","install.php","tab_preferences.gif");
      $this->add_tab("admin","admin.php","tab_stats.gif");
      $this->add_tab("diver","diver.php","tab_buddylist.gif");
+     $this->add_tab("visitor","visitor.php","tab_stats.gif");
      $pm->t->set_block("main","tabblock","tab");
    }
 

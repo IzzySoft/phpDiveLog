@@ -1,0 +1,181 @@
+#############################################################################
+# phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+# written by Itzchak Rehberg <izzysoft@qumran.org>                          #
+# http://www.qumran.org/homes/izzy/                                         #
+# ------------------------------------------------------------------------- #
+# This program is free software; you can redistribute and/or modify it      #
+# under the terms of the GNU General Public License (see doc/LICENSE)       #
+# ------------------------------------------------------------------------- #
+# Usage notes for the visitor of the site                                   #
+#############################################################################
+
+# ===========================================================================
+[title]
+Navigation tab: Logbook mode
+
+[text]
+Using the navigation tabs, you can navigate through the sections of the
+application. The navigation bar has different elements, depending on the
+"mode" of the application which you can switch with the first icon. phpDiveLog
+has two modes of operation: the "Logbook" mode, and the "Global" mode. If you
+don't find a single icon without description as the first element in the
+navigation bar, the website administrator may have disabled the "Global" mode,
+or none of the divers has opened his data for public access. Otherwise, you
+can use that single first icon to switch between the modi.
+
+[text]
+In the "Logbook" mode, following tabs are available to the visitor:
+
+<table class="nav" align="center" border="0" width="90%">
+ <tr><td class="td_blank"><b>Dives</b></td>
+  <td class="td_blank">This tab brings you to the dive index, which is
+     most probably the page you see first when coming to this site. The dive
+     index list up all dives of the given buddy and provides you with links
+     to the details, which is why we call this page "dive list", too.</td></tr>
+ <tr><td class="td_blank"><b>Stats</b></td>
+  <td class="td_blank">Here you will find some statistics for the selected
+     dive logbook.</td></tr>
+ <tr><td class="td_blank"><b>Sites</b></td>
+  <td class="td_blank">Brings you to a list of all sites listed in this
+     DiveLog. As with the "Dives", this list provides links to more details
+     (see below).</td></tr>
+ <tr><td class="td_blank"><b>&lt;BuddyName&gt;</b></td>
+  <td class="td_blank">If this tab is available, the owner of the selected
+     logbook provides some personal details you can browse here.</td></tr>
+ <tr><td class="td_blank"><b>Prefs</b></td>
+  <td class="td_blank">Your (the visitors) preferences for this application.
+     Here you can define the look-and-feel for this site (well, up to some
+     degree ;) and chose the language you prefer the information in.</td></tr>
+</table>
+
+# ===========================================================================
+[title]
+Navigation tab: Global mode
+
+[text]
+If the admin of this site decided to enable the global mode, you can switch here
+by clicking on the first single icon in the navigation bar (see above). Then,
+the navigation bar will contain the following items:
+
+<table class="nav" align="center" border="0" width="90%">
+ <tr><td class="td_blank"><b>Divers</b></td>
+  <td class="td_blank">This opens a list of all divers registered with this
+     site, who decided to open their DiveLogs to the public. Links to their
+     logbooks are provided.</td></tr>
+ <tr><td class="td_blank"><b>Sites</b></td>
+  <td class="td_blank">Brings you to a global list of all public available
+     divesite descriptions, collected from all DiveLogs of the site.</td></tr>
+ <tr><td class="td_blank"><b>Prefs</b></td>
+  <td class="td_blank">Your site preferences, as described above.</td></tr>
+</table>
+
+# ===========================================================================
+[title]
+Dive Index
+
+[text]
+The dive index lists up a summary of all dives recorded in the current logbook.
+To make this page more handy, the site andministrator and/or the logbook owner
+may have limited the count of dives displayed on one page. In this case, the
+table header provides you with links to the first/last and previous/next page.
+
+[text]
+Each data row in the table represents one dive record and provides you with
+the following links:
+<ul>
+ <li>First column (with the dive number) links to the dive details. In the last
+     column, an icon indicates that there are images linked with the details.</li>
+ <li>The dive location links to a list of all dive sites for this location
+     that are recorded in any of the public logbooks of this installation</li>
+ <li>The dive site itself links to details about the dive site</li>
+ <li>The footer of the page contains a link to the phpDiveLog homepage ;)</li>
+</ul>
+
+# ===========================================================================
+[title]
+Dive Details
+
+[text]
+As the name suggests, this page gives you the details on the selected dive.
+Depending on the information the diver (not) recorded, some of the following
+items may be missing:
+<ul>
+ <li>Conditions: wheather, currents etc.</li>
+ <li>Equipment used</li>
+ <li>Graphic of the dive profile</li>
+ <li>Divers notes on this dive</li>
+ <li>Foto collection</li>
+</ul>
+
+[text]
+The fotos may be thumbnails which are linked to images with a higher resolution,
+and the description itself may contain links to further information. Both will
+normally open in a new browser window, unless the logbook owner explicitely
+defined it otherwise.
+
+# ===========================================================================
+[title]
+Site Index
+
+[text]
+Here are all divesites from the current logbook listed. Navigation is the same
+as with the Dive Index, and the icon in the last column is the indicator of
+associated images here as well. The only link provided here is the site ID in
+the first column, which brings you to the details page for the selected site.
+
+# ===========================================================================
+[title]
+Site Details
+
+[text]
+Here you find the details for the selected divesite. This may include some
+general geographic information, additional notes and a foto collection - if the
+the logbook owner provided these details. For the images and links applies the
+same as described with the dive details.
+
+[text]
+If the diver provided the GPS data for this site, a click on the globe next
+to the sites name will open a new browser window. In that window you will then
+find a map with the dive sites position marked - which may be useful to plan
+your own dives here.
+
+# ===========================================================================
+[title]
+Prefs
+
+[text]
+On the preferences page, you may set up how phpDiveLog will present you the
+data. This setup includes the selection of a template set ("Skin"), and your
+favorite language. The latter one is used for the item names; the divers
+information will not be translated. Except if (s)he provided special information
+for the selected language, which is possible for the dive and divesite notes.
+
+# ===========================================================================
+[title]
+Global: Divers
+
+[text]
+This page lists up all publically available DiveLogs for this installation. A
+click on the divers nick name brings you to the Dive Index of his/her logbook.
+If you find an icon in the last column, this indicates that there's a personal
+picture available on his/her personal page.
+
+# ===========================================================================
+[title]
+Global Site Index
+
+[text]
+When you select this tab, it will bring you to a list of locations gathered
+from all public logbooks on this installation. The header of the table provides
+you with links to navigate between the pages, if there are multiple pages
+available. A click on the locations name brings you to the list of all sites
+at that location - how many sites you can expect on that page is told by the
+column next to the location.
+
+[text]
+When you have selected the location to browse, the next table lists you all
+sites found with this installation together with the information, in which
+divers logbook we found the sites. In order to view the site description
+details, just click the nick name of the diver.
+
+[eof]
