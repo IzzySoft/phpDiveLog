@@ -15,8 +15,6 @@
  include("inc/includes.inc");
  $title .= ": DiveIndex";
  include("inc/header.inc");
- include("inc/class.file.inc");
- $f = new file();
  if (!$start) $start = 0;
  $end = $start + $pdl->config->display_limit;
 
@@ -65,7 +63,7 @@
    $t->set_var("rating",$pdl->config->tpl_url."images/".$dives[$i]["rating"]."star.gif");
    $t->set_var("dive#",$pdl->link->linkurl("dive.php?nr=".$dives[$i]["dive#"],$dives[$i]["dive#"]));
    $t->set_var("place",$pdl->link->linkurl("site.php?id=".$dives[$i]["site_id"],$dives[$i]["place"]));
-   if ( $f->havePix($dives[$i]["dive#"],"dive") ) {
+   if ( $pdl->file->havePix($dives[$i]["dive#"],"dive") ) {
      $t->set_var("pix",'<img src="'.$pdl->config->tpl_url.'images/camera.gif" valign="middle">');
    } else {
      $t->set_var("pix","");

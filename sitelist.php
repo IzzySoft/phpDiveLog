@@ -15,8 +15,6 @@
  include("inc/includes.inc");
  $title .= ": SiteIndex";
  include("inc/header.inc");
- include("inc/class.file.inc");
- $f = new file();
  if (!$start) $start = 0;
  $end = $start + $pdl->config->display_limit;
 
@@ -65,7 +63,7 @@
    }
    $t->set_var("site_ref",$pdl->link->linkurl("site.php?id=".$sites[$i]["id"],$sites[$i]["id"]));
 #   $t->set_var("rating",$pdl->config->tpl_url."images/".$sites[$i]["rating"]."star.gif");
-   if ( $f->havePix($sites[$i]["id"],"site") ) {
+   if ( $pdl->file->havePix($sites[$i]["id"],"site") ) {
      $t->set_var("pix",'<img src="'.$pdl->config->tpl_url.'images/camera.gif" valign="middle">');
    } else {
      $t->set_var("pix","");

@@ -25,4 +25,7 @@
                           # and will be handled as "error")
  $default_user  = "demo"; # if default_page=user: which user is the default?
                           # must be a valid account (subdir diver/<user>)
+ $allow_override = "title lang display_limit template_set"; 
+                          # which settings may be adjusted via the
+                          # diver/*/system.conf - space separated values
 ?>

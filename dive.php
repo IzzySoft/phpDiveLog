@@ -17,8 +17,6 @@
  $nr = $_GET["nr"];
  $title .= ": ".lang("dive#")." $nr";
  include("inc/header.inc");
- include("inc/class.file.inc");
- $f = new file();
 
  $t = new Template($pdl->config->tpl_path);
  $t->set_file(array("template"=>"dive.tpl"));
@@ -144,7 +142,7 @@
    $t->set_var("sched","");
  }
  #-----------------------------[ Profile ]---
- if ( strlen($prof_img=$f->getProfPic($nr)) ) {
+ if ( strlen($prof_img=$pdl->file->getProfPic($nr)) ) {
    $t->set_var("prof_name",lang("profile"));
    $t->set_var("prof_img",$prof_img);
    $t->parse("profile","profileblock");
@@ -154,7 +152,7 @@
  $t->set_var("notes_text",nl2br($dive["notes"]));
 
  #-------------------------------[ Fotos ]---
- $fotos = $f->getDivePix($nr);
+ $fotos = $pdl->file->getDivePix($nr);
  $fc = count($fotos);
  if ($fc>0) {
    $picdir = $pdl->config->user_url;

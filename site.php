@@ -17,7 +17,6 @@
  $id = $_GET["id"];
  $title .= ": Site# $id";
  include("inc/header.inc");
- include("inc/class.file.inc");
 
  $t = new Template($pdl->config->tpl_path);
  $t->set_file(array("template"=>"site.tpl"));
@@ -60,8 +59,7 @@
 # $t->parse("item","itemblock",TRUE);
 
  #-------------------------------[ Fotos ]---
- $f = new file();
- $fotos = $f->getSitePix($id);
+ $fotos = $pdl->file->getSitePix($id);
  $fc = count($fotos);
  if ($fc>0) {
    $picdir = $pdl->config->user_url;
