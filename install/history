@@ -7,7 +7,7 @@ v0.1.0 (10.06.2004)
 -------------------
 * initial release
 
-v0.1.1
+v0.1.1 (23.06.2004)
 -------------------
 + all data are now retrieved from the (CSV) data files (thanks to the
   new conduit provided by Stephan), making the *.html files obsolete
