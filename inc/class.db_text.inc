@@ -249,7 +249,7 @@
     * @method getAllPlaces
     * @return array places
     */
-   function getAllPlaces() {
+   function getAllPlaces($start="",$end="") {
      GLOBAL $pdl;
      $csv = new csv(";",'"',TRUE);
      $udirs = $pdl->file->get_subdirs($pdl->config->base_path."diver");
@@ -271,8 +271,19 @@
        $p->num  = $cnum[$place[$key]];
        $splace[] = $p;
      }
+     unset($place);
      sort($splace); reset($splace);
-     return $splace;
+     $this->allplaces = count($splace);
+     if ( $start!=="" ) { // return subset
+       if ( empty($end) || $end > $this->allplaces ) $end = $this->allplaces;
+       if ( $end - $start > $pdl->config->display_limit )
+         $end = $start + $pdl->config->display_limit;
+       for ($i=$start;$i<$end;++$i) {
+         $place[] = $splace[$i];
+       }
+       return $place;
+     }
+     return $splace; // return all otherwise
    }
 
   #======================================================[ Dive Statistics ]===
@@ -305,5 +316,9 @@
  /** Count of imported dive records
   * @class db_text
   * @attribute integer dives
+  */
+ /** Count of dive locations of ALL divers
+  * @class db_text
+  * @attribute integer allplaces
   */
 ?>

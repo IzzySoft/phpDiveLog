@@ -15,6 +15,7 @@
  include("inc/includes.inc");
  $title .= ": AllPlaces";
  include("inc/header.inc");
+ $start = $_GET["start"];
  if (!$start) $start = 0;
  $end = $start + $pdl->config->display_limit;
  $showPlace = $_GET["place"];
@@ -27,9 +28,9 @@
  $t->set_block("siteblock","sitemblock","sitem");
 
  #==============================================[ Import dive data from DB ]===
- $places = $pdl->db->getAllPlaces();
+ $places = $pdl->db->getAllPlaces($start,$end);
  $max   = count($places);
- $records = $max;
+ $records = $pdl->db->allplaces;
 
  #=============================================[ set up the navigation bar ]===
  include("inc/tab_setup2.inc");
