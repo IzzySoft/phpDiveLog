@@ -1,4 +1,17 @@
 <?
+ #############################################################################
+ # phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+ # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
+ # http://www.qumran.org/homes/izzy/                                         #
+ # ------------------------------------------------------------------------- #
+ # This program is free software; you can redistribute and/or modify it      #
+ # under the terms of the GNU General Public License (see doc/LICENSE)       #
+ # ------------------------------------------------------------------------- #
+ # Display a single dive record                                              #
+ #############################################################################
+
+ # $Id$
+
  $title = "Izzys Dive LogBook: Dive# $nr";
  include("inc/includes.inc");
  include("inc/header.inc");
