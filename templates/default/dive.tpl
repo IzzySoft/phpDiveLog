@@ -41,7 +41,7 @@
        <tr><th>{item_name}</th><td>{item_data}</td></tr>
 <!-- END sumblock -->
      </table>
-   </td><td class="td_blank">&nbsp;</td><td class="td_blank" valign="top">
+   </td><td class="td_blank">&nbsp;</td><td class="td_transp" valign="top">
      <table align="center" border="0" cellpadding="2">
 <!-- BEGIN condblock -->
        <tr><th>{item_name}</th><td>{item_data}</td></tr>
