@@ -138,6 +138,7 @@
    *  (see http://photomatt.net/scripts.php/autop)
    */
   function nl2br($pee, $tagreplace=1, $br=0) {
+    if ( empty($pee) ) return $pee;
     if ($tagreplace) $pee = $this->tagreplace($pee);
     $pee = $pee . "\n"; // just to make things a little easier, pad the end
     $pee = preg_replace('|<br />\s*<br />|', "\n\n", $pee);
