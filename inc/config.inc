@@ -17,13 +17,14 @@
  #$base_path  = ""; # absolute file systems path
 
  #=============================================================[ database ]===
- $database["type"]      = "csv";     # mysql|pgsql
- $database["host"]      = "";        # your hosts name
- $database["database"]  = "";        # what database holds the tables
- $database["user"]      = "";         # db user with at least following
+ $database["type"]      = "csv";     # csv|mysql|pgsql (only csv supported now)
+ #$database["host"]      = "";        # your hosts name
+ #$database["database"]  = "";        # what database holds the tables
+ #$database["user"]      = "";        # db user with at least following
                                       # privileges on these tables:
 				      # SELECT,UPDATE,INSERT,DELETE
- $database["password"]  = "";  # this users password for the db
+ #$database["password"]  = "";  # this users password for the db
+
  # the following lines apply for text databases (CSV/UDDF) only
  $database["divedata"]  = "data/logbook.csv";
  $database["sites"]  = "data/sites.csv";
