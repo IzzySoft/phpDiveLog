@@ -1,0 +1,16 @@
+/***********************************************************************
+ *
+ * PROJECT:  Dive Log
+ * FILE:     divelog.ini
+ *
+ **********************************************************************/
+ 
+TablePDBFile = ./AquaPalm-TableDB.pdb 
+DivePDBFile = ./AquaPalm-DiveDB.pdb
+LogbookPath = ./log/
+
+LogTemplate = ./template/pdl_tank.html
+IndexTemplate = ./template/pdl_stats.html
+PlaceTemplate = ./template/pdl_place.html
+CSVTemplate = ./template/pdl_loc.csv
+CSVTemplate = ./template/pdl_dives.csv
