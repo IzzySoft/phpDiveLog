@@ -66,8 +66,8 @@
 <!-- END tankblock -->
 </table>
 
-</td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 <!-- BEGIN scheduleblock -->
+</td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 <table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Schedule -->
  <tr><th class="head" colspan="4" valign="middle"><img src="{tpl_dir}images/btn_schedule.gif" width="37" height="15" alt="Schedule"> {sched_name}</th></tr>
  <tr>
