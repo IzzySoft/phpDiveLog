@@ -66,6 +66,11 @@
      $t->set_var("description",$diver["person"]["status"]);
      $t->parse("pdetail","pdetailblock",TRUE);
    }
+   if ( !empty($diver["person"]["foto"]) ) {
+     $t->set_var("portrait",$pdl->config->user_url."fotos/person/".$diver["person"]["foto"]);
+   } else {
+     $t->set_var("portrait",$pdl->config->tpl_url."images/dummy_person.jpg");
+   }
    $t->parse("person","personblock");
  }
  #------------------------[ certifications ]---

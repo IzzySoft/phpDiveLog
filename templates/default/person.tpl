@@ -17,9 +17,12 @@
 <!-- BEGIN personblock -->
 <table cellpadding="2" cellspacing="2" align="center" style="margin-top:7px">
  <tr><th valign="middle" colspan="2"><img src="{tpl_dir}images/btn_personal.gif" width="37" height="15" alt="Fotos"> {personal_name}</th></tr>
+ <tr><td valign="middle" align="center"><img src="{portrait}"></td>
+     <td valign="middle" align="center"><table>
 <!-- BEGIN pdetailblock -->
  <tr><td><b>{name}</b></td><td>{description}</td></tr>
 <!-- END pdetailblock -->
+     </table></td></tr>
 </table>
 <!-- END personblock -->
 

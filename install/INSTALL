@@ -183,6 +183,9 @@ all, you may just completely remove it (or comment it out) at all.
 The [person] block, as the name suggests contains the personal data. Available
 options in this block are name, firstname, country, state, city and status
 (where "status" means your highest certification, e.g. AOWD, DM or Instructor).
+You can include a photo of yours using the "foto" option also available in this
+block. The image used here must be stored in the diver/*/fotos/person/
+subdirectory. If you don't specify one, a "dummy" will be used instead.
 If you want to omit something, just delete or comment out that line.
 
 With the [certification] block, there are stronger rules to observe. Data for
