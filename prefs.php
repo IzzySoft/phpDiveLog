@@ -38,7 +38,7 @@
    $t->set_var("lang_ref",$pdl->link->slink("$PHP_SELF?lang=".$lavail[$i]));
    $imgfile = "images/lang_".$lavail[$i].".jpg";
    if ( file_exists($pdl->config->tpl_path.$imgfile ) )
-     $img = "<img src='".$pdl->config->tpl_url.$imgfile."'>";
+     $img = "<img src='".$pdl->config->tpl_url.$imgfile."' width='30' height='20'>";
      else $img = strtoupper($lavail[$i]);
    $t->set_var("lang_img",$img);
    $t->set_var("lang_name",lang("lang_".$lavail[$i]));
