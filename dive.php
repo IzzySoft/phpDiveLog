@@ -153,7 +153,7 @@
  #-------------------------------[ Notes ]---
  $notes[1] = $pdl->common->nl2br($dive["notes"]);
  $notes[2] = $pdl->file->getNotes($nr,"dive");
- $notb = $pdl->common->nl2br($notes[1].$notes[2]);
+ $notb = $notes[1].$pdl->common->nl2br($notes[2]);
  if (!empty($notb)) {
    $t->set_var("notes_text",$notb);
    $t->parse("notb","notesblock");
