@@ -25,11 +25,15 @@
     * @param optional string separator (default: ';')
     * @param optional string textmarker
     *   (by what characters are textfields enclosed; default: '"')
+    * @param optional boolean trim whether to trim the fields
+    * @param optional mixed recode either recode definition string
+    *  (e.g. "lat1..utf-8", see method recode) or FALSE for no recoding)
     */
-   function csv($sep=";",$txt='"',$trim=FALSE) {
+   function csv($sep=";",$txt='"',$trim=FALSE,$recode="lat1..utf-8") {
      $this->sep  = $sep;
      $this->txt  = $txt;
      $this->trim = $trim;
+     $this->recode = $recode;
    }
 
    /** Import CSV file
@@ -65,6 +69,7 @@
 	 $this->field[$i]->name = $fields[$i];
        }
        if ($this->trim) $this->field[$i]->name = trim($this->field[$i]->name);
+       $this->field[$i]->name = $this->recode($this->field[$i]->name);
      }
      if ( $this->field[$fc -1]->txt ) {
        $this->rec_end = $this->txt."\n";
@@ -121,6 +126,7 @@
              $this->text = substr($this->text,$pos+1);
            }
            if ($this->trim) $data[$name] = trim($data[$name]);
+	   $data[$name] = $this->recode($data[$name]);
            $this->data[$rec] = $data;
          } // record end
        }
@@ -136,6 +142,24 @@
    function clear_data() {
      unset ($this->data);
      unset ($this->field);
+   }
+
+   /** Recode a string between two character sets
+    * @class csv
+    * @method recode
+    * @param string string to recode
+    * @return string recoded string
+    * @version supports only "lat1..utf-8" for now; the recode definition
+    *  has to be set in the this::recode property
+    */
+   function recode ($string) {
+     switch ($this->recode) {
+       case "lat1..utf-8" :
+         return preg_replace("/([\x80-\xFF])/e",
+             "chr(0xC0|ord('\\1')>>6).chr(0x80|ord('\\1')&0x3F)",
+	     $string); break;
+       default: return($string);
+     }
    }
 
  } // end class csv
