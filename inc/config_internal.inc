@@ -15,7 +15,7 @@
  #==========================================================[ directories ]===
  $pdl->config->tpl_url  = "templates/default/";
  $pdl->config->tpl_path = "templates/default/";
- $pdl->config->version  = "0.0.13";
+ $pdl->config->version  = "0.1.0";
  $pdl->config->display_limit = 10;
  $pdl->config->db_type  = $database["type"];
  $pdl->config->divedata = $database["divedata"];
