@@ -17,11 +17,7 @@
      GLOBAL $t,$pdl;
      $t->set_block("template","homeblock","home");
      if ( $pdl->config->enable_index ){
-       if ( basename($_SERVER["SCRIPT_FILENAME"])=="buddylist.php" ) {
-         $img = "<img src='".$pdl->config->tpl_url."images/tab_buddylist.gif'>";
-       } else {
-         $img = $pdl->link->linkurl("buddylist.php","<img src='".$pdl->config->tpl_url."images/tab_home.gif'>");
-       }
+       $img = $pdl->link->linkurl("buddylist.php","<img src='".$pdl->config->tpl_url."images/tab_switch.gif'>");
        $t->set_var("home_ref",$img);
        $t->parse("home","homeblock");
      }
