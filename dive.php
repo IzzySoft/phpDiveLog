@@ -129,10 +129,14 @@
    $t->set_var("s_gas_name","Gas");
    $sc = count($sched);
    for ($i=0;$i<$sc;++$i) {
-     $t->set_var("s_depth",$sched[$i]["depth (m)"]." m / ".$sched[$i]["depth (ft)"]." ft");
-     $t->set_var("s_time",$sched[$i]["time (sec)"]);
-     $t->set_var("s_runtime",$sched[$i]["runtime (sec)"]);
-     $t->set_var("s_gas",$sched[$i]["gas"] ." [".$sched[$i]["tank nr."]."]");
+     $t->set_var("s_depth",$sched[$i]["depth"]);
+     list($time_h, $time_m) = sscanf($sched[$i]["time"],"%d:%d");
+     $time = "$time_h:".sprintf("%02d",$time_m,0);
+     $t->set_var("s_time",$time);
+     list($time_h, $time_m) = sscanf($sched[$i]["runtime"],"%d:%d");
+     $time = "$time_h:".sprintf("%02d",$time_m,0);
+     $t->set_var("s_runtime",$time);
+     $t->set_var("s_gas",$sched[$i]["gas"] ." [".$sched[$i]["tank#"]."]");
      $t->parse("scheditem","scheditemblock",TRUE);
    }
    $t->parse("sched","scheduleblock");
