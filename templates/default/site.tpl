@@ -45,4 +45,16 @@
  <tr><td>{description}</td></tr>
 </table>
 
+<!-- BEGIN fotoblock -->
+</td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
+<table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Fotos -->
+ <tr><th class="head" valign="middle"><img src="{tpl_dir}images/btn_fotos.gif" width="37" height="15" alt="Fotos"> {fotos_name}</th></tr>
+ <tr><td align="center"><table><tr>
+<!-- BEGIN fotoitemblock -->
+   <td><span class="thumbnail"><img src="{foto}" align="center"><br>{fdesc}</span></td>
+<!-- END fotoitemblock -->
+   </tr></table></td></tr>
+</table>
+<!-- END fotoblock -->
+
 </td></tr></table>
