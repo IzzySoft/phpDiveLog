@@ -1,0 +1,98 @@
+/* === Common === */
+  BODY {
+   font-family: Verdana,Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   background-color: #ffffff;
+   color: #0000ee;
+   link: #bb0000;
+   vlink: #ff0000;
+  }
+  P {
+   text-align: justify;
+  }
+  H1 {
+   text-align: center;
+   font-size: 150%;
+  }
+  H2 {
+   text-align: center;
+   font-size: 140%;
+  }
+  H3 {
+   text-align: center;
+   font-size: 130%;
+  }
+  .footer {
+   font-size: 9px;
+   color: #000000;
+   margin-top: 5;
+  }
+
+/* === Tables === */
+
+  TABLE {
+   background-color: #CCFFFF;
+   empty-cells: show;
+  }
+  TD,TH {
+   font-size: 80%;
+   font-family: Verdana,Arial,Helvetica,sans-serif;
+  }
+  TD {
+   background-color: #FFFFCC;
+  }
+  .td_blank {
+   background-color: #ffffff;
+   border: 0;
+  }
+  .td_big {
+    font-size: 100%;
+  }
+  .tab_active {
+   background-color: #cfcfcf;
+   border: 0;
+  }
+  .tab_inactive {
+   background-color: #eeeeee;
+   border: 0;
+  }
+
+/* === Links === */
+
+  a {
+    text-decoration: none;
+  }
+  a:active {
+    background: #ffff00;
+    color: #000099;
+  }
+  a:hover {
+    background: #ccffff;
+    color: #000099;
+  }
+  a:link {
+    text-decoration: none;
+    color: #000099;
+  }
+
+/* === Images === */
+
+  span.thumbnail-right,span.thumbnail-left {
+    padding:2px;
+  /* border:1px solid #8888aa; */
+    background: #e5e5e5;
+    margin:0.3em 0 0.5em;
+    font-size:75%;
+    text-align:center;
+    color: #000000;
+  }
+  span.thumbnail-right {
+    float:right;
+    margin-left:0.5em;
+  }
+  span.thumbnail-left {
+    float:left;
+    margin-right:0.5em;
+  }
+  IMG { border:0; }
+//--></style>

@@ -1,0 +1,47 @@
+<table align="center"  style="background-color:transparent;" border="0"><tr class="td_blank"><td class="td_blank">
+
+<table cellpadding="0" align="left" style="background-color:transparent;" border="1">
+ <tr style="background-color:transparent;">
+   <td class="tab_active"><table class="tab_active" border="0">
+    <tr style="background-color:transparent;">
+     <td class="tab_active" style="vertical-align:middle">{dive_tab_img}</td>
+     <td class="tab_active" style="vertical-align:middle">{dive_tab_name}</td>
+    </tr></table></td>
+   <td class="tab_inactive"><a href="stats.php"><table class="tab_inactive" border="0">
+    <tr style="background-color:transparent;">
+     <td class="tab_inactive" style="vertical-align:middle"><a href="{stats_ref}">{stats_tab_img}</a></td>
+     <td class="tab_inactive" style="vertical-align:middle"><a href="{stats_ref}">{stats_tab_name}</a></td>
+    </tr></table></td>
+   <td class="tab_inactive"><table class="tab_inactive" border="0">
+    <tr style="background-color:transparent;">
+     <td class="tab_inactive" style="vertical-align:middle"><a href="{sites_ref}">{sites_tab_img}</a></td>
+     <td class="tab_inactive" style="vertical-align:middle"><a href="{sites_ref}">{sites_tab_name}</a></td></tr>
+    </tr></table></td>
+</table>
+
+</td></tr><tr class="td_blank"><td class="td_blank">
+ <table border="0" cellpadding="2" width="100%" style="background-color:transparent;"><tr>
+  <td class="td_blank" align="left">{nav_left}</td>
+  <td class="td_blank" align="right">{nav_right}</td>
+ </tr></table>
+
+</td></tr><tr class="td_blank"><td class="td_blank">
+
+<table border="1" cellpadding="2" align="center">
+ <tr><th>Dive</th><th>Date</th><th>Time</th><th>Location</th><th>Rating</th>
+     <td class="td_blank"></td>
+     <th>Depth and Dive Time</td><th>Buddy</th></tr>
+
+<!-- BEGIN itemblock -->
+ <tr><td align="right"><a href="{dive_ref}">{dive#}</a></td>
+  <td align="center">{date}</td>
+  <td align="center">{time}</td>
+  <td align="center">{location}:<br>{place}</td>
+  <td align="center"><img src="{rating}"></td>
+  <th class="td_blank"></th>
+  <td align="center">{depth}<br>{divetime}</td>
+  <td align="center">{buddy}</td>
+ </tr>
+<!-- END itemblock -->
+
+</td></tr></table>
