@@ -26,5 +26,6 @@
   <th>{pix}</th>
  </tr>
 <!-- END itemblock -->
+</table>
 
 </td></tr></table>
