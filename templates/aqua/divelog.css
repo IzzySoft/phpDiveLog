@@ -60,6 +60,7 @@
   TH {
    background-image:url(images/sand-light.jpg);
   }
+  TH a:hover { background: #ffff00; }
   TD {
 /*   background-color: #FFFFCC; */
   }
@@ -79,19 +80,19 @@
    background-image:url(images/aqua.jpg);
    text-color:#ffffff;
   }
-  .tab_active {
-   background-image:url(images/sand-light.jpg);
+  .tab_active, .tab_inactive {
    border: 0;
    border-spacing:0;
    margin-top: 0;
    margin-bottom: 0;
+   font-weight: bold;
+   font-size: 90%;
+  }
+  .tab_active {
+   background-image:url(images/sand-light.jpg);
   }
   .tab_inactive {
    background-image:url(images/aqua-light.jpg);
-   border: 0;
-   border-spacing: 0;
-   margin-top: 0;
-   margin-bottom: 0;
   }
   .tab_active a, .tab_active a:visited {
     color: #0000ff;
@@ -102,6 +103,7 @@
     color: #000000;
     text-decoration: none;
   }
+  .tab_incative a:active { background: transparent; }
 
 /* === Links === */
 
