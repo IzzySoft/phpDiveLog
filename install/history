@@ -9,6 +9,7 @@ v0.1.6
   JavaScript in a new window) if they exist (picture with the same name in
   the diver/*/fotos/*/large/ subdirectory)
 * the "Person" tab (if available) now shows the divers nick instead of "Person"
++ added number of sites and avg dives/site to the stats page
 
 v0.1.5 (12.07.2004)
 -------------------

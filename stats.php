@@ -32,6 +32,8 @@
  $t->set_var("avg_time_name",lang("avg_divetime").":");
  $t->set_var("dive_num_name",lang("num_dives").":");
  $t->set_var("cum_time_name",lang("cum_divetime").":");
+ $t->set_var("site_num_name",lang("num_sites").":");
+ $t->set_var("avg_sd_name",lang("avg_dives_per_site").":");
 
  #================================================[ Import statistics data ]===
  $stats = $pdl->db->get_stats();
@@ -42,6 +44,8 @@
 # $t->set_var("dive_num",$stats["dive_num"]);
  $t->set_var("dive_num",$pdl->db->dives);
  $t->set_var("cum_time",$stats["cum_dive_time"]);
+ $t->set_var("site_num",$pdl->db->sites);
+ $t->set_var("avg_sd",$pdl->db->dives / $pdl->db->sites);
 
  $t->pparse("out","template");
 

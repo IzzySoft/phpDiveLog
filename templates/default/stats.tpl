@@ -31,6 +31,10 @@
  <tr><th>{dive_num_name}</th><td align="right">{dive_num}</td>
   <td class="td_blank"></td>
   <th>{cum_time_name}</th><td>{cum_time}</td></tr>
+ <tr><th>{site_num_name}</th><td align="right">{site_num}</td>
+  <td class="td_blank"></td>
+  <th>{avg_sd_name}</th><td align="right">{avg_sd}</td></tr>
+
 </table>
 
 </td></tr></table>

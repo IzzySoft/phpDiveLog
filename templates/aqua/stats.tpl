@@ -20,17 +20,21 @@
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 
 <table class="outer" border="0" cellpadding="4" cellspacing="0" align="center" style="margin-top:10;">
- <tr><th class="big" colspan="7"><img src="{tpl_dir}images/btn_notes.gif" width="20" height="15" border="0" alt="Stats" align="middle"> {title}</th></tr>
- <tr><th rowspan="3">&nbsp;</th><th>{max_depth_name}</th><td align="right">{max_depth}</td>
+ <tr><th class="big" colspan="7"><img src="{tpl_dir}images/tab_stats.gif" width="20" height="15" border="0" alt="Stats" align="middle"> {title}</th></tr>
+ <tr><th rowspan="4">&nbsp;</th><th>{max_depth_name}</th><td align="right">{max_depth}</td>
   <th>&nbsp;</th>
-  <th>{max_time_name}</th><td align="right">{max_time}</td><th>&nbsp;</th></tr>
+  <th>{max_time_name}</th><td align="right">{max_time}</td><th rowspan="4">&nbsp;</th></tr>
  <tr><th>{avg_depth_name}</th><td align="right">{avg_depth}</td>
   <th>&nbsp;</th>
-  <th>{avg_time_name}</th><td align="right">{avg_time}</td><th>&nbsp;</th></tr>
+  <th>{avg_time_name}</th><td align="right">{avg_time}</td></tr>
  <tr><th>{dive_num_name}</th><td align="right">{dive_num}</td>
   <th>&nbsp;</th>
-  <th>{cum_time_name}</th><td>{cum_time}</td><th>&nbsp;</th></tr>
+  <th>{cum_time_name}</th><td>{cum_time}</td></tr>
+ <tr><th>{site_num_name}</th><td align="right">{site_num}</td>
+  <th>&nbsp;</th>
+  <th>{avg_sd_name}</th><td align="right">{avg_sd}</td></tr>
  <tr><th colspan="7">&nbsp;</th></tr>
+
 </table>
 
 </td></tr></table>
