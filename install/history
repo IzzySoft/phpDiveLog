@@ -5,7 +5,7 @@ History for phpDiveLog
 
 v0.1.8
 -------------------
-+ now the [url], [img] and [imgr] tags can be used in the notes fields of
++ now the [url], [img]/[imgr] and [file] tags can be used in the notes fields of
   dives and sites
 
 v0.1.7 (27.07.2004)

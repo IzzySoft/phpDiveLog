@@ -26,6 +26,19 @@
    function file() {
    }
 
+   /** Get the file content of a text file as string
+    * @class file
+    * @method read_file
+    * @param string filename file to read
+    * @return string text
+    */
+   function read_file($filename) {
+     $fp = fopen($filename, "rb");
+     $buffer = fread($fp, filesize($filename));
+     fclose($fp);
+     return preg_replace("/\r?\n|\r/", "\n", $buffer);
+   }
+
    /** Get the ADL formated file prefix
     * @class file
     * @method mkADLprefix

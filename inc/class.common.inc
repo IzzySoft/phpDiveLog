@@ -46,14 +46,16 @@
   }
 
   /* Helper to tagreplace: replace dirnames in URLs (private!) */
-  function dirReplace($string) {
+  function dirReplace($string,$url=0) {
     GLOBAL $pdl;
     if (substr($string,0,1)=="~") {
+      if ($url) $root = $pdl->config->base_url;
+        else $root = $pdl->config->base_path;
       $pos  = strpos($string,"/");
       if (substr($string,2,1)=="@") {
-        $root = $this->dir->diverroot.substr($string,3,$pos-2);
+        $root .= $this->dir->diverroot.substr($string,3,$pos-2);
       } else {
-        $root = $pdl->config->user_url;
+        $root .= $pdl->config->user_url;
       }
       switch(substr($string,1,1)) {
         case "d" : $root.=$this->dir->divepix; break;
@@ -73,6 +75,7 @@
    * @return string newText formatted text block
    */
   function tagreplace($data) {
+    GLOBAL $pdl;
     if(empty($data)) {
       return $data;
     }
@@ -81,6 +84,14 @@
       if ( preg_match_all("/\[href\]\S+\[\/href\]/i",$line,$matches) ) {
         for ($i=0;$i<count($matches[0]);++$i) {
           $sub  = eregi_replace("\[href\](.*)\[\/href\]","<A HREF=\"\\1\" TARGET=\"_blank\">\\1</A>",$matches[0][$i]);
+          $line = str_replace($matches[0][$i],$sub,$line);
+        }
+      }
+      if ( preg_match_all("/\[file\].+\[\/file\]/i",$line,$matches) ) {
+        for ($i=0;$i<count($matches[0]);++$i) {
+          $link = $this->dirReplace( eregi_replace("\[file\](.*)\[\/file\]","\\1",$matches[0][$i]) );
+	  $text = $this->tagreplace( $pdl->file->read_file($link) );
+          $sub  = eregi_replace("\[file\](.*)\[\/file\]",$text,$matches[0][$i]);
           $line = str_replace($matches[0][$i],$sub,$line);
         }
       }
