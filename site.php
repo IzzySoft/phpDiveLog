@@ -15,9 +15,12 @@
  include("inc/includes.inc");
  $title .= ": Site# $id";
  include("inc/header.inc");
+ include("inc/class.file.inc");
 
  $t = new Template($pdl->config->tpl_path);
  $t->set_file(array("template"=>"site.tpl"));
+ $t->set_block("template","fotoblock","fotos");
+ $t->set_block("fotoblock","fotoitemblock","pic");
 
  #==============================================[ Import dive data from DB ]===
  $site = $pdl->db->get_site($id); // $start,$pdl->config->display_limit);
@@ -47,9 +50,27 @@
  foreach($details AS $detail) {
    $t->set_var("$detail",$site[$detail]);
  }
+ #-------------------------------[ Notes ]---
  $t->set_var("description",nl2br($site["description"]));
 #   $t->set_var("rating",$pdl->config->tpl_url."images/".$dives[$i]["rating"]."star.gif");
 # $t->parse("item","itemblock",TRUE);
+
+ #-------------------------------[ Fotos ]---
+ $f = new file();
+ $fotos = $f->getSitePix($id);
+ $fc = count($fotos);
+ if ($fc>0) {
+   $picdir = $pdl->config->user_url;
+   for ($i=0;$i<$fc;++$i) {
+     $t->set_var("foto",$fotos[$i]->url);
+     $t->set_var("fdesc",$fotos[$i]->desc);
+     $t->parse("pic","fotoitemblock",TRUE);
+   }
+   $t->set_var("fotos_name","Fotos");
+   $t->parse("fotos","fotoblock");
+ } else {
+   $t->set_var("fotos","");
+ }
 
  $t->pparse("out","template");
 
