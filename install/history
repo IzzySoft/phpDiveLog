@@ -7,6 +7,8 @@ v0.2.3
 -------------------
 + improved formating of included textfiles
 + added first/last buttons to the navigation in dive[site] lists
++ clicking on the location in the dives list now brings you to the (global)
+  list of all divesites at this place
 
 v0.2.2 (02.09.2004)
 -------------------

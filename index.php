@@ -60,7 +60,7 @@
  $t->set_var("buddy_name",lang("buddy"));
 
  #============================[ Walk through the list and set up the table ]===
- $details = array ("dive#","date","time","location","depth","divetime","buddy","rating");
+ $details = array ("dive#","date","time","depth","divetime","buddy","rating");
  for ($i=0;$i<$max;++$i) {
    foreach($details AS $detail) {
      $t->set_var("$detail",$dives[$i][$detail]);
@@ -68,6 +68,7 @@
    $t->set_var("rating",$pdl->config->tpl_url."images/".$dives[$i]["rating"]."star.gif");
    $t->set_var("dive#",$pdl->link->linkurl("dive.php?nr=".$dives[$i]["dive#"],$dives[$i]["dive#"]));
    $t->set_var("place",$pdl->link->linkurl("site.php?id=".$dives[$i]["site_id"],$dives[$i]["place"]));
+   $t->set_var("location",$pdl->link->linkurl("places.php?place=".$dives[$i]["location"],$dives[$i]["location"]));
    if ( $pdl->file->havePix($dives[$i]["dive#"],"dive") ) {
      $t->set_var("pix",'<img src="'.$pdl->config->tpl_url.'images/camera.gif" valign="middle">');
    } else {
