@@ -255,7 +255,7 @@ a short documentation for the available parameters and their effects:
   <td class="td_blank">The base directory for the transfered logbook data when
     using the "single OS user transfer". This should be the directory containing
     the diver directories directly below it (i.e. the counterpart to the PDL
-    <code>diver/</code> directory).</td></tr>
+    <code>diver/</code> directory - also see the {admin_page} for this).</td></tr>
 </table>
 
 #---[ Updating ]----------------------------------------------[ Updating ]---

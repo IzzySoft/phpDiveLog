@@ -117,6 +117,14 @@ will be treated as "privat", i.e. it is only accessible if one invokes PDL with
 the correct <code>diver=&lt;nickname&gt;</code> parameter.
 
 [text]
+For more detailed information on the configuration of a divers account, please
+refer to the {diver_page}.
+
+#===============================================================================
+[title]
+Preparing data transfer using a single OS user for all divers
+
+[text]
 If you intend to let your diver buddies transfer their data using the "single
 OS user transfer" (see {install_page}), these directories must be writeable by
 the web server process. The easiest way to reach this goal is to have them
@@ -136,7 +144,15 @@ you see there. Hint: to obtain the hash, you may e.g. use a simple PHP script
 running the function <code>$pwd=md5("plain_text_pwd");</code>.
 
 [text]
-For more detailed information on the configuration of a divers account, please
-refer to the {diver_page}.
+For the data transfer from the divers client, you need a directory with the
+same structure as the <code>diver/</code> subdirectory. This directory needs to
+be readable by the web server process, and is the one specified by
+<code>$transfer_dir</code> in the <code>config.inc</code> file (also see the
+{install_page} for details). Whether you need to setup a new OS user for this,
+depends on the transfer methods you want to provide. With FTP, there are some
+servers available that let you set up "virtual users" and map their
+"home directory" to some path of your choice (e.g. Pure-FTPd). If you plan to
+provide SCP/RSync, you will need an OS user for this - and preferably chroot
+him to his home directory. For details on this, see your OS documentation.
 
 [eof]
