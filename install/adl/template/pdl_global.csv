@@ -1,0 +1,2 @@
+max_depth;max_time;avg_depht;avg_time;cum_dive_time
+<PDL_max_depth>max depth</PDL_max_depth>;<PDL_max_time>max time</PDL_max_time>;<PDL_avg_depth>avg depht</PDL_avg_depth>,<PDL_avg_time>avg time</PDL_avg_time>;<PDL_cum_time>cumulated time</PDL_cum_time>
