@@ -36,5 +36,6 @@
   <td align="center">{buddy}</td>
  </tr>
 <!-- END itemblock -->
+</table>
 
 </td></tr></table>
