@@ -3,9 +3,16 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.1.0 (10.06.2004)
+v0.1.2
 -------------------
-* initial release
++ added the Aqua template set
++ dive details can now contain fotos
++ web site name (for the window title) can now be configured
++ now site page can contain fotos, too
+* some HTML and CSS updates to the templates - M$IE needed them
+* updated documentation (install/README and install/INSTALL files)
++ if there are fotos available for a dive[site], this is now indicated by a
+  camera symbol in the dive[site] list
 
 v0.1.1 (23.06.2004)
 -------------------
@@ -19,11 +26,6 @@ v0.1.1 (23.06.2004)
 * moved the icon definitions into the templates (HTML2HTML ;)
 * moved hardcoded fieldnames out of templates (for later translation)
 
-v0.1.2
+v0.1.0 (10.06.2004)
 -------------------
-+ added the Aqua template set
-+ dive details can now contain fotos
-+ web site name (for the window title) can now be configured
-+ now site page can contain fotos, too
-* some HTML and CSS updates to the templates - M$IE needed them
-* updated documentation (install/README and install/INSTALL files)
+* initial release

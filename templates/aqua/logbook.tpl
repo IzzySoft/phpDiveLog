@@ -31,7 +31,7 @@
 
 <table border="1" cellpadding="2" align="center">
  <tr><td></td><th>{date_name}</th><th>{time_name}</th><th>{loc_name}</th><th>{rat_name}</th>
-     <td class="td_blank"></td>
+     <th>&nbsp;</th>
      <th>{ddt_name}</td><th>{buddy_name}</th></tr>
 
 <!-- BEGIN itemblock -->
@@ -40,7 +40,7 @@
   <td align="center">{time}</td>
   <td align="center">{location}:<br>{place}</td>
   <td align="center"><img src="{rating}"></td>
-  <th class="td_blank"></th>
+  <th>{pix}</th>
   <td align="center">{depth}<br>{divetime}</td>
   <td align="center">{buddy}</td>
  </tr>
