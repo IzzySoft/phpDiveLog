@@ -13,7 +13,7 @@
  # $Id$
 
  include("inc/includes.inc");
- $title .= ": Dive# $nr";
+ $title .= ": ".lang("dive#")." $nr";
  include("inc/header.inc");
  include("inc/class.file.inc");
  $f = new file();
@@ -50,6 +50,7 @@
  } else {
    $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif'>");
  }
+ $t->set_var("divenr",lang("dive#"));
  #==================================================[ set up the dive data ]===
  $t->set_var("dive#",$dive["dive#"]);
  $t->set_var("time",$dive["time"]);

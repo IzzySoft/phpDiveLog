@@ -11,6 +11,8 @@ v0.1.3
 + added translation system - thus PDL now is prepared to display in "any"
   language. Just need the language files to be provided ;) For now, only
   English is available.
++ added German translations
+* translation system now falls back to English if translation not found
 
 v0.1.2 (28.06.2004)
 -------------------

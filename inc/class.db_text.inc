@@ -48,16 +48,24 @@
    * @class db_text
    * @method get_translations
    * @param string lang_id two character language ID (ISO)
+   * @param optional array trans already set-up translations array to
+   *  add/overwrite to
    * @return array translations (ref=>trans)
    */
-   function get_translations($lang_id="en") {
-     GLOBAL $pdl;
-     $filename = $pdl->config->base_path."lang/trans.$lang_id";
-     if ( !file_exists($filename) ) {
-       if ($lang_id=="en") return array();
+   function get_translations($lang_id="en",$trans=array()) {
+     $trans = array();
+     if ( $lang_id!="en" ) {
        $filename = $pdl->config->base_path."lang/trans.en";
-       if ( !file_exists($filename) ) return array();
+       if ( !file_exists($filename) ) return $trans;
+       $trans = $this->read_translations($filename,$trans);
      }
+     $filename = $pdl->config->base_path."lang/trans.$lang_id";
+     if ( !file_exists($filename) ) return $trans;
+     return $this->read_translations($filename,$trans);
+   }
+
+   function read_translations($filename,$trans) {
+     GLOBAL $pdl;
      switch ($pdl->config->db_type) {
        case "csv"  :
        default     :

@@ -23,7 +23,7 @@
  <table border="0" cellpadding="2" width="100%" style="background-color:transparent;"><tr>
   <td class="td_transp" colspan="5" height="5"></td></tr><tr>
   <td class="td_transp" align="left" width="12">{nav_left}</td>
-  <td align="left" class="td_big" style="vertical-align:middle;width:12em;">Dive#: {dive#}</td>
+  <td align="left" class="td_big" style="vertical-align:middle;width:12em;">{divenr}: {dive#}</td>
   <td class="td_blank" style="vertical-align:middle;text-align:right;"><img src="{tpl_dir}images/dive_flag1.gif" width="23" height="15" alt="Globe" valign="middle" style="margin-left:20;"></td>
   <td class="td_blank" style="vertical-align:middle;"><h2 style="margin-bottom:0;margin-right:20;">{location} / {place}</h2></td>
   <td align="right" class="td_big" style="vertical-align:middle;width:12em;">{date} {time}</td>

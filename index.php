@@ -46,10 +46,10 @@
  }
 
  #===============================================[ set up the table header ]===
- $t->set_var("dive_name",lang("dive"));
+# $t->set_var("dive_name",lang("dive"));
  $t->set_var("date_name",lang("date"));
  $t->set_var("time_name",lang("time"));
- $t->set_var("loc_name",lang("location"));
+ $t->set_var("loc_name",lang("place"));
  $t->set_var("rat_name",lang("rating"));
  $t->set_var("ddt_name",lang("depth+divetime"));
  $t->set_var("buddy_name",lang("buddy"));
