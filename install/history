@@ -16,3 +16,4 @@ v0.1.1
   reference
 + logbook list and entry now provide direct link to dive site details
 + site list now supports the display limit setting
++ time in the schedule (if available) is now correctly formated
