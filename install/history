@@ -9,6 +9,7 @@ v0.1.8
   dives and sites
 * updated Russian translations
 + added OnLine Documentation
++ Conduit wrapper script now optionally transfers via SCP to remote web server
 
 v0.1.7 (27.07.2004)
 -------------------
