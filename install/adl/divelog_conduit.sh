@@ -12,13 +12,10 @@
 #############################################################################
 
 #========================================================[ Configuration ]===
-PDLROOT=/web/divelog/
-CSVTARGET=$PDLROOT/data
-HTMLTARGET=$PDLROOT/dives
-# the conduit of ADL v0.98 allows only for one *.cvs file, so we have to
-# work around by running it twice with two different templates
-SITES_INI=divelog.sites
-DIVES_INI=divelog.data
+# location of the Conduit output (must match the confuration in divelog.ini)
+LOGDIR=log
+# the location of phpDiveLogs data dir
+DATADIR=/web/divelog/data
 
 #=========================================================[ Intro Output ]===
 echo "
@@ -34,31 +31,23 @@ echo "
 # clean up data from possible previous run - the conduit does not update
 # correctly otherwise
 echo "Initializing..."
-rm log/* &>/dev/null
+for i in csv dives divesites; do
+  rm $LOGDIR/$i/* &>/dev/null
+done
 
-# get the dive sites info
-echo "Converting Dive Sites Info..."
-cp $SITES_INI divelog.ini
+# get the DiveLog data
+echo "Converting AquaDiveLog Data..."
 java -jar conduit.jar -bothunits %1 %2 %3 %4 %5 >/dev/null
-mv log/logbook.csv $CSVTARGET/sites.csv
 
-# get the dive log info
-echo "Converting the LogFile entries..."
-cp $DIVES_INI divelog.ini
-java -jar conduit.jar -bothunits %1 %2 %3 %4 %5 >/dev/null
-mv log/logbook.csv $CSVTARGET
-
-# remaining static data we cannot get via CSV
-echo "Moving the static data to its destination..."
-dos2unix log/* &>/dev/null
-chmod g+r log/*
-chmod o+r log/*
-mv log/dive* $HTMLTARGET
-mv log/index* $HTMLTARGET
+# transfer CSV files to web target
+echo "Moving datafiles to the web target dir..."
+mv $LOGDIR/csv/* $DATADIR
 
 # cleanup
 echo "Cleanup..."
-rm log/*
+for i in csv dives divesites; do
+  rm $LOGDIR/$i/* &>/dev/null
+done
 
 # Finito
 echo "Finnished.
