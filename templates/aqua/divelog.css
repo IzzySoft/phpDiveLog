@@ -120,6 +120,7 @@
 
   a {
     text-decoration: none;
+    font-style: italic;
   }
   a:active {
     background: #ffff00;
