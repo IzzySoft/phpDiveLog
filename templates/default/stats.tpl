@@ -25,7 +25,7 @@
  <tr class="td_blank"></tr>
 </table>
 <table border="0" cellpadding="4" align="center">
- <tr><th colspan="5"><img src="{tpl_dir}images/btn_notes.gif" width="20" height="15" border="0" alt="Stats" align="middle"> {title}</th></tr>
+ <tr><th colspan="5"><h3 style="margin-bottom:0;"><img src="{tpl_dir}images/btn_notes.gif" width="20" height="15" border="0" alt="Stats" align="middle"> {title}</h3></th></tr>
  <tr><th>{max_depth_name}</th><td align="right">{max_depth}</td>
   <td class="td_blank"></td>
   <th>{max_time_name}</th><td align="right">{max_time}</td></tr>

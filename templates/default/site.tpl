@@ -28,7 +28,7 @@
 </td></tr><tr class="td_transp"><td class="td_transp">
 
 <table cellpadding="2" border="0" align="center">
- <tr><th colspan="5"><h3><IMG SRC="{tpl_dir}images/globe.gif" width="15" height="15" alt="Conditions"> {loc}: {place}</h3></th></tr>
+ <tr><th colspan="5"><h3 style="margin-bottom:0;"><IMG SRC="{tpl_dir}images/globe.gif" width="15" height="15" alt="Conditions"> {loc}: {place}</h3></th></tr>
  <tr>
   <th style="text-align:right">{lat_name}</th> <td>{latitude}</td>
   <td class="td_transp"></td>
@@ -41,14 +41,14 @@
 </table>
 <br>
 <table cellpadding="2" border="0" align="center">
- <tr><th>{notes_name}</th></tr>
+ <tr><th><h3 style="margin-bottom:0;"><img src="{tpl_dir}images/btn_notes.gif" width="37" height="15" alt="Notes"> {notes_name}</h3></th></tr>
  <tr><td>{description}</td></tr>
 </table>
 
 <!-- BEGIN fotoblock -->
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 <table align="center" border="0" cellpadding="2" style="margin-top:2px"><!-- Fotos -->
- <tr><th class="head" valign="middle"><img src="{tpl_dir}images/btn_fotos.gif" width="37" height="15" alt="Fotos"> {fotos_name}</th></tr>
+ <tr><th valign="middle"><h3 style="margin-bottom:0;"><img src="{tpl_dir}images/btn_fotos.gif" width="37" height="15" alt="Fotos"> {fotos_name}</h3></th></tr>
  <tr><td align="center"><table><tr>
 <!-- BEGIN fotoitemblock -->
    <td><span class="thumbnail"><img src="{foto}" align="center"><br>{fdesc}</span></td>
