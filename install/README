@@ -17,15 +17,16 @@ In this case, please forgive (and notify) me!
 
 TOC
 ---
-1) What is phpDiveLog?
-2) Requirements
-3) Installation
-4) Placing fotos with your dives/sites
-5) Localization
-6) The web page - multi user issues
-7) CopyRight
-8) Disclaimer
-9) More information
+ 1) What is phpDiveLog?
+ 2) Requirements
+ 3) Installation
+ 4) Placing fotos with your dives/sites
+ 5) Placeholders ("tags") in your dive[site] notes
+ 6) Localization
+ 7) The web page - multi user issues
+ 8) CopyRight
+ 9) Disclaimer
+10) More information
 
 ===============================================================================
 
@@ -113,7 +114,79 @@ Things to consider:
 
 ===============================================================================
 
-5.) Localization
+5) Placeholders ("tags") in your dive[site] notes
+-------------------------------------------------
+Since the data you may "capture" with your Aqua DiveLog application are somehow
+limited in size and content, you may extend the "notes" fields for your dive
+and site descriptions by using special tags which are then replaced when
+phpDiveLog parses your DiveLog information for display. This way you can include
+images and point to additional information on local and remote sites, or even
+include other plain text/html files stored on the machine serving your PDL files.
+
+Embedded links are enclosed by the [url] and [/url] tags. Embedded images are
+enclosed by the [img] and [/img] (left aligned) or [imgr] and [/imgr] (right
+aligned) tags. External files can be included by using the [file] and [/file]
+tags, nesting of tags (i.e. using the tags in a file included by the [file] tag,
+and using images as anchors for URLs) is possible. Everything from the opening
+to the closing tag (including the tags themselves) has to be on the same line
+(i.e. the string must NOT contain any line breaks). The syntax of the part
+between the tags is as follows, where square brackets mark optional and angle
+brackets mandatory parts:
+
+file        : <location>
+url,img,imgr: <location>[|<description>]
+
+location      : [root|protocol]<file>
+description   : plain text
+
+root          : ~dir[@<buddy>]
+  where "dir" is: d = ...fotos/dive
+                  s = ...fotos/site
+                  p = ...fotos/person
+                  t = diver/<buddy>/text
+buddy         : nick of the buddy (= subdir under diver/) to refer to. If not
+                specified, it is the own nick assumed.
+file          : file name, optionally including directory names
+protocol      : any browser supported protocol (e.g. "http://" or "ftp://")
+
+You even can embed an image in an url to make it clickable - see the examples
+below:
+
+Examples:
+---------
+Input:  Look here: [url]http://somewhere.com[/url]
+Output: Look here: <a HREF='http://somewhere.com/'
+        TARGET='_blank'>http://somewhere.com/</a>
+Comment: Easy example - you just specify the URL, and you will see it
+         clickable.
+
+Input:  See the [url]~t@demo/sample.html|sample link[/url]: This
+        is an <b>important</b> example.
+Output: See the <A HREF="diver/demo/text/sample.html" TARGET='_blank'>sample
+        link</a>: This is an <b>important</b> example.
+Comment: Like above, but you will see the DESCRIPTION ("sample link") clickable
+         and linked to the target.
+
+Input:  [img]~s@demo/dive_00012-002.jpg|Big fish![/img]
+Output: <span CLASS='thumbnail-left'><img ALIGN='center'
+        SRC='diver/demo/fotos/site/dive_00012-002.jpg'><br>Big fish!</span>
+Comment: This will result in a left-aligned image having a description
+         ("Big fish!") centered below itself. All following text will float
+         around this block on the right hand side.
+
+Input:  Dive here:
+        [url]http://can/dives.html|[imgr]~d@demo/dive_00123-003.jpg|Great Site![/imgr][/url]
+Output: Dive here: <a HREF='http://can/dives.html' TARGET='_blank'><span
+        CLASS='thumbnail-right'><img ALIGN='center'
+        SRC='diver/demo/fotos/dive/dive_00123-003.jpg'><br>Great site!</span></a>
+Comment: Image will be right aligned with the description ("Great Site!") sticking
+         centered underneath, while the text ("Dive here") flows left around it.
+         Image and its description are linked to the target
+         ("http://can/dives.html")
+
+===============================================================================
+
+6.) Localization
 ----------------
 
 phpDiveLog now ships with language support for English, German and Russian. If
@@ -152,7 +225,7 @@ be included with future releases. Please send it to izzysoft@qumran.org
 
 ===============================================================================
 
-6) The web page - multi user issues
+7) The web page - multi user issues
 -----------------------------------
 
 If you now point your browser to the PDL start page, it needs to know whose
@@ -180,7 +253,7 @@ to your nick name used with PDL.
 
 ===============================================================================
 
-7) CopyRight (and CopyLeft)
+8) CopyRight (and CopyLeft)
 ----------------------------
 
 This nice piece of software is (c) 2004 by Itzchak Rehberg and IzzySoft, and is
@@ -202,7 +275,7 @@ informed about the fact to be up-to-date about all PR taking place ;).
 
 ===============================================================================
 
-8) Disclaimer
+9) Disclaimer
 -------------
 
 This program is provided "as is" with no warranty (see GPL Par. 11).
@@ -212,7 +285,7 @@ I can guarantee you is: it will consume some disk space :)
 
 ===============================================================================
 
-9) More Information
+10) More Information
 -------------------
 
 ...can be found on the phpDiveLog website: just point your browser to
