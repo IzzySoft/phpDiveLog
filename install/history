@@ -1,0 +1,18 @@
+$Id$
+
+History for phpDiveLog
+======================
+
+v0.1.0 (10.06.2004)
+-------------------
+* initial release
+
+v0.1.1
+-------------------
++ all dive data are now retrieved from the (CSV) data files (thanks to the
+  new conduit provided by Stephan), making the dives/dive*.html files
+  obsolete
+* new conduit data providing us with the site_id now - so we use this for
+  reference
++ logbook entry now provides direct link to dive site details
++ site list now supports the display limit setting
