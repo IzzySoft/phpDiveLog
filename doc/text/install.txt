@@ -33,12 +33,12 @@ For the impatient: QuickInstall
  <tr><td class="td_blank"><b>Data transfer</b></td>
    <td class="td_blank">if both sides are configured, just run the
     <code>divelog_conduit.sh</code> once - then point your browser to
-    http://&lt;your_server&gt;/&lt;PDL_URL&gt;/index.php?diver=&lt;your_nick_here&gt;
+    <code>http://&lt;your_server&gt;/&lt;PDL_URL&gt;/index.php?diver=&lt;your_nick_here&gt;</code>
  </td></tr></table>
 
 #===[ AquaDiveLog ]========================================[ AquaDiveLog ]===
 [title]
-Aqua DiveLog
+Aqua DiveLog AddOns
 
 [text]
 <b>Installation:</b><ul>
@@ -51,51 +51,79 @@ Aqua DiveLog
 This takes place in the <code>divelog.ini</code> file as described in the Aqua
 DiveLog <a href="http://www.aquadivelog.org/docs/index.html"
 target="_blank">documentation</a> (see there for detailed description). In this
-little document I will assume that you only change the following parameters:<ul>
+little document I will assume that you installed the AddOns provided with this
+archive as described above and only change the following parameters in the
+<code>divelog.ini</code> file:<ul>
 <li><code>TablePDBFile&nbsp;</code>: location and name of your
     <code>AquaPalm-TableDB.pdb</code> file</li>
 <li><code>DivePDBFile&nbsp;&nbsp;</code>: location and name of your
     <code>AquaPalm-DiveDB.pdb</code> file</li></ul>
 [text]
-I will not explain all combinations of the other parameters - this is not the
-topic of this short documentation, but to get you started quick. If you want/
-need to change more, you will have to find out yourself ;)
+I will not explain all combinations of the other parameters - this is covered by
+above mentioned ADL documentation and not the topic of this short documentation,
+which is to get you started quick. If you want/need to change more, you will
+have to find out yourself ;)
+
+[title]
+Data transfer: Configuring the <code>divelog_conduit.sh</code>
 
 [text]
-<b>Script configuration:</b><br>
 The script is to be configured in the <code>divelog_conduit.sh</code> itself.
 In the head of the file you find the configuration section: Even if you are not
 familiar with Shell scripts, it should be easy for you to set up. One hint:
 never place spaces around the "=" sign or it will not work. The following
 options will need your attention:
+[text]
 <table class="nav" align="center" border="0" width="90%">
  <tr><td class="td_blank"><b><code>LOGDIR</code></b></td>
-  <td class="td_blank">if you followed my advice for the conduit configuration above,
-    you can leave it as is. If not: this value has to match the
-    <code>LogBookPath</code> in the <code>divelog.ini</code></td></tr>
- <tr><td class="td_blank"><b><code>PDLBASE</code></b></td>
-  <td class="td_blank">the divers directory of your phpDiveLog installation, i.e.
-   where the subdirectories <code>data/</code> and <code>images/</code> reside.
-   Will certainly look like &lt;PDL root dir&gt;/diver/&lt;nickname&gt; - see
-   "Set up a diver" on the <a href="admin.php">Admin page</a> for details.</td></tr>
+  <td class="td_blank">if you followed my advice for the <code>divelog.ini</code>
+   configuration above, you can leave it as is. If not: this value has to match
+   the <code>LogBookPath</code> in the <code>divelog.ini</code></td></tr>
  <tr><td class="td_blank"><b><code>UNITS</code></b></td>
   <td class="td_blank">which kind of units you prefer - can be set either to
    "metric", "imperial" or "bothunits"</td></tr>
  <tr><td class="td_blank"><b><code>DATEFORMAT</code></b></td>
   <td class="td_blank">just for the "progress display" on the screen to give you an
-   idea how long which step took ;)</td></tr></table>
-
+   idea how long which step took ;)</td></tr>
+ <tr><td colspan=2 class="td_blank" align="center"><b>Local Transfers</b></td></tr>
+ <tr><td class="td_blank"><b><code>USELOCAL</code></b></td>
+  <td class="td_blank">if you want to copy the files to your local webserver,
+   set the value to "1" - otherwise to "0".</td></tr>
+ <tr><td class="td_blank"><b><code>PDLBASE</code></b></td>
+  <td class="td_blank">the divers directory of your <b><i>local</i></b>
+   phpDiveLog installation, i.e. where the subdirectories <code>data/</code>
+   and <code>images/</code> reside. Will certainly look like <code>&lt;PDL root
+   dir&gt;/diver/&lt;nickname&gt;</code> - see "Set up a diver" on the
+   <a href="admin.php">Admin page</a> for details.</td></tr>
+ <tr><td colspan=2 class="td_blank" align="center"><b>Remote Transfers</b></td></tr>
+ <tr><td class="td_blank"><b><code>USESCP</code></b></td>
+  <td class="td_blank">if you want to copy the files to a remote webserver via
+   SCP, set the value to "1" - otherwise to "0".</td></tr>
+ <tr><td class="td_blank"><b><code>SCPBASE</code></b></td>
+  <td class="td_blank">the divers directory of the <b><i>remote</i></b>
+   phpDiveLog installation, i.e. where the subdirectories <code>data/</code>
+   and <code>images/</code> on the remote server reside. Will certainly look like
+   <code>&lt;nickname&gt;@www.domain.com:/&lt;PDL root dir&gt;/diver/&lt;nickname&gt;</code>
+   - see "Set up a diver" on the <a href="admin.php">Admin page</a> for details.</td></tr>
+</table>
+[text]
+You can use local (<code>USELOCAL=1</code>) and remote (<code>USESCP=1</code>)
+transfers independantly - if you need both, you can enable both at the same
+time.
 
 #===[ phpDiveLog ]==========================================[ phpDiveLog ]===
 [title]
 phpDiveLog: Installation
 
 [text]
-<ol><li>copy everything except the <code>install/</code> subdir into your web
-    tree</li>
-<li>if you don't want to start with the demo data, remove all files from
-  the <code>data/</code> , <code>fotos/</code> and <code>images/</code>
-  subdir</li></ol>
+<ol>
+ <li>copy everything except the <code>install/</code> subdir into your web tree</li>
+ <li>if you don't want to start with the demo data, remove all files from the
+     <code>data/</code> , <code>fotos/</code> and <code>images/</code> subdir</li>
+ <li>if you don't need this Online Docu (anymore), you can remove the
+     <code>doc/</code> subdirectory</li>
+</ol>
+
 
 [title]
 phpDiveLog: Konfiguration
