@@ -16,7 +16,7 @@
  $database["type"]      = "csv";   # csv|mysql|pgsql (only csv supported now)
 
  #==========================================================[ preferences ]===
- $display_limit = 10;     # how may records/page should be displayed for lists
+ $display_limit = 12;     # how may records/page should be displayed for lists
  $template_set  = "aqua"; # prefered template set: default|aqua
  $lang          = "en";   # default language if not (yet) specified by visitor
  $title = "phpDiveLog Dev"; # site name

@@ -41,7 +41,7 @@
     $params = "";
     $details = array("lang","tpl","diver");
     foreach ($details as $element) {
-     if (!empty(${$element})) {
+     if ( !(strpos($target,"$element=")) && !empty(${$element}) ) {
       if (empty($params)) {
         $params = "$element=${$element}";
       } else {
@@ -50,6 +50,7 @@
      }
     }
 #    if (!$pdl->config->enable_cookies) {
+      if (empty($params)) return $target;
       $pos = strpos($target,"?");
       if ($pos) {
         $target .= "&$params";

@@ -19,6 +19,13 @@
    $relPath = "diver/$default_user/";
  }
 
+ #==========================================================[ preferences ]===
+ if ( !empty($_GET["tpl"]) )  $template_set = $_GET["tpl"];
+ $pdl->config->display_limit = $display_limit;
+ if ( !empty($_GET["lang"]) ) {
+   $lang = $_GET["lang"];
+ }
+
  #==========================================================[ directories ]===
  $pdl->config->base_path = ""; # if set, has to include trailing slash - if
  $pdl->config->base_url  = ""; #   not, must be empty
@@ -32,12 +39,5 @@
  $pdl->config->datadir  = $pdl->config->user_path."data/";
  $pdl->config->divedata = $pdl->config->datadir."logbook.csv";
  $pdl->config->sites    = $pdl->config->datadir."divesites.csv";
- unset($database);
-
- #==========================================================[ preferences ]===
- $pdl->config->display_limit = $display_limit;
- if ( !empty($_GET["lang"]) ) {
-   $lang = $_GET["lang"];
- }
- unset($display_limit,$relPath);
+ unset($database,$display_limit,$relPath);
 ?>

@@ -26,6 +26,7 @@
  include("inc/class.translation.inc");
  $pdl->trans = new trans();
  include("inc/class.link.inc");
+ include("inc/class.common.inc");
 
  #======================================================[ setup shortkeys ]===
  function lang($key,$m1="",$m2="",$m3="",$m4="",$m5="") {
@@ -34,10 +35,16 @@
  }
 
  #======================================================[ setup prefs ]===
- if ( !empty($_GET["tpl"]) )  $template_set = $_GET["tpl"];
  if ( empty($_GET["lang"]) && !empty($pdl->trans->browserpref) ) {
    $lang = $pdl->trans->browserpref;
  }
  $pdl->trans->get_translations($lang);
+
+ if (!is_dir($pdl->config->user_path)) { // unknown account
+   include("inc/header.inc");
+   $pdl->common->alert(lang("no_such_diver",ucfirst($diver)));
+   include("inc/footer.inc");
+   exit;
+ }
 
 ?>

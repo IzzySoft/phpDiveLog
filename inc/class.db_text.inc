@@ -29,17 +29,19 @@
        case "csv"  :
        default     :
          $csv = new csv(";",'"',TRUE);
-	 if (!file_exists($pdl->config->divedata)) die ("DiveData file '".$pdl->config->divedata."' not found!<br>\n");
-	 $csv->import($pdl->config->divedata);
-	 $this->divedata = $csv->data;
-	 $this->dives    = count($this->divedata);
-	 $this->setup_dive_records();
-	 $csv->clear_data();
-	 if (!file_exists($pdl->config->sites)) die ("DiveSites file '".$pdl->config->sites."' not found!<br>\n");
-	 $csv->import($pdl->config->sites);
-         $this->sitedata = $csv->data;
-         $this->sites    = count($this->sitedata);
-	 $this->setup_site_records(); // temporary - see func *!*
+         if (file_exists($pdl->config->divedata)) {
+           $csv->import($pdl->config->divedata);
+           $this->divedata = $csv->data;
+           $this->dives    = count($this->divedata);
+           $this->setup_dive_records();
+           $csv->clear_data();
+         }
+	 if (file_exists($pdl->config->sites)) {
+           $csv->import($pdl->config->sites);
+           $this->sitedata = $csv->data;
+           $this->sites    = count($this->sitedata);
+           $this->setup_site_records(); // temporary - see func *!*
+         }
      }
    }
 
