@@ -31,7 +31,7 @@
  <tr><th></th><th>Location</th><th>Place</th><th>Max.Depth</th></tr>
 
 <!-- BEGIN itemblock -->
- <tr><td align="right"><a href="{site_ref}">{site#}</a></td>
+ <tr><td align="right"><a href="{site_ref}">{id}</a></td>
   <td align="center">{loc}</td>
   <td align="center">{place}</td>
   <td align="right">{depth}</td>

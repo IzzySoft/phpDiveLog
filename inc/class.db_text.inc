@@ -160,19 +160,44 @@
   #============================================================[ Locations ]===
    function setup_site_records() { // temporary: we need an ID for reference
      for ($i=0;$i<$this->sites;++$i) {
-       $this->sitedata[$i]["site#"] = $i;
-       $this->sitedata[$i]["prev_site#"] = $i-1;
-       $this->sitedata[$i]["next_site#"] = $i+1;
+#       $this->sitedata[$i]["site#"] = $i;
+       $this->sitedata[$i]["prev_site#"] = $this->sitedata[$i-1]["id"];
+       $this->sitedata[$i]["next_site#"] = $this->sitedata[$i+1]["id"];
      }
      unset($this->sitedata[0]["prev_site#"]);
      unset($this->sitedata[$this->sites -1]["next_site#"]);
    }
 
    function get_sites($start="",$end="",$id=FALSE) {
-     if ($start==="") {
+     if ($start==="") { // all records
        return $this->sitedata;
      } else {
-       return $this->sitedata[$start];
+       if ($id) { // identify by site#
+         if ($end!=="") { // range of records
+           for ($i=0;$i<$this->sites;++$i) {
+             if (($this->sitedata[$i]["id"] >= $start) && ($this->sitedata[$i]["id"] <= $end)) {
+               $data[] = $this->sitedata[$i];
+             }
+	   }
+           return $data;
+         } else { // single record
+           for ($i=0;$i<$this->sites;++$i) {
+	     if ($this->sitedata[$i]["id"] == $start)
+	       return $this->sitedata[$i];
+	   }
+         }
+       } else { // identify by record
+         if ($end==="") {
+           return $this->sitedata[$start];
+	 } else {
+	   $max = $start + $end;
+	   if ($max > $this->sites) $max = $this->sites;
+	   for ($i=$start;$i<$max;++$i) {
+	     $data[] = $this->sitedata[$i];
+	   }
+	   return $data;
+         }
+       }
      }
    }
 

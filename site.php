@@ -38,7 +38,7 @@
  $t->set_var("site_img","<img src='".$pdl->config->tpl_url."images/globe.gif' width='15' height='15' alt='Conditions'>");
 
  #=============================================[ set up the navigation bar ]===
- if (is_int($prev=$site["prev_site#"])) {
+ if ($prev=$site["prev_site#"]) {
    $t->set_var("nav_left","<a href='$PHP_SELF?id=$prev'><img src='".$pdl->config->tpl_url."images/left.gif'></a>");
  } else {
    $t->set_var("nav_left","<img src='".$pdl->config->tpl_url."images/left-grey.gif'>");
@@ -50,7 +50,7 @@
  }
 
  #============================[ Walk through the list and set up the table ]===
- $details = array ("site#","loc","place","depth","latitude","longitude","altitude");
+ $details = array ("id","loc","place","depth","latitude","longitude","altitude");
  foreach($details AS $detail) {
    $t->set_var("$detail",$site[$detail]);
  }

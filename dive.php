@@ -121,7 +121,7 @@
  }
  $sched = $pdl->db->get_schedule($nr);
  if ($sched) {
-   $t->set_var("sched_img",'<img src="'.$pdl->config->tpl_url.'btn_schedule.gif" width="37" height="15" border="0" alt="Schedule">');
+   $t->set_var("sched_img",'<img src="'.$pdl->config->tpl_url.'images/btn_schedule.gif" width="37" height="15" border="0" alt="Schedule">');
    $t->set_var("sched_name","Schedule");
    $t->set_var("s_depth_name","Depth");
    $t->set_var("s_time_name","Time");

@@ -54,7 +54,7 @@
  }
 
  #============================[ Walk through the list and set up the table ]===
- $details = array ("site#","loc","place","depth");
+ $details = array ("id","loc","place","depth");
  for ($i=0;$i<$max;++$i) {
    foreach($details AS $detail) {
      $t->set_var("$detail",$sites[$i][$detail]);
@@ -64,7 +64,7 @@
    } else {
      $t->set_var("depth",$sites[$i]["depth"]."m");
    }
-   $t->set_var("site_ref","site.php?id=".$sites[$i]["site#"]);
+   $t->set_var("site_ref","site.php?id=".$sites[$i]["id"]);
 #   $t->set_var("rating",$pdl->config->tpl_url."images/".$dives[$i]["rating"]."star.gif");
    $t->parse("item","itemblock",TRUE);
  }
