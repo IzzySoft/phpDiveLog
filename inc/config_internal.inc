@@ -12,7 +12,7 @@
 
  /* $Id$ */
 
- $pdl->config->version = "0.2.5";
+ $pdl->config->version = "0.2.6";
  $pdl->config->enable_index = $enable_index;
  if (!empty($_GET["diver"])) {
    $relPath = "diver/".$_GET["diver"]."/";
