@@ -8,29 +8,46 @@
 # ------------------------------------------------------------------------- #
 # Installation instructions for the impatient ;)                            #
 #############################################################################
+# $Id$
 
-1) Aqua DiveLog
----------------
+===[ TOC ]=========================================================[ TOC ]===
+1. Aqua DiveLog
+2. phpDiveLog
+2.1. Installing
+2.2. Configuration
+
+===[ Aqua DiveLog ]=======================================[ Aqua DiveLog ]===
+
 - copy the contents of the install/adl/template/ dir to ADLs template/ dir
 - copy the contents of the install/adl/ dir to ADLs directory
 - adjust the DATADIR setting in the beginning of divelog_conduit.sh
 - adjust the settings for TablePDBFile and DivePDBFile in both the divelog.data
   and divelog.sites files in the ADL directory
 
-2) phpDiveLog
--------------
-- copy everything except the install/ subdir into your web tree
+===[ phpDiveLog ]==========================================[ phpDiveLog ]===
 
-3) Config
----------
-You may want to adjust the "display limit", i.e. how many records should show
-up per page in lists (i.e. for now the "Dives" and "Sites" pages). This
-setting is to be found in the "preferences" block of the "inc/config.inc" file,
-and is the only thing you possibly may change. Leave the other settings
-untouched - right now there are no alternative settings for them ;)
+2.1. Installation
+-----------------
+- copy everything except the install/ subdir into your web tree
+- if you don't want to start with the demo data, remove all files from
+  the data/ and fotos/ subdir
+
+2.2. Configuration
+------------------
+All the "user-based" configuration takes place in the inc/config.inc file. I
+strongly recommend not to try some configuration in other places - if you
+miss some configuration option, just let me know and I will see if and how I
+can implement this.
+
+Each configuration option is documented within the config file, so I assume
+there's no further explanation needed what the options stand for. Plus they
+match all on one screen, so there are no hints required where to look for
+what ;)
 
 If in the divelog_conduit.sh file (see above in block 1) you adjusted the
 DATADIR only (and did not change any file names), and the directory structure
 in your ADL installation stayed the same as shipped, no more changes have to be
 made. Run the conduit script once (otherwise you have my old dive data
-displayed), and enjoy!
+displayed - if you didn't wipe them in step 2.1. above), and enjoy!
+
+===[ EOF ]========================================================[ EOF ]===
