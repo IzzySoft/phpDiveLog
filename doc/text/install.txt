@@ -94,7 +94,7 @@ options will need your attention:
    phpDiveLog installation, i.e. where the subdirectories <code>data/</code>
    and <code>images/</code> reside. Will certainly look like <code>&lt;PDL root
    dir&gt;/diver/&lt;nickname&gt;</code> - see "Set up a diver" on the
-   <a href="admin.php">Admin page</a> for details.</td></tr>
+   {admin_page} page for details.</td></tr>
  <tr><td colspan=2 class="td_blank" align="center"><b>Remote Transfers</b></td></tr>
  <tr><td class="td_blank"><b><code>USESCP</code></b></td>
   <td class="td_blank">if you want to copy the files to a remote webserver via
@@ -104,7 +104,7 @@ options will need your attention:
    phpDiveLog installation, i.e. where the subdirectories <code>data/</code>
    and <code>images/</code> on the remote server reside. Will certainly look like
    <code>&lt;nickname&gt;@www.domain.com:/&lt;PDL root dir&gt;/diver/&lt;nickname&gt;</code>
-   - see "Set up a diver" on the <a href="admin.php">Admin page</a> for details.</td></tr>
+   - see "Set up a diver" on the {admin_page} page for details.</td></tr>
 </table>
 [text]
 You can use local (<code>USELOCAL=1</code>) and remote (<code>USESCP=1</code>)
@@ -162,7 +162,7 @@ a short documentation for the available parameters and their effects:
     code, like "en" for English or "de" for German. You can set this to any
     language you like - if no translations are found, PDL will fall back to
     English. Of course you can create your own translations, which is discussed
-    on the <a href="admin.php">Admin</a> page.</td></tr>
+    on the {admin_page} page.</td></tr>
  <tr><td class="td_blank"><b><code>$title</code></b></td>
   <td class="td_blank">for now the site name to be displayed in the browsers
     title bar. At the end of this, some page information will be added: if you

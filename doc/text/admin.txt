@@ -6,7 +6,7 @@
 # This program is free software; you can redistribute and/or modify it      #
 # under the terms of the GNU General Public License (see doc/LICENSE)       #
 # ------------------------------------------------------------------------- #
-# Basic information                                                         #
+# Site administration documentation                                         #
 #############################################################################
 
 [title]
@@ -115,5 +115,9 @@ If the diver wants his account to be listed with the buddylist, just put a file
 named <code>public</code> in his homedir. If that file is missing, the account
 will be treated as "privat", i.e. it is only accessible if one invokes PDL with
 the correct <code>diver=&lt;nickname&gt;</code> parameter.
+
+[text]
+For more detailed information on the configuration of a divers account, please
+refer to the {diver_page}.
 
 [eof]

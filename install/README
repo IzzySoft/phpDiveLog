@@ -9,50 +9,28 @@
 # Basic information                                                         #
 #############################################################################
 
-This README was created for phpDiveLog v0.1.0 - and since you may know that
-programmers are lazy doc writers, not all points may be up-to-date any more.
-In this case, please forgive (and notify) me!
+This README was created for phpDiveLog v0.1.0 - and last updated for v0.2.0.
+Since you may know that programmers are lazy doc writers, not all points may
+be up-to-date any more. In this case, please forgive (and notify) me!
+
+Next sin: This documentation is deprecated. A more up-to-date documentation
+is accessible to you after the "PDL" step in 2) when pointing your browser to
+http://<PDL_URL>/doc/index.php -- where <PDL_URL> is either the place where
+you unpacked the files to (see below at Nr. 2), or the PDL demo site.
 
 ===============================================================================
 
 TOC
 ---
- 1) What is phpDiveLog?
- 2) Requirements
- 3) Installation
- 4) Placing fotos with your dives/sites
- 5) Placeholders ("tags") in your dive[site] notes
- 6) Localization
- 7) The web page - multi user issues
- 8) CopyRight
- 9) Disclaimer
-10) More information
+ 1) Requirements
+ 2) Installation
+ 3) CopyRight
+ 4) Disclaimer
+
 
 ===============================================================================
 
-1) What is phpDiveLog?
-----------------------
-phpDiveLog displays the information of your Aqua DiveLog LogBook based on CSV
-files you generate with the Java Conduit shipped with Aqua DiveLog. Due to
-the restrictions of that conduit, some data need to be included statically -
-plus we have to run the conduit twice to retrieve all data (since only one
-CSV file is supported by the divelog.ini of v0.98). These restrictions will
-be removed with the next release of Aqua DiveLog.
-
-As for now, phpDiveLog offers you no features to edit these data. But it
-provides you with 3 tabs to display...
-- ...the DiveLogBook. Here you browse through the list of your dives (in the
-  config file, you may specify how many entries should be displayed per page).
-  For detailed information, a click on the dive# brings you directly to the log
-  books entry.
-- ...the Dive Statistics, which show you some basic stats about your dives,
-  such as max/avg depth and divetime etc.
-- ...the Dive Sites Information, which provides you with a list of your dive
-  sites. Again, a click on the site# brings you to the details page
-
-===============================================================================
-
-2) Requirements
+1) Requirements
 ---------------
 For data conversion from Aqua DiveLog you neet to have a Java interpreter
 installed (refer to the Aqua DiveLog documentation for details).
@@ -60,200 +38,29 @@ phpDiveLog itself only requires a running web server with PHP4 support.
 
 ===============================================================================
 
-3) Installation
+2) Installation
 ---------------
-See the file INSTALL (which should reside in the same directory as this file
-you are reading now) for a detailed installation description. The short variant
-for the impatient:
-- ADL: copy the contents of the install/adl/template/ dir to ADLs template/ dir
-  and the contents of the install/adl/ dir to ADLs directory. Then adjust the
-  settings for TablePDBFile and DivePDBFile in the divelog.ini, plus PDLBASE
-  in the divelog_conduit.sh
+This is a "Quick installation instructions" file for the impatient. More
+detailed installation and configuration instructions are to be found with
+your browser pointed to http://<PDL_URL>/doc/install.php after completing
+the "PDL" item below:
 - PDL: copy everything except the install/ subdir into your web tree and then
   check the inc/config.inc file for parameters you may want to adjust. Create
   your own diver profile by copying the diver/demo directory to
   diver/<your_nick_here>, directory structure only. This directory you should
   specify as PDLBASE in the ADL divelog_conduit.sh. Optionally set up the
   system.conf and diver.conf files in this directory.
+- ADL: copy the contents of the install/adl/template/ dir to ADLs template/ dir
+  and the contents of the install/adl/ dir to ADLs directory. Then adjust the
+  settings for TablePDBFile and DivePDBFile in the divelog.ini, plus PDLBASE
+  in the divelog_conduit.sh
 - Data transfer: if both sides are configured, just run the divelog_conduit.sh
   once - then point your browser to
   http://<your_server>/<PDL_URL>/index.php?diver=<your_nick_here>
 
 ===============================================================================
 
-4) Placing fotos with your dives/sites
---------------------------------------
-You can advise phpDiveLog to display fotos connected to your dives and/or
-divesites. PDL searches two special directories for these images: the
-diver/<nickname>/fotos/dive/ directory for pictures related to dives, and
-diver/<nickname>/fotos/site/ for divesite related images. It recognizes the
-Jpg, Gif and Png image types as valid. Descriptions are to be placed in *.txt
-files having the same name as the image they describe.
-
-The naming conventions are taken from the Aqua DiveLog specifications: all
-dive images have the name "diveXXXXX-YYY.*", while the site images are to
-be named "siteXXXX-YYY.txt" - where the XXXXX stand for the 5-digit dive
-or rather site number (zero-padded from the left, e.g. "00025" for dive/site
-number 25), and YYY for a 3-digit consecutive number of all images for the
-related dive/site. With the first phpDiveLog is able to connect the images
-with the according data records, using the latter you can define the order
-the images are displayed.
-
-Although you could specify an unlimited number of fotos per dive, for now
-you should not use more than 3 or 4. Since phpDiveLog does no check on the
-image count, you could render your page unreadable otherwise - since the
-table gets too wide. I may fix this problem in the future, but no promise ;)
-
-Things to consider:
-- recommended size for these "thumbnails" is 192x144 pixel
-- make the file extensions lower case (i.e. *.jpg|png|gif|txt)
-- when re-numbering your dives, your fotos need to be renumbered accordingly
-- if you want PDL to link the "thumbnail" to the original (larger) image,
-  give the latter the same file name and place it into the "large" subdirectory
-  of the directory the "thumbnail" was placed into
-
-===============================================================================
-
-5) Placeholders ("tags") in your dive[site] notes
--------------------------------------------------
-Since the data you may "capture" with your Aqua DiveLog application are somehow
-limited in size and content, you may extend the "notes" fields for your dive
-and site descriptions by using special tags which are then replaced when
-phpDiveLog parses your DiveLog information for display. This way you can include
-images and point to additional information on local and remote sites, or even
-include other plain text/html files stored on the machine serving your PDL files.
-
-Embedded links are enclosed by the [url] and [/url] tags. Embedded images are
-enclosed by the [img] and [/img] (left aligned) or [imgr] and [/imgr] (right
-aligned) tags. External files can be included by using the [file] and [/file]
-tags, nesting of tags (i.e. using the tags in a file included by the [file] tag,
-and using images as anchors for URLs) is possible. Everything from the opening
-to the closing tag (including the tags themselves) has to be on the same line
-(i.e. the string must NOT contain any line breaks). The syntax of the part
-between the tags is as follows, where square brackets mark optional and angle
-brackets mandatory parts:
-
-file        : <location>
-url,img,imgr: <location>[|<description>]
-
-location      : [root|protocol]<file>
-description   : plain text
-
-root          : ~dir[@<buddy>]
-  where "dir" is: d = ...fotos/dive
-                  s = ...fotos/site
-                  p = ...fotos/person
-                  t = diver/<buddy>/text
-buddy         : nick of the buddy (= subdir under diver/) to refer to. If not
-                specified, it is the own nick assumed.
-file          : file name, optionally including directory names
-protocol      : any browser supported protocol (e.g. "http://" or "ftp://")
-
-You even can embed an image in an url to make it clickable - see the examples
-below:
-
-Examples:
----------
-Input:  Look here: [url]http://somewhere.com[/url]
-Output: Look here: <a HREF='http://somewhere.com/'
-        TARGET='_blank'>http://somewhere.com/</a>
-Comment: Easy example - you just specify the URL, and you will see it
-         clickable.
-
-Input:  See the [url]~t@demo/sample.html|sample link[/url]: This
-        is an <b>important</b> example.
-Output: See the <A HREF="diver/demo/text/sample.html" TARGET='_blank'>sample
-        link</a>: This is an <b>important</b> example.
-Comment: Like above, but you will see the DESCRIPTION ("sample link") clickable
-         and linked to the target.
-
-Input:  [img]~s@demo/dive_00012-002.jpg|Big fish![/img]
-Output: <span CLASS='thumbnail-left'><img ALIGN='center'
-        SRC='diver/demo/fotos/site/dive_00012-002.jpg'><br>Big fish!</span>
-Comment: This will result in a left-aligned image having a description
-         ("Big fish!") centered below itself. All following text will float
-         around this block on the right hand side.
-
-Input:  Dive here:
-        [url]http://can/dives.html|[imgr]~d@demo/dive_00123-003.jpg|Great Site![/imgr][/url]
-Output: Dive here: <a HREF='http://can/dives.html' TARGET='_blank'><span
-        CLASS='thumbnail-right'><img ALIGN='center'
-        SRC='diver/demo/fotos/dive/dive_00123-003.jpg'><br>Great site!</span></a>
-Comment: Image will be right aligned with the description ("Great Site!") sticking
-         centered underneath, while the text ("Dive here") flows left around it.
-         Image and its description are linked to the target
-         ("http://can/dives.html")
-
-===============================================================================
-
-6.) Localization
-----------------
-
-phpDiveLog now ships with language support for English, German and Russian. If
-you want to localize it for your language: this should be very easy following
-the steps described here.
-
-The localization files are located in the lang/ subdirectory. The content has
-to be conform with the UTF-8 charset. In order to create your own "locale file",
-I assume Russian here as an example, you just have to...
-
-- copy the trans.en file to trans.ru (extension is the ISO language code)
-- open it with your favorite text editor (preferably one supporting UTF-8).
-  The file is in simple CSV format: leave the first line and first column
-  untouched, and just replace the translations. If the translation would look
-  the same as the original from the lang.en file, simply delete the line;
-  PDL falls back to English if the translation is not found. In fact, by
-  deleting the line (instead of keeping the duplicate) the application may
-  slightly be sped up since the setup process is shorter ;)
-- save the file with UTF-8 encoding. If your editor does not support UTF-8,
-  you need to convert the file to UTF-8 after saving it. On *nix systems you
-  can use the "recode" command for it (see "man recode" for details).
-- now you are done: since the new trans.ru file resides in the lang/
-  directory, it will be found by PDL automagically. In your browser, go to the
-  preferences page - the language should show up in the list.
-
-If you followed all these steps, and the language showed up but has no
-"clickable area" (i.e. associated flag), you need to find an image of the
-flag representing your language (size should be about 30x20 pixels) and copy
-it into the templates/*/images/ directories. For our example, the file name
-had to be lang_ru.jpg (it MUST be a jpeg file). Some additional flag images
-already exist there for the languages I hope to have supported soon - with
-your help!
-
-If you created a new language file I would appreciate to receive a copy to
-be included with future releases. Please send it to izzysoft@qumran.org
-
-===============================================================================
-
-7) The web page - multi user issues
------------------------------------
-
-If you now point your browser to the PDL start page, it needs to know whose
-data you requested. This is done by adding the parameter "diver=<nickname>"
-to the URL, so it would e.g. look like
-"http://localhost/divelog/index.php?diver=zorro" for the divelog of zorro
-(assuming, you created a divers account for "zorro" as described in the
-installation instructions).
-
-What happens if you ommit that parameter? PDL then does not know whose divelog
-you want to browse. Depending on the setting of $default_page in your
-inc/config.inc file, this can lead to two possible results:
-- $default_page = "error": an error message is displayed to the visitor
-  informing him/her about the problem and how to solve it (i.e. include the
-  "diver=" parameter in the URL)
-- $default_page = "index": PDL will display a list of available DiveLogs.
-  This requires the parameter $enable_index to be set to TRUE. The created
-  list will only contain PUBLIC DiveLogs, i.e. those where the diver has put
-  the file named "public" into his "home directory".
-- $default_page = "user": PDL will display the data of the user specified
-  by the $default_user setting in your inc/config.inc.
-This way you can set up PDL to always display your own divelog by default
-(useful e.g. for single user installation) by just setting the $default_user
-to your nick name used with PDL.
-
-===============================================================================
-
-8) CopyRight (and CopyLeft)
+3) CopyRight (and CopyLeft)
 ----------------------------
 
 This nice piece of software is (c) 2004 by Itzchak Rehberg and IzzySoft, and is
@@ -275,7 +82,7 @@ informed about the fact to be up-to-date about all PR taking place ;).
 
 ===============================================================================
 
-9) Disclaimer
+4) Disclaimer
 -------------
 
 This program is provided "as is" with no warranty (see GPL Par. 11).
@@ -285,16 +92,7 @@ I can guarantee you is: it will consume some disk space :)
 
 ===============================================================================
 
-10) More Information
--------------------
-
-...can be found on the phpDiveLog website: just point your browser to
-http://www.qumran.org/homes/izzy/ - and in the left frame, in the software
-block, click on "phpDiveLog".
-
-===============================================================================
-
 Now, have fun!
 
 Izzy
-(July 2004)
+(August 2004)

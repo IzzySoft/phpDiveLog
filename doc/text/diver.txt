@@ -6,7 +6,7 @@
 # This program is free software; you can redistribute and/or modify it      #
 # under the terms of the GNU General Public License (see doc/LICENSE)       #
 # ------------------------------------------------------------------------- #
-# Installation instructions for the patient ;)                              #
+# Diver setup and configuration documentation                               #
 #############################################################################
 #===[ Diver & Dive Data ]============================[ Diver & Dive Data ]===
 
@@ -214,7 +214,7 @@ per line in the form <code>var=value</code>. Empty lines and lines beginning
 with a "#" are ignored. Which system defaults are allowed to be overriden is
 defined in the <code>inc/config.inc</code> file by the parameter
 <code>$allow_override</code> (see in the phpDiveLog configuration description
-on the <a href="install.php">Installation</a> page).
+on the {install_page} page).
 
 [text]
 One additional parameter in the <code>system.conf</code> is <code>personal</code>.
@@ -273,11 +273,11 @@ Data conversion and transfer
 [text]
 To have your Aqua DiveLog data transfered to the right directory, you may
 want to set up <code>PDLBASE</code> in the conduit script accordingly (see
-<a href="install.php">Installation</a> for the Aqua DiveLog Conduit).
-In order to get your web installation running with useful data, you now only
-need to change to the conduit directory and run the <code>divelog_conduit.sh</code>
-script. Provided you followed all above steps carefully, your dive data should
-then be displayed when you invoke the URL to your PDL installation.
+the {install_page} page). In order to get your web installation running with
+useful data, you now only need to change to the conduit directory and run the
+<code>divelog_conduit.sh</code> script. Provided you followed all above steps
+carefully, your dive data should then be displayed when you invoke the URL to
+your PDL installation.
 
 [text]
 If you re-organized some dive data (especially renumbering the dives and/or
