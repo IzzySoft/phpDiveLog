@@ -22,9 +22,10 @@ TOC
 3) Installation
 4) Placing fotos with your dives/sites
 5) Localization
-6) CopyRight
-7) Disclaimer
-8) More information
+6) The web page - multi user issues
+7) CopyRight
+8) Disclaimer
+9) More information
 
 ===============================================================================
 
@@ -69,10 +70,10 @@ you are reading now).
 --------------------------------------
 You can advise phpDiveLog to display fotos connected to your dives and/or
 divesites. PDL searches two special directories for these images: the
-fotos/dive/ directory for pictures related to dives, and fotos/site/ for
-divesite related images. It recognizes the Jpg, Gif and Png image types as
-valid. Descriptions are to be placed in *.txt files having the same name as
-the image they describe.
+diver/<nickname>/fotos/dive/ directory for pictures related to dives, and
+diver/<nickname>/fotos/site/ for divesite related images. It recognizes the
+Jpg, Gif and Png image types as valid. Descriptions are to be placed in *.txt
+files having the same name as the image they describe.
 
 The naming conventions are taken from the Aqua DiveLog specifications: all
 dive images have the name "diveXXXXX-YYY.*", while the site images are to
@@ -130,7 +131,32 @@ your help!
 
 ===============================================================================
 
-5.) CopyRight (and CopyLeft)
+6) The web page - multi user issues
+-----------------------------------
+
+If you now point your browser to the PDL start page, it needs to know whose
+data you requested. This is done by adding the parameter "diver=<nickname>"
+to the URL, so it would e.g. look like
+"http://localhost/divelog/index.php?diver=zorro" for the divelog of zorro
+(assuming, you created a divers account for "zorro" as described in the
+installation instructions).
+
+What happens if you ommit that parameter? PDL does not know whose divelog you
+want to browse. So for now, there is a default account named "demo" if falls
+back to. Hence it is a good idea to tell your web server to permit symlinks
+at least for the PDL directory (for Apache, see the option "+FollowSymLinks"
+in the httpd.conf), and symlink your default divelog to the demo account. As
+for our "zorro" under *nix this is done by changing to the diver/ sub directory
+of PDL and issuing the command "ln -s zorro demo" (make sure to remove the
+demo account first, otherwise this command will fail).
+
+In some future version, there may instead be an index page listing all
+available public divelogs - while the diver can decide whether his/her log
+will be public or not with a special config file.
+
+===============================================================================
+
+7) CopyRight (and CopyLeft)
 ----------------------------
 
 This nice piece of software is (c) 2004 by Itzchak Rehberg and IzzySoft, and is
@@ -152,7 +178,7 @@ informed about the fact to be up-to-date about all PR taking place ;).
 
 ===============================================================================
 
-6) Disclaimer
+8) Disclaimer
 -------------
 
 This program is provided "as is" with no warranty (see GPL Par. 11).
@@ -162,7 +188,7 @@ I can guarantee you is: it will consume some disk space :)
 
 ===============================================================================
 
-7) More Information
+9) More Information
 -------------------
 
 ...can be found on the phpDiveLog website: just point your browser to

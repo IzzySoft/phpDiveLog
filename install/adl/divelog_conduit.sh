@@ -15,7 +15,7 @@
 # location of the Conduit output (must match the confuration in divelog.ini)
 LOGDIR=log
 # the location of phpDiveLogs user dir (where the data/ and images/ dirs are)
-PDLBASE=/web/divelog
+PDLBASE=/web/divelog/diver/demo
 # which units to use for the values: imperial|metric|bothunits
 UNITS=bothunits
 # date format for logging

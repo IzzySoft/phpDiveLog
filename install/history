@@ -11,6 +11,9 @@ v0.1.4
   3-if not (1) and (2) found no language supported by PDL, fall back to
     default configured in inc/config.inc
 * should now work regardless if register_globals is set to "on" or "off"
+! fixed a bug with the headers that in some cases confused the browser
+  concerning the charset to use
++ adding multi-user capabilities: now PDL can serve multiple divelogs
 
 v0.1.3 (01.07.2004)
 -------------------

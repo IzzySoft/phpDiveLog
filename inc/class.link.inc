@@ -35,22 +35,24 @@
   function slink($target) {
 #    GLOBAL $pdl;
     GLOBAL $lang, $template_set;
-    if ( strpos($target,"lang=") ) { $tlang = ""; } else {
-      if ( empty($lang) ) $lang="en";
-      $tlang = "lang=$lang";
-    }
-    if ( strpos($target,"tpl=") ) { $ttpl = ""; } else {
-      $tpl=$_GET["tpl"];
-      if ( empty($tpl) ) $ttpl="tpl=$template_set";
-        else $ttpl = "tpl=$tpl";
-      if (!empty($tlang)) $ttpl = "&".$ttpl;
+    if (empty($lang)) $lang = "en";
+    $tpl = $_GET["tpl"]; if (empty($tpl)) $tpl = $template_set;
+    $diver = $_GET["diver"];
+    $params = "";
+    $details = array("lang","tpl","diver");
+    foreach ($details as $element) {
+      if (empty($params)) {
+        $params = "$element=${$element}";
+      } else {
+        $params .= "&$element=${$element}";
+      }
     }
 #    if (!$pdl->config->enable_cookies) {
       $pos = strpos($target,"?");
       if ($pos) {
-        $target .= "&$tlang$ttpl";
+        $target .= "&$params";
       } else {
-        $target .= "?$tlang$ttpl";
+        $target .= "?$params";
       }
 #    }
     return $target;

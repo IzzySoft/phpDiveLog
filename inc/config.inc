@@ -14,7 +14,6 @@
 
  #=============================================================[ database ]===
  $database["type"]      = "csv";   # csv|mysql|pgsql (only csv supported now)
- $database["datadir"]   = "data/"; # applies to text databases (CSV/UDDF) only
 
  #==========================================================[ preferences ]===
  $display_limit = 10;     # how may records/page should be displayed for lists

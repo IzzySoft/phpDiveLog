@@ -19,7 +19,9 @@
 2.1. Installing
 2.2. Configuration
 2.3. Updating
-3. Data conversion and transfer
+3. Diver and dive data
+3.1. Set up a diver
+3.2. Data conversion and transfer
 
 ===[ Aqua DiveLog ]=======================================[ Aqua DiveLog ]===
 
@@ -48,12 +50,10 @@ spaces around the "=" sign or it will not work. The following options will
 need your attention:
 - LOGDIR     : if you followed my advice in 1.2., you can leave it as is. If
                not: this value has to match the LogBookPath in the divelog.ini
-- PDLBASE    : for now the root directory of your phpDiveLog installation, i.e.
-               where the subdirectories data/ and images/ reside. With one of
-               the following versions of PDL I will introduce MultiUser
-               functionality; then you will have to change this to the users
-               base directory, which will probably be
-               <PDL root dir>/user/<username>
+- PDLBASE    : the divers directory of your phpDiveLog installation, i.e.
+               where the subdirectories data/ and images/ reside. Will
+               certainly look like <PDL root dir>/diver/<nickname> - see
+               "Diver and dive data" below for details.
 - UNITS      : which kind of units you prefer - can be set either to "metric",
                "imperial" or "bothunits"
 - DATEFORMAT : just for the "progress display" on the screen to give you an
@@ -82,14 +82,6 @@ a short documentation for the available parameters and their effects:
                         future, there my be more formats available, such as
                         UDDF for the Universal Dive Data Format (again a file),
                         or even "real databases" such as MySQL, PostgreSQL, etc.
-- $database["datadir"]: applies to "file databases" (CSV and UDDF) only and
-                        specifies the name of the directory where the database
-                        files (i.e. *.csv) reside. Should be relative to (and
-                        below) the PDL root directory. With the MultiUser
-                        functionality added, a directory with the same name
-                        will be expected in every users directory, containing
-                        his/her dive data. In this case, the name given here
-                        will be evaluated as relative to the users dir.
 - $display_limit      : with pages containing lists, as e.g. the sitelist,
                         this value will advise PDL how many entries (i.e.
                         table data rows) to display per page. This saves you
@@ -120,8 +112,25 @@ When updating, you generally follow the steps 2.1 and 2.2 above - but probably
 you will NOT want to copy the contents of the data/ subdir from tha archive
 to not overwrite your own data.
 
-===[ Data conversion ]==================================[ Data Transfer ]===
+===[ Diver & Dive Data ]============================[ Diver & Dive Data ]===
 
+3.1. Set up a diver
+-------------------
+All data now are located in the divers directory. This is a kind of "home
+directory" located below the diver/ directory. In order to set up an account,
+just create a new directory here with a name of your choice - a good
+recommendation would be the divers nick name in lower case. This "home
+directory" then must have the following subdirectory structure:
+- data (here go the *.csv data files to)
+- fotos
+  - dive (fotos of the dives)
+  - site (fotos of the dive sites)
+- images (here go the dive profiles to)
+To have your Aqua DiveLog data transfered to the right directory, you may
+want to set up PDLBASE in the conduit script accordingly (see above).
+
+3.2. Data conversion and transfer
+---------------------------------
 In order to get you web installation running with useful data, you now only
 need to change to the conduit directory and run the divelog_conduit.sh script.
 Provided you followed all above steps carefully, your dive data should then
