@@ -168,16 +168,15 @@ inc/config.inc file, this can lead to two possible results:
 - $default_page = "error": an error message is displayed to the visitor
   informing him/her about the problem and how to solve it (i.e. include the
   "diver=" parameter in the URL)
+- $default_page = "index": PDL will display a list of available DiveLogs.
+  This requires the parameter $enable_index to be set to TRUE. The created
+  list will only contain PUBLIC DiveLogs, i.e. those where the diver has put
+  the file named "public" into his "home directory".
 - $default_page = "user": PDL will display the data of the user specified
   by the $default_user setting in your inc/config.inc.
 This way you can set up PDL to always display your own divelog by default
 (useful e.g. for single user installation) by just setting the $default_user
 to your nick name used with PDL.
-
-In some future version, I may add the option "index" to the $default_page
-parameter. This would then list up all available divers with their nicks
-(clickable) and maybe some additional information - while the diver can decide
-whether his/her log will be public or not with a special config file.
 
 ===============================================================================
 
