@@ -12,11 +12,17 @@
 
  /* $Id$ */
 
- $pdl->config->version  = "0.1.2";
+ $pdl->config->version = "0.1.2";
+ $pdl->config->user    = "";
 
  #==========================================================[ directories ]===
- $pdl->config->tpl_url  = "templates/$template_set/";
- $pdl->config->tpl_path = "templates/$template_set/";
+ $pdl->config->base_path = ""; # if set, has to include trailing slash - if
+ $pdl->config->base_url  = ""; #   not, must be empty
+ $pdl->config->tpl_path  = $pdl->config->base_path."templates/$template_set/";
+ $pdl->config->tpl_url   = $pdl->config->base_url."templates/$template_set/";
+ if (!empty($pdl->config->user)) $relPath = $pdl->config->user."/";
+ $pdl->config->user_path = $pdl->config->base_path.$relPath;
+ $pdl->config->user_url  = $pdl->config->base_url.$relPath;
 
  #=============================================================[ database ]===
  $pdl->config->db_type  = $database["type"];
