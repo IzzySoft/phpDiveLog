@@ -69,7 +69,7 @@ and site descriptions with phpDiveLog. This can be done in different ways:
 </ul>
 
 [text]
-The "external notes files" I implemented to save you the act of editing all
+I implemented the "external notes files" to save you the act of editing all
 your dive/site notes with your PDA again. To create an external "notes" field,
 simply place a plain text file named <code>diveXXXXX.txt</code> (for dive notes)
 or <code>siteXXXXX.txt</code> (for site notes) in the <code>notes/</code>
@@ -77,6 +77,21 @@ subdirectory of your "diver home directory" (for the file name syntax see the
 paragraph on placing fotos). This file may contain HTML formatings (e.g. for
 &lt;B&gt;old or &lt;U&gt;nderlining) as well as all available "tags" (see below).
 All newlines will be replaced by line breaks ("&lt;BR&gt;") to form paragraphs.
+
+[text]
+If you like to create localized versions of your notes, you can do so for all
+languages that are directly supported by phpDiveLog (see the Setup page). For
+these, name the files as described above plus add the language code to the end
+of the filename, so it would be <code>*.txt.de</code> for a German, or
+<code>*.txt.ru</code> for a Russian text. In these cases you should ensure that
+the default file (without the language code) also exists, since the localized
+versions would only be displayed if the visitor has the given language selected
+on the Setup page. To ensure this, you can make use of symbolic links. If you
+e.g. have a German and an English description, you could either place the
+English one as <code>*.txt</code> and the German one as <code>*.txt.de</code> -
+or name the English one <code>*.txt.en</code> and create an additional
+symbolic link using the <code>ln -s &lt;name of the English file&gt;
+&lt;name of the English file without the ".en"&gt;</code> command.
 
 [text]
 These files will automatically be appended to your notes field, if they exist.
