@@ -13,12 +13,13 @@
  # $Id$
 
  include("inc/includes.inc");
+ $showPlace = $_GET["place"];
  $title .= ": AllPlaces";
+ if ( !empty($showPlace) ) $title .= ": $showPlace";
  include("inc/header.inc");
  $start = $_GET["start"];
  if (!$start) $start = 0;
  $end = $start + $pdl->config->display_limit;
- $showPlace = $_GET["place"];
 
  $t = new Template($pdl->config->tpl_path);
  $t->set_file(array("template"=>"places.tpl"));
@@ -28,10 +29,10 @@
  $t->set_block("siteblock","sitemblock","sitem");
 
  #==============================================[ Import dive data from DB ]===
- if ( !empty($showPlace) ) {
-   $places = $pdl->db->getAllPlaces($start,$end,$showPlace);
- } else {
+ if ( empty($showPlace) ) {
    $places = $pdl->db->getAllPlaces($start,$end);
+ } else {
+   $places = $pdl->db->getAllPlaces($start,$end,$showPlace);
  }
  $max   = count($places);
  $records = $pdl->db->allplaces;
@@ -43,15 +44,15 @@
  if ($start) {
    $prev = $start - $pdl->config->display_limit;
    if ($prev<0) $prev=0;
-   $t->set_var("nav_left",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$prev","<img src='".$pdl->config->tpl_url."images/left.gif'>"));
+   $t->set_var("nav_left",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$prev","<img src='".$pdl->config->tpl_url."images/left.gif' alt='prev'>"));
  } else {
-   $t->set_var("nav_left","<img src='".$pdl->config->tpl_url."images/left-grey.gif'>");
+   $t->set_var("nav_left","<img src='".$pdl->config->tpl_url."images/left-grey.gif' alt='prev'>");
  }
  if ($records - $start < $pdl->config->display_limit) {
-   $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif'>");
+   $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif' alt='next'>");
  } else {
    $next = $start + $pdl->config->display_limit;
-   $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$next","<img src='".$pdl->config->tpl_url."images/right.gif'>"));
+   $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$next","<img src='".$pdl->config->tpl_url."images/right.gif' alt='next'>"));
  }
 
  #===============================================[ set up the table header ]===

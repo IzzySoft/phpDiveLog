@@ -17,7 +17,7 @@
      GLOBAL $t,$pdl;
      $t->set_block("template","homeblock","home");
      if ( !empty($_GET["diver"]) ) {
-       $img = $pdl->link->linkurl("index.php","<img src='".$pdl->config->tpl_url."images/tab_switch2.gif'>");
+       $img = $pdl->link->linkurl("index.php","<img src='".$pdl->config->tpl_url."images/tab_switch2.gif' alt='switch'>");
        $t->set_var("home_ref",$img);
        $t->parse("home","homeblock");
      }

@@ -17,7 +17,7 @@
      GLOBAL $t,$pdl;
      $t->set_block("template","homeblock","home");
      if ( $pdl->config->enable_index ){
-       $img = $pdl->link->linkurl("buddylist.php","<img src='".$pdl->config->tpl_url."images/tab_switch.gif'>");
+       $img = $pdl->link->linkurl("buddylist.php","<img src='".$pdl->config->tpl_url."images/tab_switch.gif' alt='switch'>");
        $t->set_var("home_ref",$img);
        $t->parse("home","homeblock");
      }
