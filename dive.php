@@ -43,12 +43,12 @@
 
  #=============================================[ set up the navigation bar ]===
  if ($prev=$dive["prev_dive#"]) {
-   $t->set_var("nav_left",$pdl->link->linkurl("$PHP_SELF?nr=$prev","<img src='".$pdl->config->tpl_url."images/left.gif'>"));
+   $t->set_var("nav_left",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?nr=$prev","<img src='".$pdl->config->tpl_url."images/left.gif'>"));
  } else {
    $t->set_var("nav_left","<img src='".$pdl->config->tpl_url."images/left-grey.gif'>");
  }
  if ($next=$dive["next_dive#"]) {
-   $t->set_var("nav_right",$pdl->link->linkurl("$PHP_SELF?nr=$next","<img src='".$pdl->config->tpl_url."images/right.gif'>"));
+   $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?nr=$next","<img src='".$pdl->config->tpl_url."images/right.gif'>"));
  } else {
    $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif'>");
  }

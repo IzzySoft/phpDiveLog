@@ -31,12 +31,12 @@
  $pdl->tabs->activate("sites");
  $pdl->tabs->parse();
  if ($prev=$site["prev_site#"]) {
-   $t->set_var("nav_left",$pdl->link->linkurl("$PHP_SELF?id=$prev","<img src='".$pdl->config->tpl_url."images/left.gif'>"));
+   $t->set_var("nav_left",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?id=$prev","<img src='".$pdl->config->tpl_url."images/left.gif'>"));
  } else {
    $t->set_var("nav_left","<img src='".$pdl->config->tpl_url."images/left-grey.gif'>");
  }
  if ($next=$site["next_site#"]) {
-   $t->set_var("nav_right",$pdl->link->linkurl("$PHP_SELF?id=$next","<img src='".$pdl->config->tpl_url."images/right.gif'>"));
+   $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?id=$next","<img src='".$pdl->config->tpl_url."images/right.gif'>"));
  } else {
    $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif'>");
  }

@@ -19,7 +19,7 @@
  } elseif (strtolower($default_page) == "user") {
    $relPath = "diver/$default_user/";
  } elseif (strtolower($default_page) == "index") {
-   if ( basename($PHP_SELF)!= "buddylist.php" ) {
+   if ( basename($_SERVER["SCRIPT_FILENAME"])!= "buddylist.php" ) {
      header("Location: buddylist.php");
      exit;
    }

@@ -40,7 +40,7 @@
  }
  $pdl->trans->get_translations($lang);
 
- if ( basename($PHP_SELF)!= "buddylist.php" ) {
+ if ( basename($_SERVER["SCRIPT_FILENAME"])!= "buddylist.php" ) {
    if (empty($relPath)) { // no account specified
      include("inc/header.inc");
      $pdl->common->alert(lang("no_diver",lang("diver_url_syntax")));

@@ -35,7 +35,7 @@
  $lavail = $pdl->trans->avail;
  $lc     = count($lavail);
  for ($i=0;$i<$lc;++$i) {
-   $t->set_var("lang_ref",$pdl->link->slink("$PHP_SELF?lang=".$lavail[$i]));
+   $t->set_var("lang_ref",$pdl->link->slink($_SERVER["SCRIPT_NAME"]."?lang=".$lavail[$i]));
    $imgfile = "images/lang_".$lavail[$i].".jpg";
    if ( file_exists($pdl->config->tpl_path.$imgfile ) )
      $img = "<img src='".$pdl->config->tpl_url.$imgfile."' width='30' height='20'>";
@@ -56,7 +56,7 @@
  }
  $tc = count($tset);
  for ($i=0;$i<$tc;++$i) {
-   $t->set_var("tpl_ref",$pdl->link->slink("$PHP_SELF?tpl=".$tset[$i]));
+   $t->set_var("tpl_ref",$pdl->link->slink($_SERVER["SCRIPT_NAME"]."?tpl=".$tset[$i]));
    $imgfile = "images/tpl_".$tset[$i].".gif";
    if ( file_exists($pdl->config->tpl_path.$imgfile ) )
      $img = "<img src='".$pdl->config->tpl_url.$imgfile."'>";

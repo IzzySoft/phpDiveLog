@@ -2,6 +2,9 @@
 
 <table cellpadding="0" align="left" class="nav">
  <tr>
+<!-- BEGIN homeblock -->
+   <td class="tab_inactive">{home_ref}</td>
+<!-- END homeblock -->
 <!-- BEGIN tabblock -->
    <td><table class="{tab_class}">
     <tr class="{tab_class}">

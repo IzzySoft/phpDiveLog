@@ -2,6 +2,9 @@
 
 <table cellpadding="0" align="left" style="background-color:transparent;" border="1">
  <tr style="background-color:transparent;">
+<!-- BEGIN homeblock -->
+   <td class="tab_inactive">{home_ref}</td>
+<!-- END homeblock -->
 <!-- BEGIN tabblock -->
    <td class="{tab_class}"><table class="{tab_class}" border="0">
     <tr style="background-color:transparent;">

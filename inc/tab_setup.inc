@@ -15,6 +15,16 @@
  class tabs {
    function tabs() {
      GLOBAL $t,$pdl;
+     $t->set_block("template","homeblock","home");
+     if ( $pdl->config->enable_index ){
+       if ( basename($_SERVER["SCRIPT_FILENAME"])=="buddylist.php" ) {
+         $img = "<img src='".$pdl->config->tpl_url."images/tab_buddylist.gif'>";
+       } else {
+         $img = $pdl->link->linkurl("buddylist.php","<img src='".$pdl->config->tpl_url."images/tab_home.gif'>");
+       }
+       $t->set_var("home_ref",$img);
+       $t->parse("home","homeblock");
+     }
      $this->add_tab("dives","index.php","tab_dives.gif");
      $this->add_tab("stats","stats.php","tab_stats.gif");
      $this->add_tab("sites","sitelist.php","tab_sites.gif");
