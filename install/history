@@ -14,5 +14,5 @@ v0.1.1
   obsolete
 * new conduit data providing us with the site_id now - so we use this for
   reference
-+ logbook entry now provides direct link to dive site details
++ logbook list and entry now provide direct link to dive site details
 + site list now supports the display limit setting

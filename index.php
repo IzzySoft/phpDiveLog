@@ -53,13 +53,14 @@
  }
 
  #============================[ Walk through the list and set up the table ]===
- $details = array ("dive#","date","time","location","place","depth","divetime","buddy","rating");
+ $details = array ("dive#","date","time","location","depth","divetime","buddy","rating");
  for ($i=0;$i<$max;++$i) {
    foreach($details AS $detail) {
      $t->set_var("$detail",$dives[$i][$detail]);
    }
    $t->set_var("rating",$pdl->config->tpl_url."images/".$dives[$i]["rating"]."star.gif");
    $t->set_var("dive#","<a href='dive.php?nr=".$dives[$i]["dive#"]."'>".$dives[$i]["dive#"]."</a>");
+   $t->set_var("place","<a href='site.php?id=".$dives[$i]["site_id"]."'>".$dives[$i]["place"]."</a>");
    $t->parse("item","itemblock",TRUE);
  }
  $t->pparse("out","template");
