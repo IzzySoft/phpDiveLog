@@ -41,11 +41,13 @@
     $params = "";
     $details = array("lang","tpl","diver");
     foreach ($details as $element) {
+     if (!empty(${$element})) {
       if (empty($params)) {
         $params = "$element=${$element}";
       } else {
         $params .= "&$element=${$element}";
       }
+     }
     }
 #    if (!$pdl->config->enable_cookies) {
       $pos = strpos($target,"?");
