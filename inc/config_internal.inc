@@ -12,7 +12,7 @@
 
  /* $Id$ */
 
- $pdl->config->version = "0.2.4";
+ $pdl->config->version = "0.2.5";
  $pdl->config->enable_index = $enable_index;
  if (!empty($_GET["diver"])) {
    $relPath = "diver/".$_GET["diver"]."/";
@@ -35,6 +35,8 @@
  $pdl->config->base_url  = ""; #   not, must be empty
  $pdl->config->user_path = $pdl->config->base_path.$relPath;
  $pdl->config->user_url  = $pdl->config->base_url.$relPath;
+ $pdl->config->pwdfile   = $pwdfile;
+ $pdl->config->transfer_path = $transfer_dir;
 
  #===========================================================[ users conf ]===
  if ( file_exists($pdl->config->user_path."system.conf") ) {
@@ -64,5 +66,6 @@
  $pdl->config->sites    = $pdl->config->datadir."divesites.csv";
 
  #=============================================================[ clean up ]===
- unset($database,$display_limit,$allow_override,$enable_index,$uconf,$allowed,$ac);
+ unset($database,$display_limit,$allow_override,$enable_index,$uconf,$allowed,
+       $ac,$pwdfile,$transfer_dir);
 ?>

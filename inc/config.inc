@@ -29,4 +29,7 @@
  $allow_override = "title lang display_limit template_set"; 
                           # which settings may be adjusted via the
                           # diver/*/system.conf - space separated values
+ $pwdfile = "/etc/pdlpwd";# password file for data transfers
+ $transfer_dir = "/web/www.qumran.org/homes/izzy/software/pdl/pdl-prod/diver/";
+                          # base directory of user data transfers
 ?>

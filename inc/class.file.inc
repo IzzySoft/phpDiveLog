@@ -26,6 +26,27 @@
    function file() {
    }
 
+   /** Recursively copy directories
+    * @class file
+    * @method copyDir
+    * @return boolean success
+    */
+   function copyDir($src,$target) {
+     if ( is_file($src) ) return copy ($src,$target);
+     if (!is_dir($target)) mkdir($target);
+     $dir = dir($src);
+     while (false !== $entry = $dir->read()) {
+       if ($entry == '.' || $entry == '..') continue;
+       if (is_dir("$src/$entry") && ($target !== "$src/$entry")) {
+         $this->copyDir("$src/$entry", "$target/$entry");
+       } else {
+         copy("$src/$entry", "$target/$entry");
+       }
+     }
+     $dir->close();
+     return TRUE;
+   }
+
    /** Get the file content of a text file as string
     * @class file
     * @method read_file
