@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.2.1
+v0.2.1 (31.08.2004)
 -------------------
 ! fixed a syntax error in the sitelist script
 + if coordinates are given, a click on the globe in the site details opens a
