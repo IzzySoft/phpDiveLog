@@ -8,6 +8,8 @@ v0.2.1
 ! fixed a syntax error in the sitelist script
 + if coordinates are given, a click on the globe in the site details opens a
   new window with a map of the area, having the given location marked
++ added support for RSync transfers to the divelog_conduit.sh script
+* notesblock is now only displayed if content exists
 
 v0.2.0 (18.08.2004)
 -------------------
