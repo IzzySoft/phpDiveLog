@@ -98,18 +98,32 @@ options will need your attention:
  <tr><td colspan=2 class="td_blank" align="center"><b>Remote Transfers</b></td></tr>
  <tr><td class="td_blank"><b><code>USESCP</code></b></td>
   <td class="td_blank">if you want to copy the files to a remote webserver via
-   SCP, set the value to "1" - otherwise to "0".</td></tr>
+   SCP, set the value to "1"; if you have <code>rsync</code> installed on both
+   the client and the server, you will prefer "2" for a) faster and b) complete
+   sync (including all your additional texts and fotos). For no transfers to
+   any remote server, set this to "0".</td></tr>
  <tr><td class="td_blank"><b><code>SCPBASE</code></b></td>
   <td class="td_blank">the divers directory of the <b><i>remote</i></b>
    phpDiveLog installation, i.e. where the subdirectories <code>data/</code>
    and <code>images/</code> on the remote server reside. Will certainly look like
    <code>&lt;nickname&gt;@www.domain.com:/&lt;PDL root dir&gt;/diver/&lt;nickname&gt;</code>
    - see "Set up a diver" on the {admin_page} page for details.</td></tr>
+ <tr><td class="td_blank"><b><code>RSYNCBASE</code></b></td>
+  <td class="td_blank">this defines which source directory should be used with
+   <code>rsync</code>. If you have no local PDL installation on your machine
+   and/or use <code>USESCP=0</code>, set this to "2" which advises the script
+   to use the ADL log dir as source. In this case, also make sure that all
+   needed subdirectories (i.e. for the fotos, notes and texts) exist at that
+   place! Otherwise, with a local installation of PDL, you probably don't want
+   to keep all fotos duplicate, so set this to "1" and place all your additional
+   foto and text files where they belong: in your local PDL diver dir. With
+   this setting, you will need to set <code>USELOCAL=1</code>.</td></tr>
 </table>
 [text]
-You can use local (<code>USELOCAL=1</code>) and remote (<code>USESCP=1</code>)
-transfers independantly - if you need both, you can enable both at the same
-time.
+You can use local (<code>USELOCAL=1</code>) and remote (<code>USESCP=1</code>
+or <code>USESCP=2</code>) transfers independantly - if you need both, you can
+enable both at the same time (which would even be required for
+<code>RSYNCBASE=1</code>).
 
 #===[ phpDiveLog ]==========================================[ phpDiveLog ]===
 [title]
@@ -177,7 +191,7 @@ a short documentation for the available parameters and their effects:
   <td class="td_blank">what to do if there's no diver specified with the URL
     (and thus PDL does not know where to look for the data - normally this has
     to be done on the URL with the <code>diver=nickname</code> parameter)? The
-    options are:<ul>
+    options are:<ul style="margin-top:0;">
       <li>"user"  - we have a default user (see <code>$default_user</code>)</li>
       <li>"index" - display the index page with available nicks (needs
           <code>enable_index</code> to be set to TRUE - see above)</li>
