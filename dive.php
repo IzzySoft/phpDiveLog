@@ -119,6 +119,7 @@
    $t->set_var("tank_out",$dive[tank][$i]->out);
    $t->parse("tank","tankblock",TRUE);
  }
+ #----------------------------[ Schedule ]---
  $sched = $pdl->db->get_schedule($nr);
  if ($sched) {
    $t->set_var("sched_img",'<img src="'.$pdl->config->tpl_url.'images/btn_schedule.gif" width="37" height="15" border="0" alt="Schedule">');
@@ -141,12 +142,8 @@
    }
    $t->parse("sched","scheduleblock");
  } else {
-   echo "<pre>";print_r($sched);echo "</pre>\n";
    $t->set_var("sched","");
  }
-
- #----------------------------[ Schedule ]---
- # inside the tank for now
  #-------------------------------[ Notes ]---
  $t->set_var("notes_text",nl2br($dive["notes"]));
 
