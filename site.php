@@ -54,7 +54,7 @@
    $t->set_var("$detail",$site[$detail]);
  }
  #-------------------------------[ Notes ]---
- $notes[1] = $pdl->common->tagreplace(nl2br($site["description"));
+ $notes[1] = $pdl->common->tagreplace(nl2br($site["description"]));
  $notes[2] = $pdl->file->getNotes($id,"site");
  if ( !empty($notes[2]) ) {
    if ( !empty($notes[1]) ) $notes[1] .= "<br>";

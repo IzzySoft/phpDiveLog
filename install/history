@@ -3,6 +3,10 @@ $Id$
 History for phpDiveLog
 ======================
 
+v0.2.1
+-------------------
+! fixed a syntax error in the sitelist script
+
 v0.2.0 (18.08.2004)
 -------------------
 + now the [url], [img]/[imgr] and [file] tags can be used in the notes fields of
