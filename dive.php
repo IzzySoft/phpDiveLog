@@ -21,6 +21,9 @@
  $t->set_block("template","sumblock","sum");
  $t->set_block("template","condblock","cond");
  $t->set_block("template","equiblock","equi");
+ $t->set_block("template","tankblock","tank");
+ $t->set_block("template","scheduleblock","sched");
+ $t->set_block("scheduleblock","scheditemblock","scheditem");
 
  #=========================================[ Icons for the navigation tabs ]===
  $t->set_var("dive_tab_img",'<img src="'.$pdl->config->tpl_url.'images/dive_flag2.gif" width="20" height="15" border="0" alt="DiveFlag">');
@@ -97,12 +100,47 @@
  $t->set_var("item_name","Weight:");
  $t->set_var("item_data",$dive["weight"]);
  $t->parse("equi","equiblock",TRUE);
- $filename = "dives/dive".sprintf("%05d",$nr).".html";
- $fp = fopen($filename, "rb");
- $buffer = fread($fp, filesize($filename));
- fclose($fp);
- $tank = preg_replace("/\r?\n|\r/", "\n", $buffer);
- $t->set_var("tank",$tank);
+ $tc = count($dive["tank"]);
+ $t->set_var("tank_trans","Tank");
+ $t->set_var("tank_name_name","Name");
+ $t->set_var("tank_gas_name","Gas");
+ $t->set_var("tank_type_name","Type");
+ $t->set_var("tank_volume_name","Volume");
+ $t->set_var("pressure","Pressure");
+ $t->set_var("tank_in_name","In");
+ $t->set_var("tank_out_name","Out");
+ for ($i=0;$i<$tc;++$i) {
+   $t->set_var("tank_nr",$dive[tank][$i]->nr);
+   $t->set_var("tank_name",$dive[tank][$i]->name);
+   $t->set_var("tank_gas",$dive[tank][$i]->gas);
+   $t->set_var("tank_type",$dive[tank][$i]->type);
+   $t->set_var("tank_volume",$dive[tank][$i]->volume);
+   $t->set_var("tank_in",$dive[tank][$i]->in);
+   $t->set_var("tank_out",$dive[tank][$i]->out);
+   $t->parse("tank","tankblock",TRUE);
+ }
+ $sched = $pdl->db->get_schedule($nr);
+ if ($sched) {
+   $t->set_var("sched_img",'<img src="'.$pdl->config->tpl_url.'btn_schedule.gif" width="37" height="15" border="0" alt="Schedule">');
+   $t->set_var("sched_name","Schedule");
+   $t->set_var("s_depth_name","Depth");
+   $t->set_var("s_time_name","Time");
+   $t->set_var("s_runtime_name","Runtime");
+   $t->set_var("s_gas_name","Gas");
+   $sc = count($sched);
+   for ($i=0;$i<$sc;++$i) {
+     $t->set_var("s_depth",$sched[$i]["depth (m)"]." m / ".$sched[$i]["depth (ft)"]." ft");
+     $t->set_var("s_time",$sched[$i]["time (sec)"]);
+     $t->set_var("s_runtime",$sched[$i]["runtime (sec)"]);
+     $t->set_var("s_gas",$sched[$i]["gas"] ." [".$sched[$i]["tank nr."]."]");
+     $t->parse("scheditem","scheditemblock",TRUE);
+   }
+   $t->parse("sched","scheduleblock");
+ } else {
+   echo "<pre>";print_r($sched);echo "</pre>\n";
+   $t->set_var("sched","");
+ }
+
  #----------------------------[ Schedule ]---
  # inside the tank for now
  #-------------------------------[ Notes ]---
