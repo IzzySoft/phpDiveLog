@@ -97,6 +97,11 @@
  $t->set_var("item_name",lang("suit").":");
  $t->set_var("item_data",$dive["suittype"].", ".$dive["suitname"]);
  $t->parse("equi","equiblock");
+ if (!empty($userdef1)) {
+   $t->set_var("item_name",lang($userdef1).":");
+   $t->set_var("item_data",$dive["userdef1"]);
+   $t->parse("equi","equiblock",TRUE);
+ }
  $t->set_var("item_name",lang("weight").":");
  $t->set_var("item_data",$dive["weight"]);
  $t->parse("equi","equiblock",TRUE);

@@ -26,7 +26,7 @@
                           # and will be handled as "error")
  $default_user  = "demo"; # if default_page=user: which user is the default?
                           # must be a valid account (subdir diver/<user>)
- $allow_override = "title lang display_limit template_set"; 
+ $allow_override = "title lang display_limit template_set userdef1 userdef2"; 
                           # which settings may be adjusted via the
                           # diver/*/system.conf - space separated values
  $pwdfile = "/etc/pdlpwd";# password file for data transfers
