@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.2.6
+v0.2.6 (08.11.2005)
 -------------------
 + now the [tags] also work in the image description files
 + added Dutch translation (thanx to Robbie!)
