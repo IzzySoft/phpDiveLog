@@ -10,6 +10,7 @@ v0.2.6
 + added support for the user defined fields (put to equipment block)
   (configure in the divers system.conf)
 + global site list now also indicates whether site description contains photos
+! picture "albums" from sites/dives sometimes did not consider alpahetic order
 
 v0.2.5 (21.09.2004)
 -------------------

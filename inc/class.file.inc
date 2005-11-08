@@ -152,8 +152,11 @@
          }
        }
      }
-     if (count($list)>0 ) foreach ($list as $foto) {
-       $result[] = $foto;
+     if (count($list)>0 ) {
+       ksort($list);
+       foreach ($list as $foto) {
+         $result[] = $foto;
+       }
      }
      return $result;
    }
