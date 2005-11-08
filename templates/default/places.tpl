@@ -42,7 +42,7 @@
   <td align="center">{place}</td>
   <td align="center">{site}</td>
   <td align="right">{hits}</td>
-  <th>&nbsp;</th>
+  <th>{pix}</th>
  </tr>
 <!-- END sitemblock -->
 <!-- END siteblock -->

@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpApi                                        (c) 2004 by Itzchak Rehberg #
+ # phpApi                                   (c) 2004-2005 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
  # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
@@ -158,9 +158,11 @@
      return $result;
    }
 
-   function havePix($id,$type="dive") {
+   function havePix($id,$type="dive",$diver="") {
      GLOBAL $pdl;
-     $dirname = $pdl->config->user_path."fotos/$type";
+     if (empty($diver)) { $path = $pdl->config->user_path; }
+     else { $path = dirname($pdl->config->user_path)."/".$diver."/"; }
+     $dirname = $path."fotos/$type";
      if (!is_dir($dirname)) return FALSE;
      $prefix = $this->mkADLprefix($id,$type)."-";
      $plen   = strlen($prefix);

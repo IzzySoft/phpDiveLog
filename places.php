@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2005 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
  # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
@@ -83,6 +83,11 @@
      $t->set_var("place",$places[$i]->name);
      $t->set_var("site",$places[$i]->sitename);
      $t->set_var("hits",$pdl->link->linkurl("site.php?diver=".$places[$i]->diver."&id=".$places[$i]->id,ucfirst($places[$i]->diver)));
+     if ($pdl->file->havePix($places[$i]->id,"site",$places[$i]->diver)) {
+       $t->set_var("pix",'<img src="'.$pdl->config->tpl_url.'images/camera.gif" valign="middle">');
+     } else {
+       $t->set_var("pix","&nbsp;");
+     }
      $t->parse("sitem","sitemblock",TRUE);
    }
    $t->parse("site","siteblock");
