@@ -240,8 +240,8 @@ a short documentation for the available parameters and their effects:
     it. We do not want them to mess up things, so here we define which
     parameters may be overridden by the <code>diver/*/system.conf</code> file.
     The value of this parameter is a space separated list of options. As shipped,
-    these is set to "title lang display_limit template_set", which seems to me
-    being a good choice.</td></tr>
+    these is set to "title lang display_limit template_set userdef1 userdef2",
+    which seems to me being a good choice.</td></tr>
  <tr><td class="td_blank"><b><code>$pwdfile</code></b></td>
   <td class="td_blank">If you want to allow your buddies to transfer their
     divelog data using a single OS account, you need to set up a password

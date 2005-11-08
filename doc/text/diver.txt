@@ -247,6 +247,16 @@ commented out), noone will be able to browse them via the <code>person.php</code
 page, even if a complete <code>diver.conf</code> exists. The same applies if it
 is set to "0". Set <code>personal = 1</code> if you want the page to be displayed.
 
+[text]
+Furthermore, the <code>system.conf</code> contains a few parameters which only
+can be set on a per-diver-basis: Namely, the "user defined fields" from
+Aqua DiveLog. There are two fields which you can set manually in its
+preferences, and they are exported via the conduit. So if you want them
+displayed along with your dive data, you should set the variables
+<code>userdef1</code> resp. <code>userdef2</code> to the title these fields
+should have. If then for a dive there are data available for this field(s),
+they will be shown in the equipment section of the dive.
+
 [title]
 The divers <code>diver.conf</code>
 
