@@ -615,6 +615,141 @@
      return $dives;
    }
 
+   ###########################################################################
+   # Sites Management
+   ###########################################################################
+   /** Create the base SQL statement for site records
+    * @method private sites_base_query
+    * @return string query
+    */
+   function sites_base_query() {
+     $query = "SELECT id,loc,place,latitude,longitude,altitude,depth,water,stype,rating,description"
+            . "  FROM ".$this->tables->site;
+     return $query;
+   }
+
+   /** Setup the site record from fields defined by the sites_base_query.
+    *  db::nextrecord() is NOT called here, just a single record ist set up
+    *  and returned.
+    * @method private site_record_setup
+    * @param boolean single single record full setup (breaks list!)
+    * @return array dive_record
+    */
+   function site_record_setup($full=FALSE) {
+     $details = array("id","latitude","longitude","altitude","depth","rating",
+                      "loc","place","water","description");
+     foreach ($details as $var) {
+       $site[$var] = $this->f($var);
+     }
+     $site["type"] = $this->f('stype');
+     $site["longitude"] .= "°";
+     $site["latitude"]  .= "°";
+     $site["altitude"]  .= "m";
+     $site["depth"]     .= "m";
+     if ($full) {
+       $user_id = $this->userIDget();
+       $query = "SELECT max(id) prev_id FROM ".$this->tables->site
+              . " WHERE id <".$site["id"]." AND user_id=$user_id";
+       $this->dbquery($query);
+       if ($this->next_record()) {
+         $site["prev_site#"] = $this->f('prev_id');
+       }
+       $query = "SELECT min(id) next_id FROM ".$this->tables->site
+              . " WHERE id >".$site["id"]." AND user_id=$user_id";
+       $this->dbquery($query);
+       if ($this->next_record()) {
+         $site["next_site#"] = $this->f('next_id');
+       }
+     }
+     return $site;
+   }
+
+   /** Get site records
+    *  Retrieve a list of sites or a single record. Returns all sites if neither
+    *  $start nor $end are specified, a range if both and the specified dive
+    *  record if $start is specified but $end is not
+    *  $id is just kept for compatibility to the CVS database.
+    * @method sites_get
+    * @param optional string start first site# to return
+    * @param optional string end last site# to return
+    * @return array sitedata (either array of site records or single record)
+    */
+   function sites_get($start="",$end="",$id=FALSE) {
+     GLOBAL $pdl;
+     $user_id = $this->userIDget();
+     $query = $this->sites_base_query(). " WHERE user_id=$user_id";
+     $mode = "list"; // list of sites or single record?
+     if ($start!=="") {
+       if ($end!=="") { // dive list
+         $ok = $this->lim_query($query,$start);
+       } else { // single record
+         $mode = "single";
+         $query .= " AND id=$start";
+         $ok = $this->dbquery($query);
+       }
+     } else { // return all data
+       $ok = $this->dbquery($query);
+     }
+     if (!$ok) {
+       $pdl->last_error = "site_query_execute_failed";
+       return array();
+     }
+     if ($mode=="single") {
+       $this->next_record();
+       $sites = $this->site_record_setup(TRUE);
+     } else {
+       while ($this->next_record()) {
+         $sites[] = $this->site_record_setup();
+       }
+       $this->sites = $ok;
+     }
+     return $sites;
+   }
+
+   function site_get($id) {
+     return $this->sites_get($id);
+   }
+
+   #########################################################################
+   # Statistics
+   #########################################################################
+   /** Get dive statistics
+    * @method stats_get
+    * @return array stats (properties: max_depth,max_time,avg_depth,cum_time)
+    */
+   function stats_get() {
+     GLOBAL $pdl;
+     $user_id = $this->userIDget();
+     $query = "SELECT max(depth) max_depth,max(divetime) max_time,"
+            . "       avg(depth) avg_depth,sum(divetime) cum_dive_time,"
+            . "       avg(divetime) avg_time,count(id) num_dives"
+            . "  FROM ".$this->tables->logbook
+            . " WHERE user_id=$user_id";
+     if (!$this->dbquery($query)) {
+       $pdl->last_error = "stats_query_failed";
+       return array();
+     }
+     $this->next_record();
+     $details = array("max_depth","max_time","avg_depth","cum_dive_time",
+                      "avg_time","num_dives");
+     foreach ($details as $var) {
+       $stats[$var] = $this->f($var);
+     }
+     $stats["avg_depth"] = round($stats["avg_depth"]/10,1)."m";
+     $stats["max_depth"] = $stats["max_depth"]/10 ."m";
+     $stats["max_time"] = $pdl->common->time_format($stats["max_time"]);
+     $stats["avg_time"] = $pdl->common->time_format(round($stats["avg_time"]));
+     $stats["cum_dive_time"] = $pdl->common->time_format($stats["cum_dive_time"]);
+     $query = "SELECT count(id) sites FROM ".$this->tables->site." WHERE user_id=$user_id";
+     if (!$this->dbquery($query)) {
+       $pdl->last_error = "stats_query_failed";
+       return array();
+     }
+     $this->next_record();
+     $this->sites = $this->f('sites');
+     return $stats;
+   }
+
    #########################################################################
    # Temporary wrappers
    #########################################################################
@@ -630,6 +765,15 @@
    }
    function get_translations($lang,$trans=array()) {
      return $this->translations_get($lang,$trans);
+   }
+   function get_sites($start="",$end="",$id=FALSE) {
+     return $this->sites_get($start,$end,$id);
+   }
+   function get_site($id) {
+     return $this->sites_get($id);
+   }
+   function get_stats() {
+     return $this->stats_get();
    }
 
  } // end class sql
