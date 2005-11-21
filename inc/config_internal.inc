@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2005 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
  # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
@@ -12,7 +12,7 @@
 
  /* $Id$ */
 
- $pdl->config->version = "0.2.6";
+ $pdl->config->version = "0.2.7";
  $pdl->config->enable_index = $enable_index;
  if (!empty($_GET["diver"])) {
    $relPath = "diver/".$_GET["diver"]."/";
@@ -61,7 +61,8 @@
  $pdl->config->tpl_url   = $pdl->config->base_url."templates/$template_set/";
 
  #=============================================================[ database ]===
- $pdl->config->db_type  = $database["type"];
+ $pdl->config->db_type   = $database["type"];
+ $pdl->config->database  = $database;
  $pdl->config->datadir  = $pdl->config->user_path."data/";
  $pdl->config->divedata = $pdl->config->datadir."logbook.csv";
  $pdl->config->sites    = $pdl->config->datadir."divesites.csv";

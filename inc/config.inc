@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2005 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
  # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
@@ -13,7 +13,14 @@
  /* $Id$ */
 
  #=============================================================[ database ]===
- $database["type"]      = "csv";   # csv|mysql|pgsql (only csv supported now)
+# $database["type"]      = "mysql";     # csv|mysql|pgsql (only csv supported now)
+ $database["type"]      = "cvs";     # csv|mysql|pgsql (only csv supported now)
+ $database["host"]      = "localhost"; # your hosts name
+ $database["database"]  = "pdl";       # what database holds the tables
+ $database["user"]      = "pdl";       # db user with at least following
+                                       # privileges on these tables:
+				       # SELECT,UPDATE,INSERT,DELETE
+ $database["password"]  = "";          # this users password for the db
 
  #==========================================================[ preferences ]===
  $display_limit = 12;     # how may records/page should be displayed for lists

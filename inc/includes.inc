@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2005 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
  # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
@@ -21,10 +21,14 @@
  include("inc/config_internal.inc");
  switch($pdl->config->db_type) {
    case "cvs"   :
+     require_once("inc/class.db_text.inc");
+     $pdl->db = new db_text();
+     break;
    default      :
-     include("inc/class.db_text.inc");
+     require_once("inc/class.db_".$pdl->config->db_type.".inc");
+     require_once("inc/class.db.inc");
+     $pdl->db = new sql;
  }
- $pdl->db = new db_text();
  include("inc/class.template.inc");
  include("inc/class.translation.inc");
  $pdl->trans = new trans();
