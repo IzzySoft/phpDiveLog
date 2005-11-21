@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2005 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
  # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
@@ -159,6 +159,26 @@
     $pee = preg_replace('/&([^#])(?![a-z]{1,8};)/', '&#038;$1', $pee);
     $pee = str_replace("<p><hr></p>","<hr>",$pee);
     return $pee; 
+  }
+
+  /** Format time to human readable style
+   * @method time_format
+   * @param integer time in seconds
+   * @return string formatted time
+   */
+  function time_format($time) {
+    $string = $time;
+    if ($time<60) return $string;
+    // mins
+    $secs = $time % 60;
+    if ($secs<10) $secs = "0$secs";
+    $mins = round($time/60);
+    $string = $mins.":".$secs;
+    if ($time<3600) return $mins.":".$secs;
+    // hours
+    $hours = round($mins/60);
+    $mins = $mins % 60;
+    return $hours.":".$mins.":".$secs;
   }
 
  } // end class common
