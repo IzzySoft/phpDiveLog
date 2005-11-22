@@ -33,6 +33,7 @@
      $this->DB_Sql(); // constructor of base class needs explicit call
 #     $this->Halt_On_Error = "no";
      $this->table_def(); // setup table names
+     $user  = $this->user_logins(); // initialize user records
      $userid = $this->userIDget();
    }
 
@@ -152,6 +153,8 @@
      $this->tables->logbook     = "pdl_logbook";
      $this->tables->languages   = "pdl_languages";
      $this->tables->translations= "pdl_translations";
+     $this->tables->config      = "pdl_config";
+     $this->tables->userprefs   = "pdl_userprefs";
    }
 
    ###########################################################################
@@ -321,16 +324,73 @@
 
    /** Obtain user_id
     * @method userIDget
+    * @param optional string login
     * @return integer user_id
     */
-   function userIDget() {
+   function userIDget($login="") {
      GLOBAL $pdl;
      static $userid;
-     if (!empty($userid)) return $userid;
-     $this->dbquery("SELECT id FROM ".$this->tables->user." WHERE login='".$pdl->config->user_name."'");
+     if ($login==="" && !empty($userid)) return $userid;
+     if ($login==="") $login = $pdl->config->user_name;
+     $this->dbquery("SELECT id FROM ".$this->tables->user." WHERE login='$login'");
      $this->next_record();
-     $userid = $this->f('id');
-     return $userid;
+     $user_id = $this->f('id');
+     if ($login==$pdl->config->user_name) $userid = $user_id;
+     return $user_id;
+   }
+
+   /** List users
+    * @method user_logins
+    * @param optional integer user_id
+    * @return mixed array (id=>login) or single login for given id
+    */
+   function user_logins($user_id="") {
+     GLOBAL $pdl;
+     static $logins;
+     if (empty($logins)) {
+       $query = "SELECT id,login FROM ".$this->tables->user;
+       if (!$this->dbquery($query)) {
+         $pdl->last_error = "user_logins_query_failed";
+         return FALSE;
+       }
+       while ($this->next_record()) {
+         $id    = $this->f('id');
+         $logins[$id] = $this->f('login');
+       }
+     }
+     if ($user_id!=="") return $logins[$user_id];
+     return $logins;
+   }
+
+   /** Get a user pref
+    * @method user_pref_get
+    * @param optional string name preference name
+    * @return mixed pref (string if name specified, FALSE on failure,
+    *         array(name,pref) otherwise
+    */
+   function user_pref_get($name="",$user_id="") {
+     GLOBAL $pdl;
+     if ($user_id=="") $user_id = $this->userIDget();
+     $query = "SELECT name,value FROM ".$this->tables->userprefs
+            . " WHERE user_id=$user_id";
+     $mode = "list";
+     if (!empty($name)) {
+       $query .= " AND name='$name'";
+       $mode = "single";
+     }
+     if (!$this->dbquery($query)) {
+       $pdl->last_error = "userpref_query_failed";
+       return FALSE;
+     }
+     if ($mode=="single") {
+       $this->next_record();
+       return $this->f('value');
+     }
+     while ($this->next_record()) {
+       $pname = $this->f('name');
+       $pref[$pname] = $this->f('value');
+     }
+     return $pref;
    }
 
    ###########################################################################
@@ -710,6 +770,51 @@
      return $this->sites_get($id);
    }
 
+   /** Get an alphabetical list of all dive places from all divers
+    *  (not to be confused with the dive sites - it is just the location here)
+    * @method places_get_all
+    * @param optional integer start
+    * @param optional integer end
+    * @param optional string place
+    * @return array places
+    */
+   function places_get_all($start="",$end="",$showPlace="") {
+     GLOBAL $pdl;
+     if (empty($showPlace)) { // only return list of loc
+       $query = "SELECT loc, count(place) num"
+              . "  FROM ".$this->tables->site." s,".$this->tables->userprefs." p"
+              . " WHERE s.user_id=p.user_id AND p.name='public' AND p.value=1"
+              . " GROUP BY loc";
+       if (!$this->dbquery($query)) {
+         $pdl->last_error = "location_query_failed";
+         return array();
+       }
+       while ($this->next_record()) {
+         $p->name = $this->f('loc');
+         $p->num  = $this->f('num');
+         $list[]    = $p;
+       }
+     } else {
+       $query = "SELECT loc, place, id, s.user_id"
+              . "  FROM ".$this->tables->site." s,".$this->tables->userprefs." p"
+              . " WHERE s.user_id=p.user_id AND p.name='public' AND p.value=1"
+              . "   AND loc='$showPlace'";
+       if (!$this->dbquery($query)) {
+         $pdl->last_error = "location_query_failed";
+         return array();
+       }
+       while ($this->next_record()) {
+         $p->name     = $this->f('loc');
+         $p->sitename = $this->f('place');
+         $p->id       = $this->f('id');
+         $uid         = $this->f('user_id');
+         $p->diver    = $this->user_logins($uid);
+         $list[]      = $p;
+       }
+     }
+     return $list;
+   }
+
    #########################################################################
    # Statistics
    #########################################################################
@@ -774,6 +879,9 @@
    }
    function get_stats() {
      return $this->stats_get();
+   }
+   function getAllPlaces($start="",$end="",$showPlace="") {
+     return $this->places_get_all($start,$end,$showPlace);
    }
 
  } // end class sql
