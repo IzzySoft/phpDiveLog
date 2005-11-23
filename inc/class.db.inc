@@ -393,6 +393,34 @@
      return $pref;
    }
 
+   /** Set a user pref
+    * @method user_pref_set
+    * @param string name pref name
+    * @param string value pref value
+    * @param optional string login name (if not current user)
+    * @return boolean success
+    */
+   function user_pref_set($name,$value,$login="") {
+     GLOBAL $pdl;
+     if ($login==="") $login = $pdl->config->user_name;
+     $user_id = $this->userIDget($login);
+     $test = $this->user_pref_get($name,$user_id);
+     if (empty($test) && $test!=0) { // not set at all
+       $query = "INSERT INTO ".$this->tables->userprefs
+              . "(user_id,name,value) VALUES ($user_id,'$name','$value')";
+     } else { // pref already in DB
+       if ($test===$value) { // no changes needed
+         return TRUE;
+       }
+       $query = "UPDATE ".$this->tables->userprefs
+              . "   SET value='$value'"
+              . " WHERE user_id=$user_id AND name='$name'";
+     }
+     if ($this->dbquery($query)) return TRUE;
+     $pdl->last_error = "set_userpref_failed";
+     return FALSE;
+   }
+
    ###########################################################################
    # Site Management
    ###########################################################################
