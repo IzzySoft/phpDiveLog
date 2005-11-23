@@ -172,6 +172,16 @@
       return FALSE;
     }
     $this->db->commit();
+    // preferences
+    $this->db->begin();
+    if ( file_exists($pdl->config->base_path."diver/".$pdl->config->user_name."/public") )
+      $ok = $this->db->user_pref_set("public","1");
+    else $ok = $this->db->user_pref_set("public","0");
+    if (!$ok) {
+      $pdl->last_error = "pref_update_failed";
+      $this->db->rollback();
+    }
+    $this->db->commit();
     return TRUE;
   }
 
