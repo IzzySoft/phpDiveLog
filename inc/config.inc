@@ -13,8 +13,8 @@
  /* $Id$ */
 
  #=============================================================[ database ]===
-# $database["type"]      = "mysql";     # csv|mysql|pgsql (only csv supported now)
- $database["type"]      = "cvs";     # csv|mysql|pgsql (only csv supported now)
+ $database["type"]      = "mysql";     # csv|mysql|pgsql (only csv supported now)
+# $database["type"]      = "cvs";     # csv|mysql|pgsql (only csv supported now)
  $database["host"]      = "localhost"; # your hosts name
  $database["database"]  = "pdl";       # what database holds the tables
  $database["user"]      = "pdl";       # db user with at least following

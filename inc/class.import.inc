@@ -91,12 +91,14 @@
    * @method import2db
    * @return boolean success
    */
-  function import2db() {
+  function import2db($login="") {
     GLOBAL $pdl;
     $this->db->begin();
-    $userID = $this->db->userIDget();
+    $userID = $this->db->userIDget($login);
+    if (!empty($login)) setup_diver_environment($login);
     if ($this->db->log_drop($userID)) {
       // Sites
+      unset($this->csv->sites); // force new read
       $sites = $this->csv->get_sites();
       for ($i=0;$i<$this->csv->sites;++$i) {
         $sites[$i]["latitude"] = $this->mk_coord($sites[$i]["latitude"]);
@@ -108,6 +110,7 @@
         }
       }
       // Dives + Equipment
+      unset($this->csv->dives); // force new read
       $dives = $this->csv->get_dives();
       $dc = count($dives);
       for ($i=0;$i<$dc;++$i) {
