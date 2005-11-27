@@ -57,6 +57,9 @@
      if ($uconf["personal"]) $pdl->config->display_personal = TRUE;
    }
    $pdl->config->user_pwd = $pdl->file->getPwd();
+   $pdl->config->datadir  = $pdl->config->user_path."data/";
+   $pdl->config->divedata = $pdl->config->datadir."logbook.csv";
+   $pdl->config->sites    = $pdl->config->datadir."divesites.csv";
  }
 
  setup_diver_environment();
@@ -73,9 +76,6 @@
  #=============================================================[ database ]===
  $pdl->config->db_type   = $database["type"];
  $pdl->config->database  = $database;
- $pdl->config->datadir  = $pdl->config->user_path."data/";
- $pdl->config->divedata = $pdl->config->datadir."logbook.csv";
- $pdl->config->sites    = $pdl->config->datadir."divesites.csv";
 
  #=============================================================[ clean up ]===
  unset($database,$display_limit,$allow_override,$enable_index,$pwdfile,
