@@ -439,14 +439,21 @@
        $pos = strpos($site["depth"],' ');
        $site["depth"] = substr($site["depth"],0,$pos)*10;
      }
-     if (!empty($site["description"])) $site["description"] = addslashes($site["description"]);
-     if (!is_numeric($site["rating"])) $site["rating"] = '';
-     $details = array("loc","place","latitude","longitude","altitude","depth","water","type","rating","description");
-     foreach ($details as $var) {
+     $details = array("description","loc","place","water","type");
+     foreach ($details as $var) { // strings
        if (!empty($site[$var])) {
          if ($var == "type") $fields .= ",stype";
          else $fields .= ",$var";
-         $values .= ",'".$site[$var]."'";
+         $values .= ",'".addslashes($site[$var])."'";
+       }
+     }
+#     if (!empty($site["description"])) $site["description"] = addslashes($site["description"]);
+     if (!is_numeric($site["rating"])) $site["rating"] = '';
+     $details = array("latitude","longitude","altitude","depth","rating");
+     foreach ($details as $var) { // numbers
+       if (!empty($site[$var])) {
+         $fields .= ",$var";
+         $values .= ",".$site[$var];
        }
      }
      $query = "INSERT INTO ".$this->tables->site." $fields) $values)";
@@ -462,15 +469,20 @@
     */
    function suit_add($suit) {
      GLOBAL $pdl;
-     $this->dbquery("SELECT id,name,stype,weight FROM ".$this->tables->suit." WHERE id=".$suit["id"]);
+     $userID = $this->userIDget();
+     if (empty($suit["id"]) && $suit["id"]!==0) {
+       $pdl->last_error = "suit_id_not_set";
+       return FALSE;
+     }
+     $this->dbquery("SELECT id,name,stype,weight FROM ".$this->tables->suit." WHERE id=".$suit["id"]." AND user_id=$userID");
      $this->next_record();
      $id = $this->f('id');
      if ($id==$suit["id"]) {
-       if ( ($this->f('name')!=$suit["name"]) || ($this->f('stype')!=$suit["stype"]) || ($this->f('weight')!=$suit["weight"]) )
+       if ( ($this->f('name')!=$suit["name"]) || ($this->f('stype')!=$suit["stype"]) || ($this->f('weight')!=$suit["weight"]) ) {
+         $pdl->last_error = "suit_details_no_match";
          return FALSE;
-       else return TRUE; //already have this
+       } else return TRUE; //already have this
      }
-     $userID = $this->userIDget();
      $fields = "(id,user_id";
      $values = "VALUES (".$suit["id"].",$userID";
      $details = array("name","stype","weight");
@@ -490,23 +502,24 @@
     */
    function tank_add($tank) {
      GLOBAL $pdl;
-     $this->dbquery("SELECT id,name,ttype,volume FROM ".$this->tables->tank." WHERE id=".$tank["id"]);
+     $userID = $this->userIDget();
+     $this->dbquery("SELECT id,name,ttype,volume FROM ".$this->tables->tank." WHERE id=".$tank["id"]." AND user_id=$userID");
      $this->next_record();
      $id = $this->f('id');
      if ($id===0||$id==='0') return TRUE; // *!* workaround wrong entry (id=0)
      if ($id==$tank["id"]) {
        if ( ($this->f('name')!=$tank["name"]) || ($this->f('volume')!=$tank["volume"]) || ($this->f('ttype')!=$tank["ttype"]) ) {
-         return FALSE; }
-       else return TRUE; //already have this
+         $pdl->last_error = "tank_details_no_match";
+         return FALSE;
+       } else return TRUE; //already have this
      }
-     $userID = $this->userIDget();
-     $fields = "(id,user_id";
-     $values = "VALUES (".$tank["id"].",$userID";
-     $details = array("name","ttype","volume");
+     $fields = "(id,user_id,volume";
+     $values = "VALUES (".$tank["id"].",$userID,".$tank["volume"];
+     $details = array("name","ttype");
      foreach ($details as $var) {
        if (!empty($tank[$var])) {
          $fields .= ",$var";
-         $values .= ",'".$tank[$var]."'";
+         $values .= ",'".addslashes($tank[$var])."'";
        }
      }
      $query = "INSERT INTO ".$this->tables->tank." $fields) $values)";
@@ -523,7 +536,8 @@
     */
    function dive_add($dive) {
      GLOBAL $pdl;
-     $this->dbquery("SELECT id FROM ".$this->tables->logbook." WHERE id=".$dive["dive#"]);
+     $userID = $this->userIDget();
+     $this->dbquery("SELECT id FROM ".$this->tables->logbook." WHERE id=".$dive["dive#"]." AND user_id=$userID");
      $this->next_record();
      $id = $this->f('id');
      if (!empty($id)) {
@@ -545,7 +559,6 @@
      $dive["tank_out"] .= ",";
      $dive["notes"] = addslashes($dive["notes"]);
      // create and execute statement
-     $userID = $this->userIDget();
      $fields = "(id,user_id";
      $values = "VALUES (".$dive["dive#"].",$userID";
      $details = array("site_id","suit_id","rating","depth","divetime","tanks","visibility","watertemp","airtemp");
