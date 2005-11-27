@@ -175,7 +175,7 @@
      $this->next_record();
      $langs = $this->f('langs');
      if ($langs!=0) {
-       $pdl->last_error = "duplicate_lang_id";
+       $pdl->last_error[] = "duplicate_lang_id";
        return FALSE;
      }
      $query = "INSERT INTO ".$this->tables->languages
@@ -215,7 +215,7 @@
             . " WHERE lang_id='$lang_id'";
      if (!$this->dbquery($query)) {
        $this->rollback();
-       $pdl->last_error = "translation_truncate_failed";
+       $pdl->last_error[] = "translation_truncate_failed";
        return FALSE;
      }
      foreach ($translations as $var=>$val) {
@@ -223,7 +223,7 @@
               . "(lang_id,message_id,content) VALUES ('$lang_id','$var','".addslashes($val)."')";
        if (!$this->dbquery($query)) {
          $this->rollback();
-         $pdl->last_error = "translation_insert_failed";
+         $pdl->last_error[] = "translation_insert_failed";
          return FALSE;
        }
      }
@@ -270,7 +270,7 @@
      $this->dbquery("SELECT id FROM ".$this->tables->user." WHERE login='".$user->login."'");
      $this->next_record();
      if ($this->f('id')) {
-       $pdl->last_error = "duplicate_user";
+       $pdl->last_error[] = "duplicate_user";
        return FALSE;
      }
      // if still here, add the user
@@ -290,7 +290,7 @@
      $query .= ") VALUES $values)";
      $this->dbquery($query);
      if ( $this->affected_rows() < 0 ) {
-       $pdl->last_error = "no_affected_rows";
+       $pdl->last_error[] = "no_affected_rows";
        return FALSE;
      }
      return TRUE;
@@ -304,17 +304,17 @@
    function user_drop($user_id) {
      GLOBAL $pdl;
      if (empty($user_id)) {
-       $pdl->last_error = "user_id_empty";
+       $pdl->last_error[] = "user_id_empty";
        return FALSE;
      }
      $this->begin();
      if (!$this->log_drop($user_id)) {
-       $pdl->last_error = "log_drop_failed";
+       $pdl->last_error[] = "log_drop_failed";
        $this->rollback();
        return FALSE;
      }
      if (!$this->dbquery("DELETE FROM ".$this->tables->user." WHERE id=$user_id")) {
-       $pdl->last_error = "user_delete_failed";
+       $pdl->last_error[] = "user_delete_failed";
        $this->rollback();
        return FALSE;
      }
@@ -350,7 +350,7 @@
      if (empty($logins)) {
        $query = "SELECT id,login FROM ".$this->tables->user;
        if (!$this->dbquery($query)) {
-         $pdl->last_error = "user_logins_query_failed";
+         $pdl->last_error[] = "user_logins_query_failed";
          return FALSE;
        }
        while ($this->next_record()) {
@@ -379,7 +379,7 @@
        $mode = "single";
      }
      if (!$this->dbquery($query)) {
-       $pdl->last_error = "userpref_query_failed";
+       $pdl->last_error[] = "userpref_query_failed";
        return FALSE;
      }
      if ($mode=="single") {
@@ -417,7 +417,7 @@
               . " WHERE user_id=$user_id AND name='$name'";
      }
      if ($this->dbquery($query)) return TRUE;
-     $pdl->last_error = "set_userpref_failed";
+     $pdl->last_error[] = "set_userpref_failed";
      return FALSE;
    }
 
@@ -471,7 +471,7 @@
      GLOBAL $pdl;
      $userID = $this->userIDget();
      if (empty($suit["id"]) && $suit["id"]!==0) {
-       $pdl->last_error = "suit_id_not_set";
+       $pdl->last_error[] = "suit_id_not_set";
        return FALSE;
      }
      $this->dbquery("SELECT id,name,stype,weight FROM ".$this->tables->suit." WHERE id=".$suit["id"]." AND user_id=$userID");
@@ -479,7 +479,7 @@
      $id = $this->f('id');
      if ($id==$suit["id"]) {
        if ( ($this->f('name')!=$suit["name"]) || ($this->f('stype')!=$suit["stype"]) || ($this->f('weight')!=$suit["weight"]) ) {
-         $pdl->last_error = "suit_details_no_match";
+         $pdl->last_error[] = "suit_details_no_match";
          return FALSE;
        } else return TRUE; //already have this
      }
@@ -509,7 +509,7 @@
      if ($id===0||$id==='0') return TRUE; // *!* workaround wrong entry (id=0)
      if ($id==$tank["id"]) {
        if ( ($this->f('name')!=$tank["name"]) || ($this->f('volume')!=$tank["volume"]) || ($this->f('ttype')!=$tank["ttype"]) ) {
-         $pdl->last_error = "tank_details_no_match";
+         $pdl->last_error[] = "tank_details_no_match";
          return FALSE;
        } else return TRUE; //already have this
      }
@@ -577,8 +577,6 @@
      }
      $query = "INSERT INTO ".$this->tables->logbook." $fields) $values)";
      return $this->dbquery($query);
-     echo "$query<br>";
-     return TRUE;
    }
 
    function tank_details_get($id,$user_id) {
@@ -701,7 +699,7 @@
        $ok = $this->dbquery($query);
      }
      if (!$ok) {
-       $pdl->last_error = "dive_query_execute_failed";
+       $pdl->last_error[] = "dive_query_execute_failed";
        return array();
      }
      if ($mode=="single") {
@@ -792,7 +790,7 @@
        $ok = $this->dbquery($query);
      }
      if (!$ok) {
-       $pdl->last_error = "site_query_execute_failed";
+       $pdl->last_error[] = "site_query_execute_failed";
        return array();
      }
      if ($mode=="single") {
@@ -827,7 +825,7 @@
               . " WHERE s.user_id=p.user_id AND p.name='public' AND p.value=1"
               . " GROUP BY loc";
        if (!$this->dbquery($query)) {
-         $pdl->last_error = "location_query_failed";
+         $pdl->last_error[] = "location_query_failed";
          return array();
        }
        while ($this->next_record()) {
@@ -841,7 +839,7 @@
               . " WHERE s.user_id=p.user_id AND p.name='public' AND p.value=1"
               . "   AND loc='$showPlace'";
        if (!$this->dbquery($query)) {
-         $pdl->last_error = "location_query_failed";
+         $pdl->last_error[] = "location_query_failed";
          return array();
        }
        while ($this->next_record()) {
@@ -872,7 +870,7 @@
             . "  FROM ".$this->tables->logbook
             . " WHERE user_id=$user_id";
      if (!$this->dbquery($query)) {
-       $pdl->last_error = "stats_query_failed";
+       $pdl->last_error[] = "stats_query_failed";
        return array();
      }
      $this->next_record();
@@ -888,7 +886,7 @@
      $stats["cum_dive_time"] = $pdl->common->time_format($stats["cum_dive_time"]);
      $query = "SELECT count(id) sites FROM ".$this->tables->site." WHERE user_id=$user_id";
      if (!$this->dbquery($query)) {
-       $pdl->last_error = "stats_query_failed";
+       $pdl->last_error[] = "stats_query_failed";
        return array();
      }
      $this->next_record();

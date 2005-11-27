@@ -105,7 +105,7 @@
         $sites[$i]["longitude"] = $this->mk_coord($sites[$i]["longitude"]);
         if (!$this->db->site_add($sites[$i])) {
           $this->db->rollback();
-          $pdl->last_error = "site_import_failed";
+          $pdl->last_error[] = "site_import_failed";
           return FALSE;
         }
       }
@@ -123,7 +123,7 @@
         $suit["weight"] = $dives[$i]["suitweight"];
         if (!$this->db->suit_add($suit)) {
           $this->db->rollback();
-          $pdl->last_error = "suit_import_failed";
+          $pdl->last_error[] = "suit_import_failed";
           return FALSE;
         }
         // tanks
@@ -136,7 +136,7 @@
           $tank["volume"] = substr($tank["volume"],0,$pos);
           if (!$this->db->tank_add($tank)) {
             $this->db->rollback();
-            $pdl->last_error = "tank_import_failed";
+            $pdl->last_error[] = "tank_import_failed";
             return FALSE;
           }
           $pos = strpos($dives[$i]["tank"][$k]->in,' ');
@@ -165,12 +165,12 @@
         $dives[$i]["weight"] = substr($dives[$i]["weight"],0,$pos)*2;
         if (!$this->db->dive_add($dives[$i])) {
           $this->db->rollback();
-          $pdl->last_error = "dive_import_failed";
+          $pdl->last_error[] = "dive_import_failed";
           return FALSE;
         }
       }
     } else {
-      $pdl->last_error = "log_drop_failed";
+      $pdl->last_error[] = "log_drop_failed";
       $this->db->rollback();
       return FALSE;
     }
@@ -181,7 +181,7 @@
       $ok = $this->db->user_pref_set("public","1");
     else $ok = $this->db->user_pref_set("public","0");
     if (!$ok) {
-      $pdl->last_error = "pref_update_failed";
+      $pdl->last_error[] = "pref_update_failed";
       $this->db->rollback();
     }
     $this->db->commit();

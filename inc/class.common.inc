@@ -46,6 +46,19 @@
     $t->pparse("out","template");
   }
 
+  /** Print the error stack
+   * @method last_error
+   */
+  function last_error() {
+    GLOBAL $pdl;
+    $lc = count($pdl->last_error);
+    $msg = "";
+    for ($i=0;$i<$lc;++$i) {
+      $msg .= lang($pdl->last_error[$i])."<br>";
+    }
+    $this->alert($msg);
+  }
+
   /* Helper to tagreplace: replace dirnames in URLs (private!) */
   function dirReplace($string,$url=0) {
     GLOBAL $pdl;
