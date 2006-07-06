@@ -62,12 +62,14 @@
      $fc = count($fields);
      for ($i=0;$i<$fc;++$i) {
        if (substr($fields[$i],0,1)==$this->txt) {
+         $name = substr($fields[$i],1,strlen($fields[$i])-2);
          $this->field[$i]->txt  = TRUE;
-	 $this->field[$i]->name = substr($fields[$i],1,strlen($fields[$i])-2);
        } else {
+         $name = $fields[$i];
          $this->field[$i]->txt  = FALSE;
-	 $this->field[$i]->name = $fields[$i];
        }
+       $this->field[$i]->name = $name;
+       $this->fieldid[$name] = $i;
        if ($this->trim) $this->field[$i]->name = trim($this->field[$i]->name);
        $this->field[$i]->name = $this->recode($this->field[$i]->name);
      }
@@ -168,6 +170,35 @@
        default: return($string);
      }
    }
+
+# =========================================================[ data methods ]===
+   /** Sort data by field
+    * @class csv
+    * @method sort
+    * @param string column sort by which column?
+    * @param optional string order ASC or DESC
+    * @param optional string type "num" or "str" (default: AutoDetect)
+    */
+   function sort($column,$order="ASC",$type="") {
+     $array=$this->data;
+     if (sizeof($array)==0) return;
+     $id = $this->fieldid[$column];
+     if (empty($type)||($type!="num" && $type!="str")) {
+       if ($this->field[$id]->txt) { $type="str"; } else { $type="num"; }
+     }
+     if ($order=="ASC") $option=""; else $option="!";
+     if ($type=="str") {
+       $this->array_key_multi_srt($array,$column,$option."strcmp");
+     } else {
+       $this->array_key_multi_srt($array,$column,$option."bccomp");
+     }
+     $this->data=$array;
+   }
+
+   function array_key_multi_srt(&$arr,$l,$f='strcmp') {
+     return usort($arr, create_function('$a, $b', "return $f(\$a['$l'], \$b['$l']);"));
+   }
+
 
  } // end class csv
 
