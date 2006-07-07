@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpApi                                        (c) 2004 by Itzchak Rehberg #
+ # phpApi                                   (c) 2004-2006 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
  # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
@@ -179,7 +179,9 @@
     * @param optional string order ASC or DESC
     * @param optional string type "num" or "str" (default: AutoDetect)
     */
-   function sort($column,$order="ASC",$type="") {
+   function sort($column,$order="",$type="") {
+     $order = strtoupper($order);
+     if (empty($order)) $order = "ASC";
      $array=$this->data;
      if (sizeof($array)==0) return;
      $id = $this->fieldid[$column];
@@ -188,15 +190,19 @@
      }
      if ($order=="ASC") $option=""; else $option="!";
      if ($type=="str") {
-       $this->array_key_multi_srt($array,$column,$option."strcmp");
+       $this->array_key_multi_srt($array,$column,$option,"strcmp");
      } else {
-       $this->array_key_multi_srt($array,$column,$option."bccomp");
+       $this->array_key_multi_srt($array,$column,$option,"bccomp");
      }
      $this->data=$array;
    }
 
-   function array_key_multi_srt(&$arr,$l,$f='strcmp') {
-     return usort($arr, create_function('$a, $b', "return $f(\$a['$l'], \$b['$l']);"));
+   function array_key_multi_srt(&$arr,$l,$option,$f='strcmp') {
+     if ($option=="!") {
+       return usort($arr, create_function('$b, $a', "return $f(\$a['$l'], \$b['$l']);"));
+     } else {
+       return usort($arr, create_function('$a, $b', "return $f(\$a['$l'], \$b['$l']);"));
+     }
    }
 
 

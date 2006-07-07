@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2006 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
  # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
@@ -43,8 +43,9 @@
     if (empty($lang)) $lang = "en";
     $tpl = $_GET["tpl"]; if (empty($tpl)) $tpl = $template_set;
     $diver = $_GET["diver"];
+    $order = $GLOBALS["order"]; $sort = $GLOBALS["sort"];
     $params = "";
-    $details = array("lang","tpl","diver");
+    $details = array("lang","tpl","diver","sort","order");
     foreach ($details as $element) {
      if ( !(strpos($target,"$element=")) && !empty(${$element}) ) {
       if (empty($params)) {

@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2005 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2006 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
  # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
@@ -680,15 +680,26 @@
     * @param optional boolean id whether to identify by dive# (TRUE) or
     *  record set (FALSE), defaults to FALSE (ignored; only compatibility
     *  for the CSV "database")
+    * @param optional string sort column to sort by
+    * @param optional string order sort order (asc or desc)
     * @return array divedata (either array of dive records or single record)
     */
-   function dives_get($start="",$end="",$id=FALSE) {
+   function dives_get($start="",$end="",$id=FALSE,$sort="",$order="") {
      GLOBAL $pdl;
      $query = $this->dives_base_query();
      $mode  = "list"; // list of dives or single dive?
+        switch($sort) {
+          case "date"  : $sort = "l.datum"; break;
+          case "time"  : $sort = "l.zeit"; break;
+          case "place" : $sort = "si.place"; break;
+          case "rating": $sort = "l.rating"; break;
+          case "depth" : $sort = "l.depth"; break;
+          case "buddy" : $sort = "l.buddy"; break;
+          default      : $sort = "l.id"; break;
+        }
      if ($start!=="") {
        if ($end!=="") { // dive list
-         $query .= " ORDER BY l.id ";
+         $query .= " ORDER BY $sort $order";
          $ok = $this->lim_query($query,$start);
        } else { // single record
          $mode = "single";
@@ -897,8 +908,8 @@
    #########################################################################
    # Temporary wrappers
    #########################################################################
-   function get_dives($start="",$end="",$id=FALSE) {
-     return $this->dives_get($start,$end,$id);
+   function get_dives($start="",$end="",$id=FALSE,$sort="",$order="") {
+     return $this->dives_get($start,$end,$id,$sort,$order);
    }
    function get_dive($nr) {
      return $this->dives_get($nr);

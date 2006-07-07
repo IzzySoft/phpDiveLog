@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2006 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
  # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
@@ -87,8 +87,10 @@
    /** Read the dive data file and setup the dive data
     * @class db_text
     * @method read_divedata
+    * @param optional string sort column to sort by
+    * @param optional string order sort order (asc or desc)
     */
-   function read_divedata() {
+   function read_divedata($sort="",$order="") {
      GLOBAL $pdl;
      if ($this->dives) return; // prevent multiple reads
      switch ($pdl->config->db_type) {
@@ -97,6 +99,17 @@
          $csv = new csv(";",'"',TRUE);
          if (file_exists($pdl->config->divedata)) {
            $csv->import($pdl->config->divedata);
+           switch($sort) {
+             case "date"  :
+             case "time"  : $sort = "dive#"; $type="num"; break;
+             case "place" :
+             case "rating":
+             case "depth" :
+             case "buddy" : $type = "str"; break;
+           }
+           if (!empty($sort)) {
+             $csv->sort($sort,$order,$type);
+           }
            $this->divedata = $csv->data;
            $this->dives    = count($this->divedata);
            $this->setup_dive_records();
@@ -151,10 +164,12 @@
     * @param optional string end last dive# to return
     * @param optional boolean id whether to identify by dive# (TRUE) or
     *  record set (FALSE), defaults to FALSE
+    * @param optional string sort column to sort by
+    * @param optional string order sort order (asc or desc)
     * @return array divedata (either array of dive records or single record)
     */
-   function get_dives($start="",$end="",$id=FALSE) {
-     $this->read_divedata();
+   function get_dives($start="",$end="",$id=FALSE,$sort="",$order="") {
+     $this->read_divedata($sort,$order);
      if ($start!=="") {
        if ($id) { // identify by dive#
          if ($end!=="") { // range of records
