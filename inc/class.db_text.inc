@@ -102,6 +102,7 @@
            switch($sort) {
              case "date"  :
              case "time"  : $sort = "dive#"; $type="num"; break;
+             case "location" :
              case "place" :
              case "rating":
              case "depth" :

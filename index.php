@@ -25,7 +25,7 @@
 
  #==============================================[ Import dive data from DB ]===
  $sort = $_REQUEST["sort"]; $order = $_REQUEST["order"];
- if (!in_array($sort,array("date","time","place","rating","depth","buddy"))) $sort = "";
+ if (!in_array($sort,array("date","time","location","place","rating","depth","buddy"))) $sort = "";
  if (!in_array($order,array("desc","asc"))) $order = "";
  $dives = $pdl->db->get_dives($start,$pdl->config->display_limit,FALSE,$sort,$order);
  $max   = count($dives);
@@ -59,6 +59,8 @@
  $sortimg["down"]["date"] = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?sort=date&order=desc","<img src='".$pdl->config->tpl_url."images/down.gif'>");
  $sortimg["up"]["time"] = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?sort=time&order=asc","<img src='".$pdl->config->tpl_url."images/up.gif'>");
  $sortimg["down"]["time"] = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?sort=time&order=desc","<img src='".$pdl->config->tpl_url."images/down.gif'>");
+ $sortimg["up"]["location"] = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?sort=location&order=asc","<img src='".$pdl->config->tpl_url."images/up.gif'>");
+ $sortimg["down"]["location"] = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?sort=location&order=desc","<img src='".$pdl->config->tpl_url."images/down.gif'>");
  $sortimg["up"]["place"] = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?sort=place&order=asc","<img src='".$pdl->config->tpl_url."images/up.gif'>");
  $sortimg["down"]["place"] = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?sort=place&order=desc","<img src='".$pdl->config->tpl_url."images/down.gif'>");
  $sortimg["up"]["rating"] = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?sort=rating&order=asc","<img src='".$pdl->config->tpl_url."images/up.gif'>");
@@ -77,6 +79,11 @@
                     $sortimg["down"]["time"] = "<img src='".$pdl->config->tpl_url."images/down-grey.gif'>";
                   } else {
                     $sortimg["up"]["time"] = "<img src='".$pdl->config->tpl_url."images/up-grey.gif'>";
+                  } break;
+   case "location" : if ($order=="desc") {
+                    $sortimg["down"]["location"] = "<img src='".$pdl->config->tpl_url."images/down-grey.gif'>";
+                  } else {
+                    $sortimg["up"]["location"] = "<img src='".$pdl->config->tpl_url."images/up-grey.gif'>";
                   } break;
    case "place" : if ($order=="desc") {
                     $sortimg["down"]["place"] = "<img src='".$pdl->config->tpl_url."images/down-grey.gif'>";
@@ -102,7 +109,7 @@
  #--------------------------------------------[ table header template vars ]---
  $t->set_var("date_name",lang("date")."&nbsp;".$sortimg["up"]["date"].$sortimg["down"]["date"]);
  $t->set_var("time_name",lang("time")."&nbsp;".$sortimg["up"]["time"].$sortimg["down"]["time"]);
- $t->set_var("loc_name",lang("place")."&nbsp;".$sortimg["up"]["place"].$sortimg["down"]["place"]);
+ $t->set_var("loc_name",$sortimg["up"]["location"].$sortimg["down"]["location"]."&nbsp;".lang("place")."&nbsp;".$sortimg["up"]["place"].$sortimg["down"]["place"]);
  $t->set_var("rat_name",lang("rating")."&nbsp;".$sortimg["up"]["rating"].$sortimg["down"]["rating"]);
  $t->set_var("ddt_name",lang("depth+divetime")."&nbsp;".$sortimg["up"]["depth"].$sortimg["down"]["depth"]);
  $t->set_var("buddy_name",lang("buddy")."&nbsp;".$sortimg["up"]["buddy"].$sortimg["down"]["buddy"]);

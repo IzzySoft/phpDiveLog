@@ -688,9 +688,11 @@
      GLOBAL $pdl;
      $query = $this->dives_base_query();
      $mode  = "list"; // list of dives or single dive?
+#     echo "<b>$sort</b><br>";
         switch($sort) {
           case "date"  : $sort = "l.datum"; break;
           case "time"  : $sort = "l.zeit"; break;
+          case "location" : $sort = "si.loc,si.place"; break;
           case "place" : $sort = "si.place"; break;
           case "rating": $sort = "l.rating"; break;
           case "depth" : $sort = "l.depth"; break;
@@ -700,6 +702,7 @@
      if ($start!=="") {
        if ($end!=="") { // dive list
          $query .= " ORDER BY $sort $order";
+#         die($query);
          $ok = $this->lim_query($query,$start);
        } else { // single record
          $mode = "single";
