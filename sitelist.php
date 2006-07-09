@@ -27,6 +27,10 @@
  $sort = $_REQUEST["sort"]; $order = $_REQUEST["order"];
  if (!in_array($sort,array("location","place","depth"))) $sort = "";
  if (!in_array($order,array("desc","asc"))) $order = "";
+ if (empty($sort) && !empty($pdl->config->sitelist_default_sort)) {
+   $sort  = $pdl->config->sitelist_default_sort;
+   $order = $pdl->config->sitelist_default_order;
+ }
  $sites = $pdl->db->get_sites($start,$pdl->config->display_limit,FALSE,$sort,$order);
  $max   = count($sites);
  $records = $pdl->db->sites;

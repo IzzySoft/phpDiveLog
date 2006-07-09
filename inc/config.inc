@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2005 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2006 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
  # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
@@ -31,11 +31,16 @@
  $default_page  = "user"; # where to route requests without the "?diver=nick"
                           # to: user|index|error ("index" is not supported yet
                           # and will be handled as "error")
- $default_user  = "demo"; # if default_page=user: which user is the default?
+ $default_user  = "izzy"; # if default_page=user: which user is the default?
                           # must be a valid account (subdir diver/<user>)
  $allow_override = "title lang display_limit template_set userdef1 userdef2"; 
                           # which settings may be adjusted via the
                           # diver/*/system.conf - space separated values
  $pwdfile = "/etc/pdlpwd";# password file for data transfers
  $transfer_dir = "/home/pdl/transfer/"; # base directory of user data transfers
+ #--------------------------------------------------------------[ sorting ]---
+ $logbook_default_sort   = "date";
+ $logbook_default_order  = "desc";
+ $sitelist_default_sort  = "location";
+ $sitelist_default_order = "asc";
 ?>

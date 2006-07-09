@@ -27,6 +27,10 @@
  $sort = $_REQUEST["sort"]; $order = $_REQUEST["order"];
  if (!in_array($sort,array("date","time","location","place","rating","depth","buddy"))) $sort = "";
  if (!in_array($order,array("desc","asc"))) $order = "";
+ if (empty($sort) && !empty($pdl->config->logbook_default_sort)) {
+   $sort  = $pdl->config->logbook_default_sort;
+   $order = $pdl->config->logbook_default_order;
+ }
  $dives = $pdl->db->get_dives($start,$pdl->config->display_limit,FALSE,$sort,$order);
  $max   = count($dives);
  $records = $pdl->db->dives;
