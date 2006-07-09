@@ -256,6 +256,17 @@ a short documentation for the available parameters and their effects:
     using the "single OS user transfer". This should be the directory containing
     the diver directories directly below it (i.e. the counterpart to the PDL
     <code>diver/</code> directory - also see the {admin_page} for this).</td></tr>
+ <tr><td class="td_blank"><b><code>$logbook_default_sort</code></b></td>
+  <td class="td_blank" rowspan="4">These are the default sort settings if one
+    enters the logbook resp. sitelist first time on the visit, and did not yet
+    apply a custom sort (i.e. did not yet click one of the up/down arrows next
+    to the column names). The <code>*_order</code> can be either "asc" or
+    "desc". For the <code>*_sort</code> are the following values valid:<ul>
+    <li>logbook: date, time, location, place, rating, depth, buddy</li>
+    <li>sitelist: location, place, depth</li></ul></td></tr>
+ <tr><td class="td_blank"><b><code>$logbook_default_order</code></b></td></tr>
+ <tr><td class="td_blank"><b><code>$sitelist_default_sort</code></b></td></tr>
+ <tr><td class="td_blank"><b><code>$sitelist_default_order</code></b></td></tr>
 </table>
 
 #---[ Updating ]----------------------------------------------[ Updating ]---
