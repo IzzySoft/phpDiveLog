@@ -1,6 +1,7 @@
 <?
  $inc = "../inc";
  $pdl->config->tpl_url = "../templates/aqua/";
+ $pdl->config->db_type = "cvs";
  include("$inc/class.link.inc");
  include("$inc/class.template.inc");
  include("inc/class.faq.inc");
