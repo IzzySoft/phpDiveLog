@@ -1,5 +1,5 @@
 #############################################################################
-# phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+# phpDiveLog                               (c) 2004-2006 by Itzchak Rehberg #
 # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
 # http://www.qumran.org/homes/izzy/                                         #
 # ------------------------------------------------------------------------- #
@@ -90,6 +90,10 @@ the following links:
  <li>The dive site itself links to details about the dive site</li>
  <li>The footer of the page contains a link to the phpDiveLog homepage ;)</li>
 </ul>
+
+[text]
+Using the little "Up" and "Down" arrows next to the column names, you can sort
+the list by that column, either ascending (up) or descending (down).
 
 # ===========================================================================
 [title]
