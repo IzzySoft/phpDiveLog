@@ -10,7 +10,7 @@
  include("inc/mailto.inc");
 
  $mailto = smailto("izzysoft@qumran.org","IzzySoft");
- $pdl->config->version = "0.2.5";
+ $pdl->config->version = "0.2.7";
  $intro_page = $pdl->link->linkurl("common.php","Intro");
  $install_page = $pdl->link->linkurl("install.php","Installation Instructions");
  $admin_page = $pdl->link->linkurl("admin.php","Site Administration");
