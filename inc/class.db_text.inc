@@ -217,9 +217,11 @@
   #============================================================[ Locations ]===
    /** Read the site data file and setup the site data
     * @class db_text
+    * @param optional string sort column to sort by
+    * @param optional string order sort order (asc or desc)
     * @method read_divedata
     */
-   function read_sitedata() {
+   function read_sitedata($sort="",$order="") {
      GLOBAL $pdl;
      if ($this->sites) return; // prevent multiple reads
      switch ($pdl->config->db_type) {
@@ -228,6 +230,14 @@
          $csv = new csv(";",'"',TRUE);
 	 if (file_exists($pdl->config->sites)) {
            $csv->import($pdl->config->sites);
+           switch ($sort) {
+             case "location" : $sort="loc"; $type="str"; break;
+             case "place"    :
+             case "depth"    : $type="str"; break;
+           }
+           if (!empty($sort)) {
+             $csv->sort($sort,$order,$type);
+           }
            $this->sitedata = $csv->data;
            $this->sites    = count($this->sitedata);
            $this->setup_site_records(); // temporary - see func *!*
@@ -255,10 +265,12 @@
     * @param optional string end last site# to return
     * @param optional boolean id whether to identify by site# (TRUE) or
     *  record set (FALSE), defaults to FALSE
+    * @param optional string sort column to sort by
+    * @param optional string order sort order (asc or desc)
     * @return array sitedata (either array of site records or single record)
     */
-   function get_sites($start="",$end="",$id=FALSE) {
-     $this->read_sitedata();
+   function get_sites($start="",$end="",$id=FALSE,$sort="",$order="") {
+     $this->read_sitedata($sort,$order);
      if ($start==="") { // all records
        return $this->sitedata;
      } else {

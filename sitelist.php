@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2006 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
  # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
@@ -24,7 +24,10 @@
  $t->set_block("template","itemblock","item");
 
  #==============================================[ Import dive data from DB ]===
- $sites = $pdl->db->get_sites($start,$pdl->config->display_limit);
+ $sort = $_REQUEST["sort"]; $order = $_REQUEST["order"];
+ if (!in_array($sort,array("location","place","depth"))) $sort = "";
+ if (!in_array($order,array("desc","asc"))) $order = "";
+ $sites = $pdl->db->get_sites($start,$pdl->config->display_limit,FALSE,$sort,$order);
  $max   = count($sites);
  $records = $pdl->db->sites;
 
@@ -51,9 +54,34 @@
  }
 
  #===============================================[ set up the table header ]===
- $t->set_var("loc_name",lang("location"));
- $t->set_var("place_name",lang("place"));
- $t->set_var("md_name",lang("max_depth"));
+ #--------------------------------------------------------[ sorting images ]---
+ $sortimg["up"]["location"] = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?sort=location&order=asc","<img src='".$pdl->config->tpl_url."images/up.gif'>");
+ $sortimg["down"]["location"] = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?sort=location&order=desc","<img src='".$pdl->config->tpl_url."images/down.gif'>");
+ $sortimg["up"]["place"] = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?sort=place&order=asc","<img src='".$pdl->config->tpl_url."images/up.gif'>");
+ $sortimg["down"]["place"] = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?sort=place&order=desc","<img src='".$pdl->config->tpl_url."images/down.gif'>");
+ $sortimg["up"]["depth"] = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?sort=depth&order=asc","<img src='".$pdl->config->tpl_url."images/up.gif'>");
+ $sortimg["down"]["depth"] = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?sort=depth&order=desc","<img src='".$pdl->config->tpl_url."images/down.gif'>");
+ switch ($sort) {
+   case "location" : if ($order=="desc") {
+                       $sortimg["down"]["location"] = "<img src='".$pdl->config->tpl_url."images/down-grey.gif'>";
+                     } else {
+                       $sortimg["up"]["location"] = "<img src='".$pdl->config->tpl_url."images/up-grey.gif'>";
+                     } break;
+   case "place"    : if ($order=="desc") {
+                       $sortimg["down"]["place"] = "<img src='".$pdl->config->tpl_url."images/down-grey.gif'>";
+                     } else {
+                       $sortimg["up"]["place"] = "<img src='".$pdl->config->tpl_url."images/up-grey.gif'>";
+                     } break;
+   case "depth"    : if ($order=="desc") {
+                       $sortimg["down"]["depth"] = "<img src='".$pdl->config->tpl_url."images/down-grey.gif'>";
+                     } else {
+                       $sortimg["up"]["depth"] = "<img src='".$pdl->config->tpl_url."images/up-grey.gif'>";
+                     } break;
+ }
+ #--------------------------------------------[ table header template vars ]---
+ $t->set_var("loc_name",lang("location")."&nbsp;".$sortimg["up"]["location"].$sortimg["down"]["location"]);
+ $t->set_var("place_name",lang("place")."&nbsp;".$sortimg["up"]["place"].$sortimg["down"]["place"]);
+ $t->set_var("md_name",lang("max_depth")."&nbsp;".$sortimg["up"]["depth"].$sortimg["down"]["depth"]);
 
  #============================[ Walk through the list and set up the table ]===
  $details = array ("id","loc","place","depth");
@@ -64,7 +92,7 @@
    if (!$sites[$i]["depth"]) {
      $t->set_var("depth","&nbsp;");
    } else {
-     $t->set_var("depth",$sites[$i]["depth"]."m");
+     $t->set_var("depth",$sites[$i]["depth"]);
    }
    $t->set_var("site_ref",$pdl->link->linkurl("site.php?id=".$sites[$i]["id"],$sites[$i]["id"]));
 #   $t->set_var("rating",$pdl->config->tpl_url."images/".$sites[$i]["rating"]."star.gif");

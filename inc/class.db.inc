@@ -688,21 +688,19 @@
      GLOBAL $pdl;
      $query = $this->dives_base_query();
      $mode  = "list"; // list of dives or single dive?
-#     echo "<b>$sort</b><br>";
-        switch($sort) {
-          case "date"  : $sort = "l.datum"; break;
-          case "time"  : $sort = "l.zeit"; break;
-          case "location" : $sort = "si.loc,si.place"; break;
-          case "place" : $sort = "si.place"; break;
-          case "rating": $sort = "l.rating"; break;
-          case "depth" : $sort = "l.depth"; break;
-          case "buddy" : $sort = "l.buddy"; break;
-          default      : $sort = "l.id"; break;
-        }
+     switch($sort) {
+       case "date"  : $sort = "l.datum"; break;
+       case "time"  : $sort = "l.zeit"; break;
+       case "location" : $sort = "si.loc,si.place"; break;
+       case "place" : $sort = "si.place"; break;
+       case "rating": $sort = "l.rating"; break;
+       case "depth" : $sort = "l.depth"; break;
+       case "buddy" : $sort = "l.buddy"; break;
+       default      : $sort = "l.id"; break;
+     }
      if ($start!=="") {
        if ($end!=="") { // dive list
          $query .= " ORDER BY $sort $order";
-#         die($query);
          $ok = $this->lim_query($query,$start);
        } else { // single record
          $mode = "single";
@@ -758,7 +756,7 @@
      $site["longitude"] .= "°";
      $site["latitude"]  .= "°";
      $site["altitude"]  .= "m";
-     $site["depth"]     .= "m";
+     $site["depth"]      = round($site["depth"]/10)."m";
      if ($full) {
        $user_id = $this->userIDget();
        $query = "SELECT max(id) prev_id FROM ".$this->tables->site
@@ -785,23 +783,32 @@
     * @method sites_get
     * @param optional string start first site# to return
     * @param optional string end last site# to return
+    * @param optional string sort column to sort by
+    * @param optional string order sort order (asc or desc)
     * @return array sitedata (either array of site records or single record)
     */
-   function sites_get($start="",$end="",$id=FALSE) {
+   function sites_get($start="",$end="",$id=FALSE,$sort="",$order="") {
      GLOBAL $pdl;
      $user_id = $this->userIDget();
      $query = $this->sites_base_query(). " WHERE user_id=$user_id";
      $mode = "list"; // list of sites or single record?
+     switch ($sort) {
+       case "location" : $sort = " ORDER BY loc"; break;
+       case "place"    : $sort = " ORDER BY place"; break;
+       case "depth"    : $sort = " ORDER BY depth"; break;
+       default         : $sort = ""; break;
+     }
+     if (!empty($sort)) $sort .= " $order";
      if ($start!=="") {
        if ($end!=="") { // dive list
-         $ok = $this->lim_query($query,$start);
+         $ok = $this->lim_query($query.$sort,$start);
        } else { // single record
          $mode = "single";
          $query .= " AND id=$start";
          $ok = $this->dbquery($query);
        }
      } else { // return all data
-       $ok = $this->dbquery($query);
+       $ok = $this->dbquery($query.$sort);
      }
      if (!$ok) {
        $pdl->last_error[] = "site_query_execute_failed";
@@ -924,8 +931,8 @@
    function get_translations($lang,$trans=array()) {
      return $this->translations_get($lang,$trans);
    }
-   function get_sites($start="",$end="",$id=FALSE) {
-     return $this->sites_get($start,$end,$id);
+   function get_sites($start="",$end="",$id=FALSE,$sort="",$order="") {
+     return $this->sites_get($start,$end,$id,$sort,$order);
    }
    function get_site($id) {
      return $this->sites_get($id);
