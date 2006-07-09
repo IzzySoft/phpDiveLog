@@ -93,7 +93,9 @@ the following links:
 
 [text]
 Using the little "Up" and "Down" arrows next to the column names, you can sort
-the list by that column, either ascending (up) or descending (down).
+the list by that column, either ascending (up) or descending (down). If one of
+these two is "greyed out" this indicates you are just sorted by this column in
+this order.
 
 # ===========================================================================
 [title]
