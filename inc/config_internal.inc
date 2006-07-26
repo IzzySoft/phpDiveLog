@@ -65,10 +65,7 @@
  $pdl->config->datadir  = $pdl->config->user_path."data/";
  $pdl->config->divedata = $pdl->config->datadir."logbook.csv";
  $pdl->config->sites    = $pdl->config->datadir."divesites.csv";
- $pdl->config->database["host"]     = $database["host"];
- $pdl->config->database["database"] = $database["database"];
- $pdl->config->database["user"]     = $database["user"];
- $pdl->config->database["password"] = $database["password"];
+ $pdl->config->database = $database;
 
  #======================================================[ default sorting ]===
  $sa = array("logbook_default_sort","logbook_default_order",
