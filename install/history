@@ -6,6 +6,7 @@ History for phpDiveLog
 v0.2.7
 -------------------
 + added sorting (by columns) to logbook and sitelist
++ added some vulnerability checks
 
 v0.2.6 (08.11.2005)
 -------------------
