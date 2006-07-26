@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2005 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2006 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
  # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
@@ -12,6 +12,7 @@
 
  /* $Id$ */
 
+ include("inc/vul_check.inc");
  $diver = $_GET["diver"];
  $lang  = $_GET["lang"];
  $tpl   = $_GET["tpl"];
@@ -20,7 +21,7 @@
  include("inc/class.csv.inc");
  include("inc/config_internal.inc");
  switch($pdl->config->db_type) {
-   case "cvs"   :
+   case "csv"   :
      require_once("inc/class.db_text.inc");
      $pdl->db = new db_text();
      break;
