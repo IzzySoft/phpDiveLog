@@ -34,9 +34,9 @@
  }
  function vul_alnum($var) {
    if (!empty($_GET[$var])) {
-     if (preg_match("/^\w-/",$_GET[$var])) vul_kick(); }
+     if (preg_match("/[^\w-]/",$_GET[$var])) vul_kick(); }
    if (!empty($_REQUEST[$var])) {
-     if (preg_match("/^\w-/",$_REQUEST[$var])) vul_kick(); }
+     if (preg_match("/[^\w-]/",$_REQUEST[$var])) vul_kick(); }
  }
 
  #==========================================================[ common vars ]===
