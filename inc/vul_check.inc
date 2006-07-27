@@ -34,9 +34,9 @@
  }
  function vul_alnum($var) {
    if (!empty($_GET[$var])) {
-     if (preg_match("/\W/",$_GET[$var])) vul_kick(); }
+     if (preg_match("/^\w-/",$_GET[$var])) vul_kick(); }
    if (!empty($_REQUEST[$var])) {
-     if (preg_match("/\W/",$_REQUEST[$var])) vul_kick(); }
+     if (preg_match("/^\w-/",$_REQUEST[$var])) vul_kick(); }
  }
 
  #==========================================================[ common vars ]===
@@ -45,6 +45,18 @@
  vul_alnum("tpl");
  if (!empty($_REQUEST["nr"])) vul_num("nr");
  if (!empty($_REQUEST["id"])) vul_num("id");
+ vul_num("start");
 
-#die(basename($_SERVER["SCRIPT_NAME"]));
+ #============================================================[ site.php ]===
+ vul_num("id");
+
+ #==========================================================[ places.php ]===
+ vul_alnum("place");
+
+ #===========================================================[ prefs.php ]===
+ vul_alnum("tab2");
+
+ #========================================================[ sitelist.php ]===
+# if (basename($_SERVER["SCRIPT_NAME"])=="sitelist.php") {
+# }
 ?>
