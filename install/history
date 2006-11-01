@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.2.7
+v0.2.7 (01.11.2006)
 -------------------
 + added sorting (by columns) to logbook and sitelist
 + added some vulnerability checks
