@@ -3,6 +3,10 @@ $Id$
 History for phpDiveLog
 ======================
 
+v0.2.8
+-------------------
++ Dutch translations updated (Tnx to Robbie)
+
 v0.2.7 (01.11.2006)
 -------------------
 + added sorting (by columns) to logbook and sitelist
