@@ -1,8 +1,8 @@
 <?php
  #############################################################################
  # phpApi                                   (c) 2004-2005 by Itzchak Rehberg #
- # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
- # http://www.qumran.org/homes/izzy/                                         #
+ # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
+ # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
  # This program is free software; you can redistribute and/or modify it      #
  # under the terms of the GNU General Public License (see doc/LICENSE)       #
@@ -15,8 +15,8 @@
  /** File handling methods
   * @package Api
   * @class auth
-  * @author Izzy (izzysoft@qumran.org)
-  * @copyright (c) 2004 by Itzchak Rehberg and IzzySoft
+  * @author Izzy (izzysoft AT qumran DOT org)
+  * @copyright (c) 2004-2005 by Itzchak Rehberg and IzzySoft
   */
  class file {
 
