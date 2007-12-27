@@ -83,7 +83,8 @@
    $sites[$i]["description"] = $pdl->common->nl2br($sites[$i]["description"]);
    if ($include_firstpic) {
      $fotos = $pdl->file->getSitePix($sites[$i]["id"]);
-     $sites[$i]["description"] = "<IMG ALIGN='right' ALT='' SRC='$pdl_url/".$fotos[0]->url."'>".$sites[$i]["description"];
+     if (!empty($fotos[0]->url))
+       $sites[$i]["description"] = "<IMG ALIGN='right' ALT='' SRC='$pdl_url/".$fotos[0]->url."'>".$sites[$i]["description"];
    }
    foreach($details AS $detail) {
      $t->set_var("$detail",$sites[$i][$detail]);
