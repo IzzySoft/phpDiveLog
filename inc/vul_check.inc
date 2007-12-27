@@ -1,8 +1,8 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
- # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
- # http://www.izzysoft.de/                                                   #
+ # phpDiveLog                               (c) 2004-2006 by Itzchak Rehberg #
+ # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
+ # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
  # This program is free software; you can redistribute and/or modify it      #
  # under the terms of the GNU General Public License (see doc/LICENSE)       #
@@ -34,9 +34,9 @@
  }
  function vul_alnum($var) {
    if (!empty($_GET[$var])) {
-     if (preg_match("/[^\w\s-]/",$_GET[$var])) vul_kick(); }
+     if (preg_match("/[^\w\s- ,]/",$_GET[$var])) vul_kick(); }
    if (!empty($_REQUEST[$var])) {
-     if (preg_match("/[^\w\s-]/",$_REQUEST[$var])) vul_kick(); }
+     if (preg_match("/[^\w\s- ,]/",$_REQUEST[$var])) vul_kick(); }
  }
 
  #==========================================================[ common vars ]===

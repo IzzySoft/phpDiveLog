@@ -7,7 +7,8 @@ v0.2.8
 -------------------
 + Dutch translations updated (Tnx to Robbie)
 ! fixed a small (but nasty) bug with the places list
-+ Added KML creation to display all dive sites with Google Earth
++ Added KML creation to display all dive sites with Google Earth or in Google Maps
+! adjusted vulnerability check to allow spaces and commata in dive place name
 
 v0.2.7 (01.11.2006)
 -------------------
