@@ -38,6 +38,8 @@
                           # diver/*/system.conf - space separated values
  $pwdfile = "/etc/pdlpwd";# password file for data transfers
  $transfer_dir = "/home/pdl/transfer/"; # base directory of user data transfers
+ $mapsite = "Google";     # Where to show the dive site in a map. Possible
+                          # values: "Mapquest" (old style), "Google" (Google Maps)
  #--------------------------------------------------------------[ sorting ]---
  $logbook_default_sort   = "date";
  $logbook_default_order  = "desc";

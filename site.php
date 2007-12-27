@@ -1,8 +1,8 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
- # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
- # http://www.izzysoft.de/                                                   #
+ # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
+ # http://projects.izzysoft.de/                                              #
  # ------------------------------------------------------------------------- #
  # This program is free software; you can redistribute and/or modify it      #
  # under the terms of the GNU General Public License (see doc/LICENSE)       #
@@ -24,25 +24,6 @@
  $t->set_block("template","fotoblock","fotos");
  $t->set_block("fotoblock","fotoitemblock","pic");
  $t->set_block("fotoblock","multifotoblock","multi");
-
- function mk_coord($str) {
-   if ( preg_match("/([0-9]+)[^0-9]+([0-9]+)[^0-9.]+([0-9.]+)[^0-9]+/",$str,$match) ) {
-     $code[0] = $match[1]; $code[1] = $match[2]; $code[2] = $match[3];
-   } elseif ( preg_match("/([0-9]+)[^0-9]+([0-9.]+)[^0-9.]+/",$str,$match) ) {
-     $code[0] = $match[1]; $code[1] = floor($match[2]);
-     $code[2] = ($match[2] - floor($match[2])) * 60;
-   } elseif ( preg_match("/([0-9.]+)[^0-9.]+/",$str,$match) ) {
-     $code[0] = floor($match[1]);
-     $code[1] = floor( ($match[1] - $code[0]) * 60);
-     $code[2] = floor( (($match[1] - $code[0]) * 60 - $code[1]) * 60 );
-   }
-   if ( substr($str,strlen($str)-1)=="N" || substr($str,strlen($str)-1)=="E" ) {
-     $code[4] = 1;
-   } else {
-     $code[4] = -1;
-   }
-   return $code;
- }
 
  #==============================================[ Import dive data from DB ]===
  $site = $pdl->db->get_site($id);
@@ -74,9 +55,7 @@
  foreach($details AS $detail) {
    $t->set_var("$detail",$site[$detail]);
  }
- $lat  = mk_coord($site["latitude"]);
- $long = mk_coord($site["longitude"]);
- $maplink = $pdl->link->map($lat,$long);
+ $maplink = $pdl->link->map($site["latitude"],$site["longitude"],$site["loc"].": ".$site["place"]);
  if ( !empty($maplink) ) {
    $t->set_var("mapunlink","</A>");
    $t->set_var("maplink","<A HREF='$maplink' TARGET='pdlmap'>");
