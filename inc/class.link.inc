@@ -1,8 +1,8 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
- # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
- # http://www.izzysoft.de/                                                   #
+ # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
+ # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
  # This program is free software; you can redistribute and/or modify it      #
  # under the terms of the GNU General Public License (see doc/LICENSE)       #
@@ -15,8 +15,8 @@
  /** Link related stuff: highlighting, linking targets etc.
   * @package Api
   * @class link
-  * @author Izzy (izzysoft AT qumran DOT org)
-  * @copyright (c) 2004-2007 by Itzchak Rehberg and IzzySoft
+  * @author Izzy (izzysoft@qumran.org)
+  * @copyright (c) 2001-2004 by Itzchak Rehberg and IzzySoft
   */
  class link {
 
@@ -104,6 +104,19 @@
       return $url;
     }
     return "";
+  }
+
+  /** Evaluate the base URL of PDL
+   * @method get_baseurl
+   * @return string url
+   */
+  function get_baseurl() {
+    $pdl_url = strtolower($_SERVER["SERVER_PROTOCOL"]);
+    $pos = strpos ($pdl_url,"/");
+    $pdl_url = substr($pdl_url,0,$pos)."://".$_SERVER["HTTP_HOST"];
+    if ($_SERVER["SERVER_PORT"]!=80) $pdl_url .= ":".$_SERVER["SERVER_PORT"];
+    $pdl_url .= dirname($_SERVER["PHP_SELF"]);
+    return $pdl_url;
   }
 
  } // end class link

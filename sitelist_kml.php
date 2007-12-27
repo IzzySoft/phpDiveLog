@@ -18,11 +18,7 @@
  $start = 0;
 
  #-=[ Get base URL for images ]=-
- $pdl_url = strtolower($_SERVER["SERVER_PROTOCOL"]);
- $pos = strpos ($pdl_url,"/");
- $pdl_url = substr($pdl_url,0,$pos)."://".$_SERVER["HTTP_HOST"];
- if ($_SERVER["SERVER_PORT"]!=80) $pdl_url .= ":".$_SERVER["SERVER_PORT"];
- $pdl_url .= dirname($_SERVER["PHP_SELF"]);
+ $pdl_url = $pdl->link->get_baseurl();
  $img_url = $pdl_url."/".$pdl->config->tpl_url."images/";
 
  #-=[ Convert coordinates to decimal ]=-
@@ -77,7 +73,9 @@
    $longitude = mk_coord($sites[$i]["longitude"]);
    if ($latitude == 0 || $longitude == 0) continue;
    $depth = $sites[$i]["depth"]; # if (!empty($depth)) $depth .= "m";
-   $t->set_var("placemarkname",$sites[$i]["loc"].": ".$sites[$i]["place"]." ($depth)");
+   $loc = $sites[$i]["loc"].": ".$sites[$i]["place"];
+   if (!empty($depth)) $loc .= " ($depth)";
+   $t->set_var("placemarkname",$loc);
    $t->set_var("latitude",$latitude);
    $t->set_var("longitude",$longitude);
    $sites[$i]["description"] = $pdl->common->nl2br($sites[$i]["description"]);
