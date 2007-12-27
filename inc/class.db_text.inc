@@ -1,8 +1,8 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
- # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
- # http://www.izzysoft.de/                                                   #
+ # phpDiveLog                               (c) 2004-2006 by Itzchak Rehberg #
+ # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
+ # http://www.qumran.org/homes/izzy/                                         #
  # ------------------------------------------------------------------------- #
  # This program is free software; you can redistribute and/or modify it      #
  # under the terms of the GNU General Public License (see doc/LICENSE)       #
@@ -15,8 +15,8 @@
  /** DB Emulation for text "databases" (CSV and UDDF files)
   * @package Api
   * @class auth
-  * @author Izzy (izzysoft AT qumran DOT org)
-  * @copyright (c) 2004-2007 by Itzchak Rehberg and IzzySoft
+  * @author Izzy (izzysoft@qumran.org)
+  * @copyright (c) 2004 by Itzchak Rehberg and IzzySoft
   */
  class db_text {
 
@@ -325,6 +325,7 @@
        if ( !file_exists($pdl->config->base_path."diver/".$udirs[$i]."/public") ) continue;
        $file = $pdl->config->base_path."diver/".$udirs[$i]."/data/divesites.csv";
        if (file_exists($file)) {
+         $csv->clear_data();
          $csv->import($file);
          $sitecount = count($csv->data);
          for ($k=0;$k<$sitecount;++$k) {
@@ -342,6 +343,7 @@
          }
        }
      }
+     if (!is_array($place)) $place = array();
      if ( !empty($showPlace) ) {
        sort($place); reset($place);
        $this->allplaces = count($place);
