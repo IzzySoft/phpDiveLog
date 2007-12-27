@@ -1,5 +1,5 @@
 #############################################################################
-# phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+# phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
 # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
 # http://www.izzysoft.de/                                                   #
 # ------------------------------------------------------------------------- #
@@ -76,7 +76,7 @@ More Information
 
 [text]
 ...can be found on the phpDiveLog website: just point your browser to
-<a href="http://projects.izzysoft.de/?topic=progs;subject=phpdivelog" target="_blank">projects.izzysoft.de</a>.
+<a href="http://projects.izzysoft.de/?topic=progs;subject=phpdivelog" target="_blank">http://projects.izzysoft.de/</a>.
 
 [text]
 Now, have fun!
