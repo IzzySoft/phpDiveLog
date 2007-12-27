@@ -34,6 +34,7 @@
   <td align="center">{pix}</td>
  </tr>
 <!-- END itemblock -->
+ <tr><td colspan="5" align="center">{dl_kml}</td></tr>
 </table>
 
 </td></tr></table>

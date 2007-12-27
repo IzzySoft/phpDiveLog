@@ -6,6 +6,8 @@ History for phpDiveLog
 v0.2.8
 -------------------
 + Dutch translations updated (Tnx to Robbie)
+! fixed a small (but nasty) bug with the places list
++ Added KML creation to display all dive sites with Google Earth
 
 v0.2.7 (01.11.2006)
 -------------------
