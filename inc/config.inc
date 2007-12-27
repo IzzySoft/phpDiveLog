@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -39,7 +39,8 @@
  $pwdfile = "/etc/pdlpwd";# password file for data transfers
  $transfer_dir = "/home/pdl/transfer/"; # base directory of user data transfers
  $mapsite = "Google";     # Where to show the dive site in a map. Possible
-                          # values: "Mapquest" (old style), "Google" (Google Maps)
+                          # values: "Mapquest" (old style), "Google" (Google Maps),
+			  # "Yahoo" (Yahoo Maps)
  #--------------------------------------------------------------[ sorting ]---
  $logbook_default_sort   = "date";
  $logbook_default_order  = "desc";

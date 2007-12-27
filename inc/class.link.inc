@@ -25,7 +25,8 @@
    */
   function link() {
     $this->mapurl["Mapquest"] = "http://www.mapquest.com/maps/map.adp?latlongtype=decimal&latitude={lat}&longitude={long}";
-    $this->mapurl["Google"]   = "http://maps.google.com/?ll={lat},{long}&q={lat},{long}+({desc})";
+    $this->mapurl["Google"]   = "http://maps.google.com/?ll={lat},{long}&q={lat},{long}+({desc})&t=h";
+    $this->mapurl["Yahoo"]    = "http://maps.yahoo.com/#mvt=h&lat={lat}&lon={long}";
     $this->mapsite            = $GLOBALS["mapsite"];
   }
 

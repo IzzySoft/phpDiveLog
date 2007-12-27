@@ -259,8 +259,8 @@ a short documentation for the available parameters and their effects:
  <tr><td class="td_blank"><b><code>$mapsite</code></b></td>
   <td class="td_blank">If you recorded GPS coordinates with your dive sites,
     phpDiveLog creates a link to a given mapsite to look up the place. You
-    may chose between "Mapquest" and "Google" (the latter refers, of course,
-    to <i>Google Maps</i>)</td></tr>
+    may chose between "Mapquest", "Google" (the latter refers, of course,
+    to <i>Google Maps</i>), or "Yahoo" (<i>Yahoo Maps</i>)</td></tr>
  <tr><td class="td_blank"><b><code>$logbook_default_sort</code></b></td>
   <td class="td_blank" rowspan="4">These are the default sort settings if one
     enters the logbook resp. sitelist first time on the visit, and did not yet
