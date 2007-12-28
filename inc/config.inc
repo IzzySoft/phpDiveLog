@@ -7,7 +7,8 @@
  # This program is free software; you can redistribute and/or modify it      #
  # under the terms of the GNU General Public License (see doc/LICENSE)       #
  # ------------------------------------------------------------------------- #
- # User's configuration file - the only one for the user to edit!            #
+ # Main configuration file - the only one for the admin to edit!             #
+ # (The diver may partially override settings in his/her diver/*/system.conf)#
  #############################################################################
 
  /* $Id$ */
@@ -33,7 +34,7 @@
                           # and will be handled as "error")
  $default_user  = "izzy"; # if default_page=user: which user is the default?
                           # must be a valid account (subdir diver/<user>)
- $allow_override = "title lang display_limit template_set userdef1 userdef2"; 
+ $allow_override = "mapsite title lang display_limit template_set userdef1 userdef2"; 
                           # which settings may be adjusted via the
                           # diver/*/system.conf - space separated values
  $pwdfile = "/etc/pdlpwd";# password file for data transfers
