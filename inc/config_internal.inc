@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -12,7 +12,7 @@
 
  /* $Id$ */
 
- $pdl->config->version = "0.2.7";
+ $pdl->config->version = "0.2.8";
  $pdl->config->enable_index = $enable_index;
  if (!empty($_GET["diver"])) {
    $relPath = "diver/".$_GET["diver"]."/";
