@@ -92,6 +92,13 @@ options will need your attention:
  <tr><td class="td_blank"><b><code>UNITS</code></b></td>
   <td class="td_blank">which kind of units you prefer - can be set either to
    "metric", "imperial" or "bothunits"</td></tr>
+ <tr><td class="td_blank"><b><code>PROFUPD</code></b></td>
+  <td class="td_blank">Creation of the dive profile PNG graphics slows down
+   the conversion process a lot (it takes about 2/3 of the time). Luckily,
+   starting with conduit version 0.99_7 there is a new parameter to skip
+   this step if the PNG already exists: <code>-noprofileupdate</code>. In
+   case you are using an older conduit version, just comment out that line
+   in your config - or better get the latest conduit ;)</td></tr>
  <tr><td class="td_blank"><b><code>DATEFORMAT</code></b></td>
   <td class="td_blank">just for the "progress display" on the screen to give you an
    idea how long which step took ;)</td></tr>
