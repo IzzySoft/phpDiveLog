@@ -1,6 +1,6 @@
 #!/bin/bash
 #############################################################################
-# phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+# phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
 # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
 # http://www.izzysoft.de/                                                   #
 # ------------------------------------------------------------------------- #
@@ -15,7 +15,7 @@
 echo "
 #############################################################################
 # Aqua DiveLog                               (c) 2001-2004 by Stephan Veigl #
-# phpDiveLog                                    (c) 2004 by Itzchak Rehberg #
+# phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
 # ------------------------------------------------------------------------- #
 # Data Conversion Unit                                                      #
 #############################################################################
@@ -60,7 +60,7 @@ done
 echo `date +"$DATEFORMAT"` "Converting AquaDiveLog Data..." | tee -a $LOGFILE
 oriLang=$LANG
 export LANG=$PALMLOCALE
-java -jar conduit.jar -$UNITS $* >/dev/null
+java -jar conduit.jar -$UNITS $PROFUPD $* >/dev/null
 export LANG=$oriLang
 
 # transfer CSV files to LOCAL web target

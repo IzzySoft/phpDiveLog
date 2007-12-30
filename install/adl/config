@@ -1,6 +1,6 @@
 #!/bin/bash
 #############################################################################
-# phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+# phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
 # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
 # http://www.izzysoft.de/                                                   #
 # ------------------------------------------------------------------------- #
@@ -19,6 +19,10 @@ PALMLOCALE=de_DE@euro
 LOGDIR=log
 # which units to use for the values: imperial|metric|bothunits
 UNITS=bothunits
+# Profile (PNG) creation slows down the process. With conduit v0.99_7 and up,
+# you may skip this step if the profile PNGs are already created. Comment out
+# if your conduit is older!
+PROFUPD="-noprofileupdate"
 # date format for logging
 DATEFORMAT="%Y-%m-%d %H:%M:%S"
 # where to log the process - you need write access to that directory!
