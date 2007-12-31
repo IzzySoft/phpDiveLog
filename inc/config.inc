@@ -14,14 +14,7 @@
  /* $Id$ */
 
  #=============================================================[ database ]===
- $database["type"]      = "mysql";     # csv|mysql|pgsql (only csv supported now)
-# $database["type"]      = "cvs";     # csv|mysql|pgsql (only csv supported now)
- $database["host"]      = "localhost"; # your hosts name
- $database["database"]  = "pdl";       # what database holds the tables
- $database["user"]      = "pdl";       # db user with at least following
-                                       # privileges on these tables:
-				       # SELECT,UPDATE,INSERT,DELETE
- $database["password"]  = "";          # this users password for the db
+ $database["type"]      = "cvs";     # csv|mysql|pgsql (only csv supported now)
 
  #==========================================================[ preferences ]===
  $display_limit = 12;     # how may records/page should be displayed for lists
