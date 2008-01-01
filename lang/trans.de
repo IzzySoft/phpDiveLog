@@ -57,4 +57,4 @@ user_auth_fail;"<b>Boing!</b><br>Dummerweise wurde das eingegebene Passwort nich
 import_init_title;"Datenimport"
 import_init_notes;"Liegen die Daten im Transfer-Verzeichnis bereit? Dann können sie jetzt in die phpDiveLog-Datenbank importiert werden. Einfach das zugehörige Passwort eintippen, und den Button betätigen."
 submit_form;"Absenden"
-dl_kml;"KML Datei für Google Earth herunterladen"
+show_kml;"Sites anzeigen in:"

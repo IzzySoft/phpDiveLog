@@ -79,4 +79,4 @@ user_auth_fail;"<b>Boing!</b><br>Unfortunately we could not verify your password
 import_init_title;"DiveLog Import"
 import_init_notes;"If your data have been transfered to the server, you now can import them to phpDiveLog. Please enter your password and submit the form to do so."
 submit_form;"Submit"
-dl_kml;"Download KML file for Google Earth"
+show_kml;"Show Sites in:"
