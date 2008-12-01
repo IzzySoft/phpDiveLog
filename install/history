@@ -6,6 +6,7 @@ History for phpDiveLog
 v0.2.9
 -------------------
 + added French translations (Tnx to Gilles!)
+! fixed minor syntax error in KML template
 
 v0.2.8 (10.10.2008)
 -------------------

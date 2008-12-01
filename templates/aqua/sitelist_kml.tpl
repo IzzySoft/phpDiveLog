@@ -38,7 +38,7 @@
 				<tilt>0</tilt>
 				<heading>0</heading>
 			</LookAt>
-			<styleUrl>s_fins</styleUrl>
+			<styleUrl>#s_fins</styleUrl>
 			<Point>
 				<coordinates>{longitude},{latitude},{altitude}</coordinates>
 			</Point>
