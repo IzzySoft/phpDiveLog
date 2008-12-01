@@ -20,7 +20,7 @@ install: installdirs
 	$(INSTALL_DATA) install/LICENSE $(datadir)/install
 	$(INSTALL_DATA) install/README $(datadir)/install
 	$(INSTALL_DATA) install/history $(datadir)/install
-	$(INSTALL_DATA) install/install.txt $(datadir)/install
+	$(INSTALL_DATA) install/*.txt $(datadir)/install
 	cp -pr doc/* $(datadir)/doc
 	cp -pr diver/demo/* $(datadir)/diver/demo
 	if [ ! -e $(LINKTO) ]; then ln -s $(datadir) $(LINKTO); fi

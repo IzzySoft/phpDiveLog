@@ -27,7 +27,9 @@
                           # and will be handled as "error")
  $default_user  = "izzy"; # if default_page=user: which user is the default?
                           # must be a valid account (subdir diver/<user>)
- $allow_override = "mapsite title lang display_limit template_set userdef1 userdef2"; 
+ $sitepix_on_divepage = 0;# whether existing site photos shall be included on
+                          # corresponding dive pages (1) or not (0)
+ $allow_override = "mapsite title lang display_limit template_set userdef1 userdef2 sitepix_on_divepage"; 
                           # which settings may be adjusted via the
                           # diver/*/system.conf - space separated values
  $pwdfile = "/etc/pdlpwd";# password file for data transfers

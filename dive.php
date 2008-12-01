@@ -172,6 +172,28 @@
  #-------------------------------[ Fotos ]---
  $fotos = $pdl->file->getDivePix($nr);
  $fc = count($fotos);
+ if ($sitepix_on_divepage > 0) { // optionally include sitepix
+   $sfotos = $pdl->file->getSitePix($dive["site_id"]);
+   $sfc = count($sfotos);
+   if ($sfc>0) {
+     $picdir = $pdl->config->user_url;
+     for ($i=0;$i<$sfc;++$i) {
+       if (!empty($sfotos[$i]->bigurl)) {
+         $t->set_var("unref","</a>");
+	 $t->set_var("bigref","<a href=\"".$sfotos[$i]->bigurl."\">");
+       } else {
+         $t->set_var("unref","");
+	 $t->set_var("bigref","");
+       }
+       $t->set_var("foto",$sfotos[$i]->url);
+       $t->set_var("fdesc",$sfotos[$i]->desc);
+       $t->parse("pic","fotoitemblock",TRUE);
+       if ( ($i+1)%3==0 && $sfc+$fc>3 && ($fc>0 || $i+1!=$sfc) ) {
+         $t->parse("pic","multifotoblock",TRUE);
+       }
+     }
+   }
+ }
  if ($fc>0) {
    $picdir = $pdl->config->user_url;
    for ($i=0;$i<$fc;++$i) {
@@ -185,7 +207,7 @@
      $t->set_var("foto",$fotos[$i]->url);
      $t->set_var("fdesc",$pdl->common->tagreplace($fotos[$i]->desc));
      $t->parse("pic","fotoitemblock",TRUE);
-     if ( ($i+1)%3==0 && $fc>3 && $i+1!=$fc ) {
+     if ( ($sfc+$i+1)%3==0 && $sfc+$fc>3 && $i+1!=$fc ) {
        $t->parse("pic","multifotoblock",TRUE);
      }
    }

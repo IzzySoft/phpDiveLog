@@ -8,6 +8,7 @@ v0.2.9
 + added French translations (Tnx to Gilles!)
 ! fixed minor syntax error in KML template
 + added recoding of CSV files to UTF8 (configurable)
++ optionally, site pictures can now be included on the corresponding dive pages
 
 v0.2.8 (10.10.2008)
 -------------------
