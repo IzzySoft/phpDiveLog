@@ -70,6 +70,16 @@ if [ $USELOCAL -eq 1 ]; then
   cp $LOGDIR/images/* $PDLBASE/images/ &>/dev/null
 fi
 
+# charset conversion
+if [ -n "$RECODEFROM" ]; then
+  if [ -n "$(which recode)" ]; then
+    echo `date +"$DATEFORMAT"` "Converting CSV files to UTF8..."
+    recode ${RECODEFROM}..utf8 $PDLBASE/data/*
+  else
+    echo `date +"$DATEFORMAT"` "RECODE EXECUTABLE 'recode' NOT FOUND - SKIPPING RECODE OF CSV FILES"
+  fi
+fi
+
 # SCP transfer to REMOTE machine
 if [ $USESCP -eq 1 ]; then
   echo `date +"$DATEFORMAT"` "Copying files to the remote web target dir via SCP..." | tee -a $LOGFILE

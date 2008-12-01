@@ -1,0 +1,22 @@
+PalmOS Supported CharacterSets
+==============================
+
+PalmOS usually only supports one character set on the device - not multiple
+character sets at the same time. Supported character sets include:
+
+ Name             	 Description                               Recode
+ charEncodingAscii 	 ISO 646-1991                              ascii
+ charEncodingISO8859_1 	 ISO 8859 Teil 1                           lat1
+ charEncodingPalmLatin 	 Palm OS Version of CP1252
+ charEncodingShiftJIS 	 Codierung for 0208-1990 + 1-Byte-katakana JIS_X0208
+ charEncodingPalmSJIS 	 Palm OS Version of CP932
+ charEncodingUTF8 	 Encoding for Unicode                      utf8
+ charEncodingCP1252 	 Windows-Variant of 8859-1                 cp1252
+ charEncodingCP932 	 Windows-Variant of ShiftJIS               cp932
+
+Of course, if your Palm is setup to use UTF8, you don't need any recoding in the
+divelog_conduit.sh to be done. Same applies to plain Ascii, since this is a
+subset of UTF8. If your Palm uses one of the PalmOS specific chararacter sets
+(in the table marked as "Palm OS Version of...") you may be in trouble, since
+those are not directly supported by the recode command. In those cases you may
+experiment with their "originals" - in the hope you have luck...

@@ -15,6 +15,9 @@
 #========================================================[ Configuration ]===
 # Locale settings of your PALM (don't mess up with your PCs settings)
 PALMLOCALE=de_DE@euro
+# Convert your CSV files to UTF8 - from which character set?
+# See charset.txt for details. Leave empty for no recoding.
+RECODEFROM=lat1
 # location of the Conduit output (must match the confuration in divelog.ini)
 LOGDIR=log
 # which units to use for the values: imperial|metric|bothunits
