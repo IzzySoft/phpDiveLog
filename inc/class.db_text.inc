@@ -308,7 +308,7 @@
    }
 
    /** Get an alphabetical list of all dive places from all divers
-    *  (not to be confused with the dive sites - it's just the location here)
+    *  (not to be confused with the dive sites - it is just the location here)
     * @class db_text
     * @method getAllPlaces
     * @param optional integer start
@@ -336,6 +336,7 @@
              $data->diver    = $udirs[$i];
              $data->id       = $csv->data[$k]["id"];
              $place[] = $data;
+	     unset($data);
            } else {
              $place[] = $csv->data[$k]["loc"];
              ++$cnum[$csv->data[$k]["loc"]];
@@ -357,6 +358,7 @@
        $p->name = $place[$key];
        $p->num  = $cnum[$place[$key]];
        $splace[] = $p;
+       unset($p);
      }
      unset($place);
      sort($splace); reset($splace);
