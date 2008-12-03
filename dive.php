@@ -211,6 +211,8 @@
        $t->parse("pic","multifotoblock",TRUE);
      }
    }
+ }
+ if ($fc+$sfc>0) {
    $t->set_var("fotos_name",lang("fotos"));
    $t->parse("fotos","fotoblock");
  } else {
