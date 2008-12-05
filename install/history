@@ -11,6 +11,7 @@ v0.2.9
 + optionally, site pictures can now be included on the corresponding dive pages
 ! fixing PHP5 issue in global site list which caused a mess with place names
 + added links to first/last page on Global Sites Index
+* parentheses in place names caused "permission problems" - permitting them now
 
 v0.2.8 (10.10.2008)
 -------------------
