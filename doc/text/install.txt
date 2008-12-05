@@ -85,6 +85,15 @@ options will need your attention:
    <code>de_DE@euro</code> (Latin-1 plus Euro sign) will be the correct choice.
    For non-Western charsets on your Palm, you may have to experiment a bit
    until all special chars are drawn correctly.</td></tr>
+ <tr><td class="td_blank"><b><code>RECODEFROM</code></b></td>
+  <td class="td_blank">PalmOS devices use different character sets. If you
+   encounter display problems on your divelog web pages, such as messed-up
+   characters (German Umlauts and the like), you may want to play with this
+   option. If not set to an empty string, the script will use the <code>recode</code>
+   command to convert the character set to UTF8 - you just need to figure out
+   which character set your PalmOS device is using (see also <code>install/charsets.txt</code>).
+   Usually, a good starting point is <code>lat1</code> for newer devices (PalmOS
+   5 and up), or <code>cp1252</code> for older ones (PalmOS 4 and lower).</td></tr>
  <tr><td class="td_blank"><b><code>LOGDIR</code></b></td>
   <td class="td_blank">if you followed my advice for the <code>divelog.ini</code>
    configuration above, you can leave it as is. If not: this value has to match
@@ -197,7 +206,7 @@ a short documentation for the available parameters and their effects:
 <table class="nav" align="center" border="0" width="90%">
  <tr><td class="td_blank"><b><code>$database["type"]</code></b></td>
   <td class="td_blank">right now you can set this to "csv" only. In the future,
-    there my be more formats available, such as UDDF for the Universal Dive
+    there may be more formats available, such as UDDF for the Universal Dive
     Data Format (again a file), or even "real databases" such as MySQL,
     PostgreSQL, etc.</td></tr>
  <tr><td class="td_blank"><b><code>$display_limit</code></b></td>
@@ -241,6 +250,10 @@ a short documentation for the available parameters and their effects:
     which is the default logbook we should route the request to? Must be a
     valid account (see "set up a diver"), otherwise results in
     <code>$default_page="error"</code>.</td></tr>
+ <tr><td class="td_blank"><b><code>$sitepix_on_divepage</code></b></td>
+  <td class="td_blank">if you want pictures from the corresponding dive site to
+    be displayed together with the pictures from the dive when viewing the
+    dive page, set this to 1.</td></tr>
  <tr><td class="td_blank"><b><code>$allow_override</code></b></td>
   <td class="td_blank">some configuration values can be defined on a
     per-logbook-base, so each diver can provide his/her default preferences to
