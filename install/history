@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.2.9
+v0.2.9 (06.12.2008)
 -------------------
 + added French translations (Tnx to Gilles!)
 ! fixed minor syntax error in KML template
