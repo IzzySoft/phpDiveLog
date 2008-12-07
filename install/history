@@ -6,6 +6,9 @@ History for phpDiveLog
 v0.3.0
 -------------------
 + now it is possible to optionally generate the dive profil graph dynamically
++ added yearly dive stats graph to statistics page. This will automatically
+  be available if the directory "profiles" is available in the divers home
+  *and* this directory is radable and writable by the web server process.
 
 v0.2.9 (06.12.2008)
 -------------------

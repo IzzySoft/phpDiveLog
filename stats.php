@@ -18,6 +18,7 @@
 
  $t = new Template($pdl->config->tpl_path);
  $t->set_file(array("template"=>"stats.tpl"));
+ $t->set_block("template","diveyearblock","yearstat");
 
  #================================================[ set up navigation tabs ]===
  include("inc/tab_setup.inc");
@@ -45,6 +46,21 @@
  $t->set_var("cum_time",$stats["cum_dive_time"]);
  $t->set_var("site_num",$pdl->db->sites);
  $t->set_var("avg_sd",round($stats["num_dives"] / $pdl->db->sites,3));
+
+ #========================================================[ Include Graphs ]===
+ if (function_exists("imagepng") && is_writable($pdl->config->user_path . "profiles")) {
+   $csvfile   = $pdl->config->datadir."logbook.csv";
+   $graphfile = $pdl->config->user_path . "profiles/divestat.png";
+unlink($graphfile);
+   if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
+     include("inc/class.graph.inc");
+     $graph = new graph();
+     $graph->dives();
+   }
+   $t->set_var("ytitle",lang("year_stat"));
+   $t->set_var("yearstat_png",$pdl->config->user_url."profiles/divestat.png");
+   $t->parse("yearstat","diveyearblock");
+ }
 
  $t->pparse("out","template");
 

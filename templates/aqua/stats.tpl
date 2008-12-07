@@ -20,7 +20,7 @@
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 
 <table class="outer" border="0" cellpadding="4" cellspacing="0" align="center" style="margin-top:10;">
- <tr><th class="big" colspan="7"><img src="{tpl_dir}images/tab_stats.gif" width="20" height="15" border="0" alt="Stats" align="middle"> {title}</th></tr>
+ <tr><th class="big" colspan="7"><img src="{tpl_dir}images/tab_stats.gif" width="20" height="15" border="0" alt="Stats" valign="middle"> {title}</th></tr>
  <tr><th rowspan="4">&nbsp;</th><th>{max_depth_name}</th><td align="right">{max_depth}</td>
   <th>&nbsp;</th>
   <th>{max_time_name}</th><td align="right">{max_time}</td><th rowspan="4">&nbsp;</th></tr>
@@ -34,7 +34,12 @@
   <th>&nbsp;</th>
   <th>{avg_sd_name}</th><td align="right">{avg_sd}</td></tr>
  <tr><th colspan="7">&nbsp;</th></tr>
-
 </table>
 
+<!-- BEGIN diveyearblock -->
+<table class="outer" border="0" cellpadding="4" cellspacing="0" align="center" style="margin-top:10;">
+ <tr><th><img src="{tpl_dir}images/tab_stats.gif" width="20" height="15" border="0" alt="Stats" valign="middle"> {ytitle}</th></tr>
+ <tr><td align="center"><img src="{yearstat_png}" alt="{yearstat_alt}"></td></tr>
+</table>
+<!-- END diveyearblock -->
 </td></tr></table>

@@ -118,9 +118,9 @@ will be treated as "privat", i.e. it is only accessible if one invokes PDL with
 the correct <code>diver=&lt;nickname&gt;</code> parameter.
 
 [text]
-If you want to use the dynamically generated profile graphs, make sure your web
-server process has read <i>and</i> write permission to the <code>profiles</code>
-directory in each divers home.
+If you want to use the dynamically generated profile graphs and/or the graphs on
+the statistics page, make sure your web server process has read <i>and</i> write
+permission to the <code>profiles</code> directory in each divers home.
 
 [text]
 For more detailed information on the configuration of a divers account, please

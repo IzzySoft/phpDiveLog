@@ -34,7 +34,13 @@
  <tr><th>{site_num_name}</th><td align="right">{site_num}</td>
   <td class="td_blank"></td>
   <th>{avg_sd_name}</th><td align="right">{avg_sd}</td></tr>
-
 </table>
+
+<!-- BEGIN diveyearblock -->
+<table border="0" cellpadding="4" align="center" style="margin-top:10;">
+ <tr><th><img src="{tpl_dir}images/tab_stats.gif" width="20" height="15" border="0" alt="Stats" valign="middle"> {ytitle}</th></tr>
+ <tr><td align="center"><img src="{yearstat_png}" alt="{yearstat_alt}"></td></tr>
+</table>
+<!-- END diveyearblock -->
 
 </td></tr></table>
