@@ -60,3 +60,4 @@ import_init_notes;"Liegen die Daten im Transfer-Verzeichnis bereit? Dann können
 submit_form;"Absenden"
 show_kml;"Sites anzeigen in:"
 year_stat;"Tauchgänge pro Jahr"
+time_stat;"Tauchzeit pro Jahr"

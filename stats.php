@@ -51,7 +51,6 @@
  if (function_exists("imagepng") && is_writable($pdl->config->user_path . "profiles")) {
    $csvfile   = $pdl->config->datadir."logbook.csv";
    $graphfile = $pdl->config->user_path . "profiles/divestat.png";
-unlink($graphfile);
    if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
      include("inc/class.graph.inc");
      $graph = new graph();
@@ -60,6 +59,16 @@ unlink($graphfile);
    $t->set_var("ytitle",lang("year_stat"));
    $t->set_var("yearstat_png",$pdl->config->user_url."profiles/divestat.png");
    $t->parse("yearstat","diveyearblock");
+
+   $graphfile = $pdl->config->user_path . "profiles/timestat.png";
+   if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
+     include("inc/class.graph.inc");
+     $graph = new graph();
+     $graph->divetime();
+   }
+   $t->set_var("ytitle",lang("time_stat"));
+   $t->set_var("yearstat_png",$pdl->config->user_url."profiles/timestat.png");
+   $t->parse("yearstat","diveyearblock",TRUE);
  }
 
  $t->pparse("out","template");

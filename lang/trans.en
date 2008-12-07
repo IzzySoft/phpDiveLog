@@ -82,3 +82,4 @@ import_init_notes;"If your data have been transfered to the server, you now can 
 submit_form;"Submit"
 show_kml;"Show Sites in:"
 year_stat;"Dives per Year"
+time_stat;"Divetime per Year"
