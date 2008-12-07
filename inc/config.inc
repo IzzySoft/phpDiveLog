@@ -29,6 +29,8 @@
                           # must be a valid account (subdir diver/<user>)
  $sitepix_on_divepage = 0;# whether existing site photos shall be included on
                           # corresponding dive pages (1) or not (0)
+ $use_dyn_profile_png = 0;# create the dive profile image dynamically (1) or
+                          # use the one from the conduit (0)
  $allow_override = "mapsite title lang display_limit template_set userdef1 userdef2 sitepix_on_divepage"; 
                           # which settings may be adjusted via the
                           # diver/*/system.conf - space separated values

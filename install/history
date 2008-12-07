@@ -3,6 +3,10 @@ $Id$
 History for phpDiveLog
 ======================
 
+v0.3.0
+-------------------
++ now it is possible to optionally generate the dive profil graph dynamically
+
 v0.2.9 (06.12.2008)
 -------------------
 + added French translations (Tnx to Gilles!)
@@ -13,7 +17,7 @@ v0.2.9 (06.12.2008)
 + added links to first/last page on Global Sites Index
 * parentheses in place names caused "permission problems" - permitting them now
 
-v0.2.8 (10.10.2008)
+v0.2.8 (01.01.2008)
 -------------------
 + Dutch translations updated (Tnx to Robbie)
 ! fixed a small (but nasty) bug with the places list

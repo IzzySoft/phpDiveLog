@@ -154,10 +154,34 @@
    $t->set_var("sched","");
  }
  #-----------------------------[ Profile ]---
- if ( strlen($prof_img=$pdl->file->getProfPic($nr)) ) {
-   $t->set_var("prof_name",lang("profile"));
-   $t->set_var("prof_img",$prof_img);
-   $t->parse("profile","profileblock");
+ while (strlen($nr)<5) $nr = "0$nr";
+ $csvfile = $pdl->config->datadir."dive${nr}_profile.csv";
+ $profilepng = $pdl->config->user_path . "profiles/dive${nr}_profile.png";
+ $profilemap = $pdl->config->user_path . "profiles/dive${nr}_profile.map";
+ if (!file_exists($profilepng) || filemtime($profilepng) < filemtime($csvfile)) {
+   include("inc/class.graph.inc");
+   $graph = new graph();
+   $graph->profile($nr);
+ }
+ if ($use_dyn_profile_png) {
+   if (file_exists($profilepng)) {
+     $t->set_var("prof_name",lang("profile"));
+     $t->set_var("prof_img",$profilepng);
+     if (file_exists($profilemap)) {
+       $t->set_var("prof_map","<map name='prof${nr}' id='prof${nr}'>".file_get_contents($profilemap)."</map>");
+       $t->set_var("use_map","USEMAP='#prof${nr}'");
+     } else {
+       $t->set_var("prof_map","");
+       $t->set_var("use_map","");
+     }
+     $t->parse("profile","profileblock");
+   }
+ } else {
+   if ( strlen($prof_img=$pdl->file->getProfPic($nr)) ) {
+     $t->set_var("prof_name",lang("profile"));
+     $t->set_var("prof_img",$prof_img);
+     $t->parse("profile","profileblock");
+   }
  }
 
  #-------------------------------[ Notes ]---

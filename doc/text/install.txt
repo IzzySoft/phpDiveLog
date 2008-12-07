@@ -254,6 +254,12 @@ a short documentation for the available parameters and their effects:
   <td class="td_blank">if you want pictures from the corresponding dive site to
     be displayed together with the pictures from the dive when viewing the
     dive page, set this to 1.</td></tr>
+ <tr><td class="td_blank"><b><code>$use_dyn_profile_png</code></b></td>
+  <td class="td_blank">Though the Aqua DiveLog Conduit creates graph images
+    for the dive profiles, these images vary much in their dimensions. To keep
+    the design more clear, you may want to generate these profiles dynamically
+    by setting this option to "1". Note that this requires GD support in your
+    PHP installation.</td></tr>
  <tr><td class="td_blank"><b><code>$allow_override</code></b></td>
   <td class="td_blank">some configuration values can be defined on a
     per-logbook-base, so each diver can provide his/her default preferences to
