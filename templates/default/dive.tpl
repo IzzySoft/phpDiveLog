@@ -85,7 +85,7 @@
 </td></tr><tr class="td_transp"><td class="td_transp"><!-- Profile -->
 <table align="center" border="0" cellpadding="2" style="margin-top:2px">
  <tr><th valign="middle"><h3 style="margin-bottom:0;"><img src="{tpl_dir}images/btn_profile.gif" width="37" height="15" alt="Fotos"> {prof_name}</h3></th></tr>
- <tr><td><span class="thumbnail" style="margin:0"><img src="{prof_img}" alt="Profile"></span></td></tr>
+ <tr><td><span class="thumbnail" style="margin:0">{prof_map}<img src="{prof_img}" alt="DiveProfile" {use_map}></span></td></tr>
 </table>
 <!-- END profileblock -->
 

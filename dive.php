@@ -180,6 +180,8 @@
    if ( strlen($prof_img=$pdl->file->getProfPic($nr)) ) {
      $t->set_var("prof_name",lang("profile"));
      $t->set_var("prof_img",$prof_img);
+     $t->set_var("prof_map","");
+     $t->set_var("use_map","");
      $t->parse("profile","profileblock");
    }
  }
