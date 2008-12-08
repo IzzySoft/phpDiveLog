@@ -14,7 +14,7 @@
  /* $Id$ */
 
  #=============================================================[ database ]===
- $database["type"]      = "cvs";     # csv|mysql|pgsql (only csv supported now)
+ $database["type"]      = "csv";     # csv|mysql|pgsql (only csv supported now)
 
  #==========================================================[ preferences ]===
  $display_limit = 12;     # how may records/page should be displayed for lists

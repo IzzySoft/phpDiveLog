@@ -210,19 +210,19 @@
 
  /** CVS data: array[0..n] of imported records.
   *  Each Record is an array[0..n] of objects with the properties: name,data
-  * @class cvs
+  * @class csv
   * @attribute array data
   */
- /** CVS field separator (defaults to ";")
-  * @class cvs
+ /** csv field separator (defaults to ";")
+  * @class csv
   * @attribute string sep
   */
- /** CVS text field encloser (defaults to '"')
-  * @class cvs
+ /** csv text field encloser (defaults to '"')
+  * @class csv
   * @attribute string txt
   */
  /** trim imported values? (Defaults to FALSE)
-  * @class cvs
+  * @class csv
   * @attribute boolean trim
   */
 ?>
