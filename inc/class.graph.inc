@@ -166,7 +166,10 @@ class graph {
     $D->Draw("#99ccff", "#000000", false);
     $base=$D->ScreenY(0.01);
     if ($years < 10) $boxborder = 2;
-    else $boxborder = 1;
+    else {
+      $boxborder = 1;
+      $D->BFont = 4;
+    }
     for($i=1;$i<$years;$i++) {
       $D->Box($D->ScreenX($time[$i-1]),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]),$D->ScreenY(0),"3333ff",$data[$i-1],"ffffff","$boxborder");
     }
@@ -240,7 +243,10 @@ class graph {
     $D->Draw("#99ccff", "#000000", false);
     $base=$D->ScreenY(0.01);
     if ($years < 10) $boxborder = 2;
-    else $boxborder = 1;
+    else {
+      $boxborder = 1;
+      $D->BFont = 4;
+    }
     for($i=1;$i<$years;$i++) {
       if ($max_time < 600)
       $D->Box($D->ScreenX($time[$i-1]),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]),$D->ScreenY(0),"3333ff",$data[$i-1],"ffffff","$boxborder");
