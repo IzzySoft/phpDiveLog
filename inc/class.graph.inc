@@ -152,8 +152,11 @@ class graph {
     $D=new Diagram(); 
     $D->Img=@ImageCreate($width, $height) or die("Cannot create a new GD image."); 
     ImageColorAllocate($D->Img, 200,200,200); // background color 
-    $D->SetFrame(40, 30, $width-20, $height-30); 
-    $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($max_date-1,12,31,0,0,0), 0, $max_dives+1); 
+    $D->SetFrame(60, 30, $width-20, $height-30);
+    if ($years<5)
+      $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($min_date+4,12,31,0,0,0), 0, $max_dives+1); 
+    else
+      $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($max_date-1,12,31,0,0,0), 0, $max_dives+1); 
     $D->XSubGrids = 1;
     $D->YSubGrids = 1;
     // Setup Labels
@@ -170,8 +173,9 @@ class graph {
       $boxborder = 1;
       $D->BFont = 4;
     }
+    if ($years>15) $D->BFont = 2;
     for($i=1;$i<$years;$i++) {
-      $D->Box($D->ScreenX($time[$i-1]),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]),$D->ScreenY(0),"3333ff",$data[$i-1],"ffffff","$boxborder");
+      $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",$data[$i-1],"ffffff","$boxborder");
     }
 
     // Save Image & Data
@@ -224,12 +228,14 @@ class graph {
     $D->Img=@ImageCreate($width, $height) or die("Cannot create a new GD image."); 
     ImageColorAllocate($D->Img, 200,200,200); // background color 
     $D->SetFrame(60, 30, $width-20, $height-30);
+    if ($years<5) $edate = $min_date +4;
+    else $edate = $max_date -1;
     if ($max_time < 600) {
       $D->YScale = "'";
-      $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($max_date-1,12,31,0,0,0), 0, $max_time+60);
+      $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($edate,12,31,0,0,0), 0, $max_time+60);
     } else {
       $D->YScale = "h";
-      $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($max_date-1,12,31,0,0,0), 0, ($max_time+60)/60);
+      $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($edate,12,31,0,0,0), 0, ($max_time+60)/60);
     }
     $D->XSubGrids = 1;
     $D->YSubGrids = 1;
@@ -245,13 +251,14 @@ class graph {
     if ($years < 10) $boxborder = 2;
     else {
       $boxborder = 1;
-      $D->BFont = 4;
+      $D->BFont = 2;
     }
+    if ($years>15) $D->BFont = 1;
     for($i=1;$i<$years;$i++) {
       if ($max_time < 600)
-      $D->Box($D->ScreenX($time[$i-1]),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]),$D->ScreenY(0),"3333ff",$data[$i-1],"ffffff","$boxborder");
+      $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",$data[$i-1],"ffffff","$boxborder");
       else
-      $D->Box($D->ScreenX($time[$i-1]),$D->ScreenY(round($data[$i-1]/60,1)),$D->ScreenX($time[$i]),$D->ScreenY(0),"3333ff",round($data[$i-1]/60,1),"ffffff","$boxborder");
+      $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY(round($data[$i-1]/60,1)),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",round($data[$i-1]/60,1),"ffffff","$boxborder");
     }
 
     // Save Image & Data
