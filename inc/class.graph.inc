@@ -12,7 +12,7 @@
 
 /* $Id$ */
 
-include ("inc/diagram.inc");
+require_once ("inc/diagram.inc");
 
 /** Generating graphs and diagrams from CSV data
  * @package Api

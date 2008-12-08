@@ -52,7 +52,7 @@
    $csvfile   = $pdl->config->datadir."logbook.csv";
    $graphfile = $pdl->config->user_path . "profiles/divestat.png";
    if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
-     include("inc/class.graph.inc");
+     include_once("inc/class.graph.inc");
      $graph = new graph();
      $graph->dives();
    }
@@ -62,7 +62,7 @@
 
    $graphfile = $pdl->config->user_path . "profiles/timestat.png";
    if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
-     include("inc/class.graph.inc");
+     include_once("inc/class.graph.inc");
      $graph = new graph();
      $graph->divetime();
    }
