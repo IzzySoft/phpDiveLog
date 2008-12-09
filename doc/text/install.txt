@@ -259,7 +259,20 @@ a short documentation for the available parameters and their effects:
     for the dive profiles, these images vary much in their dimensions. To keep
     the design more clear, you may want to generate these profiles dynamically
     by setting this option to "1". Note that this requires GD support in your
-    PHP installation.</td></tr>
+    PHP installation - plus a directory named <code>profiles</code> in each
+    divers home, writable for the web server process. The image then will be
+    generated in two cases: If it does not already exist, or if the profile CSV
+    file is newer.</td></tr>
+ <tr><td class="td_blank"><b><code>$values_in_statgraphs</code></b></td>
+  <td class="td_blank">On the statistics page for each diver you also find some
+    graphs, e.g. for dives per year. They can have the values printed within the
+    bars - but if you are to list up statistics for more than 20 years, or have
+    several hundreds (or even more) dives per year, this may not look as nice as
+    you would expect - so you have the choice to: always have the values displayed
+    in the bars ("yes"), never have them there ("no"), or let the app decide
+    ("auto"). The latter should be fine for the average diver.<br>
+    Note: The values are always displayed when hovering the mouse over the
+    corresponding bar - so don't be afraid they could be completely missing.</td></tr>
  <tr><td class="td_blank"><b><code>$allow_override</code></b></td>
   <td class="td_blank">some configuration values can be defined on a
     per-logbook-base, so each diver can provide his/her default preferences to

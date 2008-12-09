@@ -175,9 +175,12 @@ class graph {
       $boxborder = 1;
       $D->BFont = 4;
     }
-    if ($years>15) $D->BFont = 2;
+    if ($years>20) $D->BFont = 1;
+    elseif ($years>15) $D->BFont = 2;
     for($i=1;$i<$years;$i++) {
-      $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",$data[$i-1],"ffffff","$boxborder","",$year[$i-1].": ".$data[$i-1]);
+      if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && $years>25)) $dispval = "";
+      else $dispval = $data[$i-1];
+      $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",$dispval,"ffffff","$boxborder","",$year[$i-1].": ".$data[$i-1]);
     }
 
     // Save Image & Data
@@ -214,6 +217,7 @@ class graph {
       if ($x>$year) $year = $x;
       $divetime[$year] += (int) $csv->data[$i]['divetime'];
     }
+    unset($year);
     $divetime[$max_date+1] = 0;
     ++$max_date;
     $max_time = 0;
@@ -258,10 +262,15 @@ class graph {
     }
     if ($years>15) $D->BFont = 1;
     for($i=1;$i<$years;$i++) {
-      if ($max_time < 600)
-      $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",$data[$i-1],"ffffff","$boxborder","",$year[$i-1].": ".$data[$i-1]."min");
-      else
-      $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY(round($data[$i-1]/60,1)),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",round($data[$i-1]/60,1),"ffffff","$boxborder","",$year[$i-1].": ".round($data[$i-1]/60,1)."h");
+      if ($max_time < 600) {
+        if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && $years>25)) $dispval = "";
+        else $dispval = $data[$i-1];
+        $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",$dispval,"ffffff","$boxborder","",$year[$i-1].": ".$data[$i-1]."min");
+      } else {
+        if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && $years>25)) $dispval = "";
+        else $dispval = round($data[$i-1]/60,1);
+        $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY(round($data[$i-1]/60,1)),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",$dispval,"ffffff","$boxborder","",$year[$i-1].": ".round($data[$i-1]/60,1)."h");
+      }
     }
 
     // Save Image & Data

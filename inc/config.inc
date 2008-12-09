@@ -31,7 +31,10 @@
                           # corresponding dive pages (1) or not (0)
  $use_dyn_profile_png = 0;# create the dive profile image dynamically (1) or
                           # use the one from the conduit (0)
- $allow_override = "mapsite title lang display_limit template_set userdef1 userdef2 sitepix_on_divepage"; 
+ $values_in_statgraphs = "auto";# whether you want values printed in the bars
+                          # of the graphs on the stat page (yes) or not (no),
+			  # or leave the decision to PDL (auto)
+ $allow_override = "mapsite title lang display_limit template_set userdef1 userdef2 sitepix_on_divepage values_in_statgraphs"; 
                           # which settings may be adjusted via the
                           # diver/*/system.conf - space separated values
  $pwdfile = "/etc/pdlpwd";# password file for data transfers

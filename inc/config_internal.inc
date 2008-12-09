@@ -59,6 +59,7 @@
  }
  $pdl->config->tpl_path  = $pdl->config->base_path."templates/$template_set/";
  $pdl->config->tpl_url   = $pdl->config->base_url."templates/$template_set/";
+ $pdl->config->values_in_statgraphs = strtolower($values_in_statgraphs);
 
  #=============================================================[ database ]===
  $pdl->config->db_type  = $database["type"];
@@ -77,5 +78,5 @@
 
  #=============================================================[ clean up ]===
  unset($database,$display_limit,$allow_override,$enable_index,$uconf,$allowed,
-       $ac,$pwdfile,$transfer_dir);
+       $ac,$pwdfile,$transfer_dir,$values_in_statgraphs);
 ?>
