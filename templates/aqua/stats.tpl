@@ -39,7 +39,7 @@
 <!-- BEGIN diveyearblock -->
 <table class="outer" border="0" cellpadding="4" cellspacing="0" align="center" style="margin-top:10;">
  <tr><th><img src="{tpl_dir}images/tab_stats.gif" width="20" height="15" border="0" alt="Stats" valign="middle"> {ytitle}</th></tr>
- <tr><td align="center"><img src="{yearstat_png}" alt="{yearstat_alt}"></td></tr>
+ <tr><td align="center">{yearmap}<img src="{yearstat_png}" alt="{yearstat_alt}" {usemap}></td></tr>
 </table>
 <!-- END diveyearblock -->
 </td></tr></table>

@@ -51,6 +51,7 @@
  if (function_exists("imagepng") && is_writable($pdl->config->user_path . "profiles")) {
    $csvfile   = $pdl->config->datadir."logbook.csv";
    $graphfile = $pdl->config->user_path . "profiles/divestat.png";
+   $mapfile   = $pdl->config->user_path . "profiles/divestat.map";
    if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
      include_once("inc/class.graph.inc");
      $graph = new graph();
@@ -58,9 +59,17 @@
    }
    $t->set_var("ytitle",lang("year_stat"));
    $t->set_var("yearstat_png",$pdl->config->user_url."profiles/divestat.png");
+   if (file_exists($mapfile)) {
+     $t->set_var("yearmap","<map name='divestat' id='divestat'>".file_get_contents($mapfile)."</map>");
+     $t->set_var("usemap","USEMAP='#divestat'");
+   } else {
+     $t->set_var("yearmap","");
+     $t->set_var("usemap","");
+   }
    $t->parse("yearstat","diveyearblock");
 
    $graphfile = $pdl->config->user_path . "profiles/timestat.png";
+   $mapfile   = $pdl->config->user_path . "profiles/timestat.map";
    if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
      include_once("inc/class.graph.inc");
      $graph = new graph();
@@ -68,6 +77,13 @@
    }
    $t->set_var("ytitle",lang("time_stat"));
    $t->set_var("yearstat_png",$pdl->config->user_url."profiles/timestat.png");
+   if (file_exists($mapfile)) {
+     $t->set_var("yearmap","<map name='timestat' id='timestat'>".file_get_contents($mapfile)."</map>");
+     $t->set_var("usemap","USEMAP='#timestat'");
+   } else {
+     $t->set_var("yearmap","");
+     $t->set_var("usemap","");
+   }
    $t->parse("yearstat","diveyearblock",TRUE);
  }
 

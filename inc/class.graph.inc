@@ -137,6 +137,7 @@ class graph {
       if ($x>$year) $year = $x;
       ++$dives[$year];
     }
+    unset($year);
     $dives[$max_date+1] = 0;
     ++$max_date;
     $max_dives = 0;
@@ -144,6 +145,7 @@ class graph {
     for ($i=$min_date,$k=0;$i<=$max_date;++$i,++$k) {
       $time[$k] = ($i * $year_in_s - 0.5 * $year_in_s) - (1970 * $year_in_s);
       $data[$k] = $dives[$i];
+      $year[$k] = $i;
       if ($data[$k]>$max_dives) $max_dives = $data[$k];
     }
     $years = count($data);
@@ -175,12 +177,12 @@ class graph {
     }
     if ($years>15) $D->BFont = 2;
     for($i=1;$i<$years;$i++) {
-      $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",$data[$i-1],"ffffff","$boxborder");
+      $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",$data[$i-1],"ffffff","$boxborder","",$year[$i-1].": ".$data[$i-1]);
     }
 
     // Save Image & Data
     ImagePng($D->Img,$profilepng);
-    // if (!empty($D->ImgMapData)) file_put_contents($profilemap,$D->ImgMapData);
+    if (!empty($D->ImgMapData)) file_put_contents($profilemap,$D->ImgMapData);
     ImageDestroy($D->Img); 
 
   }
@@ -219,6 +221,7 @@ class graph {
     for ($i=$min_date,$k=0;$i<=$max_date;++$i,++$k) {
       $time[$k] = ($i * $year_in_s - 0.5 * $year_in_s) - (1970 * $year_in_s);
       $data[$k] = $divetime[$i];
+      $year[$k] = $i;
       if ($data[$k]>$max_time) $max_time = $data[$k];
     }
     $years = count($data);
@@ -256,14 +259,14 @@ class graph {
     if ($years>15) $D->BFont = 1;
     for($i=1;$i<$years;$i++) {
       if ($max_time < 600)
-      $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",$data[$i-1],"ffffff","$boxborder");
+      $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",$data[$i-1],"ffffff","$boxborder","",$year[$i-1].": ".$data[$i-1]."min");
       else
-      $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY(round($data[$i-1]/60,1)),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",round($data[$i-1]/60,1),"ffffff","$boxborder");
+      $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY(round($data[$i-1]/60,1)),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",round($data[$i-1]/60,1),"ffffff","$boxborder","",$year[$i-1].": ".round($data[$i-1]/60,1)."h");
     }
 
     // Save Image & Data
     ImagePng($D->Img,$profilepng);
-    // if (!empty($D->ImgMapData)) file_put_contents($profilemap,$D->ImgMapData);
+    if (!empty($D->ImgMapData)) file_put_contents($profilemap,$D->ImgMapData);
     ImageDestroy($D->Img); 
 
   }
