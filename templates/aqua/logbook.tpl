@@ -26,9 +26,9 @@
  <tr><th align="right"><a href="{dive_ref}">{dive#}</a></th>
   <td align="center">{date}</td>
   <td align="center">{time}</td>
-  <td align="center">{location}:<br>{place}</td>
+  <td align="center">{location}: {place}</td>
   <td align="center"><img src="{rating}"></td>
-  <td align="center">{depth}<br>{divetime}</td>
+  <td align="center">{depth} / {divetime}</td>
   <td align="center">{buddy}</td>
   <th>{pix}</th>
  </tr>
