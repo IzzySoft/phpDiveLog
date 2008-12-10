@@ -29,7 +29,7 @@
                           # must be a valid account (subdir diver/<user>)
  $sitepix_on_divepage = 0;# whether existing site photos shall be included on
                           # corresponding dive pages (1) or not (0)
- $use_dyn_profile_png = 1;# create the dive profile image dynamically (1) or
+ $use_dyn_profile_png = 0;# create the dive profile image dynamically (1) or
                           # use the one from the conduit (0)
  $values_in_statgraphs = "auto";# whether you want values printed in the bars
                           # of the graphs on the stat page (yes) or not (no),
@@ -50,7 +50,7 @@
 
  #------------------------------------------------------------------[ misc ]---
  $debug_level = "EW";     # What shall be logged: [E]rrors, [W]arnings,
-                          # [N]otices?
+                          # [N]otices, [A]ll?
  $debug_show = 0;         # Show errors on screen (1) or not (0)
  $debug_log  = 1;         # Save errors to the servers error.log (1) or not (0)
 ?>

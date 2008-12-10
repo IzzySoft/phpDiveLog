@@ -319,8 +319,8 @@ a short documentation for the available parameters and their effects:
  <tr><td class="td_blank"><b><code>$debug_level</code></td>
   <td class="td_blank">What information shall be logged. This can be a
     combination of events (chose the bold letter): <b>E</b>rrors, <b>W</b>arnings,
-    <b>N</b>otices. By default, errors and warnings should be reported. Notices
-    may be useful for debugging purposes.</td></tr>
+    <b>N</b>otices, <b>A</b>ll. By default, errors and warnings should be reported.
+    Notices may be useful for debugging purposes.</td></tr>
  <tr><td class="td_blank"><b><code>$debug_show</code></td>
   <td class="td_blank">Whether debug info should be displayed in the browser
     window itself (1) - <b><i>a very bad idea for "production" systems, since

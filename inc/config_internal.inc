@@ -19,9 +19,12 @@
    $pdbug = error_reporting();
    error_reporting($pdbug | $level);
  }
- if ( strpos(strtoupper($debug_level),"E")!==false ) set_phpdebug(E_ERROR);
- if ( strpos(strtoupper($debug_level),"W")!==false ) set_phpdebug(E_WARNING);
- if ( strpos(strtoupper($debug_level),"N")!==false ) set_phpdebug(E_NOTICE);
+ if ( strpos(strtoupper($debug_level),"A")!==false ) set_phpdebug(E_LL);
+ else {
+   if ( strpos(strtoupper($debug_level),"E")!==false ) set_phpdebug(E_ERROR);
+   if ( strpos(strtoupper($debug_level),"W")!==false ) set_phpdebug(E_WARNING);
+   if ( strpos(strtoupper($debug_level),"N")!==false ) set_phpdebug(E_NOTICE);
+ }
  if ($debug_show==0) ini_set('display_errors',0);
  else ini_set('display_errors',1);
  if ($debug_log==0) ini_set('log_errors',0);
