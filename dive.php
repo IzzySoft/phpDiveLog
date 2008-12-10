@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -44,13 +44,13 @@
  $dive = $pdl->db->get_dive($nr);
 
  #=============================================[ set up the navigation bar ]===
- if ($prev=$dive["prev_dive#"]) {
-   $t->set_var("nav_left",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?nr=$prev","<img src='".$pdl->config->tpl_url."images/left.gif'>"));
+ if (isset($dive["prev_dive#"])) {
+   $t->set_var("nav_left",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?nr=".$dive["prev_dive#"],"<img src='".$pdl->config->tpl_url."images/left.gif'>"));
  } else {
    $t->set_var("nav_left","<img src='".$pdl->config->tpl_url."images/left-grey.gif'>");
  }
- if ($next=$dive["next_dive#"]) {
-   $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?nr=$next","<img src='".$pdl->config->tpl_url."images/right.gif'>"));
+ if (isset($dive["next_dive#"])) {
+   $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?nr=".$dive["next_dive#"],"<img src='".$pdl->config->tpl_url."images/right.gif'>"));
  } else {
    $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif'>");
  }
@@ -120,13 +120,13 @@
  $t->set_var("tank_in_name",lang("tank_in"));
  $t->set_var("tank_out_name",lang("tank_out"));
  for ($i=0;$i<$tc;++$i) {
-   $t->set_var("tank_nr",$dive[tank][$i]->nr);
-   $t->set_var("tank_name",$dive[tank][$i]->name);
-   $t->set_var("tank_gas",$dive[tank][$i]->gas);
-   $t->set_var("tank_type",$dive[tank][$i]->type);
-   $t->set_var("tank_volume",$dive[tank][$i]->volume);
-   $t->set_var("tank_in",$dive[tank][$i]->in);
-   $t->set_var("tank_out",$dive[tank][$i]->out);
+   $t->set_var("tank_nr",$dive["tank"][$i]->nr);
+   $t->set_var("tank_name",$dive["tank"][$i]->name);
+   $t->set_var("tank_gas",$dive["tank"][$i]->gas);
+   $t->set_var("tank_type",$dive["tank"][$i]->type);
+   $t->set_var("tank_volume",$dive["tank"][$i]->volume);
+   $t->set_var("tank_in",$dive["tank"][$i]->in);
+   $t->set_var("tank_out",$dive["tank"][$i]->out);
    $t->parse("tank","tankblock",TRUE);
  }
  #----------------------------[ Schedule ]---
@@ -219,7 +219,7 @@
        }
      }
    }
- }
+ } else $sfc = 0;
  if ($fc>0) {
    $picdir = $pdl->config->user_url;
    for ($i=0;$i<$fc;++$i) {

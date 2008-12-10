@@ -16,7 +16,7 @@
   * @package Api
   * @class auth
   * @author Izzy (izzysoft@qumran.org)
-  * @copyright (c) 2004 by Itzchak Rehberg and IzzySoft
+  * @copyright (c) 2004-2008 by Itzchak Rehberg and IzzySoft
   */
  class db_text {
 
@@ -36,6 +36,7 @@
    * @return array translations (ref=>trans)
    */
    function get_translations($lang_id="en",$trans=array()) {
+     GLOBAL $pdl;
      $trans = array();
      if ( $lang_id!="en" ) {
        $filename = $pdl->config->base_path."lang/trans.en";
@@ -92,7 +93,7 @@
     */
    function read_divedata($sort="",$order="") {
      GLOBAL $pdl;
-     if ($this->dives) return; // prevent multiple reads
+     if (isset($this->dives)) return; // prevent multiple reads
      switch ($pdl->config->db_type) {
        case "csv"  :
        default     :
@@ -149,8 +150,8 @@
               $this->divedata[$i]["tank_in"],$this->divedata[$i]["tank_out"]);
 
        # temporary until the prev/next are available in CSV data
-       $this->divedata[$i]["prev_dive#"] = $this->divedata[$i-1]["dive#"];
-       $this->divedata[$i]["next_dive#"] = $this->divedata[$i+1]["dive#"];
+       if ($i>0) $this->divedata[$i]["prev_dive#"] = $this->divedata[$i-1]["dive#"];
+       if ($i+1<$this->dives) $this->divedata[$i]["next_dive#"] = $this->divedata[$i+1]["dive#"];
      }
    }
 
@@ -223,7 +224,7 @@
     */
    function read_sitedata($sort="",$order="") {
      GLOBAL $pdl;
-     if ($this->sites) return; // prevent multiple reads
+     if (isset($this->sites)) return; // prevent multiple reads
      switch ($pdl->config->db_type) {
        case "csv"  :
        default     :
@@ -246,10 +247,12 @@
    }
 
    function setup_site_records() { // temporary: we need an ID for reference
-     for ($i=0;$i<$this->sites;++$i) {
+     $this->sitedata[0]["next_site#"] = $this->sitedata[1]["id"];
+     for ($i=1;$i+1<$this->sites;++$i) {
        $this->sitedata[$i]["prev_site#"] = $this->sitedata[$i-1]["id"];
        $this->sitedata[$i]["next_site#"] = $this->sitedata[$i+1]["id"];
      }
+     $this->sitedata[$i+1]["prev_site#"] = $this->sitedata[$i]["id"];
      unset($this->sitedata[0]["prev_site#"]);
      unset($this->sitedata[$this->sites -1]["next_site#"]);
    }
@@ -321,6 +324,7 @@
      $csv = new csv(";",'"',TRUE);
      $udirs = $pdl->file->get_subdirs($pdl->config->base_path."diver");
      $dircount = count($udirs);
+     $cnum = array();
      for ($i=0;$i<$dircount;++$i) {
        if ( !file_exists($pdl->config->base_path."diver/".$udirs[$i]."/public") ) continue;
        $file = $pdl->config->base_path."diver/".$udirs[$i]."/data/divesites.csv";
@@ -339,7 +343,8 @@
 	     unset($data);
            } else {
              $place[] = $csv->data[$k]["loc"];
-             ++$cnum[$csv->data[$k]["loc"]];
+             if (isset($cnum[$csv->data[$k]["loc"]])) ++$cnum[$csv->data[$k]["loc"]];
+	     else $cnum[$csv->data[$k]["loc"]] = 1;
            }
          }
        }

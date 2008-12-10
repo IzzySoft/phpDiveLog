@@ -130,14 +130,12 @@ class graph {
     $dc = count($csv->data);
     $min_date = preg_replace('|.*(\d{4}).*|','$1',$csv->data[0]['date']);
     $max_date = preg_replace('|.*(\d{4}).*|','$1',$csv->data[$dc-1]['date']);
-    $year = 0;
     for($i=0;$i<count($csv->data);$i++) {
       // Zeiten berechnen
       $x = preg_replace('|.*(\d{4}).*|','$1',$csv->data[$i]['date']);
-      if ($x>$year) $year = $x;
-      ++$dives[$year];
+      if (empty($dives[$x])) $dives[$x] = 1;
+      else ++$dives[$x];
     }
-    unset($year);
     $dives[$max_date+1] = 0;
     ++$max_date;
     $max_dives = 0;
@@ -210,14 +208,12 @@ class graph {
     $dc = count($csv->data);
     $min_date = preg_replace('|.*(\d{4}).*|','$1',$csv->data[0]['date']);
     $max_date = preg_replace('|.*(\d{4}).*|','$1',$csv->data[$dc-1]['date']);
-    $year = 0;
     for($i=0;$i<count($csv->data);$i++) {
       // Zeiten berechnen
       $x = preg_replace('|.*(\d{4}).*|','$1',$csv->data[$i]['date']);
-      if ($x>$year) $year = $x;
-      $divetime[$year] += (int) $csv->data[$i]['divetime'];
+      if (empty($divetime[$x])) $divetime[$x] = (int) $csv->data[$i]['divetime'];
+      else $divetime[$x] += (int) $csv->data[$i]['divetime'];
     }
-    unset($year);
     $divetime[$max_date+1] = 0;
     ++$max_date;
     $max_time = 0;

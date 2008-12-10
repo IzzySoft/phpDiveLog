@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpApi                                   (c) 2004-2005 by Itzchak Rehberg #
+ # phpApi                                   (c) 2004-2008 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -16,7 +16,7 @@
   * @package Api
   * @class auth
   * @author Izzy (izzysoft AT qumran DOT org)
-  * @copyright (c) 2004-2005 by Itzchak Rehberg and IzzySoft
+  * @copyright (c) 2004-2008 by Itzchak Rehberg and IzzySoft
   */
  class file {
 
@@ -129,6 +129,7 @@
      }
      $plen   = strlen($prefix);
      $dir = dir($dirname);
+     $list = array();
      while ( $file=$dir->read() ) {
        if ( strpos($file,$prefix)===0 ) {
          $pos = strpos($file,".");
@@ -143,11 +144,7 @@
 	     }
 	     break;
            case "txt" :
-             $text = file($pdl->config->user_path."fotos/$type/$file");
-             $tl   = count($text);
-             for ($i=0;$i<$tl;++$i) {
-               $list[$pic]->desc .= $text[$i];
-             }
+             $list[$pic]->desc = file_get_contents($pdl->config->user_path."fotos/$type/$file");
              break;
          }
        }
@@ -158,7 +155,8 @@
          $result[] = $foto;
        }
      }
-     return $result;
+     if (isset($result)) return $result;
+     return null;
    }
 
    function havePix($id,$type="dive",$diver="") {

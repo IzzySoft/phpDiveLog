@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -62,7 +62,7 @@
        } else { $sname = lang("tab_".$name); }
        $t->set_var("tab_img",$this->tab[$name]->img);
        if (!$this->tab[$name]->hideurl) {
-         if ($this->tab[$name]->jswin) {
+         if (isset($this->tab[$name]->jswin)) {
            $name = "<A HREF='JavaScript:open_help(\"".$this->tab[$name]->url."\")'>$sname</A>";
          } else
            $name = $pdl->link->linkurl($this->tab[$name]->url,$sname);

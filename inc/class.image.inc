@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -16,7 +16,7 @@
   * @package Api
   * @class image
   * @author Izzy (izzysoft AT qumran DOT org)
-  * @copyright (c) 2004-2007 by Itzchak Rehberg and IzzySoft
+  * @copyright (c) 2004-2008 by Itzchak Rehberg and IzzySoft
   */
  class image {
 
@@ -33,7 +33,7 @@
    * @return array size (x,y - 0,0 if the graphic functions not available)
    */
   function getSize($file) {
-    if ( !function_exists(getimagesize) ) return array(0,0);
+    if ( !function_exists("getimagesize") ) return array(0,0);
     return getimagesize($file);
   }
 

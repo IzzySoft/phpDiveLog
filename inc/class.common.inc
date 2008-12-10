@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -16,7 +16,7 @@
   * @package Api
   * @class common
   * @author Izzy (izzysoft AT qumran DOT org)
-  * @copyright (c) 2004-2007 by Itzchak Rehberg and IzzySoft
+  * @copyright (c) 2004-2008 by Itzchak Rehberg and IzzySoft
   */
  class common {
 
@@ -94,6 +94,7 @@
     if(empty($data)) {
       return $data;
     }
+    $newText = "";
     $lines = split("\n",$data);
     while ( list ($key,$line) = each ($lines)) {
       if ( preg_match_all("/\[href\]\S+\[\/href\]/i",$line,$matches) ) {

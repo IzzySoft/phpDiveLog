@@ -13,7 +13,8 @@
  # $Id$
 
  include("inc/includes.inc");
- $showPlace = $_GET["place"];
+ if (isset($_REQUEST["place"])) $showPlace = $_REQUEST["place"];
+ else $showPlace = "";
  $title .= ": AllPlaces";
  if ( !empty($showPlace) ) $title .= ": $showPlace";
  include("inc/header.inc");

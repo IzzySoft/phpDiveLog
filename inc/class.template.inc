@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -56,15 +56,15 @@ class Template {
    * @param optional string unknowns how to handle unknown variables (remove/comment/keep)
    */
   function Template($root = ".", $unknowns = "remove") {
-    GLOBAL $pvp,$base_path,$base_url,$page_id;
+    GLOBAL $pdl,$page_id;
     $this->set_root($root);
     $this->set_unknowns($unknowns);
-    $this->set_var("tpl_dir",str_replace($base_path,$base_url,$pvp->tpl_dir)."/");
-    $this->set_var("logoff_link",$base_url."login.php?logout=1");
+    $this->set_var("tpl_dir",str_replace($pdl->config->base_path,$pdl->config->base_url,$pdl->config->tpl_path)."/");
+    $this->set_var("logoff_link",$pdl->config->base_url."login.php?logout=1");
     $this->set_var("page_id",$page_id);
     $this->set_var("help_link","open_help('$page_id')");
-    $this->set_var("home_link",$base_url."index.php");
-    $this->set_var("search_link",$base_url."search.php");
+    $this->set_var("home_link",$pdl->config->base_url."index.php");
+    $this->set_var("search_link",$pdl->config->base_url."search.php");
   }
 
   /** Set a new template directory
