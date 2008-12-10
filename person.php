@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -87,7 +87,7 @@
      $t->set_var("date",$diver["certification"]["date"][$i]);
      $t->set_var("course",$diver["certification"]["course"][$i]);
      $t->set_var("place",$diver["certification"]["place"][$i]);
-     $t->parse("cdetail","cdetailblock",TRUE);
+     $t->parse("cdetail","cdetailblock",$i);
    }
    $t->set_var("date_name",lang("date"));
    $t->set_var("course_name",lang("course"));
@@ -118,9 +118,9 @@
      }
      $t->set_var("foto",$fotos[$i]->url);
      $t->set_var("fdesc",$pdl->common->tagreplace($fotos[$i]->desc));
-     $t->parse("pic","fotoitemblock",TRUE);
+     $t->parse("pic","fotoitemblock",$i);
      if ( ($i+1)%3==0 && $fc>3 && $i+1!=$fc ) {
-       $t->parse("pic","multifotoblock",TRUE);
+       $t->parse("pic","multifotoblock",$i);
      }
    }
    $t->set_var("fotos_name",lang("fotos"));

@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -20,8 +20,7 @@
    include("inc/footer.inc");
    exit;
  }
- $start = $_GET["start"];
- if (!$start) $start = 0;
+ $start = $pdl->params->start;
  $end = $start + $pdl->config->display_limit;
 
  $t = new Template($pdl->config->tpl_path);
@@ -88,7 +87,7 @@
      $t->set_var("status","");
      $t->set_var("pix","");
    }
-   $t->parse("item","itemblock",TRUE);
+   $t->parse("item","itemblock",$i);
  }
 
  $t->pparse("out","template");

@@ -37,12 +37,11 @@
    * @return string target url
    */
   function slink($target) {
-#    GLOBAL $pdl;
-    GLOBAL $lang, $template_set;
+    GLOBAL $pdl, $lang;
     if (empty($lang)) $lang = "en";
-    $tpl = $_GET["tpl"]; if (empty($tpl)) $tpl = $template_set;
-    $diver = $_GET["diver"];
-    $order = $GLOBALS["order"]; $sort = $GLOBALS["sort"];
+    $tpl = $pdl->config->template_set;
+    $diver = $pdl->params->diver;
+    $order = $pdl->params->order; $sort = $pdl->params->sort;
     $params = "";
     $details = array("lang","tpl","diver","sort","order");
     foreach ($details as $element) {

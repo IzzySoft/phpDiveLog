@@ -23,8 +23,7 @@
    include("inc/footer.inc");
    exit;
  }
- $start = $_GET["start"];
- if (!$start) $start = 0;
+ $start = $pdl->params->start;
  $end = $start + $pdl->config->display_limit;
 
  $t = new Template($pdl->config->tpl_path);
@@ -79,7 +78,7 @@
    for ($i=0;$i<count($places);++$i) {
      $t->set_var("place",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?place=".urlencode($places[$i]->name),$places[$i]->name));
      $t->set_var("hits",$places[$i]->num);
-     $t->parse("pitem","pitemblock",TRUE);
+     $t->parse("pitem","pitemblock",$i);
    }
    $t->parse("place","placeblock");
    $t->set_var("site","");
@@ -93,7 +92,7 @@
      } else {
        $t->set_var("pix","&nbsp;");
      }
-     $t->parse("sitem","sitemblock",TRUE);
+     $t->parse("sitem","sitemblock",$i);
    }
    $t->parse("site","siteblock");
    $t->set_var("place","");

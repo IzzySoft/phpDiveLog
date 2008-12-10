@@ -13,8 +13,9 @@
  # $Id$
 
  #================================================[ Initialize environment ]===
+ $listtype = "logbook";
  include("inc/includes.inc");
- $nr = $_GET["nr"];
+ $nr = $pdl->params->nr;
  $title .= ": ".lang("dive#")." $nr";
  include("inc/header.inc");
 
@@ -127,7 +128,7 @@
    $t->set_var("tank_volume",$dive["tank"][$i]->volume);
    $t->set_var("tank_in",$dive["tank"][$i]->in);
    $t->set_var("tank_out",$dive["tank"][$i]->out);
-   $t->parse("tank","tankblock",TRUE);
+   $t->parse("tank","tankblock",$i);
  }
  #----------------------------[ Schedule ]---
  $sched = $pdl->db->get_schedule($nr);

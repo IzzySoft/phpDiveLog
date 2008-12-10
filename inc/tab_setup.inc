@@ -68,7 +68,7 @@
            $name = $pdl->link->linkurl($this->tab[$name]->url,$sname);
        } else { $name = lang("tab_".$name); }
        $t->set_var("tab_name",$name);
-       $t->parse("tab","tabblock",TRUE);
+       $t->parse("tab","tabblock",$i);
      }
    }
  }

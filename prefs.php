@@ -53,7 +53,7 @@
      else $img = strtoupper($lavail[$i]);
    $t->set_var("lang_img",$img);
    $t->set_var("lang_name",lang("lang_".$lavail[$i]));
-   $t->parse("lang","langblock",TRUE);
+   $t->parse("lang","langblock",$i);
  }
 
  #=================================================[ Set up template block ]===
@@ -74,7 +74,7 @@
      else $img ="";
    $t->set_var("tpl_img",$img);
    $t->set_var("tpl_name",ucfirst($tset[$i]));
-   $t->parse("tpl","tplblock",TRUE);
+   $t->parse("tpl","tplblock",$i);
  }
 
  $t->pparse("out","template");

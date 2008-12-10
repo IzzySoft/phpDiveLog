@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -12,11 +12,11 @@
 
  # $Id$
 
+ $listtype = "logbook";
  include("inc/includes.inc");
  $title .= ": DiveIndex";
  include("inc/header.inc");
- $start = $_GET["start"];
- if (!$start||!is_numeric($start)) $start = 0;
+ $start = $pdl->params->start;
  $end = $start + $pdl->config->display_limit;
 
  $t = new Template($pdl->config->tpl_path);
@@ -24,7 +24,7 @@
  $t->set_block("template","itemblock","item");
 
  #==============================================[ Import dive data from DB ]===
- $sort = $_REQUEST["sort"]; $order = $_REQUEST["order"];
+ $sort = $pdl->params->sort; $order = $pdl->params->order;
  if (!in_array($sort,array("date","time","location","place","rating","depth","buddy"))) $sort = "";
  if (!in_array($order,array("desc","asc"))) $order = "";
  if (empty($sort) && !empty($pdl->config->logbook_default_sort)) {

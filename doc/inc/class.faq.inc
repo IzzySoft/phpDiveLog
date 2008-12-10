@@ -39,9 +39,12 @@ class pagemaker {
  }
 
  function add_item($text) {
+   static $repeat;
+   if (!isset($repeat)) $repeat = 0;
    $text = trim($text);
    $this->t->set_var("item","<A HREF='#".$this->itemc."'>$text</A>");
-   $this->t->parse("toc","tocblock",TRUE);
+   $this->t->parse("toc","tocblock",$repeat);
+   ++$repeat;
  }
 
  /** Replacing placeholders for variables and translations within the
@@ -55,7 +58,7 @@ class pagemaker {
  function add_block($content) {
   if (!$this->block->name) return;
   if ( preg_match_all("/\{\S+\}/",$content,$matches) ) { // replace variables
-   $var = substr($matches[0],1,strlen($matches[0])-2);
+   $var = substr($matches[0][0],1,strlen($matches[0][0])-2);
    for ($i=0;$i<count($matches[0]);$i++) {
      $var = substr($matches[0][$i],1,strlen($matches[0][$i])-2);
      $pos = strpos($var,"->");
@@ -88,8 +91,12 @@ class pagemaker {
   $list   = $this->block->name . "list";
   $pblock = $this->block->name . "block";
   $this->t->set_var($this->block->name,trim($this->block->content));
-  $this->t->parse($list,$pblock,$this->block->append);
-  if (!$this->block->append) $this->block->append = 1;
+  if (empty($this->block->append) || ($this->block->name == "title" && !isset($this->t->varvals["titlelist"]))) {
+    $this->t->parse($list,$pblock);
+    $this->block->append = 1;
+  } else {
+    $this->t->parse($list,$pblock,$this->block->append);
+  }
   $this->block->content = "";
  }
 
@@ -134,6 +141,7 @@ class pagemaker {
     $input = file($file);
   }
   $line  = 0;
+  $eof   = FALSE;
   while ( $line<count($input) ) {
    switch ( trim(strtolower($input[$line])) ) {
     case "[title]"   : if ($this->block->name) {

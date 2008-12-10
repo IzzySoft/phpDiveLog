@@ -43,6 +43,27 @@
  $relPath = "diver/".$pdl->params->diver."/";
  $pdl->config->user_name = $pdl->params->diver;
 
+ #======================================[ Process remaining URL parameters ]===
+ function set_param($req,$default) {
+   GLOBAL $pdl;
+   if (isset($_REQUEST[$req])) $pdl->params->$req = $_REQUEST[$req];
+   else $pdl->params->$req = $default;
+ }
+ set_param("start",0);
+ if (!isset($listtype)) $listtype = "";
+ switch ($listtype) {
+   case "logbook" : set_param("order",$logbook_default_order);
+                    set_param("sort",$logbook_default_sort);
+		    break;
+   case "sitelist": set_param("order",$sitelist_default_order);
+                    set_param("sort",$sitelist_default_sort);
+		    break;
+   default        : set_param("order","asc");
+                    set_param("sort","");
+		    break;
+ }
+ set_param("nr",0);
+
  include("inc/class.file.inc");
  $pdl->file = new file();
 
@@ -69,6 +90,7 @@
 
  #==========================================================[ preferences ]===
  if ( !empty($_GET["tpl"]) )  $template_set = $_GET["tpl"];
+ $pdl->config->template_set = $template_set;
  $pdl->config->display_limit = $display_limit;
  if ( !empty($_GET["lang"]) ) {
    $lang = $_GET["lang"];

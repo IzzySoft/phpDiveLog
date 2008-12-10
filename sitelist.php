@@ -15,8 +15,7 @@
  include("inc/includes.inc");
  $title .= ": SiteIndex";
  include("inc/header.inc");
- $start = $_GET["start"];
- if (!$start) $start = 0;
+ $start = $pdl->params->start;
  $end = $start + $pdl->config->display_limit;
 
  $t = new Template($pdl->config->tpl_path);
@@ -107,7 +106,7 @@
    } else {
      $t->set_var("pix","");
    }
-   $t->parse("item","itemblock",TRUE);
+   $t->parse("item","itemblock",$i);
  }
 
  $t->pparse("out","template");
