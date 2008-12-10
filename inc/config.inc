@@ -14,22 +14,22 @@
  /* $Id$ */
 
  #=============================================================[ database ]===
- $database["type"]      = "csv";     # csv|mysql|pgsql (only csv supported now)
+ $database["type"]      = "csv";   # csv|mysql|pgsql (only csv supported now)
 
  #==========================================================[ preferences ]===
  $display_limit = 12;     # how may records/page should be displayed for lists
  $template_set  = "aqua"; # prefered template set: default|aqua
  $lang          = "en";   # default language if not (yet) specified by visitor
- $title = "phpDiveLog Dev"; # site name
+ $title = "phpDiveLog Prod"; # site name
  $enable_index  = TRUE;   # whether the buddylist index is available
  $default_page  = "user"; # where to route requests without the "?diver=nick"
                           # to: user|index|error ("index" is not supported yet
                           # and will be handled as "error")
- $default_user  = "izzy"; # if default_page=user: which user is the default?
+ $default_user  = "demo"; # if default_page=user: which user is the default?
                           # must be a valid account (subdir diver/<user>)
  $sitepix_on_divepage = 0;# whether existing site photos shall be included on
                           # corresponding dive pages (1) or not (0)
- $use_dyn_profile_png = 0;# create the dive profile image dynamically (1) or
+ $use_dyn_profile_png = 1;# create the dive profile image dynamically (1) or
                           # use the one from the conduit (0)
  $values_in_statgraphs = "auto";# whether you want values printed in the bars
                           # of the graphs on the stat page (yes) or not (no),
@@ -42,9 +42,15 @@
  $mapsite = "Google";     # Where to show the dive site in a map. Possible
                           # values: "Mapquest" (old style), "Google" (Google Maps),
 			  # "Yahoo" (Yahoo Maps)
- #--------------------------------------------------------------[ sorting ]---
+ #--------------------------------------------------------------[ sorting ]----
  $logbook_default_sort   = "date";
  $logbook_default_order  = "desc";
  $sitelist_default_sort  = "location";
  $sitelist_default_order = "asc";
+
+ #------------------------------------------------------------------[ misc ]---
+ $debug_level = "EW";     # What shall be logged: [E]rrors, [W]arnings,
+                          # [N]otices?
+ $debug_show = 0;         # Show errors on screen (1) or not (0)
+ $debug_log  = 1;         # Save errors to the servers error.log (1) or not (0)
 ?>

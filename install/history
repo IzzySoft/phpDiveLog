@@ -9,6 +9,7 @@ v0.3.0
 + added dive stats graphs to statistics page. These will automatically
   be available if the directory "profiles" is available in the divers home
   *and* this directory is radable and writable by the web server process.
++ made debug logging configurable - so it's easier to collect important details
 
 v0.2.9 (06.12.2008)
 -------------------

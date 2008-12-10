@@ -13,19 +13,32 @@
  /* $Id$ */
 
  $pdl->config->version = "0.2.9";
+ #=============================================================[ Debugging ]===
+ error_reporting(0); // initially turn all off
+ function set_phpdebug($level) {
+   $pdbug = error_reporting();
+   error_reporting($pdbug | $level);
+ }
+ if ( strpos(strtoupper($debug_level),"E")!==false ) set_phpdebug(E_ERROR);
+ if ( strpos(strtoupper($debug_level),"W")!==false ) set_phpdebug(E_WARNING);
+ if ( strpos(strtoupper($debug_level),"N")!==false ) set_phpdebug(E_NOTICE);
+ if ($debug_show==0) ini_set('display_errors',0);
+ else ini_set('display_errors',1);
+ if ($debug_log==0) ini_set('log_errors',0);
+ else ini_set('log_errors',1);
+
+ #===========================================================[ Diver Setup ]===
  $pdl->config->enable_index = $enable_index;
- if (!empty($_GET["diver"])) {
-   $relPath = "diver/".$_GET["diver"]."/";
-   $pdl->config->user_name = $_GET["diver"];
- } elseif (strtolower($default_page) == "user") {
-   $relPath = "diver/$default_user/";
-   $pdl->config->user_name = $default_user;
- } elseif (strtolower($default_page) == "index") {
+ if (!empty($_REQUEST["diver"])) $pdl->params->diver = $_REQUEST["diver"];
+ elseif (strtolower($default_page) == "user") $pdl->params->diver = $default_user;
+ elseif (strtolower($default_page) == "index") {
    if ( basename($_SERVER["SCRIPT_FILENAME"])!= "buddylist.php" ) {
      header("Location: buddylist.php");
      exit;
    }
  }
+ $relPath = "diver/".$pdl->params->diver."/";
+ $pdl->config->user_name = $pdl->params->diver;
 
  include("inc/class.file.inc");
  $pdl->file = new file();

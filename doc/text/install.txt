@@ -311,6 +311,27 @@ a short documentation for the available parameters and their effects:
  <tr><td class="td_blank"><b><code>$logbook_default_order</code></b></td></tr>
  <tr><td class="td_blank"><b><code>$sitelist_default_sort</code></b></td></tr>
  <tr><td class="td_blank"><b><code>$sitelist_default_order</code></b></td></tr>
+ <tr><th class="td_blank" colspan="2">Debug Settings</th></tr>
+ <tr><td class="td_blank" colspan="2">These settings are for debugging purposes
+    only - so usually you should leave them untouched. They may be needed to
+    track down a problem, however - but in those cases you will open a ticket,
+    and <i>may</i> be adviced to change one/some of these settings:</td></tr>
+ <tr><td class="td_blank"><b><code>$debug_level</code></td>
+  <td class="td_blank">What information shall be logged. This can be a
+    combination of events (chose the bold letter): <b>E</b>rrors, <b>W</b>arnings,
+    <b>N</b>otices. By default, errors and warnings should be reported. Notices
+    may be useful for debugging purposes.</td></tr>
+ <tr><td class="td_blank"><b><code>$debug_show</code></td>
+  <td class="td_blank">Whether debug info should be displayed in the browser
+    window itself (1) - <b><i>a very bad idea for "production" systems, since
+    internal (private) information would be presented to each visitor.</i></b>
+    This is really simply to ease debugging - <b><i>you should always turn it
+    off (0)</i></b> otherwise.</td></tr>
+ <tr><td class="td_blank"><b><code>$debug_log</code></td>
+  <td class="td_blank">Whether to store error messages to the web servers
+    <code>error.log</code> file (1) or not (0). It is always a good idea to
+    have this turned on - so you can verify if a certain error already exists
+    for a while, and since when.</td></tr>
 </table>
 
 #---[ Updating ]----------------------------------------------[ Updating ]---
