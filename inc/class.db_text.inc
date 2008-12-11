@@ -104,6 +104,14 @@
      $dc = count($csv->data);
      for ($i=0;$i<$dc;++$i) $csv->data[$i][$field] .= " $unit";
    }
+   function divedat_time2num(&$csv) {
+     $dc = count($csv->data);
+     for ($i=0;$i<$dc;++$i) $csv->data[$i]["time"] = str_replace(":",".",$csv->data[$i]["time"]);
+   }
+   function divedat_num2time(&$csv) {
+     $dc = count($csv->data);
+     for ($i=0;$i<$dc;++$i) $csv->data[$i]["time"] = str_replace(".",":",$csv->data[$i]["time"]);
+   }
    /** Read the dive data file and setup the dive data
     * @class db_text
     * @method read_divedata
@@ -120,8 +128,8 @@
          if (file_exists($pdl->config->divedata)) {
            $csv->import($pdl->config->divedata);
            switch($sort) {
-             case "date"  :
-             case "time"  : $sort = "dive#"; $type="num"; break;
+             case "date"  : $sort = "dive#"; $type="num"; break;
+             case "time"  : $type="num"; $this->divedat_time2num($csv); break;
              case "location" :
              case "place" :
              case "rating":
@@ -139,6 +147,7 @@
 	   switch($sort) {
 	     case "depth"    :
 	     case "divetime" : $this->divedat2str(&$csv,$sort,$unit); break;
+	     case "time"     : $this->divedat_num2time($csv); break;
 	     default         : break;
 	   }
            $this->divedata = $csv->data;

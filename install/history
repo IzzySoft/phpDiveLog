@@ -14,6 +14,9 @@ v0.3.0
 + added sorting by divetime to logbook (dives) view
 + improved sorting for depth and divetime (now sorted numerical by the integer
   part at least)
++ sort arrows on time column (logbook page) now really sort by time - so you can
+  find earliest and latest times your dives ever started
+* numeric sort now finally also considers decimals
 
 v0.2.9 (06.12.2008)
 -------------------

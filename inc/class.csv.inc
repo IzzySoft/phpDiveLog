@@ -198,10 +198,12 @@
    }
 
    function array_key_multi_srt(&$arr,$l,$option,$f='strcmp') {
+     if ($f=='bccomp') $func = "return $f(\$a['$l'], \$b['$l'], 2);";
+     else $func = "return $f(\$a['$l'], \$b['$l']);";
      if ($option=="!") {
-       return usort($arr, create_function('$b, $a', "return $f(\$a['$l'], \$b['$l']);"));
+       return usort($arr, create_function('$b, $a', $func));
      } else {
-       return usort($arr, create_function('$a, $b', "return $f(\$a['$l'], \$b['$l']);"));
+       return usort($arr, create_function('$a, $b', $func));
      }
    }
 
@@ -210,19 +212,19 @@
 
  /** CVS data: array[0..n] of imported records.
   *  Each Record is an array[0..n] of objects with the properties: name,data
-  * @class csv
+  * @class cvs
   * @attribute array data
   */
- /** csv field separator (defaults to ";")
-  * @class csv
+ /** CVS field separator (defaults to ";")
+  * @class cvs
   * @attribute string sep
   */
- /** csv text field encloser (defaults to '"')
-  * @class csv
+ /** CVS text field encloser (defaults to '"')
+  * @class cvs
   * @attribute string txt
   */
  /** trim imported values? (Defaults to FALSE)
-  * @class csv
+  * @class cvs
   * @attribute boolean trim
   */
 ?>
