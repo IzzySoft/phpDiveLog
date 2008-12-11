@@ -225,7 +225,13 @@ a short documentation for the available parameters and their effects:
     code, like "en" for English or "de" for German. You can set this to any
     language you like - if no translations are found, PDL will fall back to
     English. Of course you can create your own translations, which is discussed
-    on the {admin_page} page.</td></tr>
+    on the {admin_page} page.<br>
+    Before you get confused when seeing a different language - here is how
+    phpDiveLog deals with languages:<OL>
+    <LI>Check the URL for an explicitly requested language (<code>?lang=XX</CODE>)</LI>
+    <LI>If there is none (or the requested one is not available), check the
+        browsers negotiated language</LI>
+    <LI>If we still found no match, use the one defined here</LI></OL></td></tr>
  <tr><td class="td_blank"><b><code>$title</code></b></td>
   <td class="td_blank">for now the site name to be displayed in the browsers
     title bar. At the end of this, some page information will be added: if you
