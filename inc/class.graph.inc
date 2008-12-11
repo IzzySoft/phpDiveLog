@@ -37,7 +37,7 @@ class graph {
     // setup data
     while (strlen($nr)<5) $nr = "0$nr";
     $csvfile = $pdl->config->datadir."dive${nr}_profile.csv";
-    if (!file_exists($csvfile)) die("CSV File '$csvfile' was not found.<br>");
+    if (!file_exists($csvfile)) return; // die("CSV File '$csvfile' was not found.<br>");
     $profilepng = $pdl->config->user_path . "profiles/dive${nr}_profile.png";
     $profilemap = $pdl->config->user_path . "profiles/dive${nr}_profile.map";
     // check whether we have something to do
@@ -68,7 +68,7 @@ class graph {
 
     // Create the Diagram
     $D=new Diagram(); 
-    $D->Img=@ImageCreate($width, $height) or die("Cannot create a new GD image."); 
+    if (!$D->Img=@ImageCreate($width, $height)) return; // or die("Cannot create a new GD image."); 
     ImageColorAllocate($D->Img, 200,200,200); // background color 
     $D->SetFrame(40, 30, $width-10, $height-30); 
     $D->SetBorder(UTC(2000,01,01,0,0,0), UTC(2000,01,01,0,0,$divetime+20), $max_depth+1, 0); 
@@ -117,7 +117,7 @@ class graph {
   function dives() {
     GLOBAL $pdl;
     $csvfile = $pdl->config->datadir."logbook.csv";
-    if (!file_exists($csvfile)) die("CSV File '$csvfile' was not found.<br>");
+    if (!file_exists($csvfile)) return; // die("CSV File '$csvfile' was not found.<br>");
     $profilepng = $pdl->config->user_path . "profiles/divestat.png";
     $profilemap = $pdl->config->user_path . "profiles/divestat.map"; // not used yet
     if (empty($width))  $width  = 468;
@@ -150,7 +150,7 @@ class graph {
 
     // Create the Diagram
     $D=new Diagram(); 
-    $D->Img=@ImageCreate($width, $height) or die("Cannot create a new GD image."); 
+    if (!$D->Img=@ImageCreate($width, $height)) return; // or die("Cannot create a new GD image."); 
     ImageColorAllocate($D->Img, 200,200,200); // background color 
     $D->SetFrame(60, 30, $width-20, $height-30);
     if ($years<5)
@@ -195,7 +195,7 @@ class graph {
   function divetime() {
     GLOBAL $pdl;
     $csvfile = $pdl->config->datadir."logbook.csv";
-    if (!file_exists($csvfile)) die("CSV File '$csvfile' was not found.<br>");
+    if (!file_exists($csvfile)) return; // die("CSV File '$csvfile' was not found.<br>");
     $profilepng = $pdl->config->user_path . "profiles/timestat.png";
     $profilemap = $pdl->config->user_path . "profiles/timestat.map"; // not used yet
     if (empty($width))  $width  = 468;
@@ -228,7 +228,7 @@ class graph {
 
     // Create the Diagram
     $D=new Diagram(); 
-    $D->Img=@ImageCreate($width, $height) or die("Cannot create a new GD image."); 
+    if (!$D->Img=@ImageCreate($width, $height)) return; // or die("Cannot create a new GD image."); 
     ImageColorAllocate($D->Img, 200,200,200); // background color 
     $D->SetFrame(60, 30, $width-20, $height-30);
     if ($years<5) $edate = $min_date +4;
