@@ -17,6 +17,9 @@ v0.3.0
 + sort arrows on time column (logbook page) now really sort by time - so you can
   find earliest and latest times your dives ever started
 * numeric sort now finally also considers decimals
+* minor changes to the (global) places page to match the design of all other
+  pages: Have an ID column first to click for the detail page. Diver name now
+  links to the divers page.
 
 v0.2.9 (06.12.2008)
 -------------------

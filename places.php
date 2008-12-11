@@ -84,9 +84,10 @@
    $t->set_var("site","");
  } else {
    for ($i=0;$i<count($places);++$i) {
+     $t->set_var("serial",$pdl->link->linkurl("site.php?diver=".$places[$i]->diver."&id=".$places[$i]->id,$start+$i+1));
      $t->set_var("place",$places[$i]->name);
      $t->set_var("site",$places[$i]->sitename);
-     $t->set_var("hits",$pdl->link->linkurl("site.php?diver=".$places[$i]->diver."&id=".$places[$i]->id,ucfirst($places[$i]->diver)));
+     $t->set_var("diver",$pdl->link->linkurl("person.php?diver=".$places[$i]->diver,ucfirst($places[$i]->diver)));
      if ($pdl->file->havePix($places[$i]->id,"site",$places[$i]->diver)) {
        $t->set_var("pix",'<img src="'.$pdl->config->tpl_url.'images/camera.gif" valign="middle">');
      } else {

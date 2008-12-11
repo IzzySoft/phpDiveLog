@@ -33,10 +33,10 @@
 <!-- BEGIN siteblock -->
  <tr><td>{nav_left}</td><th>{place_name}</th><th>{site_name}</th><th>{hit_name}</th><td align="right">{nav_right}</td></tr>
 <!-- BEGIN sitemblock -->
- <tr><th>&nbsp;</th>
+ <tr><th>{serial}</th>
   <td align="center">{place}</td>
   <td align="center">{site}</td>
-  <td align="right">{hits}</td>
+  <td align="right">{diver}</td>
   <th>{pix}</th>
  </tr>
 <!-- END sitemblock -->
