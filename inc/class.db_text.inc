@@ -85,6 +85,25 @@
   }
 
   #============================================================[ Dive Data ]===
+  /** Prepare divedata for numeric sort (convert field to float)
+   * @method private divedat2num
+   * @param ref object csv
+   * @param string fieldname
+   */
+   function divedat2num(&$csv,$field) {
+     $dc = count($csv->data);
+     for ($i=0;$i<$dc;++$i) $csv->data[$i][$field] = (float) $csv->data[$i][$field];
+   }
+  /** Add back the unit to fields where it has been removed by divedat2num
+   * @method private divedat2str
+   * @param ref object csv
+   * @param string fieldname
+   * @param string unit
+   */
+   function divedat2str(&$csv,$field,$unit) {
+     $dc = count($csv->data);
+     for ($i=0;$i<$dc;++$i) $csv->data[$i][$field] .= " $unit";
+   }
    /** Read the dive data file and setup the dive data
     * @class db_text
     * @method read_divedata
@@ -106,12 +125,22 @@
              case "location" :
              case "place" :
              case "rating":
-             case "depth" :
              case "buddy" : $type = "str"; break;
+             case "depth" :
+	     case "divetime" : $type="num";
+	          $datastr = explode(" ",$csv->data[0][$sort]);
+		  $unit    = $datastr[1];
+		  $this->divedat2num($csv,$sort);
+	          break;
            }
            if (!empty($sort)) {
              $csv->sort($sort,$order,$type);
            }
+	   switch($sort) {
+	     case "depth"    :
+	     case "divetime" : $this->divedat2str(&$csv,$sort,$unit); break;
+	     default         : break;
+	   }
            $this->divedata = $csv->data;
            $this->dives    = count($this->divedata);
            $this->setup_dive_records();
