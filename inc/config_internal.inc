@@ -12,7 +12,7 @@
 
  /* $Id$ */
 
- $pdl->config->version = "0.2.9";
+ $pdl->config->version = "0.3.0a";
  #=============================================================[ Debugging ]===
  error_reporting(0); // initially turn all off
  function set_phpdebug($level) {
