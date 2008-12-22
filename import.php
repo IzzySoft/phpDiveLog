@@ -30,6 +30,7 @@
    if ( $pwd_ok ) {
  #-----------------------------------------------------[ Transfer the data ]---
      include("inc/class.import.inc");
+     $pdl->import = new import;
      $import_ok = $pdl->import->getData("pdl");
      if ( $import_ok ) { // call to import routine here *!*
        $ptitle = lang("import_success_title");
