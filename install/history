@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.3.0
+v0.3.0 (24.12.2008)
 -------------------
 + now it is possible to optionally generate the dive profil graph dynamically
 + added dive stats graphs to statistics page. These will automatically
