@@ -14,7 +14,7 @@
 
  /** File handling methods
   * @package Api
-  * @class auth
+  * @class file
   * @author Izzy (izzysoft AT qumran DOT org)
   * @copyright (c) 2004-2008 by Itzchak Rehberg and IzzySoft
   */
@@ -32,19 +32,31 @@
     * @return boolean success
     */
    function copyDir($src,$target) {
-     if ( is_file($src) ) return copy ($src,$target);
-     if (!is_dir($target)) mkdir($target);
+     GLOBAL $pdl;
+     $ok = TRUE;
+     if ( is_file($src) ) {
+       if (copy ($src,$target)) return TRUE;
+       $pdl->common->add_error(lang("copy_failed",basename($target)));
+       return FALSE;
+     }
+     if (!is_dir($target)) {
+       if (!mkdir($target)) {
+         $pdl->common->add_error(lang("mkdir_failed",basename($target)));
+	 return FALSE;
+       }
+     }
      $dir = dir($src);
      while (false !== $entry = $dir->read()) {
        if ($entry == '.' || $entry == '..') continue;
        if (is_dir("$src/$entry") && ($target !== "$src/$entry")) {
-         $this->copyDir("$src/$entry", "$target/$entry");
+         $ok = $this->copyDir("$src/$entry", "$target/$entry");
        } else {
-         copy("$src/$entry", "$target/$entry");
+         $ok = copy("$src/$entry", "$target/$entry");
        }
+       if (!$ok) $pdl->common->add_error(lang("copy_failed",$entry));
      }
      $dir->close();
-     return TRUE;
+     return $ok;
    }
 
    /** Get the file content of a text file as string
@@ -290,7 +302,7 @@
     */
    function get_subdirs($dirname) {
      $dir = dir($dirname);
-     $exclude = array(".","..","CVS");
+     $exclude = array(".","..","CVS",".svn");
      while ( $file=$dir->read() ) {
        if (!in_array($file,$exclude) ) {
          if ( is_dir("$dirname/$file") ) $sub[] = $file;

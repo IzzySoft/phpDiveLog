@@ -36,7 +36,14 @@
        $ptitle = lang("import_success_title");
        $notes  = lang("import_success_notes");
      } else {
-       $pdl->common->alert(lang("import_failed"));
+       if (count($pdl->common->errors)>0) {
+         $errs = "<br>".lang("error_stack").":<UL>";
+         foreach ($pdl->common->errors as $error) {
+           $errs .= "<LI>$error</LI>";
+         }
+         $errs .= "</UL>";
+       } else $errs = "";
+       $pdl->common->alert(lang("import_failed").$errs);
        include("inc/footer.inc");
        exit;
      }

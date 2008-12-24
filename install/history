@@ -3,6 +3,10 @@ $Id$
 History for phpDiveLog
 ======================
 
+v0.3.1
+-------------------
++ improved error checking on data import: it should now say if the copy failed.
+
 v0.3.0 (24.12.2008)
 -------------------
 + now it is possible to optionally generate the dive profil graph dynamically

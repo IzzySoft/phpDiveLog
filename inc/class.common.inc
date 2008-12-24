@@ -20,6 +20,12 @@
   */
  class common {
 
+  /** Array of errors (if any)
+   * @class common
+   * @attribute array error array[0..n] of strings
+   */
+   var $error = array();
+
   /** Constructor: Set up directories
    * @constructor common
    */
@@ -30,6 +36,15 @@
     $this->dir->privpix   = "fotos/person";
     $this->dir->notes     = "notes";
     $this->dir->text      = "text";
+  }
+
+  /** Add something to the error stack
+   * @class common
+   * @method add_error
+   * @param string error error message to add
+   */
+  function add_error($error) {
+    $this->error[] = $error;
   }
 
   /** Build up alert page with a given message
