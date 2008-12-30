@@ -181,6 +181,7 @@
          $tank->in     = $tank_in[$k];
          $tank->out    = $tank_out[$k];
          $this->divedata[$i]["tank"][$k] = $tank;
+	 unset ($tank);
        }
        unset ($this->divedata[$i]["tank#"],$this->divedata[$i]["tank_id"],
               $this->divedata[$i]["tank_name"],$this->divedata[$i]["tank_volume"],
