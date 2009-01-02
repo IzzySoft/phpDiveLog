@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -12,7 +12,8 @@
 
  /* $Id$ */
 
- $pdl->config->version = "0.3.0";
+ $pdl->config->version = "0.3.1";
+ $pdl->config->site_title = $title;
  #=============================================================[ Debugging ]===
  error_reporting(0); // initially turn all off
  function set_phpdebug($level) {

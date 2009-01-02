@@ -11,6 +11,10 @@ v0.3.1
 * some cleanup
 * failed file operations will now trigger E_USER_NOTICEs so the admin can check
   them in the web servers error log
++ added global KML (using network links to all separate KML files), accessible
+  from the global site list. Be aware that with many logs available, GE may
+  cause 403 errors on the web server since it tries to pick them all at once,
+  which may be interpreted as DoS attack
 
 v0.3.0 (24.12.2008)
 -------------------

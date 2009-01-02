@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -72,6 +72,8 @@
    $t->set_var("site_name",lang("place"));
    $t->set_var("hit_name",lang("diver"));
  }
+ $pdl_url = $pdl->link->get_baseurl()."/placelist_kml.php";
+ $t->set_var("dl_kml",lang("show_kml")." [<a href='placelist_kml.php'>Google Earth</a> | <a href='http://maps.google.com/?q=".urlencode($pdl_url)."' TARGET='_blank'>Google Maps</a>]");
 
  #============================[ Walk through the list and set up the table ]===
  if ( empty($showPlace) ) {

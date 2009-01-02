@@ -41,6 +41,7 @@
  </tr>
 <!-- END sitemblock -->
 <!-- END siteblock -->
+ <tr><td colspan="4" align="center">{dl_kml}</td></tr>
 </table>
 
 </td></tr></table>

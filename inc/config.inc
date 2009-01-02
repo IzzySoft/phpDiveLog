@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -20,7 +20,7 @@
  $display_limit = 12;     # how may records/page should be displayed for lists
  $template_set  = "aqua"; # prefered template set: default|aqua
  $lang          = "en";   # default language if not (yet) specified by visitor
- $title = "phpDiveLog Prod"; # site name
+ $title = "Demos phpDiveLog"; # site name
  $enable_index  = TRUE;   # whether the buddylist index is available
  $default_page  = "user"; # where to route requests without the "?diver=nick"
                           # to: user|index|error ("index" is not supported yet
