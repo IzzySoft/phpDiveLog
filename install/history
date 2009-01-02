@@ -8,6 +8,9 @@ v0.3.1
 + improved error checking on data import: it should now say if the copy failed.
 ! fixed a (PHP5) bug at the tank setup - did nobody notice always using the same
   tank with the same mix and air consumption?
+* some cleanup
+* failed file operations will now trigger E_USER_NOTICEs so the admin can check
+  them in the web servers error log
 
 v0.3.0 (24.12.2008)
 -------------------

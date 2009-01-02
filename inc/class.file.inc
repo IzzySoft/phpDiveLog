@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpApi                                   (c) 2004-2008 by Itzchak Rehberg #
+ # phpApi                                   (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -16,7 +16,7 @@
   * @package Api
   * @class file
   * @author Izzy (izzysoft AT qumran DOT org)
-  * @copyright (c) 2004-2008 by Itzchak Rehberg and IzzySoft
+  * @copyright (c) 2004-2009 by Itzchak Rehberg and IzzySoft
   */
  class file {
 
@@ -37,11 +37,13 @@
      if ( is_file($src) ) {
        if (copy ($src,$target)) return TRUE;
        $pdl->common->add_error(lang("copy_failed",basename($target)));
+       trigger_error("Could not copy '$src' to '$target'",E_USER_NOTICE);
        return FALSE;
      }
      if (!is_dir($target)) {
        if (!mkdir($target)) {
          $pdl->common->add_error(lang("mkdir_failed",basename($target)));
+         trigger_error("Unable to create directory '$target'",E_USER_NOTICE);
 	 return FALSE;
        }
      }
@@ -56,6 +58,7 @@
        if (!$ok) $pdl->common->add_error(lang("copy_failed",$entry));
      }
      $dir->close();
+     if (!$ok) trigger_error("Failed to copy '$src' to '$target'!",E_USER_NOTICE);
      return $ok;
    }
 
@@ -67,6 +70,7 @@
     */
    function read_file($filename) {
      $fp = fopen($filename, "rb");
+     if (!$fp) trigger_error("Failed to open '$filename' for read",E_USER_NOTICE);
      $buffer = fread($fp, filesize($filename));
      fclose($fp);
      return preg_replace("/\r?\n|\r/", "\n", $buffer);
@@ -243,6 +247,7 @@
     */
    function read_conf($file) {
      $def = file($file);
+     if ($def===FALSE) trigger_error("Could not open user config file '$file'",E_USER_NOTICE);
      $lc  = count($def);
      for ($i=0;$i<$lc;++$i) {
        switch(substr(trim($def[$i]),0,1)) {
@@ -291,6 +296,8 @@
 	   return $csv->data[$i]["pwd"];
        }
        return "";
+     } else {
+       trigger_error("Could not find password file '".$pdl->config->pwdfile."'",E_USER_NOTICE);
      }
    }
 

@@ -88,6 +88,7 @@
     */
    function read_file($filename) {
      $fp = fopen($filename, "rb");
+     if ($fp===FALSE) trigger_error("Could not open '$filename' for read",E_USER_NOTICE);
      $buffer = fread($fp, filesize($filename));
      fclose($fp);
      $this->text = preg_replace("/\r?\n|\r/", "\n", $buffer);
