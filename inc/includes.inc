@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -13,9 +13,9 @@
  /* $Id$ */
 
  include("inc/vul_check.inc");
- $diver = $_GET["diver"];
- $lang  = $_GET["lang"];
- $tpl   = $_GET["tpl"];
+ if (!empty($_GET["diver"])) $diver = $_GET["diver"];
+ if (!empty($_GET["lang"])) $lang  = $_GET["lang"];
+ if (!empty($_GET["tpl"])) $tpl   = $_GET["tpl"];
  #==========================================================[ include API ]===
  include("inc/config.inc");
  include("inc/class.csv.inc");
@@ -54,6 +54,7 @@
      include("inc/header.inc");
      $pdl->common->alert(lang("no_diver",lang("diver_url_syntax")));
      include("inc/footer.inc");
+     trigger_error("The default_user '$default_user' specified in config.inc does not exist",E_USER_NOTICE);
      exit;
    } elseif (!is_dir($pdl->config->user_path)) { // unknown account
      include("inc/header.inc");

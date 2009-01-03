@@ -15,6 +15,7 @@ v0.3.1
   from the global site list. Be aware that with many logs available, GE may
   cause 403 errors on the web server since it tries to pick them all at once,
   which may be interpreted as DoS attack
+* throw E_USER_NOTICE when configured $default_user is required but invalid
 
 v0.3.0 (24.12.2008)
 -------------------
