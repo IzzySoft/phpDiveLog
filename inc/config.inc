@@ -42,6 +42,8 @@
  $mapsite = "Google";     # Where to show the dive site in a map. Possible
                           # values: "Mapquest" (old style), "Google" (Google Maps),
 			  # "Yahoo" (Yahoo Maps)
+ $global_kml = TRUE;      # Offer links to global KML files (TRUE) on the global
+                          # places list or not (FALSE)
  #--------------------------------------------------------------[ sorting ]----
  $logbook_default_sort   = "date";
  $logbook_default_order  = "desc";

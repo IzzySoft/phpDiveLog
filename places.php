@@ -32,6 +32,7 @@
  $t->set_block("placeblock","pitemblock","pitem");
  $t->set_block("template","siteblock","site");
  $t->set_block("siteblock","sitemblock","sitem");
+ $t->set_block("template","kmlblock","gkml");
 
  #==============================================[ Import dive data from DB ]===
  if ( empty($showPlace) ) {
@@ -72,8 +73,11 @@
    $t->set_var("site_name",lang("place"));
    $t->set_var("hit_name",lang("diver"));
  }
- $pdl_url = $pdl->link->get_baseurl()."/placelist_kml.php";
- $t->set_var("dl_kml",lang("show_kml")." [<a href='placelist_kml.php'>Google Earth</a> | <a href='http://maps.google.com/?q=".urlencode($pdl_url)."' TARGET='_blank'>Google Maps</a>]");
+ if ($pdl->config->global_kml) {
+   $pdl_url = $pdl->link->get_baseurl()."/placelist_kml.php";
+   $t->set_var("dl_kml",lang("show_kml")." [<a href='placelist_kml.php'>Google Earth</a> | <a href='http://maps.google.com/?q=".urlencode($pdl_url)."' TARGET='_blank'>Google Maps</a>]");
+   $t->parse("gkml","kmlblock");
+ }
 
  #============================[ Walk through the list and set up the table ]===
  if ( empty($showPlace) ) {

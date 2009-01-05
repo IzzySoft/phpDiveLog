@@ -46,7 +46,9 @@
  </tr>
 <!-- END sitemblock -->
 <!-- END siteblock -->
+<!-- BEGIN kmlblock -->
  <tr><td colspan="4" align="center">{dl_kml}</td></tr>
+<!-- END kmlblock -->
 </table>
 
 </td></tr></table>

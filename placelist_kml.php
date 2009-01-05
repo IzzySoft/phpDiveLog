@@ -14,6 +14,15 @@
 
  #=================================================[ Setup & Configuration ]===
  include("inc/includes.inc");
+ #---------------------------------------------[ KickOff when switched off ]---
+ if (!$pdl->config->global_kml) {
+   header("HTTP/1.1 403 Forbidden");
+   $title .= ": ".lang("feature_unavailable_title",lang("global_kml"));
+   include("inc/header.inc");
+   $pdl->common->alert(lang("feature_unavailable_desc"));
+   include("inc/footer.inc");
+   exit;
+ }
  $refresh_interval = 604800; // 1 week
  $tree_open        = 0; // open all elements in GE (0|1)
 

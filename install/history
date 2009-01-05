@@ -14,8 +14,12 @@ v0.3.1
 + added global KML (using network links to all separate KML files), accessible
   from the global site list. Be aware that with many logs available, GE may
   cause 403 errors on the web server since it tries to pick them all at once,
-  which may be interpreted as DoS attack
+  which may be interpreted as DoS attack. If you are affected by this and thus
+  want to turn the global KML links off, set $global_kml to FALSE in your config
 * throw E_USER_NOTICE when configured $default_user is required but invalid
+* if exists in the same dir as your config.inc, a file called config_local.inc
+  will now be included immediately after the config.inc - so you can put your
+  settings here which then would never been overwritten on updates
 
 v0.3.0 (24.12.2008)
 -------------------
