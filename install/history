@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.3.1
+v0.3.1 (05.01.2009)
 -------------------
 + improved error checking on data import: it should now say if the copy failed.
 ! fixed a (PHP5) bug at the tank setup - did nobody notice always using the same
