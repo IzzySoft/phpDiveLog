@@ -306,6 +306,14 @@ a short documentation for the available parameters and their effects:
     phpDiveLog creates a link to a given mapsite to look up the place. You
     may chose between "Mapquest" and "Google" (the latter refers, of course,
     to <i>Google Maps</i>)</td></tr>
+ <tr><td class="td_blank"><b><code>$global_kml</code></b></td>
+  <td class="td_blank">With v0.3.1, support for a global KML file was added.
+    This file lists all available divers KMZ files as "network links" (one link
+    per diver) - which works fine with Google Maps. Google Earth, however, seems
+    to request all listed network links simultaneously - which the server may
+    interprete as DoS attack and reject some of the requests (the user can,
+    however, reload missing files manually then in most cases). So if you are
+    affected by this, you may turn the global KML processing off here.</td></tr>
  <tr><td class="td_blank"><b><code>$logbook_default_sort</code></b></td>
   <td class="td_blank" rowspan="4">These are the default sort settings if one
     enters the logbook resp. sitelist first time on the visit, and did not yet
