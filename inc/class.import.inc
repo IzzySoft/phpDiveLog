@@ -12,7 +12,6 @@
 
  /* $Id$ */
 
- require_once(dirname(__FILE__)."/class.db.inc");
  require_once(dirname(__FILE__)."/class.db_text.inc");
 
  /** Import PDL data to DB
