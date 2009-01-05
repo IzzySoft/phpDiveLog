@@ -34,6 +34,7 @@
    function copyDir($src,$target) {
      GLOBAL $pdl;
      $ok = TRUE;
+     $all_ok = TRUE;
      if ( is_file($src) ) {
        if (copy ($src,$target)) return TRUE;
        $pdl->common->add_error(lang("copy_failed",basename($target)));
@@ -56,10 +57,11 @@
          $ok = copy("$src/$entry", "$target/$entry");
        }
        if (!$ok) $pdl->common->add_error(lang("copy_failed",$entry));
+       $all_ok = $all_ok && $ok;
      }
      $dir->close();
-     if (!$ok) trigger_error("Failed to copy '$src' to '$target'!",E_USER_NOTICE);
-     return $ok;
+     if (!$all_ok) trigger_error("Failed to copy '$src' to '$target'!",E_USER_NOTICE);
+     return $all_ok;
    }
 
    /** Get the file content of a text file as string
