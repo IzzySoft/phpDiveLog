@@ -8,6 +8,9 @@ v0.3.2
 + added Norsk language support (thanks to Nils-Fredrik!)
 ! some more fixes to the import stuff (again, thanks to Nils-Fredrik for
   report and testing!)
+! Google Maps link got strange values when data were already stored in
+  decimal format (and thus converted twice) - no we check that before
+
 
 v0.3.1 (05.01.2009)
 -------------------

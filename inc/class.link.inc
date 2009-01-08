@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -16,7 +16,7 @@
   * @package Api
   * @class link
   * @author Izzy (izzysoft@qumran.org)
-  * @copyright (c) 2001-2004 by Itzchak Rehberg and IzzySoft
+  * @copyright (c) 2001-2009 by Itzchak Rehberg and IzzySoft
   */
  class link {
 
@@ -86,6 +86,7 @@
    * @return string coords in decimal format
    */
   function coord2dec($str) {
+    if (strpos($str,"''")===FALSE) return $str; // it is already decimal
     if ( preg_match("/([0-9]+)[^0-9]+([0-9]+)[^0-9.]+([0-9.]+)[^0-9]+/",$str,$match) ) {
       $code[0] = $match[1]; $code[1] = $match[2]; $code[2] = $match[3];
     } elseif ( preg_match("/([0-9]+)[^0-9]+([0-9.]+)[^0-9.]+/",$str,$match) ) {
