@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft@qumran.org>                          #
  # http://projects.izzysoft.de/                                              #
  # ------------------------------------------------------------------------- #
@@ -56,9 +56,12 @@
    $t->set_var("$detail",$site[$detail]);
  }
  $maplink = $pdl->link->map($site["latitude"],$site["longitude"],$site["loc"].": ".$site["place"]);
- if ( !empty($maplink) ) {
+ if ( empty($maplink) ) {
+   $t->set_var("anim","");
+ } else {
    $t->set_var("mapunlink","</A>");
    $t->set_var("maplink","<A HREF='$maplink' TARGET='pdlmap'>");
+   $t->set_var("anim","_anim");
  }
 
  #-------------------------------[ Notes ]---

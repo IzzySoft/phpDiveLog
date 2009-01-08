@@ -10,6 +10,8 @@ v0.3.2
   report and testing!)
 ! Google Maps link got strange values when data were already stored in
   decimal format (and thus converted twice) - no we check that before
+* make the Google Maps link on site page more obvious (rotating globe instead
+  of static one)
 
 
 v0.3.1 (05.01.2009)
