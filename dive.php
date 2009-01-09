@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -138,8 +138,6 @@
  $profilepng = $pdl->config->user_path . "profiles/dive${nr}_profile.png";
  $profilemap = $pdl->config->user_path . "profiles/dive${nr}_profile.map";
  $schedulepng = $pdl->config->user_path . "profiles/dive${nr}_schedule.png";
-unlink($profilepng); // *!*
-unlink($schedulepng); // *!*
  if ($use_dyn_profile_png) {
    // generate dynamic profile/schedule graphs
    if (!file_exists($profilepng) || filemtime($profilepng) < filemtime($csvfile)) {
