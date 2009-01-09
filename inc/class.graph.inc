@@ -1,6 +1,6 @@
 <?php
 #############################################################################
-# phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+# phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
 # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
 # http://www.izzysoft.de/                                                   #
 # ------------------------------------------------------------------------- #
@@ -26,46 +26,16 @@ class graph {
   function graph() {
   }
 
-#----------------------------------------------------------[ Dive Profiles ]---
-  /** Generate dive profile graph
-   * @method profile
-   * @param integer divenr dive number
-   * @return array filenames (png: the image, map: imagemap data file)
+#---------------------[ Helper to profile() and schedule(): Create GraphBG ]---
+  /** Create background for profile/schedule graph
+   * @method private graphbg
+   * @param ref object diagram
+   * @param integer width
+   * @param integer height
+   * @param float max_depth
+   * @param integer divetime
    */
-  function profile($nr) {
-    GLOBAL $pdl;
-    // setup data
-    while (strlen($nr)<5) $nr = "0$nr";
-    $csvfile = $pdl->config->datadir."dive${nr}_profile.csv";
-    if (!file_exists($csvfile)) return; // die("CSV File '$csvfile' was not found.<br>");
-    $profilepng = $pdl->config->user_path . "profiles/dive${nr}_profile.png";
-    $profilemap = $pdl->config->user_path . "profiles/dive${nr}_profile.map";
-    // check whether we have something to do
-    //if (file_exists($profilepng) && filemtime($profilepng) > filemtime($csvfile))
-    //  return array(png=>$profilepng,map=>$profilemap);
-
-    // still here? So we have to create graph and map:
-    if (empty($width))  $width  = 468;
-    if (empty($height)) $height = 300;
-    $csv = new csv(";",'"',TRUE);
-    $csv->import($csvfile);
-
-    // setup the graph
-    $time = array();
-    $max_depth = 0;
-    for($i=0;$i<count($csv->data);$i++) {
-      // Maximaltiefe ermitteln
-      $csv->data[$i]['depth'] = floatval($csv->data[$i]['depth']);
-      if($csv->data[$i]['depth'] > $max_depth) $max_depth = $csv->data[$i]['depth'];
-      // Zeiten berechnen
-      $x = explode(":",$csv->data[$i]['time']);
-      $time[] = $x[0]*60 + $x[1];
-      // Correct image height for small depths
-      if($max_depth < 5)  $height = 200;
-      if($max_depth < 10) $height = 250;
-    }
-    $divetime = $time[count($time)-1]; // dive time is the last value
-
+  function graphbg(&$D,$width,$height,$max_depth,$divetime) {
     // Create the Diagram
     $D=new Diagram(); 
     if (!$D->Img=@ImageCreate($width, $height)) return; // or die("Cannot create a new GD image."); 
@@ -91,15 +61,83 @@ class graph {
     $D->Font = 3;
     $D->SetText("","","");
     $D->SetGridColor("#cccccc", "#99ccff");
-    // Draw Graph
     $D->Draw("#3333ff", "#000000", false);
+  }
+
+#----------------------------------------------------------[ Dive Profiles ]---
+  /** Generate dive profile graph
+   * @method profile
+   * @param integer divenr dive number
+   */
+  function profile($nr) {
+    GLOBAL $pdl;
+    // setup data
+    while (strlen($nr)<5) $nr = "0$nr";
+    $csvfile = $pdl->config->datadir."dive${nr}_profile.csv";
+    if (!file_exists($csvfile)) return; // die("CSV File '$csvfile' was not found.<br>");
+    $csv2file = $pdl->config->datadir."dive${nr}_schedule.csv";
+    $profilepng = $pdl->config->user_path . "profiles/dive${nr}_profile.png";
+    $profilemap = $pdl->config->user_path . "profiles/dive${nr}_profile.map";
+
+    // still here? So we have to create graph and map:
+    if (empty($width))  $width  = 468;
+    if (empty($height)) $height = 300;
+    $csv = new csv(";",'"',TRUE);
+    $csv->import($csvfile);
+
+    // setup the graph
+    $time = array();
+    $max_depth = 0;
+    for($i=0;$i<count($csv->data);$i++) {
+      // Get max depth
+      $csv->data[$i]['depth'] = floatval($csv->data[$i]['depth']);
+      if($csv->data[$i]['depth'] > $max_depth) $max_depth = $csv->data[$i]['depth'];
+      // Calculate times
+      $x = explode(":",$csv->data[$i]['time']);
+      $time[] = $x[0]*60 + $x[1];
+      // Correct image height for small depths
+      if($max_depth < 5)  $height = 200;
+      if($max_depth < 10) $height = 250;
+    }
+    $divetime = $time[count($time)-1]; // dive time is the last value
+
+    // Create the Diagram
+    $D=new Diagram(); 
+    $this->graphbg($D,$width,$height,$max_depth,$divetime);
+    // Draw Graph
     $base=$D->ScreenY(0.01);
     $toff=UTC(2000,01,01,0,0,0);
     for($i=1;$i<count($csv->data);$i++) {
       $D->Area($D->ScreenX($toff+$time[$i-1]),$D->ScreenY($csv->data[$i-1]['depth']),$D->ScreenX($toff+$time[$i]),$D->ScreenY($csv->data[$i]['depth']),"99ccff",$base,"","");
-      $D->Line($D->ScreenX($toff+$time[$i-1]),$D->ScreenY($csv->data[$i-1]['depth']),$D->ScreenX($toff+$time[$i]),$D->ScreenY($csv->data[$i]['depth']),"00000",1,"","");
+      $D->Line($D->ScreenX($toff+$time[$i-1]),$D->ScreenY($csv->data[$i-1]['depth']),$D->ScreenX($toff+$time[$i]),$D->ScreenY($csv->data[$i]['depth']),"000000",1,"","");
       if ($csv->data[$i]['warning'] != '') {
         $D->Dot($D->ScreenX($toff+$time[$i]), $D->ScreenY($csv->data[$i]['depth']),12, 0, "#ff0000", $csv->data[$i]['warning']);
+      }
+    }
+    // Go for the schedule, if we have one
+    // !!! add the start time to runtime !!!
+    if ($GLOBALS["schedule_graph"]=="integrated" && file_exists($csv2file)) {
+      unset ($csv);
+      $csv = new csv(";",'"',TRUE);
+      $csv->import($csv2file);
+      $dc = count($csv->data);
+      for ($i=0;$i<$dc;++$i) {
+        $x = explode(":",$csv->data[$i]['time']);
+        $csv->data[$i]['time'] = $x[0]*60 + $x[1];
+        $x = explode(":",$csv->data[$i]['runtime']);
+        $csv->data[$i]['runtime'] = $x[0]*60 + $x[1];
+        $csv->data[$i]['depth'] = floatval($csv->data[$i]['depth']);
+        $D->Line($D->ScreenX($toff+$csv->data[$i]['runtime']-$csv->data[$i]['time']),
+	         $D->ScreenY($csv->data[$i]['depth']),
+		 $D->ScreenX($toff+$csv->data[$i]["runtime"]),
+		 $D->ScreenY($csv->data[$i]['depth']),
+		 "00BBBB",3,"","");
+	if ($i+1<$dc) $end = $csv->data[$i+1]['depth']; else $end = 0;
+        $D->Line($D->ScreenX($toff+$csv->data[$i]["runtime"]),
+	         $D->ScreenY($csv->data[$i]['depth']),
+		 $D->ScreenX($toff+$csv->data[$i]["runtime"]),
+		 $D->ScreenY($end),
+		 "00BBBB",1,"","");
       }
     }
 
@@ -109,6 +147,77 @@ class graph {
     ImageDestroy($D->Img); 
 
   } // end method profile
+
+#---------------------------------------------------------------[ Schedule ]---
+  /** Generate the dive schedule graph
+   * @method schedule
+   * @param integer divenumber
+   */
+  function schedule($nr) {
+    GLOBAL $pdl;
+    // setup data
+    while (strlen($nr)<5) $nr = "0$nr";
+    $csvfile = $pdl->config->datadir."dive${nr}_schedule.csv";
+    if (!file_exists($csvfile)) return; // die("CSV File '$csvfile' was not found.<br>");
+    $profilepng = $pdl->config->user_path . "profiles/dive${nr}_schedule.png";
+
+    // setup graph
+    if (empty($width))  $width  = 468;
+    if (empty($height)) $height = 300;
+    $csv = new csv(";",'"',TRUE);
+    $csv->import($csvfile);
+    $dc = count($csv->data);
+    $time = array();
+    $max_depth = 0;
+    for($i=0;$i<$dc;$i++) {
+      // Get max depth
+      $csv->data[$i]['depth'] = floatval($csv->data[$i]['depth']);
+      if($csv->data[$i]['depth'] > $max_depth) $max_depth = $csv->data[$i]['depth'];
+      // Calculate times
+      $x = explode(":",$csv->data[$i]['time']);
+      $time[] = $x[0]*60 + $x[1];
+      $x = explode(":",$csv->data[$i]['runtime']);
+      $runtime[] = $x[0]*60 + $x[1];
+      // Correct image height for small depths
+      if($max_depth < 5)  $height = 200;
+      if($max_depth < 10) $height = 250;
+    }
+    $divetime = $runtime[count($runtime)-1]; // dive time is the last value
+
+    // Create the Diagram
+    $D=new Diagram(); 
+    $this->graphbg($D,$width,$height,$max_depth,$divetime);
+    // Draw Graph
+    $base=$D->ScreenY(0.01);
+    $toff=UTC(2000,01,01,0,0,0);
+    for ($i=0;$i<$dc;++$i) {
+      $x = explode(":",$csv->data[$i]['time']);
+      $csv->data[$i]['time'] = $x[0]*60 + $x[1];
+      $x = explode(":",$csv->data[$i]['runtime']);
+      $csv->data[$i]['runtime'] = $x[0]*60 + $x[1];
+      $csv->data[$i]['depth'] = floatval($csv->data[$i]['depth']);
+      $D->Area($D->ScreenX($toff+$csv->data[$i]['runtime']-$csv->data[$i]['time']),
+               $D->ScreenY($csv->data[$i]['depth']),
+               $D->ScreenX($toff+$csv->data[$i]['runtime']),
+               $D->ScreenY($csv->data[$i]['depth']),
+               "99ccff",$base,"","");
+      $D->Line($D->ScreenX($toff+$csv->data[$i]['runtime']-$csv->data[$i]['time']),
+	       $D->ScreenY($csv->data[$i]['depth']),
+	       $D->ScreenX($toff+$csv->data[$i]["runtime"]),
+	       $D->ScreenY($csv->data[$i]['depth']),
+	       "00BBBB",3,"","");
+      if ($i+1<$dc) $end = $csv->data[$i+1]['depth']; else $end = 0;
+      $D->Line($D->ScreenX($toff+$csv->data[$i]["runtime"]),
+	       $D->ScreenY($csv->data[$i]['depth']),
+	       $D->ScreenX($toff+$csv->data[$i]["runtime"]),
+	       $D->ScreenY($end),
+	       "00BBBB",1,"","");
+      }
+
+    // Save Image & Data
+    ImagePng($D->Img,$profilepng);
+    ImageDestroy($D->Img); 
+  } // end method schedule
 
 #---------------------------------------------------------[ Dives per Year ]---
   /** Generate dive stats graph

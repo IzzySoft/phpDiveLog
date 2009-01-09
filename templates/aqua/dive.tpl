@@ -65,7 +65,13 @@
 <!-- BEGIN scheduleblock -->
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 <table class="outer" align="center" border="0" cellpadding="2" cellspacing="0" style="margin-top:3px"><!-- Schedule -->
- <tr><th class="head" colspan="4" valign="middle"><img src="{tpl_dir}images/btn_schedule.gif" width="37" height="15" alt="Schedule"> {sched_name}</th></tr>
+ <tr><th class="head" valign="middle"><img src="{tpl_dir}images/btn_schedule.gif" width="37" height="15" alt="Schedule"> {sched_name}</th></tr>
+<!-- BEGIN schedimageblock -->
+ <tr>
+   <td align="center"><span class="thumbnail" style="margin:0"><img src="{sched_img}" alt="DiveSchedule"></span></td>
+ </tr>
+<!-- END schedimageblock -->
+ <tr><td align="center"><table align="center" border="0" cellpadding="2" cellspacing="0">
  <tr>
    <td align="center"><b>{s_depth_name}</b></td>
    <td align="center"><b>{s_time_name}</b></td>
@@ -80,6 +86,7 @@
    <td align="center">{s_gas}</td>
  </tr>
 <!-- END scheditemblock -->
+ </table></td></tr>
 </table>
 <!-- END scheduleblock -->
 

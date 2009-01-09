@@ -31,6 +31,10 @@
                           # corresponding dive pages (1) or not (0)
  $use_dyn_profile_png = 0;# create the dive profile image dynamically (1) or
                           # use the one from the conduit (0)
+ $schedule_graph = "integrated";# How to draw the schedule graph (if we have
+                          # data for it): "integrated" into the profile graph
+			  # (if there is one, else separate), as a "separate"
+			  # graph in the schedule block, or "none"
  $values_in_statgraphs = "auto";# whether you want values printed in the bars
                           # of the graphs on the stat page (yes) or not (no),
 			  # or leave the decision to PDL (auto)

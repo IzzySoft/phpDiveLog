@@ -28,6 +28,7 @@
  $t->set_block("template","notesblock","notb");
  $t->set_block("template","scheduleblock","sched");
  $t->set_block("scheduleblock","scheditemblock","scheditem");
+ $t->set_block("scheduleblock","schedimageblock","schedimg");
  $t->set_block("template","profileblock","profile");
  $t->set_block("template","fotoblock","fotos");
  $t->set_block("fotoblock","fotoitemblock","pic");
@@ -130,41 +131,29 @@
    $t->set_var("tank_out",$dive["tank"][$i]->out);
    $t->parse("tank","tankblock",$i);
  }
- #----------------------------[ Schedule ]---
- $sched = $pdl->db->get_schedule($nr);
- if ($sched) {
-   $t->set_var("sched_name",lang("schedule"));
-   $t->set_var("s_depth_name",lang("depth"));
-   $t->set_var("s_time_name",lang("time"));
-   $t->set_var("s_runtime_name",lang("runtime"));
-   $t->set_var("s_gas_name",lang("gas"));
-   $sc = count($sched);
-   for ($i=0;$i<$sc;++$i) {
-     $t->set_var("s_depth",$sched[$i]["depth"]);
-     list($time_h, $time_m) = sscanf($sched[$i]["time"],"%d:%d");
-     $time = "$time_h:".sprintf("%02d",$time_m,0);
-     $t->set_var("s_time",$time);
-     list($time_h, $time_m) = sscanf($sched[$i]["runtime"],"%d:%d");
-     $time = "$time_h:".sprintf("%02d",$time_m,0);
-     $t->set_var("s_runtime",$time);
-     $t->set_var("s_gas",$sched[$i]["gas"] ." [".$sched[$i]["tank#"]."]");
-     $t->parse("scheditem","scheditemblock",TRUE);
-   }
-   $t->parse("sched","scheduleblock");
- } else {
-   $t->set_var("sched","");
- }
  #-----------------------------[ Profile ]---
  while (strlen($nr)<5) $nr = "0$nr";
  $csvfile = $pdl->config->datadir."dive${nr}_profile.csv";
+ $schedulecsv = $pdl->config->datadir."dive${nr}_schedule.csv";
  $profilepng = $pdl->config->user_path . "profiles/dive${nr}_profile.png";
  $profilemap = $pdl->config->user_path . "profiles/dive${nr}_profile.map";
- if (!file_exists($profilepng) || filemtime($profilepng) < filemtime($csvfile)) {
-   include("inc/class.graph.inc");
-   $graph = new graph();
-   $graph->profile($nr);
- }
+ $schedulepng = $pdl->config->user_path . "profiles/dive${nr}_schedule.png";
+unlink($profilepng); // *!*
+unlink($schedulepng); // *!*
  if ($use_dyn_profile_png) {
+   // generate dynamic profile/schedule graphs
+   if (!file_exists($profilepng) || filemtime($profilepng) < filemtime($csvfile)) {
+     include_once("inc/class.graph.inc");
+     $graph = new graph();
+     $graph->profile($nr);
+   }
+   if ((($schedule_graph=="integrated" && !file_exists($profilepng)) || $schedule_graph=="separate")
+      && (!file_exists($schedulepng) || filemtime($schedulepng) < filemtime($schedulecsv))) {
+     include_once("inc/class.graph.inc");
+     $graph = new graph();
+     $graph->schedule($nr);
+   }
+   // use dynamic profile if exists
    if (file_exists($profilepng)) {
      $t->set_var("prof_name",lang("profile"));
      $t->set_var("prof_img",$profilepng);
@@ -185,6 +174,35 @@
      $t->set_var("use_map","");
      $t->parse("profile","profileblock");
    }
+ }
+
+ #----------------------------[ Schedule ]---
+ $sched = $pdl->db->get_schedule($nr);
+ if ($sched) {
+   $t->set_var("sched_name",lang("schedule"));
+   $t->set_var("s_depth_name",lang("depth"));
+   $t->set_var("s_time_name",lang("time"));
+   $t->set_var("s_runtime_name",lang("runtime"));
+   $t->set_var("s_gas_name",lang("gas"));
+   $sc = count($sched);
+   for ($i=0;$i<$sc;++$i) {
+     $t->set_var("s_depth",$sched[$i]["depth"]);
+     list($time_h, $time_m) = sscanf($sched[$i]["time"],"%d:%d");
+     $time = "$time_h:".sprintf("%02d",$time_m,0);
+     $t->set_var("s_time",$time);
+     list($time_h, $time_m) = sscanf($sched[$i]["runtime"],"%d:%d");
+     $time = "$time_h:".sprintf("%02d",$time_m,0);
+     $t->set_var("s_runtime",$time);
+     $t->set_var("s_gas",$sched[$i]["gas"] ." [".$sched[$i]["tank#"]."]");
+     $t->parse("scheditem","scheditemblock",TRUE);
+   }
+   if ($use_dyn_profile_png && file_exists($schedulepng)) {
+     $t->set_var("sched_img",$schedulepng);
+     $t->parse("schedimg","schedimageblock");
+   }
+   $t->parse("sched","scheduleblock");
+ } else {
+   $t->set_var("sched","");
  }
 
  #-------------------------------[ Notes ]---
