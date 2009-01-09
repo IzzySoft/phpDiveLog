@@ -269,6 +269,15 @@ a short documentation for the available parameters and their effects:
     divers home, writable for the web server process. The image then will be
     generated in two cases: If it does not already exist, or if the profile CSV
     file is newer.</td></tr>
+ <tr><td class="td_blank"><b><code>$schedule_graph</code></b></td>
+  <td class="td_blank">These graphs are not provided by the conduit, so phpDiveLog
+    will have to generate them if you want them (which means, <code>$use_dyn_profile_png</code>
+    must be enabled for this). With the <code>$schedule_graph</code> configuration
+    option, you can tell phpDiveLog how you want your schedule graph to be drawn:
+    "integrated" into the profile graph (if possible, falls back to next), as a
+    "separate" graph in the Schedule section of the page, or "none" if you don't
+    want it at all. With the default (shipped) configuration, this is set to
+    "integrated".</td></tr>
  <tr><td class="td_blank"><b><code>$values_in_statgraphs</code></b></td>
   <td class="td_blank">On the statistics page for each diver you also find some
     graphs, e.g. for dives per year. They can have the values printed within the
