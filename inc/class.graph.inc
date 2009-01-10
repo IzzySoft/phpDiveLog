@@ -122,22 +122,32 @@ class graph {
       $csv->import($csv2file);
       $dc = count($csv->data);
       for ($i=0;$i<$dc;++$i) {
+        if (!preg_match("|[0123456789]|",$csv->data[$i]['depth'])) { // Ascent
+          $s_depth = $csv->data[$i-1]['depth'];
+          $e_depth = floatval($csv->data[$i+1]['depth']);
+        } else { // normal
+          $s_depth = $e_depth = floatval($csv->data[$i]['depth']);
+        }
         $x = explode(":",$csv->data[$i]['time']);
         $csv->data[$i]['time'] = $x[0]*60 + $x[1];
         $x = explode(":",$csv->data[$i]['runtime']);
         $csv->data[$i]['runtime'] = $x[0]*60 + $x[1];
         $csv->data[$i]['depth'] = floatval($csv->data[$i]['depth']);
         $D->Line($D->ScreenX($toff+$csv->data[$i]['runtime']-$csv->data[$i]['time']),
-	         $D->ScreenY($csv->data[$i]['depth']),
-		 $D->ScreenX($toff+$csv->data[$i]["runtime"]),
-		 $D->ScreenY($csv->data[$i]['depth']),
-		 "00BBBB",3,"","");
-	if ($i+1<$dc) $end = $csv->data[$i+1]['depth']; else $end = 0;
-        $D->Line($D->ScreenX($toff+$csv->data[$i]["runtime"]),
-	         $D->ScreenY($csv->data[$i]['depth']),
-		 $D->ScreenX($toff+$csv->data[$i]["runtime"]),
-		 $D->ScreenY($end),
-		 "00BBBB",1,"","");
+                 $D->ScreenY($s_depth),
+                 $D->ScreenX($toff+$csv->data[$i]["runtime"]),
+                 $D->ScreenY($e_depth),
+                 "00BBBB",3,"","");
+        if ($i+1<$dc) {
+          if (preg_match("|[1234567890]|",$csv->data[$i+1]['depth'])) $end = $csv->data[$i+1]['depth'];
+          else continue;
+        } else $end = 0;
+        if ($s_depth==$e_depth)
+          $D->Line($D->ScreenX($toff+$csv->data[$i]["runtime"]),
+                   $D->ScreenY($e_depth),
+                   $D->ScreenX($toff+$csv->data[$i]["runtime"]),
+                   $D->ScreenY($end),
+                   "00BBBB",1,"","");
       }
     }
 
@@ -171,6 +181,7 @@ class graph {
     $max_depth = 0;
     for($i=0;$i<$dc;$i++) {
       // Get max depth
+      if (!preg_match("|[0123456789]|",$csv->data[$i]['depth'])) continue;
       $csv->data[$i]['depth'] = floatval($csv->data[$i]['depth']);
       if($csv->data[$i]['depth'] > $max_depth) $max_depth = $csv->data[$i]['depth'];
       // Calculate times
@@ -195,24 +206,33 @@ class graph {
       $csv->data[$i]['time'] = $x[0]*60 + $x[1];
       $x = explode(":",$csv->data[$i]['runtime']);
       $csv->data[$i]['runtime'] = $x[0]*60 + $x[1];
-      $csv->data[$i]['depth'] = floatval($csv->data[$i]['depth']);
+      if (!preg_match("|[0123456789]|",$csv->data[$i]['depth'])) { // Ascent
+        $s_depth = $csv->data[$i-1]['depth'];
+	$e_depth = floatval($csv->data[$i+1]['depth']);
+      } else { // normal
+        $s_depth = $e_depth = floatval($csv->data[$i]['depth']);
+      }
       $D->Area($D->ScreenX($toff+$csv->data[$i]['runtime']-$csv->data[$i]['time']),
-               $D->ScreenY($csv->data[$i]['depth']),
+               $D->ScreenY($s_depth),
                $D->ScreenX($toff+$csv->data[$i]['runtime']),
-               $D->ScreenY($csv->data[$i]['depth']),
+               $D->ScreenY($e_depth),
                "99ccff",$base,"","");
       $D->Line($D->ScreenX($toff+$csv->data[$i]['runtime']-$csv->data[$i]['time']),
-	       $D->ScreenY($csv->data[$i]['depth']),
+	       $D->ScreenY($s_depth),
 	       $D->ScreenX($toff+$csv->data[$i]["runtime"]),
-	       $D->ScreenY($csv->data[$i]['depth']),
+	       $D->ScreenY($e_depth),
 	       "00BBBB",3,"","");
-      if ($i+1<$dc) $end = $csv->data[$i+1]['depth']; else $end = 0;
-      $D->Line($D->ScreenX($toff+$csv->data[$i]["runtime"]),
-	       $D->ScreenY($csv->data[$i]['depth']),
-	       $D->ScreenX($toff+$csv->data[$i]["runtime"]),
-	       $D->ScreenY($end),
-	       "00BBBB",1,"","");
-      }
+      if ($i+1<$dc) {
+        if (preg_match("|[1234567890]|",$csv->data[$i+1]['depth'])) $end = $csv->data[$i+1]['depth'];
+	else continue;
+      } else $end = 0;
+      if ($s_depth==$e_depth)
+        $D->Line($D->ScreenX($toff+$csv->data[$i]["runtime"]),
+	         $D->ScreenY($e_depth),
+	         $D->ScreenX($toff+$csv->data[$i]["runtime"]),
+	         $D->ScreenY($end),
+	         "00BBBB",1,"","");
+    }
 
     // Save Image & Data
     ImagePng($D->Img,$profilepng);
