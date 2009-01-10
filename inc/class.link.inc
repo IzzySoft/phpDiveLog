@@ -86,7 +86,12 @@
    * @return string coords in decimal format
    */
   function coord2dec($str) {
-    if (strpos($str,"''")===FALSE) return $str; // it is already decimal
+    if (strpos($str,"''")===FALSE) { // it is already decimal
+      $coord = floatval($str);
+      if ( substr($str,strlen($str)-1)=="S" || substr($str,strlen($str)-1)=="W" )
+        $coord *= -1;
+      return $coord;
+    }
     if ( preg_match("/([0-9]+)[^0-9]+([0-9]+)[^0-9.]+([0-9.]+)[^0-9]+/",$str,$match) ) {
       $code[0] = $match[1]; $code[1] = $match[2]; $code[2] = $match[3];
     } elseif ( preg_match("/([0-9]+)[^0-9]+([0-9.]+)[^0-9.]+/",$str,$match) ) {
