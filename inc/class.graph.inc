@@ -39,8 +39,8 @@ class graph {
     // Create the Diagram
     $D=new Diagram(); 
     if (!$D->Img=@ImageCreate($width, $height)) return; // or die("Cannot create a new GD image."); 
-    ImageColorAllocate($D->Img, 200,200,200); // background color 
-    $D->SetFrame(40, 30, $width-10, $height-30); 
+    ImageColorAllocate($D->Img, 200,200,200); // background color
+    $D->SetFrame(50, 30, $width-10, $height-30); 
     $D->SetBorder(UTC(2000,01,01,0,0,0), UTC(2000,01,01,0,0,$divetime+20), $max_depth+1, 0); 
     // Setup Grid
     $D->XGridDelta = 300; // 5 min
