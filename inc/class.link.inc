@@ -86,21 +86,16 @@
    * @return string coords in decimal format
    */
   function coord2dec($str) {
-    if (strpos($str,"''")===FALSE) { // it is already decimal
-      $coord = floatval($str);
-      if ( substr($str,strlen($str)-1)=="S" || substr($str,strlen($str)-1)=="W" )
-        $coord *= -1;
-      return $coord;
-    }
-    if ( preg_match("/([0-9]+)[^0-9]+([0-9]+)[^0-9.]+([0-9.]+)[^0-9]+/",$str,$match) ) {
+    if ( preg_match("/(\d+)[^\d\.]+(\d+)[^\d\.]+([\d\.]+)[^\d]+/",$str,$match) ) { // 11° 11' 11[.11]"
       $code[0] = $match[1]; $code[1] = $match[2]; $code[2] = $match[3];
-    } elseif ( preg_match("/([0-9]+)[^0-9]+([0-9.]+)[^0-9.]+/",$str,$match) ) {
-      $code[0] = $match[1]; $code[1] = floor($match[2]);
-      $code[2] = ($match[2] - floor($match[2])) * 60;
-    } elseif ( preg_match("/([0-9.]+)[^0-9.]+/",$str,$match) ) {
-      $code[0] = floor($match[1]);
-      $code[1] = floor( ($match[1] - $code[0]) * 60);
-      $code[2] = floor( (($match[1] - $code[0]) * 60 - $code[1]) * 60 );
+    } elseif ( preg_match("/(\d+)[^\d\.]+([\d\.]+)[^\d\.]+/",$str,$match) ) { // 11° 11[.11]'
+      $code[0] = $match[1]; $code[1] = floatval($match[2]);
+      $code[2] = 0;
+    } elseif ( preg_match("/([\d\.]+)[^\d\.]+/",$str,$match) ) { // 11[.11]°
+      $code[0] = floatval($match[1]);
+      $code[1] = $code[2] = 0;
+    } else {
+      $code[0] = $code[1] = $code[2] = $code[3] = 0;
     }
     if ( substr($str,strlen($str)-1)=="N" || substr($str,strlen($str)-1)=="E" ) {
       $code[4] = 1;
