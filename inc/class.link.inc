@@ -119,7 +119,9 @@
     $lat  = $this->coord2dec($lati);
     if (empty($lat)) return "";
     $long = $this->coord2dec($longi);
-    if ($desc!="") $desc = "+(".urlencode($desc).")";
+    $search  = array("(",")");
+    $replace = array("[","]");
+    if ($desc!="") $desc = "+(".urlencode(str_replace($search,$replace,$desc)).")";
     $url  = str_replace(array("{lat}","{long}","+({desc})"),array($lat,$long,$desc),$this->mapurl[$this->mapsite]);
     return($url);
   }
