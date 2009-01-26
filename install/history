@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.3.2
+v0.3.2 (27.01.2009)
 -------------------
 + added Norsk language support (thanks to Nils-Fredrik!)
 ! some more fixes to the import stuff (again, thanks to Nils-Fredrik for
