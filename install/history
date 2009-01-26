@@ -8,8 +8,9 @@ v0.3.2
 + added Norsk language support (thanks to Nils-Fredrik!)
 ! some more fixes to the import stuff (again, thanks to Nils-Fredrik for
   report and testing!)
-! Fixed GPS calculation for Google Maps link - now all 3 formats PDL offers
-  should work fine again (2 of them had been broken and probably never worked)
+! Fixed GPS calculation for Google Maps link (including the sitelist for
+  Google Earth/Maps) - now all 3 formats PDL offers should work fine again
+  (2 of them had been broken and probably never worked)
 * make the Google Maps link on site page more obvious (rotating globe instead
   of static one)
 + graphs for dive schedule - depending on configuration, either integrated
