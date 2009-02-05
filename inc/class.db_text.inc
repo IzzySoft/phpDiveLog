@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -14,13 +14,17 @@
 
  /** DB Emulation for text "databases" (CSV and UDDF files)
   * @package Api
-  * @class auth
+  * @class db_text
   * @author Izzy (izzysoft@qumran.org)
-  * @copyright (c) 2004-2008 by Itzchak Rehberg and IzzySoft
+  * @copyright (c) 2004-2009 by Itzchak Rehberg and IzzySoft
   */
  class db_text {
+   var $divedata;
+   var $dives;
+   var $allplaces;
 
-   /** Initialize: Read all data from the "text database" into the object
+   /** Read all data from the "text database" and store it inside
+    *  the object
     * @constructor db_text
     */
    function db_text() {
@@ -259,7 +263,7 @@
     * @class db_text
     * @param optional string sort column to sort by
     * @param optional string order sort order (asc or desc)
-    * @method read_divedata
+    * @method read_sitedata
     */
    function read_sitedata($sort="",$order="") {
      GLOBAL $pdl;

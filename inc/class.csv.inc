@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpApi                                   (c) 2004-2006 by Itzchak Rehberg #
+ # phpApi                                   (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -14,13 +14,31 @@
 
  /** CSV file handling
   * @package Api
-  * @class auth
+  * @class csv
   * @author Izzy (izzysoft AT qumran DOT org)
-  * @copyright (c) 2004-2006 by Itzchak Rehberg and IzzySoft
+  * @copyright (c) 2004-2009 by Itzchak Rehberg and IzzySoft
   */
  class csv {
 
-   /** Initialize
+   /** CVS data: array[0..n] of imported records.
+    *  Each Record is an array[0..n] of objects with the properties: name,data
+    * @class csv
+    * @attribute array data
+    */
+   /** CVS field separator (defaults to ";")
+    * @class csv
+    * @attribute string sep
+    */
+   /** CVS text field encloser (defaults to '"')
+    * @class csv
+    * @attribute string txt
+    */
+   /** trim imported values? (Defaults to FALSE)
+    * @class csv
+    * @attribute boolean trim
+    */
+
+   /** Setting up defaults
     * @constructor csv
     * @param optional string separator (default: ';')
     * @param optional string textmarker
@@ -52,7 +70,7 @@
 
    /** Get the field names
     *  Reads the field names from the specification line and sets up the
-    *  $this->field array
+    *  this::field array
     * @class csv
     * @method read_fields
     * @param string line field specification line from the CSV file to import
@@ -208,24 +226,5 @@
      }
    }
 
-
  } // end class csv
-
- /** CVS data: array[0..n] of imported records.
-  *  Each Record is an array[0..n] of objects with the properties: name,data
-  * @class cvs
-  * @attribute array data
-  */
- /** CVS field separator (defaults to ";")
-  * @class cvs
-  * @attribute string sep
-  */
- /** CVS text field encloser (defaults to '"')
-  * @class cvs
-  * @attribute string txt
-  */
- /** trim imported values? (Defaults to FALSE)
-  * @class cvs
-  * @attribute boolean trim
-  */
 ?>

@@ -23,7 +23,7 @@
  class import {
 
   /** Constructor: Initiate
-   * @constructor import_db
+   * @constructor import
    */
   function import() {
     GLOBAL $pdl;

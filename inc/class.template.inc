@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -17,6 +17,8 @@
  /** Template processing
   * @package Api
   * @class Template
+  * @copyright 1999-2000 NetUSE GmbH
+  * @author Kristian Koehntopp
   */
 
 class Template {
@@ -49,8 +51,6 @@ class Template {
 
   #############################################################################
   /** Constructor
-   * @package Api
-   * @class Template
    * @constructor Template
    * @param optional string root template directory
    * @param optional string unknowns how to handle unknown variables (remove/comment/keep)
