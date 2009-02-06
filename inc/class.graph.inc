@@ -37,7 +37,6 @@ class graph {
    */
   function graphbg(&$D,$width,$height,$max_depth,$divetime) {
     // Create the Diagram
-    $D=new Diagram(); 
     if (!$D->Img=@ImageCreate($width, $height)) return; // or die("Cannot create a new GD image."); 
     if ($GLOBALS["graph_bg_transparent"]) {
       $transp = ImageColorAllocateAlpha($D->Img,0,0,0,127);
@@ -566,10 +565,7 @@ class graph {
     if (!empty($D->ImgMapData)) file_put_contents($profilemap,$D->ImgMapData);
     ImageDestroy($D->Img); 
 
-#echo "<div align='center'><map name='tempstat' id='tempstat'>".file_get_contents($profilemap)."</map>";
-#echo "<img src='".$pdl->config->user_url."profiles/tempstat.png' alt='TempStats' UseMap='#tempstat'>";
-
-  }
+  } // end temperature
 
 
 } // end class graph
