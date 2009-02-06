@@ -27,7 +27,7 @@ class graph {
   }
 
 #---------------------[ Helper to profile() and schedule(): Create GraphBG ]---
-  /** Create background for profile/schedule graph
+  /** Create background for profile/schedule graph (divetime based)
    * @method private graphbg
    * @param ref object diagram
    * @param integer width
@@ -402,7 +402,79 @@ class graph {
     ImagePng($D->Img,$profilepng);
     if (!empty($D->ImgMapData)) file_put_contents($profilemap,$D->ImgMapData);
     ImageDestroy($D->Img); 
+  }
 
+#------------------------------------------------------------[ Depth Stats ]---
+  /** Generate depth graph
+   * @method depth
+   */
+  function depth() {
+    GLOBAL $pdl;
+    $csvfile = $pdl->config->datadir."logbook.csv";
+    if (!file_exists($csvfile)) return; // die("CSV File '$csvfile' was not found.<br>");
+    $profilepng = $pdl->config->user_path . "profiles/depthstat.png";
+    $profilemap = $pdl->config->user_path . "profiles/depthstat.map"; // not used yet
+    if (empty($height)) $height = 200;
+    if (empty($width))  $width  = $height+130;
+
+    // prepare data
+    $data = $pdl->db->get_dives("","",FALSE,"depth","DESC");
+    $dc = count($data);
+    $datastr = explode(" ",$data[0]["depth"]);
+    $unit    = $datastr[1];
+    $max_depth = floatval($data[0]["depth"]);
+    $ceil = $rceil = ceil(floatval($max_depth)/10)*10;
+
+    // calculate base data
+    $sum[$rceil] = 0;
+    for ($i=0;$i<$dc;++$i) {
+      $val = floatval($data[$i]["depth"]);
+      while ($val < $rceil -10) { $rceil -= 10; $sum[$rceil] = 0; }
+      ++$sum[$rceil];
+    }
+    $max_val = 0;
+    foreach($sum as $val) if ($val > $max_val) $max_val = $val;
+
+    // Create the Diagram
+    $D=new Diagram(); 
+    if (!$D->Img=@ImageCreate($width, $height)) return; // or die("Cannot create a new GD image.");
+    if ($transparent) {
+      $transp = ImageColorAllocateAlpha($D->Img,0,0,0,127); // \
+      ImageFill($D->Img,0,0,$transp);                       // | transparent
+      ImageSaveAlpha($D->Img,TRUE);                         // /
+    } else {
+      ImageColorAllocate($D->Img, 200,200,200); // background color
+    }
+
+    // Graph
+    $base=$height/2;
+    // Setup Labels
+    $D->BFont = 3;
+    // Draw Graph
+    $max = $ceil/10;
+    $angle0 = 1;
+#    #colors: Green, Red, Blue, Gold, Black, Cyan, Magenta, Royalblue, Salmon
+#    $color = array("#00ff00","#ff0000","#0000ff","#ffd700","#8b4513","#000000","#00ffff","#ff00ff","#4169e1","#fa8072");
+    #colors: Orange (Sand), MediumSpringGreen (Gras), RoyalBlue (Water), Blue (Deep Water), BlueViolet (>40m = too deep), DeepPink, Crimson (much 2 deep), Red, Tan, WhiteSmoke
+    $color = array("#ffa500","#00fa9a","#4169e1","#0000ff","#8a2be2","#ff1493","#dc143c","#ff0000","#d2b48c","#f5f5f5");
+    $tcolor = array("#000000","#000000","#ffffff","#ffffff","#ffffff","#ffffff","#ffffff","#ffffff","#000000","#000000");
+    #$D->Pie($base,$base,0,$base*0.9,0,10,"#ffffff");
+    for ($i=1;$i<=$max;++$i) {
+      if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && $years>25)) $dispval = "";
+      else $dispval = $sum[$i*10];
+      # Pie (XCenter,YCenter,Offset,Radius,Angle0,Angle1,Color[,tooltip]
+      $angle1 = $sum[$i*10] * 100/$dc;
+      $tooltip = ($i-1)*10 ."-". $i*10 . $unit .": ".$sum[$i*10];
+      $D->Pie($base,$base,0,$base*0.9,$angle0*3.6,($angle0+$angle1)*3.6,$color[$i-1],$tooltip);
+      # Bar(left,top,right,bottom,color,text,textcolor)
+      $adjustY = ($height - (($max+1)*20) +15)/2;
+      $D->Bar($height+20,($i-1)*20+$adjustY,$height+120,($i-1)*20+15+$adjustY,$color[$i-1],$tooltip,$tcolor[$i-1]);
+      $angle0 += $angle1;
+    }
+    // Save Image & Data
+    ImagePng($D->Img,$profilepng);
+    if (!empty($D->ImgMapData)) file_put_contents($profilemap,$D->ImgMapData);
+    ImageDestroy($D->Img); 
   }
 
 

@@ -3,6 +3,10 @@ $Id$
 History for phpDiveLog
 ======================
 
+v0.3.3
+-------------------
++ added StatsGraphs: Dives by Depth
+
 v0.3.2 (27.01.2009)
 -------------------
 + added Norsk language support (thanks to Nils-Fredrik!)

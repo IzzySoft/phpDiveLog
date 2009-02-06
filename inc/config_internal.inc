@@ -12,7 +12,7 @@
 
  /* $Id$ */
 
- $pdl->config->version = "0.3.2";
+ $pdl->config->version = "0.3.2+svn";
  $pdl->config->site_title = $title;
  #=============================================================[ Debugging ]===
  error_reporting(0); // initially turn all off

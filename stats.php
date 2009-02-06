@@ -50,6 +50,7 @@
  #========================================================[ Include Graphs ]===
  if (function_exists("imagepng") && is_writable($pdl->config->user_path . "profiles")) {
    $csvfile   = $pdl->config->datadir."logbook.csv";
+   #------------------------------------------------------[ Dives per Year ]---
    $graphfile = $pdl->config->user_path . "profiles/divestat.png";
    $mapfile   = $pdl->config->user_path . "profiles/divestat.map";
    if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
@@ -68,6 +69,7 @@
    }
    $t->parse("yearstat","diveyearblock");
 
+   #---------------------------------------------------[ DiveTime per Year ]---
    $graphfile = $pdl->config->user_path . "profiles/timestat.png";
    $mapfile   = $pdl->config->user_path . "profiles/timestat.map";
    if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
@@ -80,6 +82,25 @@
    if (file_exists($mapfile)) {
      $t->set_var("yearmap","<map name='timestat' id='timestat'>".file_get_contents($mapfile)."</map>");
      $t->set_var("usemap","USEMAP='#timestat'");
+   } else {
+     $t->set_var("yearmap","");
+     $t->set_var("usemap","");
+   }
+   $t->parse("yearstat","diveyearblock",TRUE);
+
+   #-----------------------------------------------------[ Dives per Depth ]---
+   $graphfile = $pdl->config->user_path . "profiles/depthstat.png";
+   $mapfile   = $pdl->config->user_path . "profiles/depthstat.map";
+   if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
+     include_once("inc/class.graph.inc");
+     $graph = new graph();
+     $graph->depth();
+   }
+   $t->set_var("ytitle",lang("depth_stat"));
+   $t->set_var("yearstat_png",$pdl->config->user_url."profiles/depthstat.png");
+   if (file_exists($mapfile)) {
+     $t->set_var("yearmap","<map name='depthstat' id='depthstat'>".file_get_contents($mapfile)."</map>");
+     $t->set_var("usemap","USEMAP='#depthstat'");
    } else {
      $t->set_var("yearmap","");
      $t->set_var("usemap","");
