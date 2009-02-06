@@ -39,7 +39,13 @@ class graph {
     // Create the Diagram
     $D=new Diagram(); 
     if (!$D->Img=@ImageCreate($width, $height)) return; // or die("Cannot create a new GD image."); 
-    ImageColorAllocate($D->Img, 200,200,200); // background color
+    if ($GLOBALS["graph_bg_transparent"]) {
+      $transp = ImageColorAllocateAlpha($D->Img,0,0,0,127);
+      ImageFill($D->Img,0,0,$transp);
+      ImageSaveAlpha($D->Img,TRUE);
+    } else {
+      ImageColorAllocate($D->Img, 200,200,200); // background color
+    }
     $D->SetFrame(50, 30, $width-10, $height-30); 
     $D->SetBorder(UTC(2000,01,01,0,0,0), UTC(2000,01,01,0,0,$divetime+20), $max_depth+1, 0); 
     // Setup Grid
@@ -280,7 +286,13 @@ class graph {
     // Create the Diagram
     $D=new Diagram(); 
     if (!$D->Img=@ImageCreate($width, $height)) return; // or die("Cannot create a new GD image."); 
-    ImageColorAllocate($D->Img, 200,200,200); // background color 
+    if ($GLOBALS["graph_bg_transparent"]) {
+      $transp = ImageColorAllocateAlpha($D->Img,0,0,0,127);
+      ImageFill($D->Img,0,0,$transp);
+      ImageSaveAlpha($D->Img,TRUE);
+    } else {
+      ImageColorAllocate($D->Img, 200,200,200); // background color
+    }
     $D->SetFrame(60, 30, $width-20, $height-30);
     if ($years<5)
       $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($min_date+4,12,31,0,0,0), 0, $max_dives+1); 
@@ -358,7 +370,13 @@ class graph {
     // Create the Diagram
     $D=new Diagram(); 
     if (!$D->Img=@ImageCreate($width, $height)) return; // or die("Cannot create a new GD image."); 
-    ImageColorAllocate($D->Img, 200,200,200); // background color 
+    if ($GLOBALS["graph_bg_transparent"]) {
+      $transp = ImageColorAllocateAlpha($D->Img,0,0,0,127);
+      ImageFill($D->Img,0,0,$transp);
+      ImageSaveAlpha($D->Img,TRUE);
+    } else {
+      ImageColorAllocate($D->Img, 200,200,200); // background color
+    }
     $D->SetFrame(60, 30, $width-20, $height-30);
     if ($years<5) $edate = $min_date +4;
     else $edate = $max_date -1;
@@ -438,10 +456,10 @@ class graph {
     // Create the Diagram
     $D=new Diagram(); 
     if (!$D->Img=@ImageCreate($width, $height)) return; // or die("Cannot create a new GD image.");
-    if ($transparent) {
-      $transp = ImageColorAllocateAlpha($D->Img,0,0,0,127); // \
-      ImageFill($D->Img,0,0,$transp);                       // | transparent
-      ImageSaveAlpha($D->Img,TRUE);                         // /
+    if ($GLOBALS["graph_bg_transparent"]) {
+      $transp = ImageColorAllocateAlpha($D->Img,0,0,0,127);
+      ImageFill($D->Img,0,0,$transp);
+      ImageSaveAlpha($D->Img,TRUE);
     } else {
       ImageColorAllocate($D->Img, 200,200,200); // background color
     }
@@ -458,7 +476,6 @@ class graph {
     #colors: Orange (Sand), MediumSpringGreen (Gras), RoyalBlue (Water), Blue (Deep Water), BlueViolet (>40m = too deep), DeepPink, Crimson (much 2 deep), Red, Tan, WhiteSmoke
     $color = array("#ffa500","#00fa9a","#4169e1","#0000ff","#8a2be2","#ff1493","#dc143c","#ff0000","#d2b48c","#f5f5f5");
     $tcolor = array("#000000","#000000","#ffffff","#ffffff","#ffffff","#ffffff","#ffffff","#ffffff","#000000","#000000");
-    #$D->Pie($base,$base,0,$base*0.9,0,10,"#ffffff");
     for ($i=1;$i<=$max;++$i) {
       if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && $years>25)) $dispval = "";
       else $dispval = $sum[$i*10];
@@ -475,6 +492,83 @@ class graph {
     ImagePng($D->Img,$profilepng);
     if (!empty($D->ImgMapData)) file_put_contents($profilemap,$D->ImgMapData);
     ImageDestroy($D->Img); 
+  }
+
+#------------------------------------------------------[ Temperature Stats ]---
+  /** Generate temperature graph
+   * @method temperature
+   */
+  function temperature() {
+    GLOBAL $pdl;
+    $csvfile = $pdl->config->datadir."logbook.csv";
+    if (!file_exists($csvfile)) return; // die("CSV File '$csvfile' was not found.<br>");
+    $profilepng = $pdl->config->user_path . "profiles/tempstat.png";
+    $profilemap = $pdl->config->user_path . "profiles/tempstat.map"; // not used yet
+    if (empty($height)) $height = 200;
+    if (empty($width))  $width  = $height+130;
+
+    // prepare data
+    $data = $pdl->db->get_dives("","",FALSE,"watertemp","ASC");
+    $dc = count($data);
+    $datastr = explode(" ",$data[0]["watertemp"]);
+    $unit    = $datastr[1];
+    $max_temp = floatval($data[$dc-1]["watertemp"]);
+    $ceil = $rceil = ceil(floatval($max_temp)/10)*10;
+    $min_temp = floatval($data[0]["watertemp"]);
+    $floor = $rfloor = floor(floatval($min_temp)/10)*10;
+
+    // calculate base data
+    $sum[$rfloor] = 0;
+    for ($i=0;$i<$dc;++$i) {
+      $val = floatval($data[$i]["watertemp"]);
+      while ($val > $rfloor) { $rfloor += 10; $sum[$rfloor] = 0; }
+      ++$sum[$rfloor];
+    }
+    $max_val = 0;
+    foreach($sum as $val) if ($val > $max_val) $max_val = $val;
+
+    // Create the Diagram
+    $D=new Diagram(); 
+    if (!$D->Img=@ImageCreate($width, $height)) return; // or die("Cannot create a new GD image.");
+    if ($GLOBALS["graph_bg_transparent"]) {
+      $transp = ImageColorAllocateAlpha($D->Img,0,0,0,127);
+      ImageFill($D->Img,0,0,$transp);
+      ImageSaveAlpha($D->Img,TRUE);
+    } else {
+      ImageColorAllocate($D->Img, 200,200,200); // background color
+    }
+
+    // Graph
+    $base=$height/2;
+    // Setup Labels
+    $D->BFont = 3;
+    // Draw Graph
+    $max = $ceil/10;
+    $angle0 = 1;
+    #colors: Blue (ice), DeepSkyBlue (cold), PaleGoldenRod (avg), Chocolate (warm), Tomato (hot), Firebrick (nuts?)
+    $color  = array("#0000ff","#00bfff","#eee8aa","#d2691e","#ff6347","#b22222");
+    $tcolor = array("#ffffff","#000000","#000000","#000000","#000000","#ffffff");
+    for ($i=0;$i<=$max;++$i) {
+      if (empty($sum[$i*10])) continue;
+      if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && $years>25)) $dispval = "";
+      else $dispval = $sum[$i*10];
+      # Pie (XCenter,YCenter,Offset,Radius,Angle0,Angle1,Color[,tooltip]
+      $angle1 = $sum[$i*10] * 100/$dc;
+      $tooltip = ($i-1)*10 ."-". $i*10 . " $unit: ". $sum[$i*10];
+      $D->Pie($base,$base,0,$base*0.9,$angle0*3.6,($angle0+$angle1)*3.6,$color[$i],$tooltip);
+      # Bar(left,top,right,bottom,color,text,textcolor)
+      $adjustY = ($height - ($max*20) +15)/2;
+      $D->Bar($height+20,($i-1)*20+$adjustY,$height+120,($i-1)*20+15+$adjustY,$color[$i],str_replace("Â°","°",$tooltip),$tcolor[$i]);
+      $angle0 += $angle1;
+    }
+    // Save Image & Data
+    ImagePng($D->Img,$profilepng);
+    if (!empty($D->ImgMapData)) file_put_contents($profilemap,$D->ImgMapData);
+    ImageDestroy($D->Img); 
+
+#echo "<div align='center'><map name='tempstat' id='tempstat'>".file_get_contents($profilemap)."</map>";
+#echo "<img src='".$pdl->config->user_url."profiles/tempstat.png' alt='TempStats' UseMap='#tempstat'>";
+
   }
 
 

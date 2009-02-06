@@ -138,6 +138,7 @@
              case "place" :
              case "rating":
              case "buddy" : $type = "str"; break;
+	     case "watertemp" :
              case "depth" :
 	     case "divetime" : $type="num";
 	          $datastr = explode(" ",$csv->data[0][$sort]);
@@ -149,6 +150,7 @@
              $csv->sort($sort,$order,$type);
            }
 	   switch($sort) {
+	     case "watertemp":
 	     case "depth"    :
 	     case "divetime" : $this->divedat2str(&$csv,$sort,$unit); break;
 	     case "time"     : $this->divedat_num2time($csv); break;

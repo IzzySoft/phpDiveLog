@@ -60,6 +60,7 @@
    }
    $t->set_var("ytitle",lang("year_stat"));
    $t->set_var("yearstat_png",$pdl->config->user_url."profiles/divestat.png");
+   $t->set_var("yearstat_alt","YearStat");
    if (file_exists($mapfile)) {
      $t->set_var("yearmap","<map name='divestat' id='divestat'>".file_get_contents($mapfile)."</map>");
      $t->set_var("usemap","USEMAP='#divestat'");
@@ -79,6 +80,7 @@
    }
    $t->set_var("ytitle",lang("time_stat"));
    $t->set_var("yearstat_png",$pdl->config->user_url."profiles/timestat.png");
+   $t->set_var("yearstat_alt","TimeStat");
    if (file_exists($mapfile)) {
      $t->set_var("yearmap","<map name='timestat' id='timestat'>".file_get_contents($mapfile)."</map>");
      $t->set_var("usemap","USEMAP='#timestat'");
@@ -98,6 +100,7 @@
    }
    $t->set_var("ytitle",lang("depth_stat"));
    $t->set_var("yearstat_png",$pdl->config->user_url."profiles/depthstat.png");
+   $t->set_var("yearstat_alt","DepthStat");
    if (file_exists($mapfile)) {
      $t->set_var("yearmap","<map name='depthstat' id='depthstat'>".file_get_contents($mapfile)."</map>");
      $t->set_var("usemap","USEMAP='#depthstat'");
@@ -106,6 +109,27 @@
      $t->set_var("usemap","");
    }
    $t->parse("yearstat","diveyearblock",TRUE);
+
+   #-----------------------------------------------[ Dives per Temperature ]---
+   $graphfile = $pdl->config->user_path . "profiles/tempstat.png";
+   $mapfile   = $pdl->config->user_path . "profiles/tempstat.map";
+   if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
+     include_once("inc/class.graph.inc");
+     $graph = new graph();
+     $graph->temperature();
+   }
+   $t->set_var("ytitle",lang("temp_stat"));
+   $t->set_var("yearstat_png",$pdl->config->user_url."profiles/tempstat.png");
+   $t->set_var("yearstat_alt","TemperatureStat");
+   if (file_exists($mapfile)) {
+     $t->set_var("yearmap","<map name='tempstat' id='tempstat'>".file_get_contents($mapfile)."</map>");
+     $t->set_var("usemap","USEMAP='#tempstat'");
+   } else {
+     $t->set_var("yearmap","");
+     $t->set_var("usemap","");
+   }
+   $t->parse("yearstat","diveyearblock",TRUE);
+
  }
 
  $t->pparse("out","template");
