@@ -553,7 +553,11 @@ class graph {
       else $dispval = $sum[$i*10];
       # Pie (XCenter,YCenter,Offset,Radius,Angle0,Angle1,Color[,tooltip]
       $angle1 = $sum[$i*10] * 100/$dc;
-      $tooltip = ($i-1)*10 ."-". $i*10 . " $unit: ". $sum[$i*10];
+      if ($i>0) {
+        $tooltip = ($i-1)*10 ."-". $i*10 . " $unit: ". $sum[$i*10];
+      } else {
+        $tooltip = "<=". $i*10 . " $unit: ". $sum[$i*10];
+      }
       $D->Pie($base,$base,0,$base*0.9,$angle0*3.6,($angle0+$angle1)*3.6,$color[$i],$tooltip);
       # Bar(left,top,right,bottom,color,text,textcolor)
       $adjustY = ($height - ($max*20) +15)/2;
