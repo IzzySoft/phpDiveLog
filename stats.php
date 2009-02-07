@@ -121,11 +121,16 @@
    $t->set_var("ytitle",lang("temp_stat"));
    $t->set_var("yearstat_png",$pdl->config->user_url."profiles/tempstat.png");
    $t->set_var("yearstat_alt","TemperatureStat");
+   if ($ignore_zero_degrees) {
+     $comment = lang("stat_ignored_zero_degrees");
+   } else {
+     $comment = "";
+   }
    if (file_exists($mapfile)) {
-     $t->set_var("yearmap","<map name='tempstat' id='tempstat'>".file_get_contents($mapfile)."</map>");
+     $t->set_var("yearmap","<map name='tempstat' id='tempstat'>".file_get_contents($mapfile)."</map>".$comment);
      $t->set_var("usemap","USEMAP='#tempstat'");
    } else {
-     $t->set_var("yearmap","");
+     $t->set_var("yearmap",$comment);
      $t->set_var("usemap","");
    }
    $t->parse("yearstat","diveyearblock",TRUE);
