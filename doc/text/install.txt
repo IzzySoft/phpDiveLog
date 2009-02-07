@@ -288,6 +288,15 @@ a short documentation for the available parameters and their effects:
     ("auto"). The latter should be fine for the average diver.<br>
     Note: The values are always displayed when hovering the mouse over the
     corresponding bar - so don't be afraid they could be completely missing.</td></tr>
+ <tr><td class="td_blank"><b><code>$graph_bg_transparent</code></b></td>
+  <td class="td_blank">This setting decides whether to use transparent background
+    for the graphs (TRUE) or not (FALSE).</td></tr>
+ <tr><td class="td_blank"><b><code>$ignore_zero_degrees</code></b></td>
+  <td class="td_blank">If you did not enter any water temperature in ADL, the
+    conduit would export this as "0°C" - so phpDiveLog cannot decide between
+    "no temperature entered" and "real 0°C". Though this temperature is really
+    unlikely to be dived in, we want to leave you the questionable fun of doing
+    so by setting this variable to FALSE.</td></tr>
  <tr><td class="td_blank"><b><code>$allow_override</code></b></td>
   <td class="td_blank">some configuration values can be defined on a
     per-logbook-base, so each diver can provide his/her default preferences to

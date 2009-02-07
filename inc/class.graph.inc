@@ -517,9 +517,13 @@ class graph {
     $floor = $rfloor = floor(floatval($min_temp)/10)*10;
 
     // calculate base data
-    $sum[$rfloor] = 0;
+    $sum[$rfloor] = $ignored = 0;
     for ($i=0;$i<$dc;++$i) {
       $val = floatval($data[$i]["watertemp"]);
+      if ($GLOBALS["ignore_zero_degrees"] && $val == 0) {
+        ++$ignored;
+        continue;
+      }
       while ($val > $rfloor) { $rfloor += 10; $sum[$rfloor] = 0; }
       ++$sum[$rfloor];
     }
@@ -552,7 +556,7 @@ class graph {
       if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && $years>25)) $dispval = "";
       else $dispval = $sum[$i*10];
       # Pie (XCenter,YCenter,Offset,Radius,Angle0,Angle1,Color[,tooltip]
-      $angle1 = $sum[$i*10] * 100/$dc;
+      $angle1 = $sum[$i*10] * 100/($dc-$ignored);
       if ($i>0) {
         $tooltip = ($i-1)*10 ."-". $i*10 . " $unit: ". $sum[$i*10];
       } else {

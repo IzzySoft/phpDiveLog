@@ -38,7 +38,9 @@
  $values_in_statgraphs = "auto";# whether you want values printed in the bars
                           # of the graphs on the stat page (yes) or not (no),
 			  # or leave the decision to PDL (auto)
- $allow_override = "mapsite title lang display_limit template_set userdef1 userdef2 sitepix_on_divepage values_in_statgraphs"; 
+ $graph_bg_transparent = FALSE; # use transparent backgroud for graphs?
+ $ignore_zero_degrees  = TRUE; # ignore a temperature of 0°C for stats?
+ $allow_override = "mapsite title lang display_limit template_set userdef1 userdef2 sitepix_on_divepage values_in_statgraphs graph_bg_transparent ignore_zero_degrees"; 
                           # which settings may be adjusted via the
                           # diver/*/system.conf - space separated values
  $pwdfile = "/etc/pdlpwd";# password file for data transfers
