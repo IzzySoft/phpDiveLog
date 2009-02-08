@@ -177,28 +177,38 @@
  #----------------------------[ Schedule ]---
  $sched = $pdl->db->get_schedule($nr);
  if ($sched) {
-   $t->set_var("sched_name",lang("schedule"));
-   $t->set_var("s_depth_name",lang("depth"));
-   $t->set_var("s_time_name",lang("time"));
-   $t->set_var("s_runtime_name",lang("runtime"));
-   $t->set_var("s_gas_name",lang("gas"));
-   $sc = count($sched);
-   for ($i=0;$i<$sc;++$i) {
-     $t->set_var("s_depth",$sched[$i]["depth"]);
-     list($time_h, $time_m) = sscanf($sched[$i]["time"],"%d:%d");
-     $time = "$time_h:".sprintf("%02d",$time_m,0);
-     $t->set_var("s_time",$time);
-     list($time_h, $time_m) = sscanf($sched[$i]["runtime"],"%d:%d");
-     $time = "$time_h:".sprintf("%02d",$time_m,0);
-     $t->set_var("s_runtime",$time);
-     $t->set_var("s_gas",$sched[$i]["gas"] ." [".$sched[$i]["tank#"]."]");
-     $t->parse("scheditem","scheditemblock",TRUE);
+   $parse_schedule = TRUE;
+   if ($hide_schedule_table) {
+     if ($use_dyn_profile_png && file_exists($schedulepng)) {
+       $t->set_var("sched_name",lang("schedule"));
+     } else {
+       $t->set_var("sched","");
+       $parse_schedule = FALSE;
+     }
+   } else {
+     $t->set_var("sched_name",lang("schedule"));
+     $t->set_var("s_depth_name",lang("depth"));
+     $t->set_var("s_time_name",lang("time"));
+     $t->set_var("s_runtime_name",lang("runtime"));
+     $t->set_var("s_gas_name",lang("gas"));
+     $sc = count($sched);
+     for ($i=0;$i<$sc;++$i) {
+       $t->set_var("s_depth",$sched[$i]["depth"]);
+       list($time_h, $time_m) = sscanf($sched[$i]["time"],"%d:%d");
+       $time = "$time_h:".sprintf("%02d",$time_m,0);
+       $t->set_var("s_time",$time);
+       list($time_h, $time_m) = sscanf($sched[$i]["runtime"],"%d:%d");
+       $time = "$time_h:".sprintf("%02d",$time_m,0);
+       $t->set_var("s_runtime",$time);
+       $t->set_var("s_gas",$sched[$i]["gas"] ." [".$sched[$i]["tank#"]."]");
+       $t->parse("scheditem","scheditemblock",TRUE);
+     }
    }
    if ($use_dyn_profile_png && file_exists($schedulepng)) {
      $t->set_var("sched_img",$schedulepng);
      $t->parse("schedimg","schedimageblock");
    }
-   $t->parse("sched","scheduleblock");
+   if ($parse_schedule) $t->parse("sched","scheduleblock");
  } else {
    $t->set_var("sched","");
  }

@@ -35,6 +35,7 @@
                           # data for it): "integrated" into the profile graph
 			  # (if there is one, else separate), as a "separate"
 			  # graph in the schedule block, or "none"
+ $hide_schedule_table = TRUE; # Do we really need the data displayed separately?
  $values_in_statgraphs = "auto";# whether you want values printed in the bars
                           # of the graphs on the stat page (yes) or not (no),
 			  # or leave the decision to PDL (auto)
@@ -42,7 +43,7 @@
  $ignore_zero_degrees  = TRUE; # ignore a temperature of 0°C for stats?
  $ignore_zero_degrees_comment = TRUE; # place a comment below the graph if zero
                           # degrees are ignored
- $allow_override = "mapsite title lang display_limit template_set userdef1 userdef2 sitepix_on_divepage values_in_statgraphs graph_bg_transparent ignore_zero_degrees ignore_zero_degrees_comment"; 
+ $allow_override = "mapsite title lang display_limit template_set userdef1 userdef2 sitepix_on_divepage values_in_statgraphs graph_bg_transparent ignore_zero_degrees ignore_zero_degrees_comment hide_schedule_table";
                           # which settings may be adjusted via the
                           # diver/*/system.conf - space separated values
  $pwdfile = "/etc/pdlpwd";# password file for data transfers

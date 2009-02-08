@@ -278,6 +278,10 @@ a short documentation for the available parameters and their effects:
     "separate" graph in the Schedule section of the page, or "none" if you don't
     want it at all. With the default (shipped) configuration, this is set to
     "integrated".</td></tr>
+ <tr><td class="td_blank"><b><code>$hide_schedule_table</code></b></td>
+  <td class="td_blank">Since the graph says more than thousand table rows, you
+    may not want to waste space on the page for the raw data. Here you can
+    decide whether to hide (TRUE) or display (FALSE) them.</td></tr>
  <tr><td class="td_blank"><b><code>$values_in_statgraphs</code></b></td>
   <td class="td_blank">On the statistics page for each diver you also find some
     graphs, e.g. for dives per year. They can have the values printed within the
