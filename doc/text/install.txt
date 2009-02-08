@@ -297,6 +297,9 @@ a short documentation for the available parameters and their effects:
     "no temperature entered" and "real 0°C". Though this temperature is really
     unlikely to be dived in, we want to leave you the questionable fun of doing
     so by setting this variable to FALSE.</td></tr>
+ <tr><td class="td_blank"><b><code>$ignore_zero_degrees_comment</code></b></td>
+  <td class="td_blank">If <code>$ignore_zero_degrees</code> was set to <code>TRUE</code>,
+    shall we place a note below the temperature graph to indicate this?</td></tr>
  <tr><td class="td_blank"><b><code>$allow_override</code></b></td>
   <td class="td_blank">some configuration values can be defined on a
     per-logbook-base, so each diver can provide his/her default preferences to

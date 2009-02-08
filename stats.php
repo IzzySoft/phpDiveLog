@@ -121,7 +121,7 @@
    $t->set_var("ytitle",lang("temp_stat"));
    $t->set_var("yearstat_png",$pdl->config->user_url."profiles/tempstat.png");
    $t->set_var("yearstat_alt","TemperatureStat");
-   if ($ignore_zero_degrees) {
+   if ($ignore_zero_degrees && $ignore_zero_degrees_comment) {
      $comment = lang("stat_ignored_zero_degrees");
    } else {
      $comment = "";
