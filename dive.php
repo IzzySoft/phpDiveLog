@@ -214,7 +214,7 @@
  }
 
  #-------------------------------[ Notes ]---
- $notes[1] = $pdl->common->nl2br($dive["notes"]);
+ $notes[1] = $pdl->common->nl2br($dive["notes"],1,1);
  $notes[2] = $pdl->file->getNotes($nr,"dive");
  $notb = $notes[1].$pdl->common->nl2br($notes[2]);
  if (!empty($notb)) {

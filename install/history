@@ -8,6 +8,9 @@ v0.3.3
 + added StatsGraphs: Dives by Depth, Dives by Temperature
 + Dive Graphs on Stats Page can now be triggered to use transparency
   (config: $graph_bg_transparent = TRUE)
++ added config option $hide_schedule_table to hide the schedule table
+* changed the way newlines in comments are interpreted for "Palm database notes":
+  Here each newline will be replaced by a BR now.
 
 v0.3.2 (27.01.2009)
 -------------------
