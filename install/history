@@ -11,6 +11,9 @@ v0.3.3
 + added config option $hide_schedule_table to hide the schedule table
 * changed the way newlines in comments are interpreted for "Palm database notes":
   Here each newline will be replaced by a BR now.
+* "last page" buttons in dive and site lists now lead to a "full page"
+  (instead of remains by display_limit). Skimming through them with the "next"
+  buttons is not affected by this change.
 
 v0.3.2 (27.01.2009)
 -------------------
