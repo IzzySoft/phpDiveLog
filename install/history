@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.3.3
+v0.3.3 (17.02.2009)
 -------------------
 + added StatsGraphs: Dives by Depth, Dives by Temperature
 + Dive Graphs on Stats Page can now be triggered to use transparency
