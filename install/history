@@ -3,6 +3,11 @@ $Id$
 History for phpDiveLog
 ======================
 
+v0.3.4
+-------------------
+! fixed issue with next/last buttons on last page (and an additional empty real
+  last page) in lists when entries modulo display_limit was 0
+
 v0.3.3 (17.02.2009)
 -------------------
 + added StatsGraphs: Dives by Depth, Dives by Temperature

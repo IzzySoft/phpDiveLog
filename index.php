@@ -48,11 +48,11 @@
    $first = "<img src='".$pdl->config->tpl_url."images/first-grey.gif'>";
    $t->set_var("nav_left","$first<img src='".$pdl->config->tpl_url."images/left-grey.gif'>");
  }
- if ($records - $start < $pdl->config->display_limit) {
+ if (($records - $start) <= $pdl->config->display_limit) {
    $last = "<img src='".$pdl->config->tpl_url."images/last-grey.gif'>";
    $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif'>$last");
  } else {
-   $last = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=".($records-$pdl->config->display_limit +1),"<img src='".$pdl->config->tpl_url."images/last.gif'>");
+   $last = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=".($records-$pdl->config->display_limit),"<img src='".$pdl->config->tpl_url."images/last.gif'>");
    $next = $start + $pdl->config->display_limit;
    $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$next","<img src='".$pdl->config->tpl_url."images/right.gif'>$last"));
  }
