@@ -47,23 +47,30 @@
  include("inc/tab_setup2.inc");
  $pdl->tabs->activate("sites",TRUE);
  $pdl->tabs->parse();
+ $arrowheight = "height='9px'";
  if ($start) {
    $prev = $start - $pdl->config->display_limit;
    if ($prev<0) $prev=0;
-   $first = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=0","<img src='".$pdl->config->tpl_url."images/first.gif'>");
-   $t->set_var("nav_left",$first.$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$prev","<img src='".$pdl->config->tpl_url."images/left.gif' alt='prev'>"));
+   $first = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=0","<img src='".$pdl->config->tpl_url."images/first.gif' $arrowheight>");
+   $t->set_var("nav_left",$first.$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$prev","<img src='".$pdl->config->tpl_url."images/left.gif' alt='prev' $arrowheight>"));
  } else {
-   $first = "<img src='".$pdl->config->tpl_url."images/first-grey.gif'>";
-   $t->set_var("nav_left",$first."<img src='".$pdl->config->tpl_url."images/left-grey.gif' alt='prev'>");
+   $first = "<img src='".$pdl->config->tpl_url."images/first-grey.gif' $arrowheight>";
+   $t->set_var("nav_left",$first."<img src='".$pdl->config->tpl_url."images/left-grey.gif' alt='prev' $arrowheight>");
  }
  if ($records - $start < $pdl->config->display_limit) {
-   $last = "<img src='".$pdl->config->tpl_url."images/last-grey.gif'>";
-   $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif' alt='next'>".$last);
+   $last = "<img src='".$pdl->config->tpl_url."images/last-grey.gif' $arrowheight>";
+   $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif' alt='next' $arrowheight>".$last);
  } else {
    $next = $start + $pdl->config->display_limit;
-   $last = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=".floor($records/$pdl->config->display_limit)*$pdl->config->display_limit,"<img src='".$pdl->config->tpl_url."images/last.gif'>");
-   $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$next","<img src='".$pdl->config->tpl_url."images/right.gif' alt='next'>".$last));
+   $last = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=".floor($records/$pdl->config->display_limit)*$pdl->config->display_limit,"<img src='".$pdl->config->tpl_url."images/last.gif' $arrowheight>");
+   $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$next","<img src='".$pdl->config->tpl_url."images/right.gif' alt='next' $arrowheight>".$last));
  }
+
+ $pages = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=0","1");
+ for ($i=$pdl->config->display_limit,$k=2;$i<$records;$i+=$pdl->config->display_limit,++$k) {
+   $pages .= "&nbsp;".$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$i","$k");
+ }
+ $t->set_var("pages",$pages);
 
  #===============================================[ set up the table header ]===
  $t->set_var("place_name",lang("location"));

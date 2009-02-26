@@ -16,16 +16,20 @@
 </table>
 
 </td></tr><tr class="td_transp"><td class="td_transp">
- <table border="0" cellpadding="2" width="100%" style="background-color:transparent;"><tr>
+ <!--table border="0" cellpadding="2" width="100%" style="background-color:transparent;"><tr>
   <td class="td_transp" align="left">{nav_left}</td>
   <td class="td_transp" align="right">{nav_right}</td>
- </tr></table>
+ </tr></table-->
 
 </td></tr><tr class="td_transp"><td class="td_transp">
 
-<table border="1" cellpadding="2" align="center">
+<table class="pagetab" border="0" cellpadding="0" align="center" style="margin-top:7;min-width:400px;">
+ <tr><td style="width:25px;">{nav_left}</td><td align="center">{pages}</td><td align="right" style="width:25px;">{nav_right}</td></tr>
+</table>
+
+<table border="1" cellpadding="2" align="center" style="margin-top:7;">
 <!-- BEGIN placeblock -->
- <tr><td>{nav_left}</td><th>{place_name}</th><th>{hit_name}</th><td align="right">{nav_right}</td></tr>
+ <tr><td>&nbsp;</td><th>{place_name}</th><th>{hit_name}</th><td align="right">&nbsp;</td></tr>
 <!-- BEGIN pitemblock -->
  <tr><th>&nbsp;</th>
   <td align="center">{place}</td>
@@ -49,6 +53,10 @@
 <!-- BEGIN kmlblock -->
  <tr><td colspan="4" align="center">{dl_kml}</td></tr>
 <!-- END kmlblock -->
+</table>
+
+<table class="pagetab" border="0" cellpadding="0" align="center" style="margin-top:7;min-width:400px;">
+ <tr><td style="width:25px;">{nav_left}</td><td align="center">{pages}</td><td align="right" style="width:25px;">{nav_right}</td></tr>
 </table>
 
 </td></tr></table>
