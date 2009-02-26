@@ -37,14 +37,16 @@ Requirements
 For data conversion from Aqua DiveLog you neet to have a Java interpreter
 installed (refer to the <a href="http://www.aquadivelog.org/docs/index.html"
 target="_blank">Aqua DiveLog documentation</a> for details). phpDiveLog itself
-only requires a running web server with PHP4 support.
+only requires a running web server with PHP support (PHP5 recommended, though
+PHP4 may work as well).
 
 [title]
 CopyRight (and CopyLeft)
 
 [text]
-This nice piece of software is &copy; 2004 by Itzchak Rehberg and IzzySoft, and
-is protected by the GNU Public License Version 2 (GPL). In short, this means:<ul>
+This nice piece of software is &copy; 2004-2009 by Itzchak Rehberg and IzzySoft,
+and is protected by the GNU Public License Version 2 (GPL). In short, this means:
+<ul>
 <li>you'll have the source code available</li>
 <li>you may run this program on as many machines as you want/have</li>
 <li>you may copy and distribute it as much as you want - as long as you
@@ -82,6 +84,6 @@ More Information
 Now, have fun!
 <br>
 Izzy
-(July 2004)
+(February 2009)
 
 [eof]
