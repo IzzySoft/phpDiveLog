@@ -10,6 +10,7 @@ v0.3.4
 * made the navbar "static" to ease browsing (prev/next buttons should now keep
   their positions)
 + added page numbers to the new "static navbar" to allow direct jumping
+* Dutch translations have been updated by Robbie (Tnx!)
 
 v0.3.3 (17.02.2009)
 -------------------
