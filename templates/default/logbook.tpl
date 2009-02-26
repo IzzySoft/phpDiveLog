@@ -16,15 +16,19 @@
 </table>
 
 </td></tr><tr class="td_transp"><td class="td_transp">
- <table border="0" cellpadding="2" width="100%" style="background-color:transparent;"><tr>
+ <!--table border="0" cellpadding="2" width="100%" style="background-color:transparent;"><tr>
   <td class="td_transp" align="left">{nav_left}</td>
   <td class="td_transp" align="right">{nav_right}</td>
- </tr></table>
+ </tr></table-->
 
 </td></tr><tr class="td_transp"><td class="td_transp">
 
-<table border="1" cellpadding="2" align="center">
- <tr><th>&nbsp;</th><th>{date_name}</th><th>{time_name}</th><th>{loc_name}</th><th>{rat_name}</th>
+<table border="1" cellpadding="2" align="center" style="margin-top:7;min-width:400px;">
+ <tr><td style="width:25px;">{nav_left}</td><td align="center">{pages}</td><td align="right" style="width:25px;">{nav_right}</td></tr>
+</table>
+
+<table border="1" cellpadding="2" align="center" style="margin-top:7">
+ <tr><th>{id_name}</th><th>{date_name}</th><th>{time_name}</th><th>{loc_name}</th><th>{rat_name}</th>
      <th>&nbsp;</th>
      <th>{ddt_name}</td><th>{buddy_name}</th></tr>
 
@@ -39,6 +43,10 @@
   <td align="center">{buddy}</td>
  </tr>
 <!-- END itemblock -->
+</table>
+
+<table border="1" cellpadding="2" align="center" style="margin-top:7;min-width:400px;">
+ <tr><td style="width:25px;">{nav_left}</td><td align="center">{pages}</td><td align="right" style="width:25px;">{nav_right}</td></tr>
 </table>
 
 </td></tr></table>

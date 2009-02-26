@@ -127,6 +127,17 @@
   }
   .tab_incative a:active { background: transparent; }
 
+  .pagetab {
+    background-color: white;
+    border: 2px ridge #3399ff;
+  }
+
+  .pagetab th, .pagetab td {
+    background-color: white;
+    font-size:70%;
+  }
+
+
 /* === Links === */
 
   a {

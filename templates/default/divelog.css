@@ -64,6 +64,16 @@
    border: 0;
   }
 
+  .pagetab {
+    background-color: white;
+    border: 1px solid gray;
+  }
+
+  .pagetab th, .pagetab td {
+    background-color: transparent;
+    font-size:70%;
+  }
+
 /* === Links === */
 
   a {

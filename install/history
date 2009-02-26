@@ -7,6 +7,9 @@ v0.3.4
 -------------------
 ! fixed issue with next/last buttons on last page (and an additional empty real
   last page) in lists when entries modulo display_limit was 0
+* made the navbar "static" to ease browsing (prev/next buttons should now keep
+  their positions)
++ added page numbers to the new "static navbar" to allow direct jumping
 
 v0.3.3 (17.02.2009)
 -------------------

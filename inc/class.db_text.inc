@@ -132,6 +132,7 @@
          if (file_exists($pdl->config->divedata)) {
            $csv->import($pdl->config->divedata);
            switch($sort) {
+	     case "id"    :
              case "date"  : $sort = "dive#"; $type="num"; break;
              case "time"  : $type="num"; $this->divedat_time2num($csv); break;
              case "location" :
@@ -277,6 +278,7 @@
 	 if (file_exists($pdl->config->sites)) {
            $csv->import($pdl->config->sites);
            switch ($sort) {
+	     case "id"       : $sort="id"; $type="num"; break;
              case "location" : $sort="loc"; $type="str"; break;
              case "place"    :
              case "depth"    : $type="str"; break;
