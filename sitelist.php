@@ -57,11 +57,7 @@
    $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$next","<img src='".$pdl->config->tpl_url."images/right.gif' $arrowheight>$last"));
  }
 
- $pages = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=0","1");
- for ($i=$pdl->config->display_limit,$k=2;$i<$records;$i+=$pdl->config->display_limit,++$k) {
-   $pages .= "&nbsp;".$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$i","$k");
- }
- $t->set_var("pages",$pages);
+ $t->set_var("pages",$pdl->common->pages($records,$start));
 
  #===============================================[ set up the table header ]===
  #--------------------------------------------------------[ sorting images ]---

@@ -39,6 +39,7 @@
     $this->dir->text      = "text";
   }
 
+#=========================================================[ Error Handling ]===
   /** Add something to the error stack
    * @class common
    * @method add_error
@@ -75,6 +76,7 @@
     $this->alert($msg);
   }
 
+#===========================================================[ Tag Handling ]===
   /* Helper to tagreplace: replace dirnames in URLs (private!) */
   function dirReplace($string,$url=0) {
     GLOBAL $pdl;
@@ -156,6 +158,7 @@
     return $newText;
   }
 
+#=============================================================[ Formatting ]===
   /** Format the input from plain text files (improved nl2br)
    * @class common
    * @method nl2br
@@ -209,6 +212,75 @@
     $hours = round($mins/60);
     $mins = $mins % 60;
     return $hours.":".$mins.":".$secs;
+  }
+
+#=======================================================[ Navigation Stuff ]===
+  /** Create page links (helper to pages())
+   * @method private page_links
+   * @param ref string links
+   * @param integer from first page number
+   * @param integer to last page number
+   * @param integer current current page
+   * @param boolean short skip links between $from and $to?
+   */
+  function page_links(&$links,$from,$to,$current,$short=FALSE) {
+    GLOBAL $pdl;
+    if ($short) {
+      $links .= "&nbsp;".$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=".($from -1)*$pdl->config->display_limit,"$from");
+      $links .= "&nbsp;..";
+      $links .= "&nbsp;".$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=".($to -1)*$pdl->config->display_limit,"$to");
+      return;
+    }
+    for ($i=$from;$i<=$to;++$i) {
+      if ($i==$current) {
+        $links .= "&nbsp;[$i]";
+      } else {
+        $start = ($i-1)*$pdl->config->display_limit;
+        $links .= "&nbsp;".$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$start","$i");
+      }
+    }
+  }
+
+  /** Handle page navigation
+   * @method pages
+   * @param integer records count of records
+   * @param integer start current page start
+   */
+  function pages($records,$start) {
+    GLOBAL $pdl;
+    $count = ceil($records/$pdl->config->display_limit);
+    $current = floor($start/$pdl->config->display_limit) +1;
+    $links = "";
+    if ($count>30) { // reduce links
+      $parts = ceil($count/10);
+      $partlen = ceil($count/$parts);
+      $currleft = $current +floor($partlen/2); // close to left
+      if ($currleft>$count) $currleft -= $count; // overflow
+      $curright = $current -floor($partlen/2); // close to right
+      if ($curright < 0) $curright += $count; // overflow
+      $p1 = -1; $p2 = 0;
+      for ( $i=0;$i<$parts;++$i ) { // split into 3 segments
+        if ($i==$parts -1) $end = $count;
+        else $end = ($i+1)*$partlen;
+        $start = $i*$partlen;
+        if ( ($start <= $current && $current <= $end) ||  // current page in this block
+           ( $start <= $currleft && $currleft <= ($start + $partlen/2) ) || // current page near left edge
+           ( $curright <= $end && ($start + ($end-$start)/2) <= $curright ) ) { // current page near right edge
+          if ($p2) {
+            $this->page_links($links,$p1 +1,$p2,$current,TRUE);
+            $p1 = -1; $p2 = 0;
+          }
+          $this->page_links($links,$i*$partlen +1,$end,$current);
+        } else {
+          if ($p1<0) $p1 = $start;
+          $p2 = $end;
+        }
+      }
+      if ($p2) $this->page_links($links,$p1 +1,$p2,$current,TRUE);
+    } else {
+      $this->page_links($links,1,$count,$current);
+    }
+    return substr($links,6); // skip initial "&nbsp;"
   }
 
  } // end class common
