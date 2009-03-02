@@ -110,6 +110,10 @@
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 <table class="outer" align="center" border="0" cellpadding="2" cellspacing="0" style="margin-top:3px"><!-- Fotos -->
  <tr><th class="head" valign="middle"><img src="{tpl_dir}images/btn_fotos.gif" width="37" height="15" alt="Fotos"> {fotos_name}</th></tr>
+<!-- BEGIN fotosubblock -->
+<!-- BEGIN fotosubname -->
+ <tr><th class="sub">{fotos_sub_name}</th></tr>
+<!-- END fotosubname -->
  <tr><td align="center"><table><tr>
 <!-- BEGIN fotoitemblock -->
    <td><span class="thumbnail">{bigref}<img src="{foto}" align="center">{unref}<br>{fdesc}</span></td>
@@ -117,7 +121,9 @@
 <!-- BEGIN multifotoblock -->
    </tr><tr>
 <!-- END multifotoblock -->
-   </tr></table></td></tr>
+   </tr></table>
+<!-- END fotosubblock -->
+   </td></tr>
 </table>
 <!-- END fotoblock -->
 

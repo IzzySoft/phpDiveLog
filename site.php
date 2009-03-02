@@ -65,7 +65,7 @@
  }
 
  #-------------------------------[ Notes ]---
- $notes[1] = $pdl->common->nl2br($site["description"],1,1);
+ $notes[1] = $pdl->common->nl2br($site["description"]);
  $notes[2] = $pdl->file->getNotes($id,"site");
  $notb = $notes[1].$pdl->common->nl2br($notes[2]);
  if ( !empty($notb) ) {
@@ -92,7 +92,7 @@
      $t->set_var("foto",$fotos[$i]->url);
      $t->set_var("fdesc",$pdl->common->tagreplace($fotos[$i]->desc));
      $t->parse("pic","fotoitemblock",TRUE);
-     if ( ($i+1)%3==0 && $fc>3 && $i+1!=$fc ) {
+     if ( ($i+1)%PIX_PER_ROW==0 && $fc>PIX_PER_ROW && $i+1!=$fc ) {
        $t->parse("pic","multifotoblock",TRUE);
      }
    }

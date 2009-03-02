@@ -90,6 +90,10 @@
     font-size: 105%;
     font-weight: bold;
   }
+  TH.sub {
+    background-image:none;
+    background-color:white;
+  }
   TD.tdl {
    background-image:url(images/aqua-light.jpg);
   }

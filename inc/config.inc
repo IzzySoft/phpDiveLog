@@ -27,8 +27,14 @@
                           # and will be handled as "error")
  $default_user  = "demo"; # if default_page=user: which user is the default?
                           # must be a valid account (subdir diver/<user>)
- $sitepix_on_divepage = 0;# whether existing site photos shall be included on
-                          # corresponding dive pages (1) or not (0)
+ $sitepix_if_no_divepix = 1; # shall sitepix be included on divepage if there
+                          # are no divepix? Only has effect with $sitepix_on_divepage=0
+ $sitepix_on_divepage = 0;# whether existing site photos shall be generally
+                          # included on corresponding dive pages (1) or not (0)
+ $sitepix_first = 0;      # if included on divepage, shall sitepix come first
+                          # (1) or follow divepix (0)?
+ $sitepix_separate = 0;   # if included on divepage, shall sitepix be separated
+                          # from divepix (1) or not (0)?
  $use_dyn_profile_png = 0;# create the dive profile image dynamically (1) or
                           # use the one from the conduit (0)
  $schedule_graph = "integrated";# How to draw the schedule graph (if we have
@@ -43,7 +49,7 @@
  $ignore_zero_degrees  = TRUE; # ignore a temperature of 0°C for stats?
  $ignore_zero_degrees_comment = TRUE; # place a comment below the graph if zero
                           # degrees are ignored
- $allow_override = "mapsite title lang display_limit template_set userdef1 userdef2 sitepix_on_divepage values_in_statgraphs graph_bg_transparent ignore_zero_degrees ignore_zero_degrees_comment hide_schedule_table";
+ $allow_override = "mapsite title lang display_limit template_set userdef1 userdef2 sitepix_on_divepage sitepix_first sitepix_separate sitepix_if_no_divepix values_in_statgraphs graph_bg_transparent ignore_zero_degrees ignore_zero_degrees_comment hide_schedule_table";
                           # which settings may be adjusted via the
                           # diver/*/system.conf - space separated values
  $pwdfile = "/etc/pdlpwd";# password file for data transfers

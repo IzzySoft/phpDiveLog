@@ -31,8 +31,10 @@
  $t->set_block("scheduleblock","schedimageblock","schedimg");
  $t->set_block("template","profileblock","profile");
  $t->set_block("template","fotoblock","fotos");
- $t->set_block("fotoblock","fotoitemblock","pic");
- $t->set_block("fotoblock","multifotoblock","multi");
+ $t->set_block("fotoblock","fotosubblock","sub");
+ $t->set_block("fotosubblock","fotosubname","subname");
+ $t->set_block("fotosubblock","fotoitemblock","pic");
+ $t->set_block("fotosubblock","multifotoblock","multi");
 
  #=================================================[ general template data ]===
  include("inc/tab_setup.inc");
@@ -74,7 +76,7 @@
  $t->set_var("item_data",$dive["buddy"]);
  $t->parse("sum","sumblock",TRUE);
  $t->set_var("item_name",lang("rating").":");
- $t->set_var("item_data","<img src='".$pdl->config->tpl_url."images/".$dive["rating"]."star.gif"."' alt='Rating:".$dive["rating"]."'");
+ $t->set_var("item_data","<img src='".$pdl->config->tpl_url."images/".$dive["rating"]."star.gif"."' alt='Rating:".$dive["rating"]."'>");
  $t->parse("sum","sumblock",TRUE);
  $t->set_var("item_name","&nbsp;"); // dummy empty line to match the
  $t->set_var("item_data","&nbsp;"); // neighbour table
@@ -214,7 +216,7 @@
  }
 
  #-------------------------------[ Notes ]---
- $notes[1] = $pdl->common->nl2br($dive["notes"],1,1);
+ $notes[1] = $pdl->common->nl2br($dive["notes"]);
  $notes[2] = $pdl->file->getNotes($nr,"dive");
  $notb = $notes[1].$pdl->common->nl2br($notes[2]);
  if (!empty($notb)) {
@@ -223,48 +225,104 @@
  }
 
  #-------------------------------[ Fotos ]---
- $fotos = $pdl->file->getDivePix($nr);
- $fc = count($fotos);
- if ($sitepix_on_divepage > 0) { // optionally include sitepix
-   $sfotos = $pdl->file->getSitePix($dive["site_id"]);
-   $sfc = count($sfotos);
-   if ($sfc>0) {
+ function parse_fotos($fotos,$start=0) {
+   GLOBAL $pdl, $t;
+   $fc = count($fotos);
+   if ($fc>0) {
      $picdir = $pdl->config->user_url;
-     for ($i=0;$i<$sfc;++$i) {
-       if (!empty($sfotos[$i]->bigurl)) {
+     for ($i=0;$i<$fc;++$i) {
+       if (!empty($fotos[$i]->bigurl)) {
          $t->set_var("unref","</a>");
-	 $t->set_var("bigref","<a href=\"".$sfotos[$i]->bigurl."\">");
+	 $t->set_var("bigref","<a href=\"".$fotos[$i]->bigurl."\">");
        } else {
          $t->set_var("unref","");
 	 $t->set_var("bigref","");
        }
-       $t->set_var("foto",$sfotos[$i]->url);
-       $t->set_var("fdesc",$sfotos[$i]->desc);
-       $t->parse("pic","fotoitemblock",TRUE);
-       if ( ($i+1)%3==0 && $sfc+$fc>3 && ($fc>0 || $i+1!=$sfc) ) {
+       $t->set_var("foto",$fotos[$i]->url);
+       $t->set_var("fdesc",$fotos[$i]->desc);
+       $t->parse("pic","fotoitemblock",$i+$start);
+       if ( ($start+$i+1)%PIX_PER_ROW==0 && $i+1<$fc) {
          $t->parse("pic","multifotoblock",TRUE);
        }
      }
    }
- } else $sfc = 0;
- if ($fc>0) {
-   $picdir = $pdl->config->user_url;
-   for ($i=0;$i<$fc;++$i) {
-     if (!empty($fotos[$i]->bigurl)) {
-       $t->set_var("unref","</a>");
-       $t->set_var("bigref","<a href=\"".$fotos[$i]->bigurl."\">");
-     } else {
-       $t->set_var("unref","");
-       $t->set_var("bigref","");
+   return $fc;
+ }
+
+ #--=[ Get photo data ]=--
+ $fotos  = $pdl->file->getDivePix($nr);
+ $sfotos = $pdl->file->getSitePix($dive["site_id"]);
+
+ #--=[ Include SitePix on Top ]=--
+ if ($sitepix_on_divepage && $sitepix_first) {
+   $sfc = parse_fotos($sfotos);
+   if ($sitepix_separate) {
+     if ( ($sfc)%PIX_PER_ROW!=0 ) {
+       $sfc += PIX_PER_ROW - ($sfc)%PIX_PER_ROW;
      }
-     $t->set_var("foto",$fotos[$i]->url);
-     $t->set_var("fdesc",$pdl->common->tagreplace($fotos[$i]->desc));
-     $t->parse("pic","fotoitemblock",TRUE);
-     if ( ($sfc+$i+1)%3==0 && $sfc+$fc>3 && $i+1!=$fc ) {
+     if (!empty($fotos)) {
+       $t->set_var("fotos_sub_name",lang("site_pix"));
+       $t->parse("subname","fotosubname");
+       $t->parse("sub","fotosubblock");
+       $block1 = TRUE;
+     } else $block1 = FALSE;
+     $t->set_var("pic","");
+   } else {
+     if ( ($sfc)%PIX_PER_ROW==0 ) {
        $t->parse("pic","multifotoblock",TRUE);
      }
+     $block1 = FALSE;
+   }
+   $fc  = parse_fotos($fotos,$sfc);
+   if ($sitepix_separate) {
+     $t->set_var("fotos_sub_name",lang("dive_pix"));
+     $t->parse("subname","fotosubname");
+   }
+   $t->parse("sub","fotosubblock",$block1);
+
+ #--=[ Include SitePix below DivePix ]=--
+ } elseif ($sitepix_on_divepage) {
+   $fc  = parse_fotos($fotos);
+   if ($sitepix_separate) {
+     if ( ($fc)%PIX_PER_ROW!=0 ) {
+       $fc += PIX_PER_ROW - ($fc)%PIX_PER_ROW;
+     }
+     if (!empty($sfotos)) {
+       $t->set_var("fotos_sub_name",lang("dive_pix"));
+       $t->parse("subname","fotosubname");
+       $t->parse("sub","fotosubblock");
+       $block1 = TRUE;
+     } else $block1 = FALSE;
+     $t->set_var("pic","");
+   } else { 
+     if ( ($fc)%PIX_PER_ROW==0 ) {
+       $t->parse("pic","multifotoblock",TRUE);
+     }
+     $block1 = FALSE;
+   }
+   $sfc = parse_fotos($sfotos,$fc);
+   if ($sitepix_separate) {
+     $t->set_var("fotos_sub_name",lang("site_pix"));
+     $t->parse("subname","fotosubname");
+   }
+   $t->parse("sub","fotosubblock",$block1);
+
+ #--=[ DivePix Only ]=--
+ } else {
+   if (!empty($fotos)) {
+     $fc  = parse_fotos($fotos);
+     $t->parse("sub","fotosubblock",$block1);
+     $sfc = 0;
+   } elseif ($sitepix_if_no_divepix && !empty($sfotos)) {
+     $sfc  = parse_fotos($sfotos);
+     $t->parse("sub","fotosubblock",$block1);
+     $fc = 0;
+   } else {
+     $fc = $sfc = 0;
    }
  }
+
+ #--=[ Finish the FotoBlock ]=--
  if ($fc+$sfc>0) {
    $t->set_var("fotos_name",lang("fotos"));
    $t->parse("fotos","fotoblock");
@@ -272,6 +330,7 @@
    $t->set_var("fotos","");
  }
 
+ #--=[ Output Content ]=--
  $t->pparse("out","template");
 
  include("inc/footer.inc");

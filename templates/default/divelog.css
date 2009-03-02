@@ -55,6 +55,10 @@
   .td_big {
     font-size: 100%;
   }
+  TH.sub {
+    background-image:none;
+    background-color:white;
+  }
   .tab_active {
    background-color: #cfcfcf;
    border: 0;

@@ -14,6 +14,7 @@
 
  $pdl->config->version = "0.3.3+svn";
  $pdl->config->site_title = $title;
+ define("PIX_PER_ROW",3);
  #=============================================================[ Debugging ]===
  error_reporting(0); // initially turn all off
  function set_phpdebug($level) {
