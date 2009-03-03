@@ -11,6 +11,7 @@ v0.3.4
   their positions)
 + added page numbers to the new "static navbar" to allow direct jumping
 * Dutch translations have been updated by Robbie (Tnx!)
++ made handling of sitepix on dive pages a bit more flexible
 
 v0.3.3 (17.02.2009)
 -------------------

@@ -93,3 +93,5 @@ feature_unavailable_desc;"Sorry - but this feature has been disabled by the admi
 depth_stat;"Dives by Depth"
 temp_stat;"Dives by Temperature"
 stat_ignored_zero_degrees;"<br><span style='font-size:9px'>records with 0°C have been ignored</span>"
+site_pix;"Site Fotos"
+dive_pix;"Dive Fotos"
