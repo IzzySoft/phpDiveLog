@@ -119,7 +119,7 @@
    <td><span class="thumbnail">{bigref}<img src="{foto}" align="center">{unref}<br>{fdesc}</span></td>
 <!-- END fotoitemblock -->
 <!-- BEGIN multifotoblock -->
-   </tr><tr>
+   </tr></table><table><tr>
 <!-- END multifotoblock -->
    </tr></table>
 <!-- END fotosubblock -->
