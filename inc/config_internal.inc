@@ -14,7 +14,13 @@
 
  $pdl->config->version = "0.3.3+svn";
  $pdl->config->site_title = $title;
- define("PIX_PER_ROW",3);
+ if (! (empty($_REQUEST["pixinrow"]) || preg_match('|[^\d]|',$_REQUEST["pixinrow"])) ) {
+   define("PIX_PER_ROW",$_REQUEST["pixinrow"]);
+ } elseif (!empty($pix_per_row)) {
+   define("PIX_PER_ROW",$pix_per_row);
+ } else {
+   define("PIX_PER_ROW",3);
+ }
  #=============================================================[ Debugging ]===
  error_reporting(0); // initially turn all off
  function set_phpdebug($level) {

@@ -42,8 +42,9 @@
     $tpl = $pdl->config->template_set;
     $diver = $pdl->params->diver;
     $order = $pdl->params->order; $sort = $pdl->params->sort;
+    if ( !empty($_REQUEST["pixinrow"]) ) $pixinrow = $_REQUEST["pixinrow"];
     $params = "";
-    $details = array("lang","tpl","diver","sort","order");
+    $details = array("lang","tpl","diver","sort","order","pixinrow");
     foreach ($details as $element) {
      if ( !(strpos($target,"$element=")) && !empty(${$element}) ) {
       if (empty($params)) {
