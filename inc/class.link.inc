@@ -39,7 +39,7 @@
   function slink($target) {
     GLOBAL $pdl, $lang;
     if (empty($lang)) $lang = "en";
-    $tpl = $pdl->config->template_set;
+    $tpl = TEMPLATE_SET;
     $diver = $pdl->params->diver;
     $order = $pdl->params->order; $sort = $pdl->params->sort;
     if ( !empty($_REQUEST["pixinrow"]) ) $pixinrow = $_REQUEST["pixinrow"];

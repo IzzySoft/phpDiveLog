@@ -14,13 +14,7 @@
 
  $pdl->config->version = "0.3.3+svn";
  $pdl->config->site_title = $title;
- if (! (empty($_REQUEST["pixinrow"]) || preg_match('|[^\d]|',$_REQUEST["pixinrow"])) ) {
-   define("PIX_PER_ROW",$_REQUEST["pixinrow"]);
- } elseif (!empty($pix_per_row)) {
-   define("PIX_PER_ROW",$pix_per_row);
- } else {
-   define("PIX_PER_ROW",3);
- }
+
  #=============================================================[ Debugging ]===
  error_reporting(0); // initially turn all off
  function set_phpdebug($level) {
@@ -96,15 +90,23 @@
  }
  $pdl->config->user_pwd = $pdl->file->getPwd();
 
- #==========================================================[ preferences ]===
- if ( !empty($_GET["tpl"]) )  $template_set = $_GET["tpl"];
- $pdl->config->template_set = $template_set;
- $pdl->config->display_limit = $display_limit;
- if ( !empty($_GET["lang"]) ) {
-   $lang = $_GET["lang"];
+ #==================================================[ URL config overrides ]===
+ function request_value($varname,$regexp,$config,$default,$neg=FALSE) {
+   if ( $neg ) { if ( !empty($_REQUEST[$varname]) && preg_match($regexp,$_REQUEST[$varname]) ) return $_REQUEST[$varname]; }
+   elseif (! (empty($_REQUEST[$varname]) || preg_match($regexp,$_REQUEST[$varname])) ) return $_REQUEST[$varname];
+   if ( empty($config) && $config!==0 ) return $default;
+   return $config;
  }
- $pdl->config->tpl_path  = $pdl->config->base_path."templates/$template_set/";
- $pdl->config->tpl_url   = $pdl->config->base_url."templates/$template_set/";
+ define("PIX_PER_ROW",request_value("pixinrow",'|[^\d]|',$pix_per_row,3));
+ define("DISPLAY_LIMIT",request_value("displaylimit",'|[^\d]|',$display_limit,12));
+ define("TEMPLATE_SET",request_value("tpl",'|[^A-Za-z0-9_]|',$template_set,"aqua"));
+ define("LANG",request_value("lang",'|^[a-z]{2}$|',$lang,"en",TRUE));
+
+ #==========================================================[ preferences ]===
+ $pdl->config->display_limit = DISPLAY_LIMIT;
+ $lang = LANG;
+ $pdl->config->tpl_path  = $pdl->config->base_path."templates/".TEMPLATE_SET."/";
+ $pdl->config->tpl_url   = $pdl->config->base_url."templates/".TEMPLATE_SET."/";
  $pdl->config->values_in_statgraphs = strtolower($values_in_statgraphs);
  $pdl->config->global_kml = $global_kml;
 
@@ -124,6 +126,7 @@
  }
 
  #=============================================================[ clean up ]===
- unset($database,$display_limit,$allow_override,$enable_index,$uconf,$allowed,
-       $ac,$pwdfile,$transfer_dir,$values_in_statgraphs,$global_kml);
+ unset($database,$display_limit,$pix_per_row,$allow_override,$enable_index,
+       $uconf,$allowed,$ac,$pwdfile,$transfer_dir,$values_in_statgraphs,
+       $global_kml);
 ?>

@@ -17,7 +17,11 @@
  $database["type"]      = "csv";   # csv|mysql|pgsql (only csv supported now)
 
  #==========================================================[ preferences ]===
+ #-----------------------------------------------------[ General Settings ]---
  $display_limit = 12;     # how may records/page should be displayed for lists
+ $pix_per_row   = 3;      # how many pictures to place in one row in the photo
+                          # sections. This can be overridden with the URL
+                          # parameter "pixinrow"
  $template_set  = "aqua"; # prefered template set: default|aqua
  $lang          = "en";   # default language if not (yet) specified by visitor
  $title = "Demos phpDiveLog"; # site name
@@ -27,6 +31,18 @@
                           # and will be handled as "error")
  $default_user  = "demo"; # if default_page=user: which user is the default?
                           # must be a valid account (subdir diver/<user>)
+ $allow_override = "mapsite title lang display_limit pix_per_row template_set userdef1 userdef2 sitepix_on_divepage sitepix_first sitepix_separate sitepix_if_no_divepix values_in_statgraphs graph_bg_transparent ignore_zero_degrees ignore_zero_degrees_comment hide_schedule_table";
+                          # which settings may be adjusted via the
+                          # diver/*/system.conf - space separated values
+
+ #----------------------------------------------------[ Geographical Stuff ]---
+ $mapsite = "Google";     # Where to show the dive site in a map. Possible
+                          # values: "Mapquest" (old style), "Google" (Google Maps),
+			  # "Yahoo" (Yahoo Maps)
+ $global_kml = TRUE;      # Offer links to global KML files (TRUE) on the global
+                          # places list or not (FALSE)
+
+ #--------------------------------------------------------[ Graph Settings ]---
  $sitepix_if_no_divepix = 1; # shall sitepix be included on divepage if there
                           # are no divepix? Only has effect with $sitepix_on_divepage=0
  $sitepix_on_divepage = 0;# whether existing site photos shall be generally
@@ -49,16 +65,11 @@
  $ignore_zero_degrees  = TRUE; # ignore a temperature of 0°C for stats?
  $ignore_zero_degrees_comment = TRUE; # place a comment below the graph if zero
                           # degrees are ignored
- $allow_override = "mapsite title lang display_limit template_set userdef1 userdef2 sitepix_on_divepage sitepix_first sitepix_separate sitepix_if_no_divepix values_in_statgraphs graph_bg_transparent ignore_zero_degrees ignore_zero_degrees_comment hide_schedule_table";
-                          # which settings may be adjusted via the
-                          # diver/*/system.conf - space separated values
+
+ #------------------------------------------------[ Data Transfer Settings ]---
  $pwdfile = "/etc/pdlpwd";# password file for data transfers
  $transfer_dir = "/home/pdl/transfer/"; # base directory of user data transfers
- $mapsite = "Google";     # Where to show the dive site in a map. Possible
-                          # values: "Mapquest" (old style), "Google" (Google Maps),
-			  # "Yahoo" (Yahoo Maps)
- $global_kml = TRUE;      # Offer links to global KML files (TRUE) on the global
-                          # places list or not (FALSE)
+
  #--------------------------------------------------------------[ sorting ]----
  $logbook_default_sort   = "date";
  $logbook_default_order  = "desc";

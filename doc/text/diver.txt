@@ -234,7 +234,7 @@ putting a file named <code>system.conf</code> in his/her "home directory"
 ("home directory" refers to the <code>diver/&lt;nick&gt;/</code> subdirectory
 of the phpDiveLog installation). The syntax of this file is easy: one parameter
 per line in the form <code>var=value</code>. Empty lines and lines beginning
-with a "#" are ignored. Which system defaults are allowed to be overriden is
+with a "#" are ignored. Which system defaults are allowed to be overridden is
 defined in the <code>inc/config.inc</code> file by the parameter
 <code>$allow_override</code> (see in the phpDiveLog configuration description
 on the {install_page} page).
@@ -321,7 +321,7 @@ with the server-side data (login, password, directory and transfer method).
 [text]
 If the site admin informs you that the "single OS user transfer" is used, you
 need one additional step after running the conduit wrapper transfer: on your
-divelov web site, click the import button, fill in your password, and submit
+divelog web site, click the import button, fill in your password, and submit
 the form to finally import your divelog to the website. The password used here
 will certainly be different from the one to use with your FTP/SCP/RSync
 transfers, so don't mess them up!
