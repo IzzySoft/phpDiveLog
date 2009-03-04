@@ -43,8 +43,9 @@
     $diver = $pdl->params->diver;
     $order = $pdl->params->order; $sort = $pdl->params->sort;
     if ( !empty($_REQUEST["pixinrow"]) ) $pixinrow = $_REQUEST["pixinrow"];
+    if ( !empty($_REQUEST["displaylimit"]) ) $displaylimit = $_REQUEST["displaylimit"];
     $params = "";
-    $details = array("lang","tpl","diver","sort","order","pixinrow");
+    $details = array("lang","tpl","diver","sort","order","pixinrow","displaylimit");
     foreach ($details as $element) {
      if ( !(strpos($target,"$element=")) && !empty(${$element}) ) {
       if (empty($params)) {

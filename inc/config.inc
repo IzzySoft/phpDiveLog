@@ -19,11 +19,14 @@
  #==========================================================[ preferences ]===
  #-----------------------------------------------------[ General Settings ]---
  $display_limit = 12;     # how may records/page should be displayed for lists
+                          # may be overridden by the "displaylimit" URL parameter
  $pix_per_row   = 3;      # how many pictures to place in one row in the photo
                           # sections. This can be overridden with the URL
                           # parameter "pixinrow"
  $template_set  = "aqua"; # prefered template set: default|aqua
+                          # may be overridden with the "tpl" parameter
  $lang          = "en";   # default language if not (yet) specified by visitor
+                          # may be overridden by the URL parameter "lang"
  $title = "Demos phpDiveLog"; # site name
  $enable_index  = TRUE;   # whether the buddylist index is available
  $default_page  = "user"; # where to route requests without the "?diver=nick"
