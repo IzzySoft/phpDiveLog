@@ -256,25 +256,27 @@
  #--=[ Include SitePix on Top ]=--
  if ($sitepix_on_divepage && $sitepix_first) {
    $sfc = parse_fotos($sfotos);
-   if ($sitepix_separate) {
-     if ( ($sfc)%PIX_PER_ROW!=0 ) {
-       $sfc += PIX_PER_ROW - ($sfc)%PIX_PER_ROW;
+   if ($sfc>0) {
+     if ($sitepix_separate) {
+       if ( ($sfc)%PIX_PER_ROW!=0 ) {
+         $sfc += PIX_PER_ROW - ($sfc)%PIX_PER_ROW;
+       }
+       if (!empty($fotos)) {
+         $t->set_var("fotos_sub_name",lang("site_pix"));
+         $t->parse("subname","fotosubname");
+         $t->parse("sub","fotosubblock");
+         $block1 = TRUE;
+       } else $block1 = FALSE;
+       if (!empty($fotos)) $t->set_var("pic","");
+     } else {
+       if ( ($sfc)%PIX_PER_ROW==0 ) {
+         $t->parse("pic","multifotoblock",TRUE);
+       }
+       $block1 = FALSE;
      }
-     if (!empty($fotos)) {
-       $t->set_var("fotos_sub_name",lang("site_pix"));
-       $t->parse("subname","fotosubname");
-       $t->parse("sub","fotosubblock");
-       $block1 = TRUE;
-     } else $block1 = FALSE;
-     $t->set_var("pic","");
-   } else {
-     if ( ($sfc)%PIX_PER_ROW==0 ) {
-       $t->parse("pic","multifotoblock",TRUE);
-     }
-     $block1 = FALSE;
    }
    $fc  = parse_fotos($fotos,$sfc);
-   if ($sitepix_separate) {
+   if ($fc>0 && $sfc>0 && $sitepix_separate) {
      $t->set_var("fotos_sub_name",lang("dive_pix"));
      $t->parse("subname","fotosubname");
    }
@@ -283,25 +285,27 @@
  #--=[ Include SitePix below DivePix ]=--
  } elseif ($sitepix_on_divepage) {
    $fc  = parse_fotos($fotos);
-   if ($sitepix_separate) {
-     if ( ($fc)%PIX_PER_ROW!=0 ) {
-       $fc += PIX_PER_ROW - ($fc)%PIX_PER_ROW;
+   if ($fc>0) {
+     if ($sitepix_separate) {
+       if ( ($fc)%PIX_PER_ROW!=0 ) {
+         $fc += PIX_PER_ROW - ($fc)%PIX_PER_ROW;
+       }
+       if (!empty($sfotos)) {
+         $t->set_var("fotos_sub_name",lang("dive_pix"));
+         $t->parse("subname","fotosubname");
+         $t->parse("sub","fotosubblock");
+         $block1 = TRUE;
+       } else $block1 = FALSE;
+       if (!empty($sfotos)) $t->set_var("pic","");
+     } else { 
+       if ( ($fc)%PIX_PER_ROW==0 ) {
+         $t->parse("pic","multifotoblock",TRUE);
+       }
+       $block1 = FALSE;
      }
-     if (!empty($sfotos)) {
-       $t->set_var("fotos_sub_name",lang("dive_pix"));
-       $t->parse("subname","fotosubname");
-       $t->parse("sub","fotosubblock");
-       $block1 = TRUE;
-     } else $block1 = FALSE;
-     $t->set_var("pic","");
-   } else { 
-     if ( ($fc)%PIX_PER_ROW==0 ) {
-       $t->parse("pic","multifotoblock",TRUE);
-     }
-     $block1 = FALSE;
    }
    $sfc = parse_fotos($sfotos,$fc);
-   if ($sitepix_separate) {
+   if ($fc>0 && $sfc>0 && $sitepix_separate) {
      $t->set_var("fotos_sub_name",lang("site_pix"));
      $t->parse("subname","fotosubname");
    }
