@@ -65,7 +65,7 @@
  }
 
  #-------------------------------[ Notes ]---
- $notes[1] = $pdl->common->nl2br($site["description"]);
+ $notes[1] = $pdl->common->nl2br($site["description"],1,1);
  $notes[2] = $pdl->file->getNotes($id,"site");
  $notb = $notes[1].$pdl->common->nl2br($notes[2]);
  if ( !empty($notb) ) {
