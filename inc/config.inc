@@ -68,6 +68,7 @@
  $ignore_zero_degrees  = TRUE; # ignore a temperature of 0°C for stats?
  $ignore_zero_degrees_comment = TRUE; # place a comment below the graph if zero
                           # degrees are ignored
+ $temp_stat_interval = 10; # intervals for the temperature graph (either 5 or 10 degrees)
 
  #------------------------------------------------[ Data Transfer Settings ]---
  $pwdfile = "/etc/pdlpwd";# password file for data transfers

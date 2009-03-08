@@ -3,6 +3,10 @@ $Id$
 History for phpDiveLog
 ======================
 
+v0.3.5
+-------------------
++ more flexible temp stats graph: intervals are now configurable (5 or 10 °C)
+
 v0.3.4 (08.03.2009)
 -------------------
 ! fixed issue with next/last buttons on last page (and an additional empty real

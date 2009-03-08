@@ -506,6 +506,19 @@ class graph {
     if (empty($height)) $height = 200;
     if (empty($width))  $width  = $height+130;
 
+    // graph colors
+    $color = array("0" => "#f5f5f5",  // WhiteSmoke
+                   "5" => "#00bfff",  // DeepSkyBlue
+                   "10" => "#4169e1", // RoyalBlue
+                   "15" => "#00fa9a", // MediumSpringGreen
+                   "20" => "#eee8aa", // PaleGoldenRod
+                   "25" => "#d2b48c", // Tan
+                   "30" => "#ffa500", // Orange
+                   "35" => "#d2691e", // Chocolade
+                   "40" => "#dc143c");// Crimson
+    $tcolor = array("0" => "#000000", "5" => "#000000", "10" => "#ffffff", "15" => "#000000", "20" => "#000000",
+                    "25" => "#000000", "30" => "#000000", "35" => "#000000", "40" => "#ffffff"); // text colors
+
     // prepare data
     $data = $pdl->db->get_dives("","",FALSE,"watertemp","ASC");
     $dc = count($data);
@@ -524,7 +537,7 @@ class graph {
         ++$ignored;
         continue;
       }
-      while ($val > $rfloor) { $rfloor += 10; $sum[$rfloor] = 0; }
+      while ($val > $rfloor && $rfloor < 40) { $rfloor += TEMP_STAT_INTERVAL; $sum[$rfloor] = 0; }
       ++$sum[$rfloor];
     }
     $max_val = 0;
@@ -546,26 +559,24 @@ class graph {
     // Setup Labels
     $D->BFont = 3;
     // Draw Graph
-    $max = $ceil/10;
+    $max = $ceil/TEMP_STAT_INTERVAL;
     $angle0 = 1;
-    #colors: Blue (ice), DeepSkyBlue (cold), PaleGoldenRod (avg), Chocolate (warm), Tomato (hot), Firebrick (nuts?)
-    $color  = array("#0000ff","#00bfff","#eee8aa","#d2691e","#ff6347","#b22222");
-    $tcolor = array("#ffffff","#000000","#000000","#000000","#000000","#ffffff");
+
     for ($i=0;$i<=$max;++$i) {
-      if (empty($sum[$i*10])) continue;
-      if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && $years>25)) $dispval = "";
-      else $dispval = $sum[$i*10];
+      if (empty($sum[$i*TEMP_STAT_INTERVAL])) continue;
+      if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && count($sum)>8)) $dispval = "";
+      else $dispval = $sum[$i*TEMP_STAT_INTERVAL];
       # Pie (XCenter,YCenter,Offset,Radius,Angle0,Angle1,Color[,tooltip]
-      $angle1 = $sum[$i*10] * 100/($dc-$ignored);
+      $angle1 = $sum[$i*TEMP_STAT_INTERVAL] * 100/($dc-$ignored);
       if ($i>0) {
-        $tooltip = ($i-1)*10 ."-". $i*10 . " $unit: ". $sum[$i*10];
+        $tooltip = ($i-1)*TEMP_STAT_INTERVAL ."-". $i*TEMP_STAT_INTERVAL . " $unit: ". $sum[$i*TEMP_STAT_INTERVAL];
       } else {
-        $tooltip = "<=". $i*10 . " $unit: ". $sum[$i*10];
+        $tooltip = "<=". $i*TEMP_STAT_INTERVAL . " $unit: ". $sum[$i*TEMP_STAT_INTERVAL];
       }
-      $D->Pie($base,$base,0,$base*0.9,$angle0*3.6,($angle0+$angle1)*3.6,$color[$i],$tooltip);
+      $D->Pie($base,$base,0,$base*0.9,$angle0*3.6,($angle0+$angle1)*3.6,$color[$i*TEMP_STAT_INTERVAL],$tooltip);
       # Bar(left,top,right,bottom,color,text,textcolor)
       $adjustY = ($height - ($max*20) +15)/2;
-      $D->Bar($height+20,($i-1)*20+$adjustY,$height+120,($i-1)*20+15+$adjustY,$color[$i],str_replace("Â°","°",$tooltip),$tcolor[$i]);
+      $D->Bar($height+20,($i-1)*20+$adjustY,$height+120,($i-1)*20+15+$adjustY,$color[$i*TEMP_STAT_INTERVAL],str_replace("Â°","°",$tooltip),$tcolor[$i*TEMP_STAT_INTERVAL]);
       $angle0 += $angle1;
     }
     // Save Image & Data

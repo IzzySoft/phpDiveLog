@@ -12,7 +12,7 @@
 
  /* $Id$ */
 
- $pdl->config->version = "0.3.4";
+ $pdl->config->version = "0.3.4+svn";
  $pdl->config->site_title = $title;
 
  #=============================================================[ Debugging ]===
@@ -101,6 +101,7 @@
  define("DISPLAY_LIMIT",request_value("displaylimit",'|[^\d]|',$display_limit,12));
  define("TEMPLATE_SET",request_value("tpl",'|[^A-Za-z0-9_]|',$template_set,"aqua"));
  define("LANG",request_value("lang",'|^[a-z]{2}$|',$lang,"en",TRUE));
+ define("TEMP_STAT_INTERVAL",request_value("tempstatinterval",'/^(5|10)$/',$temp_stat_interval,10,TRUE));
 
  #==========================================================[ preferences ]===
  $pdl->config->display_limit = DISPLAY_LIMIT;
