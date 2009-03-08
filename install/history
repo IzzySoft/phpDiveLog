@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.3.4
+v0.3.4 (08.03.2009)
 -------------------
 ! fixed issue with next/last buttons on last page (and an additional empty real
   last page) in lists when entries modulo display_limit was 0
