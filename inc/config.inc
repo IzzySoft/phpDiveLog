@@ -80,6 +80,14 @@
  $sitelist_default_sort  = "location";
  $sitelist_default_order = "asc";
 
+ #-------------------------------------------------------------------[ PDF ]---
+ $tcpdf_path = "/usr/share/tcpdf/"; # path to the TCPDF Api files
+ $pdf_page_format = "A5";           # paper size: A0..5, B0..5, or LETTER
+ $pdf_page_orientation = "P";       # (P)ortrait or (L)andscape. Recommended
+                                    # combinations: A5+P, A4+L
+ $pdf_with_fotos = TRUE;            # include photos in the PDF files? URL
+                                    # override: pdfwithfotos=0|1
+
  #------------------------------------------------------------------[ misc ]---
  $debug_level = "EW";     # What shall be logged: [E]rrors, [W]arnings,
                           # [N]otices, [A]ll?

@@ -70,8 +70,10 @@
  $pdl->file = new file();
 
  #==========================================================[ directories ]===
- $pdl->config->base_path = ""; # if set, has to include trailing slash - if
- $pdl->config->base_url  = ""; #   not, must be empty
+ $pdl->config->base_path = dirname(dirname(__FILE__))."/";
+ $pdl->config->base_url  = dirname($_SERVER["PHP_SELF"])."/";
+# $pdl->config->base_path = "";
+# $pdl->config->base_url  = "";
  $pdl->config->user_path = $pdl->config->base_path.$relPath;
  $pdl->config->user_url  = $pdl->config->base_url.$relPath;
  $pdl->config->pwdfile   = $pwdfile;
@@ -102,6 +104,7 @@
  define("TEMPLATE_SET",request_value("tpl",'|[^A-Za-z0-9_]|',$template_set,"aqua"));
  define("LANG",request_value("lang",'|^[a-z]{2}$|',$lang,"en",TRUE));
  define("TEMP_STAT_INTERVAL",request_value("tempstatinterval",'/^(5|10)$/',$temp_stat_interval,10,TRUE));
+ define("PDF_WITH_FOTOS",request_value("pdfwithfotos",'/^(0|1)$/',$pdf_with_fotos,TRUE,TRUE));
 
  #==========================================================[ preferences ]===
  $pdl->config->display_limit = DISPLAY_LIMIT;
