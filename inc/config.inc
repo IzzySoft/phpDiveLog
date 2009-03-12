@@ -87,6 +87,7 @@
                                     # combinations: A5+P, A4+L
  $pdf_with_fotos = TRUE;            # include photos in the PDF files? URL
                                     # override: pdfwithfotos=0|1
+ $pdf_pageno_from_diveno = TRUE;    # use the dive# as page# to calculate gutter?
 
  #------------------------------------------------------------------[ misc ]---
  $debug_level = "EW";     # What shall be logged: [E]rrors, [W]arnings,

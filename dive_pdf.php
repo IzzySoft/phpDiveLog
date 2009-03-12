@@ -12,9 +12,13 @@
  # $Id$
 
 #=============================================[ Initialize & Setup PDF Api ]===
+require_once(dirname(__FILE__)."/inc/includes.inc");
 #------------------------------------------[ DiveRecord specific constants ]---
 define('MULTI_PAGE',FALSE); // just a single page or the entire book?
-if ($_REQUEST["pageno"]%2) define ('PAGE_GUTTER_LEFT',1);
+if (isset($_REQUEST["pageno"])) $pagenr = $_REQUEST["pageno"];
+elseif ($pdf_pageno_from_diveno) $pagenr = $_REQUEST["nr"];
+else $pagenr = 1;
+if ($pagenr%2) define ('PAGE_GUTTER_LEFT',1);
 else define ('PAGE_GUTTER_LEFT',0);
 
 #------------------------------------------------[ create new PDF document ]---
@@ -95,7 +99,7 @@ $t->parse("sum","sumblock",TRUE);
 $t->set_var("item_name",lang("rating").":");
 if ($dive["rating"]=="-")  $starwid = 8;
 else $starwid = $dive["rating"]*8;
-$t->set_var("item_data","<img src='".$pdl->config->tpl_url."images/".$dive["rating"]."star.gif"."' alt='Rating:".$dive["rating"]."' HEIGHT='8px' WIDTH='${starwid}px' />");
+$t->set_var("item_data","<img src='".$pdl->config->base_url."templates/aqua/images/".$dive["rating"]."star.gif"."' alt='Rating:".$dive["rating"]."' HEIGHT='8px' WIDTH='${starwid}px' />");
 $t->parse("sum","sumblock",TRUE);
 $nrpad = str_pad($nr,5,"0",STR_PAD_LEFT);
 $profilepng = $pdl->config->user_url . "profiles/dive${nrpad}_profile.png";
