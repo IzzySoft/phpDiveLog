@@ -12,19 +12,19 @@
  # $Id$
 
 #=============================================[ Initialize & Setup PDF Api ]===
-require_once(dirname(__FILE__)."/inc/pdf_init.inc");
-
-# DiveRecord specific constants
-define ('PAGE_GUTTER_LEFT',1);
+#------------------------------------------[ DiveRecord specific constants ]---
 define('MULTI_PAGE',FALSE); // just a single page or the entire book?
+if ($_REQUEST["pageno"]%2) define ('PAGE_GUTTER_LEFT',1);
+else define ('PAGE_GUTTER_LEFT',0);
 
-// URL parameters
+#------------------------------------------------[ create new PDF document ]---
+require_once(dirname(__FILE__)."/inc/pdf_init.inc");
+$pdf = new pdlPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false); 
+
+#---------------------------------------------------------[ URL parameters ]---
 $nr = $pdl->params->nr;
 $dive = $pdl->db->get_dive($nr);
 $title .= ": ".lang("dive#")." $nr";
-
-// create new PDF document
-$pdf = new pdlPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false); 
 
 #------------------------------------------------------[ Setup Page Design ]---
 if (MULTI_PAGE) {
@@ -112,10 +112,10 @@ $t->set_var("item_name",lang("air_temp").":");
 $t->set_var("item_data",$dive["airtemp"]);
 $t->parse("sum","sumblock",TRUE);
 $t->set_var("item_name",lang("current").":");
-$t->set_var("item_data",$dive["current"]);
+$t->set_var("item_data",ucfirst($dive["current"]));
 $t->parse("sum","sumblock",TRUE);
 $t->set_var("item_name",lang("workload").":");
-$t->set_var("item_data",$dive["workload"]);
+$t->set_var("item_data",ucfirst($dive["workload"]));
 $t->parse("sum","sumblock",TRUE);
 
 #--------------------------------------------------------[ Setup Equipment ]---
