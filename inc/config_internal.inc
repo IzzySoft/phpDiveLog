@@ -71,7 +71,8 @@
 
  #==========================================================[ directories ]===
  $pdl->config->base_path = dirname(dirname(__FILE__))."/";
- $pdl->config->base_url  = dirname($_SERVER["PHP_SELF"])."/";
+ $pdl->config->base_url  = dirname($_SERVER["PHP_SELF"]);
+ if ($pdl->config->base_url!="/") $pdl->config->base_url .= "/";
 # $pdl->config->base_path = "";
 # $pdl->config->base_url  = "";
  $pdl->config->user_path = $pdl->config->base_path.$relPath;
