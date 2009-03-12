@@ -138,8 +138,10 @@
  $csvfile = $pdl->config->datadir."dive${nr}_profile.csv";
  $schedulecsv = $pdl->config->datadir."dive${nr}_schedule.csv";
  $profilepng = $pdl->config->user_path . "profiles/dive${nr}_profile.png";
+ $profilepng_url = $pdl->config->user_url . "profiles/dive${nr}_profile.png";
  $profilemap = $pdl->config->user_path . "profiles/dive${nr}_profile.map";
  $schedulepng = $pdl->config->user_path . "profiles/dive${nr}_schedule.png";
+ $schedulepng_url = $pdl->config->user_url . "profiles/dive${nr}_schedule.png";
  if ($use_dyn_profile_png) {
    // generate dynamic profile/schedule graphs
    if (!file_exists($profilepng) || filemtime($profilepng) < filemtime($csvfile)) {
@@ -156,7 +158,7 @@
    // use dynamic profile if exists
    if (file_exists($profilepng)) {
      $t->set_var("prof_name",lang("profile"));
-     $t->set_var("prof_img",$profilepng);
+     $t->set_var("prof_img",$profilepng_url);
      if (file_exists($profilemap)) {
        $t->set_var("prof_map","<map name='prof${nr}' id='prof${nr}'>".file_get_contents($profilemap)."</map>");
        $t->set_var("use_map","USEMAP='#prof${nr}'");
@@ -207,7 +209,7 @@
      }
    }
    if ($use_dyn_profile_png && file_exists($schedulepng)) {
-     $t->set_var("sched_img",$schedulepng);
+     $t->set_var("sched_img",$schedulepng_url);
      $t->parse("schedimg","schedimageblock");
    }
    if ($parse_schedule) $t->parse("sched","scheduleblock");

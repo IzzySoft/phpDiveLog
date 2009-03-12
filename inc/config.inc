@@ -34,7 +34,7 @@
                           # and will be handled as "error")
  $default_user  = "demo"; # if default_page=user: which user is the default?
                           # must be a valid account (subdir diver/<user>)
- $allow_override = "mapsite title lang display_limit pix_per_row template_set userdef1 userdef2 sitepix_on_divepage sitepix_first sitepix_separate sitepix_if_no_divepix values_in_statgraphs graph_bg_transparent ignore_zero_degrees ignore_zero_degrees_comment hide_schedule_table";
+ $allow_override = "mapsite title lang display_limit pix_per_row template_set userdef1 userdef2 sitepix_on_divepage sitepix_first sitepix_separate sitepix_if_no_divepix values_in_statgraphs graph_bg_transparent ignore_zero_degrees ignore_zero_degrees_comment hide_schedule_table temp_stat_interval";
                           # which settings may be adjusted via the
                           # diver/*/system.conf - space separated values
 
