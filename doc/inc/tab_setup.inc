@@ -17,7 +17,6 @@
      GLOBAL $pm, $pdl;
      $pm->t->set_block("main","homeblock","home");
      $this->add_tab("common","common.php","tab_dives.gif");
-     $this->add_tab("install","install.php","tab_preferences.gif");
      $this->add_tab("admin","admin.php","tab_stats.gif");
      $this->add_tab("diver","diver.php","tab_buddylist.gif");
      $this->add_tab("visitor","visitor.php","tab_usage.gif");
@@ -51,7 +50,7 @@
          $name = $pdl->link->linkurl($this->tab[$name]->url,$sname);
 	 else $name = ucfirst($name);
        $pm->t->set_var("tab_name",$name);
-       $pm->t->parse("tab","tabblock",TRUE);
+       $pm->t->parse("tab","tabblock",$i);
      }
    }
  }

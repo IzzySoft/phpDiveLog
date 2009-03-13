@@ -12,6 +12,9 @@ v0.3.5
   the future will also contain page-related links (already started with the dive
   PDF export on single dive pages, if TCPDF is available)
 + added possibility to disable PDF support
+- removed installation instructions from the online help system (pretty useless
+  there: When you can read them, the installation is already done). Please
+  refer to the project wiki (http://projects.izzysoft.de/trac/phpdivelog) instead.
 
 v0.3.4 (08.03.2009)
 -------------------
