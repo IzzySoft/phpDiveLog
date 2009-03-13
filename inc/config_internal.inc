@@ -81,10 +81,13 @@
  $pdl->config->pwdfile   = $pwdfile;
  $pdl->config->transfer_path = $transfer_dir;
  #----------------------------------------------------------------[ TCPDF ]---
- if (strrpos($tcpdf_path,'/')!=strlen($tcpdf_path)) $tcpdf_path .= "/";
- if (file_exists($tcpdf_path."tcpdf.php")) define ('K_PATH_MAIN',$tcpdf_path);
- elseif (file_exists("/usr/share/tcpdf/tcpdf.php")) define ('K_PATH_MAIN',"/usr/share/tcpdf/tcpdf.php");
- elseif (file_exists("/usr/local/share/tcpdf/tcpdf.php")) define ('K_PATH_MAIN',"/usr/local/share/tcpdf/tcpdf.php");
+ if ($pdf_enable) {
+   if (strrpos($tcpdf_path,'/')!=strlen($tcpdf_path)) $tcpdf_path .= "/";
+   if (file_exists($tcpdf_path."tcpdf.php")) define ('K_PATH_MAIN',$tcpdf_path);
+   elseif (file_exists("/usr/share/tcpdf/tcpdf.php")) define ('K_PATH_MAIN',"/usr/share/tcpdf/tcpdf.php");
+   elseif (file_exists("/usr/local/share/tcpdf/tcpdf.php")) define ('K_PATH_MAIN',"/usr/local/share/tcpdf/tcpdf.php");
+   else define ('K_PATH_MAIN','');
+ }
  else define ('K_PATH_MAIN','');
 
  #===========================================================[ users conf ]===

@@ -71,5 +71,5 @@ feature_unavailable_desc;"Sorry - aber diese Funktion wurde vom Administrator de
 depth_stat;"Tauchgänge nach Tiefe"
 temp_stat;"Tauchgänge nach Temperatur"
 stat_ignored_zero_degrees;"<br><span style='font-size:9px'>Einträge mit 0°C wurden ignoriert</span>"
-pdf_api_not_found;"Leider konnte das PDF API auf dem Server nicht gefunden werden."
+pdf_api_not_found;"Leider konnte das PDF API auf dem Server nicht gefunden werden - oder die PDF Untertützung wurde vom Administrator deaktiviert."
 export_dive_pdf;"Diesen Eintrag als PDF exportieren"

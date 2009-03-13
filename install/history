@@ -11,6 +11,7 @@ v0.3.5
 + separated navigation buttons on single dive/site page to own "section" which in
   the future will also contain page-related links (already started with the dive
   PDF export on single dive pages, if TCPDF is available)
++ added possibility to disable PDF support
 
 v0.3.4 (08.03.2009)
 -------------------
