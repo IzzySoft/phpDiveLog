@@ -94,10 +94,10 @@
  $t->set_var("item_data",$dive["airtemp"]);
  $t->parse("cond","condblock",TRUE);
  $t->set_var("item_name",lang("current").":");
- $t->set_var("item_data",$dive["current"]);
+ $t->set_var("item_data",ucfirst($dive["current"]));
  $t->parse("cond","condblock",TRUE);
  $t->set_var("item_name",lang("workload").":");
- $t->set_var("item_data",$dive["workload"]);
+ $t->set_var("item_data",ucfirst($dive["workload"]));
  $t->parse("cond","condblock",TRUE);
  #---------------------------[ Equipment ]---
  $t->set_var("item_name",lang("suit").":");
