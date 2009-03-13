@@ -113,6 +113,12 @@ and the description itself may contain links to further information. Both will
 normally open in a new browser window, unless the logbook owner explicitely
 defined it otherwise.
 
+[text]
+<img src='../templates/aqua/images/apdf.png' align='left' alt='PDF'>
+If PDF Support is available and enabled by the admin, you will find a PDF icon
+in the context navigation bar. This can be used to generate (and download) this
+dives information in PDF format.
+
 # ===========================================================================
 [title]
 Site Index
