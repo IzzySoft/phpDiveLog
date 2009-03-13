@@ -32,13 +32,14 @@
  include("inc/tab_setup.inc");
  $pdl->tabs->activate("sites");
  $pdl->tabs->parse();
+ $arrowheight = "height='9px'";
  if ($prev=$site["prev_site#"]) {
-   $t->set_var("nav_left",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?id=$prev","<img src='".$pdl->config->tpl_url."images/left.gif'>"));
+   $t->set_var("nav_left",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?id=$prev","<img src='".$pdl->config->tpl_url."images/left.gif' $arrowheight>"));
  } else {
    $t->set_var("nav_left","<img src='".$pdl->config->tpl_url."images/left-grey.gif'>");
  }
  if ($next=$site["next_site#"]) {
-   $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?id=$next","<img src='".$pdl->config->tpl_url."images/right.gif'>"));
+   $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?id=$next","<img src='".$pdl->config->tpl_url."images/right.gif' $arrowheight>"));
  } else {
    $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif'>");
  }

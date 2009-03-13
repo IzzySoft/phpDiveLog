@@ -19,13 +19,15 @@
 
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2"><!-- Navigation -->
 
+ <table class="pagetab" border="0" cellpadding="0" align="center" style="margin-top:7;min-width:400px;">
+  <tr><td style="width:25px;">{nav_left}</td><td align="center">{pages}</td><td align="right" style="width:25px;">{nav_right}</td></tr>
+ </table>
+
  <table class="outer" border="0" cellpadding="2" cellspacing="0" width="100%" style="margin-top:7"><tr>
-  <td class="tdl" align="left" width="12">{nav_left}</td>
   <td align="left" class="td_blank" style="vertical-align:middle;width:12em;">{divenr}: {dive#}</td>
   <th class="big" style="vertical-align:middle;"><img src="{tpl_dir}images/dive_flag1.gif" width="23" height="15" alt="Globe" valign="middle" style="margin-left:20;">
     <span style="margin-right:20;vertical-align:middle;">{location} / {place}</span></td>
   <td align="right" class="td_blank" style="vertical-align:middle;width:12em;">{date} {time}</td>
-  <td class="tdl" align="right" width="12">{nav_right}</td>
  </tr></table>
 
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
@@ -126,6 +128,10 @@
    </td></tr>
 </table>
 <!-- END fotoblock -->
+
+<table class="pagetab" border="0" cellpadding="0" align="center" style="margin-top:7;min-width:400px;">
+ <tr><td style="width:25px;">{nav_left}</td><td align="center">{pages}</td><td align="right" style="width:25px;">{nav_right}</td></tr>
+</table>
 
 </td></tr>
 </table>

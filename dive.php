@@ -48,13 +48,15 @@
  $dive = $pdl->db->get_dive($nr);
 
  #=============================================[ set up the navigation bar ]===
+ $arrowheight = "height='9px'";
+ if (K_PATH_MAIN!='') $t->set_var("pages",$pdl->link->linkurl("dive_pdf.php?nr=$nr","<img src='".$pdl->config->base_url."templates/aqua/images/apdf.png' width='16' height='16' title='".lang("export_dive_pdf")."' alt='PDF'>"));
  if (isset($dive["prev_dive#"])) {
-   $t->set_var("nav_left",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?nr=".$dive["prev_dive#"],"<img src='".$pdl->config->tpl_url."images/left.gif'>"));
+   $t->set_var("nav_left",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?nr=".$dive["prev_dive#"],"<img src='".$pdl->config->tpl_url."images/left.gif' $arrowheight>"));
  } else {
    $t->set_var("nav_left","<img src='".$pdl->config->tpl_url."images/left-grey.gif'>");
  }
  if (isset($dive["next_dive#"])) {
-   $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?nr=".$dive["next_dive#"],"<img src='".$pdl->config->tpl_url."images/right.gif'>"));
+   $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?nr=".$dive["next_dive#"],"<img src='".$pdl->config->tpl_url."images/right.gif' $arrowheight>"));
  } else {
    $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif'>");
  }

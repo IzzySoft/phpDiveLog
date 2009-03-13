@@ -9,6 +9,7 @@
  # ------------------------------------------------------------------------- #
  # Initializing the PDF engine                                               #
  #############################################################################
+ # $Id$
 
 require_once(dirname(__FILE__)."/includes.inc");
 
@@ -21,11 +22,7 @@ function config_value($varname,$regexp,$default,$neg=FALSE) {
 
 #===============================================================[ Settings ]===
 #---------------------------------------------------[ TCPDF API available? ]---
-if (strrpos($tcpdf_path,'/')!=strlen($tcpdf_path)) $tcpdf_path .= "/";
-if (file_exists($tcpdf_path."tcpdf.php")) define ('K_PATH_MAIN',$tcpdf_path);
-elseif (file_exists("/usr/share/tcpdf/tcpdf.php")) define ('K_PATH_MAIN',"/usr/share/tcpdf/tcpdf.php");
-elseif (file_exists("/usr/local/share/tcpdf/tcpdf.php")) define ('K_PATH_MAIN',"/usr/local/share/tcpdf/tcpdf.php");
-else {
+if (K_PATH_MAIN == '') {
   include(dirname(__FILE__)."/header.inc");
   $pdl->common->alert(lang("pdf_api_not_found"));
   include(dirname(__FILE__)."/footer.inc");

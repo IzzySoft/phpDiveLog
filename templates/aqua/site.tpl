@@ -18,11 +18,14 @@
 </td><td><img src="{tpl_dir}images/logo.gif" height="23" align="right">
 </td></tr><tr class="td_transp"><td class="td_transp" colspan="2">
 
+<table class="pagetab" border="0" cellpadding="0" align="center" style="margin-top:7;min-width:400px;">
+ <tr><td style="width:25px;">{nav_left}</td><td align="center">{pages}</td><td align="right" style="width:25px;">{nav_right}</td></tr>
+</table>
+
 <table class="outer" cellspacing="0" cellpadding="2" align="center" style="margin-top:7;">
- <tr><td>{nav_left}</td>
-     <th class="head" colspan="5">{maplink}<IMG SRC="{tpl_dir}images/globe{anim}.gif" width="15" height="15" alt="Location">{mapunlink} {loc}: {place}</th>
-     <td align="right">{nav_right}</td>
-     </tr>
+ <tr>
+     <th class="head" colspan="7">{maplink}<IMG SRC="{tpl_dir}images/globe{anim}.gif" width="15" height="15" alt="Location">{mapunlink} {loc}: {place}</th>
+ </tr>
  <tr>
   <th>&nbsp;</th>
   <th style="text-align:right">{lat_name}</th> <td>{latitude}</td>
@@ -58,5 +61,9 @@
    </tr></table></td></tr>
 </table>
 <!-- END fotoblock -->
+
+<table class="pagetab" border="0" cellpadding="0" align="center" style="margin-top:7;min-width:400px;">
+ <tr><td style="width:25px;">{nav_left}</td><td align="center">{pages}</td><td align="right" style="width:25px;">{nav_right}</td></tr>
+</table>
 
 </td></tr></table>

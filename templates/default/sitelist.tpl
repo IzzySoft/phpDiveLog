@@ -16,12 +16,6 @@
 </table>
 
 </td></tr><tr class="td_transp"><td class="td_transp">
- <!--table border="0" cellpadding="2" width="100%" style="background-color:transparent;"><tr>
-  <td class="td_transp" align="left">{nav_left}</td>
-  <td class="td_transp" align="right">{nav_right}</td>
- </tr></table-->
-
-</td></tr><tr class="td_transp"><td class="td_transp">
 
 <table class="pagetab" border="0" cellpadding="0" align="center" style="margin-top:7;min-width:400px;">
  <tr><td style="width:25px;">{nav_left}</td><td align="center">{pages}</td><td align="right" style="width:25px;">{nav_right}</td></tr>
