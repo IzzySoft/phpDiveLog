@@ -33,6 +33,21 @@
  $pdl->tabs->activate("sites");
  $pdl->tabs->parse();
  $arrowheight = "height='9px'";
+
+ #----------------------------------------------[ Context Navigation Setup ]---
+ $ctxnav = "";
+ $ctx_iconstyle = "style='margin-top:1px;'";
+ //if (K_PATH_MAIN!='') $ctxnav .= " ".$pdl->link->linkurl("dive_pdf.php?nr=$nr","<img src='".$pdl->config->icons["pdf"]."' width='16' height='16' title='".lang("export_dive_pdf")."' alt='PDF' $ctx_iconstyle>");
+ if (!empty($site["loc"])) {
+   $arr = urlencode("location|eq|".$site["loc"]);
+   $ctxnav .= " ".$pdl->link->linkurl("index.php?where=$arr","<img src='".$pdl->config->icons["location"]."' width='16' height='16' title='".lang("dives_at_this_location")."' alt='Location' $ctx_iconstyle>");
+ }
+ if (!empty($site["place"])) {
+   $arr = urlencode("place|eq|".$site["place"]);
+   $ctxnav .= " ".$pdl->link->linkurl("index.php?where=$arr","<img src='".$pdl->config->icons["place"]."' width='16' height='16' title='".lang("dives_at_this_place")."' alt='Place' $ctx_iconstyle>");
+ }
+ $t->set_var("pages",trim($ctxnav));
+ #----------------------------------------------------------[ Back + Forth ]---
  if ($prev=$site["prev_site#"]) {
    $t->set_var("nav_left",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?id=$prev","<img src='".$pdl->config->tpl_url."images/left.gif' $arrowheight>"));
  } else {
