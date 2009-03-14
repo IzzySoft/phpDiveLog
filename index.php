@@ -19,6 +19,11 @@
  $start = $pdl->params->start;
  $end = $start + $pdl->config->display_limit;
 
+ if (isset($_REQUEST["where"])) {
+   $arr = explode("|",$_REQUEST["where"]);
+   $where = array("column"=>$arr[0],"compare"=>$arr[1],"value"=>$arr[2]);
+ }
+
  $t = new Template($pdl->config->tpl_path);
  $t->set_file(array("template"=>"logbook.tpl"));
  $t->set_block("template","itemblock","item");
@@ -31,7 +36,7 @@
    $sort  = $pdl->config->logbook_default_sort;
    $order = $pdl->config->logbook_default_order;
  }
- $dives = $pdl->db->get_dives($start,$pdl->config->display_limit,FALSE,$sort,$order);
+ $dives = $pdl->db->get_dives($start,$pdl->config->display_limit,FALSE,$sort,$order,$where);
  $max   = count($dives);
  $records = $pdl->db->dives;
 

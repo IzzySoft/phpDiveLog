@@ -226,5 +226,35 @@
      }
    }
 
+   /** Restrict data to a subset
+    * @method where
+    * @param string column name of the column to restrict by
+    * @param string compare how to compare. Valid strings are: "lt", "gt", "eq", "ne"
+    * @param string value to restrict by
+    * @param optional string type datatype (either "str" (default) or "num")
+    * @version "le" and "ge" are not yet implemented.
+    */
+   function where ($column,$compare,$value,$type="str") {
+     if ( !in_array($compare,array('lt','gt','ne','eq','le','ge')) ) return;
+     if ($type=="num") $f = 'bccomp';
+     $dc = count($this->data);
+     for ($i=0;$i<$dc;++$i) {
+       switch($compare) {
+         case "eq"  : if ($this->data[$i][$column]==$value) $data[] = $this->data[$i]; break;
+         case "lt"  : if ($type=="num") { if (bccomp($value,$this->data[i][$column],2)>0) $data[] = $this->data[$i]; }
+	              else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))>0) $data[] = $this->data[$i]; }
+		      break;
+	 case "gt"  : if ($type=="num") { if (bccomp($value,$this->data[i][$column],2)<0) $data[] = $this->data[$i]; }
+	              else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))<0) $data[] = $this->data[$i]; }
+		      break;
+	 case "le"  : break;
+	 case "ge"  : break;
+	 case "ne" : if ($this->data[$column]!=$value) $data[] = $this->data[$i]; break;
+       }
+     }
+     unset($this->data);
+     $this->data = $data;
+   }
+
  } // end class csv
 ?>

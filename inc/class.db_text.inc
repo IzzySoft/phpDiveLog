@@ -121,8 +121,11 @@
     * @method read_divedata
     * @param optional string sort column to sort by
     * @param optional string order sort order (asc or desc)
+    * @param optional array where restricts the result set.
+    *        Array structure: fields column, compare, value. All strings.
+    *        compare must be one of "&lt;", "&gt;", "=", "!=", "&lt;&gt;", "&lt;=", "&gt;="
     */
-   function read_divedata($sort="",$order="") {
+   function read_divedata($sort="",$order="",$where="") {
      GLOBAL $pdl;
      if (isset($this->dives)) return; // prevent multiple reads
      switch ($pdl->config->db_type) {
@@ -147,6 +150,9 @@
 		  $this->divedat2num($csv,$sort);
 	          break;
            }
+	   if ( is_array($where) && ( isset($where["column"]) && isset($where["compare"]) && isset($where["value"]) ) ) {
+	     $csv->where($where["column"],$where["compare"],$where["value"]);
+	   }
            if (!empty($sort)) {
              $csv->sort($sort,$order,$type);
            }
@@ -214,10 +220,13 @@
     *  record set (FALSE), defaults to FALSE
     * @param optional string sort column to sort by
     * @param optional string order sort order (asc or desc)
+    * @param optional array where restricts the result set.
+    *        Array structure: fields column, compare, value. All strings.
+    *        compare must be one of "lt", "gt", "eq", "ne"
     * @return array divedata (either array of dive records or single record)
     */
-   function get_dives($start="",$end="",$id=FALSE,$sort="",$order="") {
-     $this->read_divedata($sort,$order);
+   function get_dives($start="",$end="",$id=FALSE,$sort="",$order="",$where="") {
+     $this->read_divedata($sort,$order,$where);
      if ($start!=="") {
        if ($id) { // identify by dive#
          if ($end!=="") { // range of records

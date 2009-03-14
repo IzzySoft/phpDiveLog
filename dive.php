@@ -49,7 +49,24 @@
 
  #=============================================[ set up the navigation bar ]===
  $arrowheight = "height='9px'";
- if (K_PATH_MAIN!='') $t->set_var("pages",$pdl->link->linkurl("dive_pdf.php?nr=$nr","<img src='".$pdl->config->base_url."templates/aqua/images/apdf.png' width='16' height='16' title='".lang("export_dive_pdf")."' alt='PDF'>"));
+ #----------------------------------------------[ Context Navigation Setup ]---
+ $ctxnav = "";
+ $ctx_iconstyle = "style='margin-top:1px;'";
+ if (K_PATH_MAIN!='') $ctxnav .= " ".$pdl->link->linkurl("dive_pdf.php?nr=$nr","<img src='".$pdl->config->icons["pdf"]."' width='16' height='16' title='".lang("export_dive_pdf")."' alt='PDF' $ctx_iconstyle>");
+ if (!empty($dive["buddy"])) {
+   $arr = urlencode("buddy|eq|".$dive["buddy"]);
+   $ctxnav .= " ".$pdl->link->linkurl("index.php?where=$arr","<img src='".$pdl->config->icons["buddy"]."' width='16' height='16' title='".lang("dives_with_this_buddy")."' alt='Buddy' $ctx_iconstyle>");
+ }
+ if (!empty($dive["location"])) {
+   $arr = urlencode("location|eq|".$dive["location"]);
+   $ctxnav .= " ".$pdl->link->linkurl("index.php?where=$arr","<img src='".$pdl->config->icons["location"]."' width='16' height='16' title='".lang("dives_at_this_location")."' alt='Location' $ctx_iconstyle>");
+ }
+ if (!empty($dive["place"])) {
+   $arr = urlencode("place|eq|".$dive["place"]);
+   $ctxnav .= " ".$pdl->link->linkurl("index.php?where=$arr","<img src='".$pdl->config->icons["place"]."' width='16' height='16' title='".lang("dives_at_this_place")."' alt='Place' $ctx_iconstyle>");
+ }
+ $t->set_var("pages",trim($ctxnav));
+ #----------------------------------------------------------[ Back + Forth ]---
  if (isset($dive["prev_dive#"])) {
    $t->set_var("nav_left",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?nr=".$dive["prev_dive#"],"<img src='".$pdl->config->tpl_url."images/left.gif' $arrowheight>"));
  } else {

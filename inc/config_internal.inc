@@ -140,6 +140,12 @@
    unset($item);
  }
 
+ #================================================================[ Icons ]===
+ $pdl->config->icons["pdf"]      = $pdl->config->base_url."templates/aqua/images/apdf.png";
+ $pdl->config->icons["buddy"]    = $pdl->config->base_url."templates/aqua/images/buddy.png";
+ $pdl->config->icons["location"] = $pdl->config->base_url."templates/aqua/images/fingerpost.gif";
+ $pdl->config->icons["place"]    = $pdl->config->base_url."templates/aqua/images/anchor.png";
+
  #=============================================================[ clean up ]===
  unset($database,$display_limit,$pix_per_row,$allow_override,$enable_index,
        $uconf,$allowed,$ac,$pwdfile,$transfer_dir,$values_in_statgraphs,
