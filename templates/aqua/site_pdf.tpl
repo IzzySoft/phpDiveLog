@@ -39,10 +39,10 @@
 <!-- BEGIN topleftblock -->
      <TD WIDTH="32" STYLE="font-size:12px;" ALIGN="right">&nbsp;</TD>
      <TD WIDTH="264" STYLE="font-size:10px;"><DIV ALIGN="center"><B>{location} / {place}</B></DIV></TD>
-     <TD WIDTH="32" STYLE="font-size:12px;" ALIGN="right"><B>#{id}</B>&nbsp;</TD>
+     <TD WIDTH="32" STYLE="font-size:10px;" ALIGN="right"><B>#{id}</B>&nbsp;</TD>
 <!-- END topleftblock -->
 <!-- BEGIN toprightblock -->
-     <TD WIDTH="32" STYLE="font-size:12px;">&nbsp;<B>#{id}</B></TD>
+     <TD WIDTH="32" STYLE="font-size:10px;">&nbsp;<B>#{id}</B></TD>
      <TD WIDTH="296" STYLE="font-size:10px;"><DIV ALIGN="center"><B>{location} / {place}</B></DIV></TD>
      <TD WIDTH="32" STYLE="font-size:12px;" ALIGN="right">&nbsp;</TD>
 <!-- END toprightblock -->
@@ -51,11 +51,11 @@
 
  <TR STYLE="font-size:1px;"><TD></TD></TR><!-- Spacer for TCPDF -->
 
- <!--TR><TH COLSPAN="2" BGCOLOR="#eeeeee"><DIV ALIGN="center"><B>{cond_name}</B></DIV></TH></TR-->
+ <TR><TH COLSPAN="2" BGCOLOR="#eeeeee"><DIV ALIGN="center"><B>{status}</B></DIV></TH></TR>
  <TR><!-- Second row: Details -->
   <TD WIDTH="328"><TABLE BORDER="0" WIDTH="328"><!-- Left side: Data -->
 <!-- BEGIN sumblock -->
-   <TR><TD>{item_name}</TD><TD>{item_data}</TD></TR>
+   <TR><TD ALIGN="right" WIDTH="162">{item_name}</TD><TD WIDTH="4">&nbsp;</TD><TD WIDTH="162">{item_data}</TD></TR>
 <!-- END sumblock -->
    </TABLE></TD>
  </TR>
@@ -65,7 +65,7 @@
  <TR><!-- 3rd row: Notes -->
   <TD COLSPAN="2" WIDTH="328"><TABLE BORDER="0" WIDTH="328">
    <TR><TH WIDTH="328" BGCOLOR="#eeeeee"><DIV ALIGN="center"><B>{notes_name}</B></DIV></TH></TR>
-   <TR><TD WIDTH="328" HEIGHT="80" STYLE="text-align:justify;">{notes_text}</TD></TR>
+   <TR><TD WIDTH="328" HEIGHT="250" STYLE="text-align:justify;">{notes_text}</TD></TR>
   </TABLE></TD>
  </TR>
 

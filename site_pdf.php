@@ -82,7 +82,7 @@ if (PAGE_GUTTER_LEFT) {
 }
 
 #----------------------------------------------------------[ Setup Summary ]---
-#$t->set_var("cond_name",lang("conditions"));
+$t->set_var("status",lang("status"));
 $t->set_var("item_name",lang("latitude").":");
 $t->set_var("item_data",$site["latitude"]);
 $t->parse("sum","sumblock");
