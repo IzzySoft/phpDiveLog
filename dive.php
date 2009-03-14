@@ -48,7 +48,7 @@
  $dive = $pdl->db->get_dive($nr);
 
  #=============================================[ set up the navigation bar ]===
- $arrowheight = "height='9px'";
+ $arrowheight = "height='9'";
  #----------------------------------------------[ Context Navigation Setup ]---
  $ctxnav = "";
  $ctx_iconstyle = "style='margin-top:1px;'";

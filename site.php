@@ -32,7 +32,7 @@
  include("inc/tab_setup.inc");
  $pdl->tabs->activate("sites");
  $pdl->tabs->parse();
- $arrowheight = "height='9px'";
+ $arrowheight = "height='9'";
 
  #----------------------------------------------[ Context Navigation Setup ]---
  $ctxnav = "";
