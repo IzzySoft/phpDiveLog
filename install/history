@@ -10,7 +10,7 @@ v0.3.5
 + added support for "logbook page export to PDF" (requires TCPDF to be installed)
 + separated navigation buttons on single dive/site page to own "section" which in
   the future will also contain page-related links (already started with the dive
-  PDF export on single dive pages, if TCPDF is available)
+  PDF export on single dive/site pages, if TCPDF is available)
 + added possibility to disable PDF support
 - removed installation instructions from the online help system (pretty useless
   there: When you can read them, the installation is already done). Please
