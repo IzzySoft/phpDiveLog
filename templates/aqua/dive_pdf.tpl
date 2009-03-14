@@ -37,17 +37,18 @@
  <TR><!-- First row: Header -->
   <TD COLSPAN="2"><TABLE WIDTH="328" STYLE="border:1px solid black;padding-bottom:10px;"><TR><TD><TABLE WIDTH="328" BORDER="0"><TR>
 <!-- BEGIN topleftblock -->
-     <TD HEIGHT="25px" WIDTH="72" STYLE="font-size:8px;"> {date}<BR/> {time}</TD>
-     <TD WIDTH="184" STYLE="font-size:10px;"><DIV ALIGN="center"><B>{location} / {place}</B></DIV></TD>
-     <TD WIDTH="72" STYLE="font-size:12px;" ALIGN="right"><B>#{dive#}</B>&nbsp;</TD>
+     <TD WIDTH="32" STYLE="font-size:10px;">&nbsp;</TD>
+     <TD WIDTH="264" STYLE="font-size:10px;"><DIV ALIGN="center"><B>{location} / {place}</B></DIV></TD>
+     <TD WIDTH="32" STYLE="font-size:10px;" ALIGN="right"><B>#{dive#}</B>&nbsp;</TD>
 <!-- END topleftblock -->
 <!-- BEGIN toprightblock -->
-     <TD WIDTH="72" STYLE="font-size:12px;">&nbsp;<B>#{dive#}</B></TD>
-     <TD WIDTH="184" STYLE="font-size:10px;"><DIV ALIGN="center"><B>{location} / {place}</B></DIV></TD>
-     <TD HEIGHT="25px" WIDTH="72" ALIGN="right" STYLE="font-size:8px;">{date} <BR/>{time}&nbsp;</TD>
+     <TD WIDTH="32" STYLE="font-size:10px;">&nbsp;<B>#{dive#}</B></TD>
+     <TD WIDTH="264" STYLE="font-size:10px;"><DIV ALIGN="center"><B>{location} / {place}</B></DIV></TD>
+     <TD WIDTH="32" STYLE="font-size:12px;">&nbsp;</TD>
 <!-- END toprightblock -->
     </TR></TABLE></TD></TR></TABLE></TD>
  </TR>
+ <TR><TD COLSPAN="2"><DIV ALIGN="center">{date} {time}</DIV></TD></TR>
 
  <TR STYLE="font-size:1px;"><TD></TD></TR><!-- Spacer for TCPDF -->
 
@@ -86,7 +87,7 @@
  <TR><!-- 4th row: Notes -->
   <TD COLSPAN="2" WIDTH="328"><TABLE BORDER="0" WIDTH="328">
    <TR><TH WIDTH="328" BGCOLOR="#eeeeee"><DIV ALIGN="center"><B>{notes_name}</B></DIV></TH></TR>
-   <TR><TD WIDTH="328" HEIGHT="80" STYLE="text-align:justify;">{notes_text}</TD></TR>
+   <TR><TD WIDTH="328" HEIGHT="65" STYLE="text-align:justify;">{notes_text}</TD></TR>
   </TABLE></TD>
  </TR>
 

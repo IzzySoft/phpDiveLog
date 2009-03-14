@@ -67,7 +67,15 @@ class pdlPDF extends TCPDF {
     GLOBAL $pdl;
     $this->SetY(-10); // Position at 1.0 cm from bottom
     $this->SetFont('helvetica', 'I', 6); // Set font
-    $this->Cell(0, 10, "Created by phpDiveLog v".$pdl->config->version, 0, 0, 'C');
+    $this->Cell(0, 10, "Created by phpDiveLog v".$pdl->config->version, 0, 0, 'C', 0, "http://projects.izzysoft.de/trac/phpdivelog/");
+  }
+  /** Override the Error method to log its message according to PDL settings
+   * @method Error
+   * @param string error message
+   */
+  public function Error($msg) {
+    trigger_error("TCPDF ERROR: $msg",E_USER_ERROR);
+    die('<strong>TCPDF ERROR: </strong> A serious error forced this cript to be halted. Details can be found in the error log.');
   }
 }
 
