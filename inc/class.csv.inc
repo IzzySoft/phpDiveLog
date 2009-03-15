@@ -235,21 +235,22 @@
     * @version "le" and "ge" are not yet implemented.
     */
    function where ($column,$compare,$value,$type="str") {
-     if ( !in_array($compare,array('lt','gt','ne','eq','le','ge')) ) return;
+     if ( !in_array($compare,array('lt','gt','ne','eq','le','ge','~')) ) return;
      if ($type=="num") $f = 'bccomp';
      $dc = count($this->data);
      for ($i=0;$i<$dc;++$i) {
        switch($compare) {
          case "eq"  : if ($this->data[$i][$column]==$value) $data[] = $this->data[$i]; break;
-         case "lt"  : if ($type=="num") { if (bccomp($value,$this->data[i][$column],2)>0) $data[] = $this->data[$i]; }
+         case "lt"  : if ($type=="num") { $val = $this->data[$i][$column]; if (bccomp($value,floatval($val),2)>0) $data[] = $this->data[$i]; }
 	              else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))>0) $data[] = $this->data[$i]; }
 		      break;
-	 case "gt"  : if ($type=="num") { if (bccomp($value,$this->data[i][$column],2)<0) $data[] = $this->data[$i]; }
+	 case "gt"  : if ($type=="num") { $val = $this->data[$i][$column]; if (bccomp($value,floatval($val),2)<0) $data[] = $this->data[$i]; }
 	              else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))<0) $data[] = $this->data[$i]; }
 		      break;
 	 case "le"  : break;
 	 case "ge"  : break;
-	 case "ne" : if ($this->data[$column]!=$value) $data[] = $this->data[$i]; break;
+	 case "ne"  : if ($this->data[$column]!=$value) $data[] = $this->data[$i]; break;
+         case "~"   : if ( preg_match('|'.str_replace("%",".*",$value).'|i',$this->data[$i][$column]) ) $data[] = $this->data[$i]; break;
        }
      }
      unset($this->data);

@@ -152,7 +152,12 @@
            }
 	   if ( is_array($where) ) {
              $ac = count($where);
-             for ($i=0;$i<$ac;++$i) $csv->where($where[$i]["column"],$where[$i]["compare"],$where[$i]["value"]);
+             for ($i=0;$i<$ac;++$i) {
+               if ( in_array($where[$i]["column"],array("time","dive#","site_id","depth","divetime","tank#","tank_id","visibility","watertemp","airtemp","suit_id","weight","rating")) )
+                 $csv->where($where[$i]["column"],$where[$i]["compare"],$where[$i]["value"],"num");
+               else
+                 $csv->where($where[$i]["column"],$where[$i]["compare"],$where[$i]["value"]);
+             }
 	   }
            if (!empty($sort)) {
              $csv->sort($sort,$order,$type);
