@@ -55,15 +55,15 @@
  if (K_PATH_MAIN!='') $ctxnav .= " ".$pdl->link->linkurl("dive_pdf.php?nr=$nr","<img src='".$pdl->config->icons["pdf"]."' width='16' height='16' title='".lang("export_dive_pdf")."' alt='PDF' $ctx_iconstyle>");
  if (!empty($dive["buddy"])) {
    $arr = urlencode("buddy|eq|".$dive["buddy"]);
-   $ctxnav .= " ".$pdl->link->linkurl("index.php?where=$arr","<img src='".$pdl->config->icons["buddy"]."' width='16' height='16' title='".lang("dives_with_this_buddy")."' alt='Buddy' $ctx_iconstyle>");
+   $ctxnav .= " ".$pdl->link->linkurl("index.php?filter=$arr","<img src='".$pdl->config->icons["buddy"]."' width='16' height='16' title='".lang("dives_with_this_buddy")."' alt='Buddy' $ctx_iconstyle>");
  }
  if (!empty($dive["location"])) {
    $arr = urlencode("location|eq|".$dive["location"]);
-   $ctxnav .= " ".$pdl->link->linkurl("index.php?where=$arr","<img src='".$pdl->config->icons["location"]."' width='16' height='16' title='".lang("dives_at_this_location")."' alt='Location' $ctx_iconstyle>");
+   $ctxnav .= " ".$pdl->link->linkurl("index.php?filter=$arr","<img src='".$pdl->config->icons["location"]."' width='16' height='16' title='".lang("dives_at_this_location")."' alt='Location' $ctx_iconstyle>");
  }
  if (!empty($dive["place"])) {
    $arr = urlencode("place|eq|".$dive["place"]);
-   $ctxnav .= " ".$pdl->link->linkurl("index.php?where=$arr","<img src='".$pdl->config->icons["place"]."' width='16' height='16' title='".lang("dives_at_this_place")."' alt='Place' $ctx_iconstyle>");
+   $ctxnav .= " ".$pdl->link->linkurl("index.php?filter=$arr","<img src='".$pdl->config->icons["place"]."' width='16' height='16' title='".lang("dives_at_this_place")."' alt='Place' $ctx_iconstyle>");
  }
  $t->set_var("pages",trim($ctxnav));
  #----------------------------------------------------------[ Back + Forth ]---

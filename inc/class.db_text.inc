@@ -121,7 +121,7 @@
     * @method read_divedata
     * @param optional string sort column to sort by
     * @param optional string order sort order (asc or desc)
-    * @param optional array where restricts the result set.
+    * @param optional array [0..n] where restricts the result set.
     *        Array structure: fields column, compare, value. All strings.
     *        compare must be one of "&lt;", "&gt;", "=", "!=", "&lt;&gt;", "&lt;=", "&gt;="
     */
@@ -150,8 +150,9 @@
 		  $this->divedat2num($csv,$sort);
 	          break;
            }
-	   if ( is_array($where) && ( isset($where["column"]) && isset($where["compare"]) && isset($where["value"]) ) ) {
-	     $csv->where($where["column"],$where["compare"],$where["value"]);
+	   if ( is_array($where) ) {
+             $ac = count($where);
+             for ($i=0;$i<$ac;++$i) $csv->where($where[$i]["column"],$where[$i]["compare"],$where[$i]["value"]);
 	   }
            if (!empty($sort)) {
              $csv->sort($sort,$order,$type);
@@ -220,7 +221,7 @@
     *  record set (FALSE), defaults to FALSE
     * @param optional string sort column to sort by
     * @param optional string order sort order (asc or desc)
-    * @param optional array where restricts the result set.
+    * @param optional array [0..n] where restricts the result set.
     *        Array structure: fields column, compare, value. All strings.
     *        compare must be one of "lt", "gt", "eq", "ne"
     * @return array divedata (either array of dive records or single record)

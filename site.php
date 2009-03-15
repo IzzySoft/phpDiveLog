@@ -40,11 +40,11 @@
  if (K_PATH_MAIN!='') $ctxnav .= " ".$pdl->link->linkurl("site_pdf.php?nr=$id","<img src='".$pdl->config->icons["pdf"]."' width='16' height='16' title='".lang("export_dive_pdf")."' alt='PDF' $ctx_iconstyle>");
  if (!empty($site["loc"])) {
    $arr = urlencode("location|eq|".$site["loc"]);
-   $ctxnav .= " ".$pdl->link->linkurl("index.php?where=$arr","<img src='".$pdl->config->icons["location"]."' width='16' height='16' title='".lang("dives_at_this_location")."' alt='Location' $ctx_iconstyle>");
+   $ctxnav .= " ".$pdl->link->linkurl("index.php?filter=$arr","<img src='".$pdl->config->icons["location"]."' width='16' height='16' title='".lang("dives_at_this_location")."' alt='Location' $ctx_iconstyle>");
  }
  if (!empty($site["place"])) {
    $arr = urlencode("place|eq|".$site["place"]);
-   $ctxnav .= " ".$pdl->link->linkurl("index.php?where=$arr","<img src='".$pdl->config->icons["place"]."' width='16' height='16' title='".lang("dives_at_this_place")."' alt='Place' $ctx_iconstyle>");
+   $ctxnav .= " ".$pdl->link->linkurl("index.php?filter=$arr","<img src='".$pdl->config->icons["place"]."' width='16' height='16' title='".lang("dives_at_this_place")."' alt='Place' $ctx_iconstyle>");
  }
  $t->set_var("pages",trim($ctxnav));
  #----------------------------------------------------------[ Back + Forth ]---
