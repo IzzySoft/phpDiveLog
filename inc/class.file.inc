@@ -204,12 +204,16 @@
     * @class file
     * @method getProfPic
     * @param integer dive# Dive# to retrieve the pic for
+    * @param boolean URL return the URL (TRUE, default) or the PATH (FALSE)?
     * @return string filename (empty if none found)
     */
-   function getProfPic($id) {
+   function getProfPic($id,$url=TRUE) {
      GLOBAL $pdl;
      $filename = $pdl->config->user_path."images/".$this->mkADLprefix($id,"dive")."_profile.png";
-     if ( file_exists($filename) ) return $filename;
+     if ( file_exists($filename) ) {
+       if ($url) return $pdl->config->user_url."images/".$this->mkADLprefix($id,"dive")."_profile.png";
+       return $filename;
+     }
      return "";
    }
 
