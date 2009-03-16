@@ -102,8 +102,10 @@ else $starwid = $dive["rating"]*8;
 $t->set_var("item_data","<img src='".$pdl->config->base_url."templates/aqua/images/".$dive["rating"]."star.gif"."' alt='Rating:".$dive["rating"]."' HEIGHT='8px' WIDTH='${starwid}px' />");
 $t->parse("sum","sumblock",TRUE);
 $nrpad = str_pad($nr,5,"0",STR_PAD_LEFT);
-$profilepng = $pdl->config->user_url . "profiles/dive${nrpad}_profile.png";
-$t->set_var("prof_img",$profilepng);
+if (file_exists($pdl->config->user_path . "profiles/dive${nrpad}_profile.png"))
+  $t->set_var("prof_img",$pdl->config->user_url . "profiles/dive${nrpad}_profile.png");
+else
+  $t->set_var("prof_img",$pdl->config->base_url."templates/aqua/images/_blank.png");
 
 #-------------------------------------------------------[ Setup Conditions ]---
 $t->set_var("item_name",lang("visibility").":");
