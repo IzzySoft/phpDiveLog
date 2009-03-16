@@ -87,7 +87,7 @@
       if (substr($string,2,1)=="@") {
         $root .= $this->dir->diverroot.substr($string,3,$pos-2);
       } else {
-        $root .= $pdl->config->user_url;
+        $root = $pdl->config->user_url;
       }
       switch(substr($string,1,1)) {
         case "d" : $root.=$this->dir->divepix; break;
