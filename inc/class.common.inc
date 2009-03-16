@@ -131,14 +131,14 @@
       }
       if ( preg_match_all("/\[img\].+\[\/img\]/i",$line,$matches) ) {
         for ($i=0;$i<count($matches[0]);++$i) {
-          $link  = $this->dirReplace( eregi_replace("\[img\]([^|]+)\|{0,1}(.*)\[\/img\]","\\1",$matches[0][$i]) );
+          $link  = $this->dirReplace( eregi_replace("\[img\]([^|]+)\|{0,1}(.*)\[\/img\]","\\1",$matches[0][$i]), TRUE );
           $sub  = eregi_replace("\[img\]([^|]+)\|{0,1}(.*)\[\/img\]","<SPAN CLASS='thumbnail-left'><IMG ALIGN='center' SRC='$link'><BR>\\2</SPAN>",$matches[0][$i]);
           $line = str_replace($matches[0][$i],$sub,$line);
         }
       }
       if ( preg_match_all("/\[imgr\].+\[\/imgr\]/i",$line,$matches) ) {
         for ($i=0;$i<count($matches[0]);++$i) {
-          $link  = $this->dirReplace( eregi_replace("\[imgr\]([^|]+)\|{0,1}(.*)\[\/imgr\]","\\1",$matches[0][$i]) );
+          $link  = $this->dirReplace( eregi_replace("\[imgr\]([^|]+)\|{0,1}(.*)\[\/imgr\]","\\1",$matches[0][$i]), TRUE );
           $sub  = eregi_replace("\[imgr\]([^|]+)\|{0,1}(.*)\[\/imgr\]","<SPAN CLASS='thumbnail-right'><IMG ALIGN='center' SRC='$link'><BR>\\2</SPAN>",$matches[0][$i]);
           $line = str_replace($matches[0][$i],$sub,$line);
         }
@@ -146,8 +146,8 @@
       $line = eregi_replace("\[imgr\](.*)\[\/img\]","<IMG ALIGN=\"right\" SRC=\"\\1\">",$line);
       if ( preg_match_all("/\[url\].+\[\/url\]/i",$line,$matches) ) {
         for ($i=0;$i<count($matches[0]);++$i) {
-          $link  = $this->dirReplace( eregi_replace("\[url\]([^|]+)\|{0,1}(.*)\[\/url\]","\\1",$matches[0][$i]) );
-          $text  = $this->dirReplace( eregi_replace("\[url\]([^|]+)\|{0,1}(.*)\[\/url\]","\\2",$matches[0][$i]) );
+          $link  = $this->dirReplace( eregi_replace("\[url\]([^|]+)\|{0,1}(.*)\[\/url\]","\\1",$matches[0][$i]), TRUE );
+          $text  = $this->dirReplace( eregi_replace("\[url\]([^|]+)\|{0,1}(.*)\[\/url\]","\\2",$matches[0][$i]), TRUE );
 	  if (empty($text)) $text = $link;
           $sub  = eregi_replace("\[url\]([^|]+)\|{0,1}(.*)\[\/url\]","<A HREF='$link' TARGET='_blank'>$text</A>",$matches[0][$i]);
           $line = str_replace($matches[0][$i],$sub,$line);
