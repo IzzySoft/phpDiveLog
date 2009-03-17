@@ -104,11 +104,13 @@ $t->parse("sum","sumblock",TRUE);
 $nrpad = str_pad($nr,5,"0",STR_PAD_LEFT);
 if (file_exists($pdl->config->user_path . "profiles/dive${nrpad}_profile.png"))
   $t->set_var("prof_img",$pdl->config->user_url . "profiles/dive${nrpad}_profile.png");
-else {
-  if ( strlen($prof_img=$pdl->file->getProfPic($nr)) )
-    $t->set_var("prof_img",$prof_img);
-  else
-    $t->set_var("prof_img",$pdl->config->base_url."templates/aqua/images/_blank.png");
+elseif ( strlen($prof_img=$pdl->file->getProfPic($nr)) ) {
+  $t->set_var("prof_img",$prof_img);
+} else {
+  switch (PDF_NO_PROFILE) {
+    case "dummy" : $t->set_var("prof_img",$pdl->config->base_url."templates/aqua/images/dummy_profile.png"); break;
+    default      : $t->set_var("prof_img",$pdl->config->base_url."templates/aqua/images/_blank.png");
+  }
 }
 
 #-------------------------------------------------------[ Setup Conditions ]---

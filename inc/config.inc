@@ -85,6 +85,8 @@
  $pdf_page_format = "A5";           # paper size: A0..5, B0..5, or LETTER
  $pdf_page_orientation = "P";       # (P)ortrait or (L)andscape. Recommended
                                     # combinations: A5+P, A4+L
+ $pdf_no_profile = "dummy";         # what to use if we have no profile: "dummy"
+                                    # for a dummy profile, "blank" for nothing
  $pdf_with_fotos = TRUE;            # include photos in the PDF files? URL
                                     # override: pdfwithfotos=0|1
  $pdf_pageno_from_diveno = TRUE;    # use the dive# as page# to calculate gutter?

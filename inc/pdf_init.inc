@@ -15,6 +15,7 @@ require_once(dirname(__FILE__)."/includes.inc");
 
 #===========================================================[ Helper funcs ]===
 function config_value($varname,$regexp,$default,$neg=FALSE) {
+  GLOBAL ${$varname};
   if ( $neg ) { if ( isset(${varname}) && preg_match($regexp,${$varname}) ) return ${$varname}; }
   elseif (! (!isset(${$varname}) || preg_match($regexp,${$varname})) ) return ${$varname};
   return $default;
@@ -51,6 +52,8 @@ if (PAGE_GUTTER_LEFT) {
 }
 define ('PDF_MAX_NOTECHARS', config_value("pdf_max_notechars",'/^[0-9]+$/',1900,1));
 define ('PDF_CHARS_PER_PIX', config_value("pdf_chars_per_pix",'/^[0-9]+$/',10,1));
+$pdf_no_profile = strtolower($pdf_no_profile);
+define ('PDF_NO_PROFILE', config_value("pdf_no_profile",'/^(dummy|blank)$/',"dummy",1));
 
 #====================================================[ Include the PDF Api ]===
 require_once(K_PATH_MAIN.'config/lang/eng.php');
