@@ -7,6 +7,7 @@ v0.3.5
 -------------------
 + more flexible temp stats graph: intervals are now configurable (5 or 10 °C)
 ! IMG tags for graphs on dive page where using file path instead of URL path
+  (same applied to the static profile images)
 + added support for "logbook page export to PDF" (requires TCPDF to be installed)
 + separated navigation buttons on single dive/site page to own "section" which in
   the future will also contain page-related links (already started with the dive

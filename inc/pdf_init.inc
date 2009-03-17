@@ -49,6 +49,8 @@ if (PAGE_GUTTER_LEFT) {
   define ('PDF_MARGIN_LEFT', 5);
   define ('PDF_MARGIN_RIGHT', 25);
 }
+define ('PDF_MAX_NOTECHARS', config_value("pdf_max_notechars",'/^[0-9]+$/',1900,1));
+define ('PDF_CHARS_PER_PIX', config_value("pdf_chars_per_pix",'/^[0-9]+$/',10,1));
 
 #====================================================[ Include the PDF Api ]===
 require_once(K_PATH_MAIN.'config/lang/eng.php');
@@ -76,6 +78,65 @@ class pdlPDF extends TCPDF {
   public function Error($msg) {
     trigger_error("TCPDF ERROR: $msg",E_USER_ERROR);
     die('<strong>TCPDF ERROR: </strong> A serious error forced this cript to be halted. Details can be found in the error log.');
+  }
+  /** Adjust HTML code (TCPDF only accepts 100% XHTML and does not handle certain elements)
+   * @method htmlAdjust
+   * @param ref string HTML text to check
+   */
+  public function htmlAdjust(&$html) {
+    // no CSS classes supported by TCPDF
+    $html = preg_replace('|<SPAN CLASS=.thumbnail-right.>(.*?)</SPAN>|ims','<SPAN STYLE="float:right;text-align:center;margin-left:5px;">$1</SPAN>',$html);
+    // tags must conform XHTML standard (<BR> to <BR/> etc.)
+    $tags = array("hr","br","img");
+    foreach ($tags as $tag) {
+      if (preg_match_all("|<$tag.*?>|ims",$html,$matches)) {
+        $mc = count($matches[0]);
+        for ($i=0;$i<$mc;++$i) {
+          $fix = preg_replace('|(?<!/)>|',' />',$matches[0][$i]);
+          if (strlen($fix)) $html = str_replace($matches[0][$i],$fix,$html);
+        }
+      }
+    }
+    // TCPDF takes spaces literally!
+    $html = preg_replace('!(<(/p|hr)>)\s*<!ims','$1<',$html);
+    // change negative font sizes to defined font size
+    $html = preg_replace('!<FONT SIZE=("|\')\-\d+?("|\')!ims','<FONT STYLE="font-size:7px"',$html);
+  }
+  /** Select possible "PDF subset" from comment
+   *  In a notes field/file, you can define what shall be considered for PDF
+   *  export using the markers <code>&lt;!-- PDF_START --&gt;</code> and
+   *  <code>&lt;!-- PDF_END --&gt;</code>. If (one of) these markers is missing,
+   *  it is "assumed" to be at the very start/end of the full comment
+   * @method notesSubset
+   * @param ref string HTML to check
+   */
+  public function notesSubset(&$html) {
+    $pdf_s = strpos($html,'<!-- PDF_START -->');
+    $pdf_e = strpos($html,'<!-- PDF_END -->');
+    if ($pdf_s!==FALSE) $pdf_s += 18; // we don't need the comment
+    else $pdf_s = 0;
+    if ($pdf_e) $html = substr($html,$pdf_s,$pdf_e - $pdf_s)."</p>";
+    else $html = substr($html,$pdf_s);
+    if ($pdf_s) $html = "<p>$html";
+  }
+  /** Restrict length of notes so they fit on the page
+   * @method notesRestrictLen
+   * @param ref string HTML to check
+   */
+  public function notesRestrictLen(&$html) {
+    $maxlen = PDF_MAX_NOTECHARS;
+    if (preg_match_all('!<img.*?>!ims',$html,$matches)) {
+      $mc = count($matches);
+      for ($i=0;$i<$mc;++$i) {
+        if ( preg_match('!height\s*=\s*("|\')(.*?)("|\')!ims',$matches[0][$i],$match) )
+          $maxlen -= $match[2]*PDF_CHARS_PER_PIX;
+        else $maxlen -= 500;
+      }
+    }
+    if (strlen($html)>$maxlen) {
+      $pos  = strpos($html," ",$maxlen);
+      $html = substr($html,0,$pos)." ...</p>";
+    }
   }
 }
 

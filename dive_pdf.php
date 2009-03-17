@@ -172,6 +172,9 @@ $t->set_var("notes_name",lang("notes"));
 $notes[1] = $pdl->common->nl2br($dive["notes"],1,1);
 $notes[2] = $pdl->file->getNotes($nr,"dive");
 $notb = $notes[1].$pdl->common->nl2br($notes[2]);
+$pdf->notesSubset($notb); // Select the subset defined for PDF export
+$pdf->htmlAdjust($notb); // Some fixup is required for TCPDF - e.g. make sure to use XHTML
+$pdf->notesRestrictLen($notb); // we need to restrict text length so it hopefully fits in
 $t->set_var("notes_text",$notb);
 
 #------------------------------------------------------------[ Setup Fotos ]---
