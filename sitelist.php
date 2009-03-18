@@ -103,7 +103,7 @@
  $details = array ("id","loc","place","depth");
  for ($i=0;$i<$max;++$i) {
    foreach($details AS $detail) {
-     $t->set_var("$detail",$sites[$i][$detail]);
+     $t->set_var("$detail",$pdl->common->null2nbsp($sites[$i][$detail]));
    }
    if (!$sites[$i]["depth"]) {
      $t->set_var("depth","&nbsp;");
@@ -115,7 +115,7 @@
    if ( $pdl->file->havePix($sites[$i]["id"],"site") ) {
      $t->set_var("pix",'<img src="'.$pdl->config->tpl_url.'images/camera.gif" valign="middle">');
    } else {
-     $t->set_var("pix","");
+     $t->set_var("pix","&nbsp;");
    }
    $t->parse("item","itemblock",$i);
  }
