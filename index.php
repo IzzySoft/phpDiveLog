@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -150,7 +150,7 @@
  $details = array ("dive#","date","time","depth","divetime","buddy","rating");
  for ($i=0;$i<$max;++$i) {
    foreach($details AS $detail) {
-     $t->set_var("$detail",$dives[$i][$detail]);
+     $t->set_var("$detail",$pdl->common->null2nbsp($dives[$i][$detail]));
    }
    $t->set_var("rating",$pdl->config->tpl_url."images/".$dives[$i]["rating"]."star.gif");
    $t->set_var("dive#",$pdl->link->linkurl("dive.php?nr=".$dives[$i]["dive#"],$dives[$i]["dive#"]));
@@ -159,7 +159,7 @@
    if ( $pdl->file->havePix($dives[$i]["dive#"],"dive") ) {
      $t->set_var("pix",'<img src="'.$pdl->config->tpl_url.'images/camera.gif" valign="middle">');
    } else {
-     $t->set_var("pix","");
+     $t->set_var("pix","&nbsp;");
    }
    $t->parse("item","itemblock",TRUE);
  }

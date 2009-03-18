@@ -214,6 +214,16 @@
     return $hours.":".$mins.":".$secs;
   }
 
+  /** Replace "NULL" in strings by "&nbsp;" (empty table cells etc.)
+   * @method null2nbsp
+   * @param ref string text
+   * @param optional boolean return return the result (TRUE, default) or not (FALSE)
+   */
+  function null2nbsp(&$str,$ret=TRUE) {
+    if (empty($str)) $str = "&nbsp;";
+    if ($ret) return $str;
+  }
+
 #=======================================================[ Navigation Stuff ]===
   /** Create page links (helper to pages())
    * @method private page_links
