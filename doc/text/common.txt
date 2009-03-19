@@ -38,7 +38,8 @@ For data conversion from Aqua DiveLog you neet to have a Java interpreter
 installed (refer to the <a href="http://www.aquadivelog.org/docs/index.html"
 target="_blank">Aqua DiveLog documentation</a> for details). phpDiveLog itself
 only requires a running web server with PHP support (PHP5 recommended, though
-PHP4 may work as well).
+PHP4 may work as well), plus optionally the <a href="http://www.tcpdf.com/"
+target="_blank">TCPDF</a> API to generate PDFs.
 
 [title]
 CopyRight (and CopyLeft)
@@ -78,7 +79,7 @@ More Information
 
 [text]
 ...can be found on the phpDiveLog website: just point your browser to
-<a href="http://projects.izzysoft.de/?topic=progs;subject=phpdivelog" target="_blank">http://projects.izzysoft.de/</a>.
+<a href="http://projects.izzysoft.de/trac/phpdivelog" target="_blank">http://projects.izzysoft.de/</a>.
 
 [text]
 Now, have fun!

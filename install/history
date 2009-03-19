@@ -19,6 +19,8 @@ v0.3.5
 * re-organized the Admin help page
 + adding context navigation to dive page: PDF Print, Dives with the same Buddy,
   Dives at the same Location/Place
+* since some browsers do not seem to support the CSS "empty-cells:show", empty
+  cells in lists now contain a hard space (nbsp)
 
 v0.3.4 (08.03.2009)
 -------------------

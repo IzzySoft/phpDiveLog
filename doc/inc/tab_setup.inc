@@ -17,7 +17,6 @@
      GLOBAL $pm, $pdl;
      $pm->t->set_block("main","homeblock","home");
      $this->add_tab("common","common.php","tab_dives.gif");
-     $this->add_tab("admin","admin.php","tab_stats.gif");
      $this->add_tab("diver","diver.php","tab_buddylist.gif");
      $this->add_tab("visitor","visitor.php","tab_usage.gif");
      $pm->t->set_block("main","tabblock","tab");

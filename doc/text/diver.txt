@@ -310,10 +310,12 @@ Data conversion and transfer
 
 [text]
 To have your Aqua DiveLog data transfered to the right directory, you may
-want to set up <code>PDLBASE</code> in the conduit script accordingly (see
-the {install_page} page). In order to get your web installation running with
-useful data, you now only need to change to the conduit directory and run the
-<code>divelog_conduit.sh</code> script. Provided you followed all above steps
+want to set the conduit script accordingly (see the
+<a href="http://projects.izzysoft.de/trac/phpdivelog/wiki/DiverManual/Configuration"
+target="_blank">corresponding documentation</a> on the projects website). In
+order to get your web installation running with useful data, you now only need
+to change to the conduit directory and run the <code>divelog_conduit.sh</code>
+script. Provided you followed all necessary steps described in the documentation
 carefully, your dive data should then be displayed when you invoke the URL to
 your PDL installation. The administrator of the PDL web site will provide you
 with the server-side data (login, password, directory and transfer method).
@@ -328,8 +330,7 @@ transfers, so don't mess them up!
 
 [text]
 If you re-organized some dive data (especially renumbering the dives and/or
-sites), you may need to clean the <code>images/</code> directory (which contains
-the dive profile images). I will think a bit about it - maybe I can include that
-with the <code>divelog_conduit.sh</code> script to save you this work...
+sites), you may need to clean the <code>images/</code> and <code>profiles/</code>
+directory (which contain the dive profile images).
 
 [eof]

@@ -69,6 +69,32 @@ the navigation bar will contain the following items:
   <td class="td_blank">Your site preferences, as described above.</td></tr>
 </table>
 
+#===============================================================[ CtxNav ]===
+[title]
+Dive &amp; Site Details: Context Navigation
+
+[text]
+On the details pages, you find the <i>Context Navigation Bar</i> once below the
+main navigation, and a second time at the end of the page. Here you not only
+have the possibility to switch to the previous/next record, but depending on
+available data and on configuration settings, one or more of the following
+icons offer you context related links:
+
+[text]
+<ul>
+<li style='list-style-image:url(../templates/aqua/images/apdf.png)'>
+ If PDF Support is available and enabled by the admin, you will find a PDF icon
+ in the context navigation bar. This can be used to generate (and download) this
+ dives/sites information in PDF format.</li>
+<li style='list-style-image:url(../templates/aqua/images/buddy.png)'>If the dive
+ record contains a buddy, this brings you to a list of dives with this buddy.</li>
+<li style='list-style-image:url(../templates/aqua/images/fingerpost.gif)'>In
+ case a location is part of the data on that page, this brings you to a list of
+ dives at that location.</li>
+<li style='list-style-image:url(../templates/aqua/images/anchor.png)'>Similarly,
+ this icon brings you to a list of dives at the given place.</li>
+</ul>
+
 # ===========================================================================
 [title]
 Dive Index
@@ -76,7 +102,7 @@ Dive Index
 [text]
 The dive index lists up a summary of all dives recorded in the current logbook.
 To make this page more handy, the site andministrator and/or the logbook owner
-may have limited the count of dives displayed on one page. In this case, the
+will have limited the count of dives displayed on one page. In this case, the
 table header provides you with links to the first/last and previous/next page.
 
 [text]
@@ -84,12 +110,17 @@ Each data row in the table represents one dive record and provides you with
 the following links:
 <ul>
  <li>First column (with the dive number) links to the dive details. In the last
-     column, an icon indicates that there are images linked with the details.</li>
+     column, a camera icon indicates that there are images linked with the details.</li>
  <li>The dive location links to a list of all dive sites for this location
      that are recorded in any of the public logbooks of this installation</li>
- <li>The dive site itself links to details about the dive site</li>
+ <li>The dive site itself links to details about the dive site from the
+     currently displayed logbook.</li>
  <li>The footer of the page contains a link to the phpDiveLog homepage ;)</li>
 </ul>
+
+[text]
+Furthermore, up/down arrows in the table header allow you to change the sorting
+of the list.
 
 # ===========================================================================
 [title]
@@ -113,12 +144,6 @@ and the description itself may contain links to further information. Both will
 normally open in a new browser window, unless the logbook owner explicitely
 defined it otherwise.
 
-[text]
-<img src='../templates/aqua/images/apdf.png' align='left' alt='PDF'>
-If PDF Support is available and enabled by the admin, you will find a PDF icon
-in the context navigation bar. This can be used to generate (and download) this
-dives information in PDF format.
-
 # ===========================================================================
 [title]
 Site Index
@@ -140,10 +165,11 @@ the logbook owner provided these details. For the images and links applies the
 same as described with the dive details.
 
 [text]
-If the diver provided the GPS data for this site, a click on the globe next
-to the sites name will open a new browser window. In that window you will then
-find a map with the dive sites position marked - which may be useful to plan
-your own dives here.
+If the diver provided the GPS data for this site (which is indicated by a
+rotating globe instead of a static one), a click on the globe next to the sites
+name will open a new browser window. In that window you will then find a map
+with the dive sites position marked - which may be useful to plan your own
+dives here.
 
 # ===========================================================================
 [title]
