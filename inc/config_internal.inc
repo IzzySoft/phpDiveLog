@@ -123,6 +123,7 @@
  define("TEMPLATE_SET",request_value("tpl",'|[^A-Za-z0-9_]|',$template_set,"aqua"));
  define("LANG",request_value("lang",'|^[a-z]{2}$|',$lang,"en",TRUE));
  define("TEMP_STAT_INTERVAL",request_value("tempstatinterval",'/^(5|10)$/',$temp_stat_interval,10,TRUE));
+ define("TIME_STAT_INTERVAL",request_value("timestatinterval",'/^(10|20|30)$/',$time_stat_interval,10,TRUE));
  define("PDF_WITH_FOTOS",request_value("pdfwithfotos",'/^(0|1)$/',$pdf_with_fotos,TRUE,TRUE));
 
  #==========================================================[ preferences ]===

@@ -586,6 +586,100 @@ class graph {
 
   } // end temperature
 
+#-----------------------------------------------------[ DiveDuration Stats ]---
+  /** Generate graph for dive duration
+   * @method duration
+   */
+  function duration() {
+    GLOBAL $pdl;
+    $csvfile = $pdl->config->datadir."logbook.csv";
+    if (!file_exists($csvfile)) return; // die("CSV File '$csvfile' was not found.<br>");
+    $profilepng = $pdl->config->user_path . "profiles/durastat.png";
+    $profilemap = $pdl->config->user_path . "profiles/durastat.map"; // not used yet
+    if (empty($height)) $height = 200;
+    if (empty($width))  $width  = $height+130;
+
+    // graph colors
+    $color = array("10" => "#add8e6", // LightBlue
+                   "20" => "#00ffff", // Aqua
+                   "30" => "#00bfff", // DeepSkyBlue
+                   "40" => "#1e90ff", // DodgerBlue
+                   "50" => "#6495ed", // CornflowerBlue
+                   "60" => "#4682b4", // SteelBlue
+                   "70" => "#4169e1", // RoyalBlue
+                   "80" => "#0000ff", // Blue
+                   "90" => "#000080", // Navy
+                   "100" => "#7b68ee", // MediumSlateBlue
+                   "110" => "#483d8b", // DarkSlateBlue
+                   "120" => "#301970", // NoNameBlue
+                   "130" => "#4b0082"); // Indigo
+    $tcolor = array("0" => "#000000", "10" => "#000000", "20" => "#000000", "30" => "#ffffff", "40" => "#ffffff",
+                    "50" => "#ffffff", "60" => "#ffffff", "70" => "#ffffff", "80" => "#ffffff", "90" => "#ffffff",
+                    "100" => "#ffffff", "110" => "#ffffff", "120" => "#ffffff"); // text colors
+
+    // prepare data
+    $data = $pdl->db->get_dives("","",FALSE,"divetime","ASC");
+    $dc = count($data);
+    $datastr = explode(" ",$data[0]["divetime"]);
+    $unit    = $datastr[1];
+    $max_time = floatval($data[$dc-1]["divetime"]);
+    $ceil = $rceil = ceil(floatval($max_time)/10)*10;
+    $min_time = floatval($data[0]["divetime"]);
+    $floor = $rfloor = floor(floatval($min_temp)/10)*10;
+
+    // calculate base data
+    $sum[$rfloor] = $ignored = 0;
+    for ($i=0;$i<$dc;++$i) {
+      $val = floatval($data[$i]["divetime"]);
+      while ($val > $rfloor && $rfloor < 130) { $rfloor += TIME_STAT_INTERVAL; $sum[$rfloor] = 0; }
+      ++$sum[$rfloor];
+    }
+    $max_val = 0;
+    foreach($sum as $val) if ($val > $max_val) $max_val = $val;
+
+    // Create the Diagram
+    $D=new Diagram(); 
+    if (!$D->Img=@ImageCreate($width, $height)) return; // or die("Cannot create a new GD image.");
+    if ($GLOBALS["graph_bg_transparent"]) {
+      $transp = ImageColorAllocateAlpha($D->Img,0,0,0,127);
+      ImageFill($D->Img,0,0,$transp);
+      ImageSaveAlpha($D->Img,TRUE);
+    } else {
+      ImageColorAllocate($D->Img, 200,200,200); // background color
+    }
+
+    // Graph
+    $base=$height/2;
+    // Setup Labels
+    $D->BFont = 3;
+    // Draw Graph
+    $max = $ceil/TIME_STAT_INTERVAL;
+    $angle0 = 1;
+
+    for ($i=0;$i<=$max;++$i) {
+      if (empty($sum[$i*TIME_STAT_INTERVAL])) continue;
+      if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && count($sum)>8)) $dispval = "";
+      else $dispval = $sum[$i*TIME_STAT_INTERVAL];
+      # Pie (XCenter,YCenter,Offset,Radius,Angle0,Angle1,Color[,tooltip]
+      $angle1 = $sum[$i*TIME_STAT_INTERVAL] * 100/($dc-$ignored);
+      if ($i>0) {
+        $tooltip = ($i-1)*TIME_STAT_INTERVAL ."-". $i*TIME_STAT_INTERVAL . " $unit: ". $sum[$i*TIME_STAT_INTERVAL];
+      } else {
+        $tooltip = "<=". $i*TIME_STAT_INTERVAL . " $unit: ". $sum[$i*TIME_STAT_INTERVAL];
+      }
+      $D->Pie($base,$base,0,$base*0.9,$angle0*3.6,($angle0+$angle1)*3.6,$color[$i*TIME_STAT_INTERVAL],$tooltip);
+      # Bar(left,top,right,bottom,color,text,textcolor)
+      $adjustY = ($height - ($max*20) +15)/2;
+      $D->Bar($height+20,($i-1)*20+$adjustY,$height+120,($i-1)*20+15+$adjustY,$color[$i*TIME_STAT_INTERVAL],str_replace("Â°","°",$tooltip),$tcolor[$i*TIME_STAT_INTERVAL]);
+      $angle0 += $angle1;
+    }
+    // Save Image & Data
+    ImagePng($D->Img,$profilepng);
+    if (!empty($D->ImgMapData)) file_put_contents($profilemap,$D->ImgMapData);
+    ImageDestroy($D->Img); 
+
+  } // end duration
+
 
 } // end class graph
 

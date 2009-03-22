@@ -135,7 +135,27 @@
    }
    $t->parse("yearstat","diveyearblock",TRUE);
 
- }
+   #--------------------------------------------------[ Dives per Duration ]---
+   $graphfile = $pdl->config->user_path . "profiles/durastat.png";
+   $mapfile   = $pdl->config->user_path . "profiles/durastat.map";
+   if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
+     include_once("inc/class.graph.inc");
+     $graph = new graph();
+     $graph->duration();
+   }
+   $t->set_var("ytitle",lang("dura_stat"));
+   $t->set_var("yearstat_png",$pdl->config->user_url."profiles/durastat.png");
+   $t->set_var("yearstat_alt","DurationStat");
+   if (file_exists($mapfile)) {
+     $t->set_var("yearmap","<map name='durastat' id='durastat'>".file_get_contents($mapfile)."</map>");
+     $t->set_var("usemap","USEMAP='#durastat'");
+   } else {
+     $t->set_var("yearmap","");
+     $t->set_var("usemap","");
+   }
+   $t->parse("yearstat","diveyearblock",TRUE);
+
+ } // end function_exists(imagepng)
 
  $t->pparse("out","template");
 
