@@ -600,22 +600,23 @@ class graph {
     if (empty($width))  $width  = $height+130;
 
     // graph colors
-    $color = array("10" => "#add8e6", // LightBlue
-                   "20" => "#00ffff", // Aqua
-                   "30" => "#00bfff", // DeepSkyBlue
-                   "40" => "#1e90ff", // DodgerBlue
-                   "50" => "#6495ed", // CornflowerBlue
-                   "60" => "#4682b4", // SteelBlue
-                   "70" => "#4169e1", // RoyalBlue
-                   "80" => "#0000ff", // Blue
-                   "90" => "#000080", // Navy
-                   "100" => "#7b68ee", // MediumSlateBlue
-                   "110" => "#483d8b", // DarkSlateBlue
-                   "120" => "#301970", // NoNameBlue
-                   "130" => "#4b0082"); // Indigo
-    $tcolor = array("0" => "#000000", "10" => "#000000", "20" => "#000000", "30" => "#ffffff", "40" => "#ffffff",
-                    "50" => "#ffffff", "60" => "#ffffff", "70" => "#ffffff", "80" => "#ffffff", "90" => "#ffffff",
-                    "100" => "#ffffff", "110" => "#ffffff", "120" => "#ffffff"); // text colors
+    $color = array("10" => "#f5f5f5",  // WhiteSmoke
+                   "20" => "#ffa500",  // Orange
+                   "30" => "#00ff00",  // Lime
+                   "40" => "#00ffff",  // Aqua
+                   "50" => "#1e90ff",  // DodgerBlue
+                   "60" => "#0000cd",  // MediumBlue
+                   "70" => "#6a5acd",  // SlateBlue
+                   "80" => "#9400d3",  // DarkViolett
+                   "90" => "#b22222",  // FireBrick
+                   "100" => "#dc143c",  // Crimson
+                   "110" => "#ff0000", // Red
+                   "120" => "#d2b48c", // Tan
+                   "130" => "#bebebe");// Gray
+    $tcolor = array("10" => "#000000", "20" => "#000000", "30" => "#000000", "40" => "#000000",
+                    "50" => "#ffffff", "60" => "#ffffff", "70" => "#ffffff", "80" => "#ffffff",
+                    "90" => "#ffffff", "100" => "#ffffff", "110" => "#ffffff", "120" => "#000000",
+                    "130" => "#000000"); // text colors
 
     // prepare data
     $data = $pdl->db->get_dives("","",FALSE,"divetime","ASC");
