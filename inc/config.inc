@@ -65,8 +65,9 @@
  $ignore_zero_degrees  = TRUE; # ignore a temperature of 0°C for stats?
  $ignore_zero_degrees_comment = TRUE; # place a comment below the graph if zero
                           # degrees are ignored
+ $depth_stat_interval = 5; # intervals for the depth graph (either 5 or 10 m)
  $temp_stat_interval = 10; # intervals for the temperature graph (either 5 or 10 degrees)
- $time_stat_interval = 10; # intervals for the dive duration graph (either 10 or 20 degrees)
+ $time_stat_interval = 10; # intervals for the dive duration graph (either 10 or 20 minutes)
 
  #------------------------------------------------[ Data Transfer Settings ]---
  $pwdfile = "/etc/pdlpwd";# password file for data transfers

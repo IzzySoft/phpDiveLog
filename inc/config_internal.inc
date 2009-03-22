@@ -113,7 +113,11 @@
 
  #==================================================[ URL config overrides ]===
  function request_value($varname,$regexp,$config,$default,$neg=FALSE) {
-   if ( $neg ) { if ( !empty($_REQUEST[$varname]) && preg_match($regexp,$_REQUEST[$varname]) ) return $_REQUEST[$varname]; }
+   if ( $neg ) {
+     if ( !empty($_REQUEST[$varname]) && preg_match($regexp,$_REQUEST[$varname]) ) return $_REQUEST[$varname];
+     elseif ( preg_match($regexp,$config) ) return $config;
+     else return $default;
+   }
    elseif (! (empty($_REQUEST[$varname]) || preg_match($regexp,$_REQUEST[$varname])) ) return $_REQUEST[$varname];
    if ( empty($config) && $config!==0 ) return $default;
    return $config;
@@ -122,6 +126,7 @@
  define("DISPLAY_LIMIT",request_value("displaylimit",'|[^\d]|',$display_limit,12));
  define("TEMPLATE_SET",request_value("tpl",'|[^A-Za-z0-9_]|',$template_set,"aqua"));
  define("LANG",request_value("lang",'|^[a-z]{2}$|',$lang,"en",TRUE));
+ define("DEPTH_STAT_INTERVAL",request_value("depthstatinterval",'/^(5|10|20)$/',$depth_stat_interval,10,TRUE));
  define("TEMP_STAT_INTERVAL",request_value("tempstatinterval",'/^(5|10)$/',$temp_stat_interval,10,TRUE));
  define("TIME_STAT_INTERVAL",request_value("timestatinterval",'/^(10|20|30)$/',$time_stat_interval,10,TRUE));
  define("PDF_WITH_FOTOS",request_value("pdfwithfotos",'/^(0|1)$/',$pdf_with_fotos,TRUE,TRUE));

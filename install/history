@@ -7,6 +7,7 @@ v0.4.1
 -------------------
 * implemented new configuration override protection rules
 + new statistics graph: Dives by Duration
+* depth graph interval now configurable
 
 v0.4.0 (22.03.2009)
 -------------------
