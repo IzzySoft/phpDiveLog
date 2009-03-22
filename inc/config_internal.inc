@@ -12,7 +12,7 @@
 
  /* $Id$ */
 
- $pdl->config->version = "0.4.0";
+ $pdl->config->version = "0.4.0+svn";
  $pdl->config->site_title = $title;
 
  #=============================================================[ Debugging ]===
@@ -93,12 +93,20 @@
  #===========================================================[ users conf ]===
  if ( file_exists($pdl->config->user_path."system.conf") ) {
    $uconf = $pdl->file->read_conf($pdl->config->user_path."system.conf");
-   $allowed = explode(" ",$allow_override);
-   $ac = count($allowed);
-   for ($i=0;$i<$ac;++$i) {
-     if ( !empty($uconf[$allowed[$i]]) ) 
-       ${$allowed[$i]} = $uconf[$allowed[$i]];
+   if (strtolower($override_protection)=="implicit") {
+     $allowed = explode(" ",$allow_override);
+     $ac = count($allowed);
+     for ($i=0;$i<$ac;++$i) {
+       if ( !empty($uconf[$allowed[$i]]) ) 
+         ${$allowed[$i]} = $uconf[$allowed[$i]];
+     }
+   } else {
+     $prohib = explode(" ",$protected_options);
+     foreach ($uconf as $var=>$val) {
+       if ( !in_array($var,$prohib) ) ${$var} = $val;
+     }
    }
+
    if ($uconf["personal"]) $pdl->config->display_personal = TRUE;
  }
  $pdl->config->user_pwd = $pdl->file->getPwd();

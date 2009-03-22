@@ -34,9 +34,6 @@
                           # and will be handled as "error")
  $default_user  = "demo"; # if default_page=user: which user is the default?
                           # must be a valid account (subdir diver/<user>)
- $allow_override = "mapsite title lang display_limit pix_per_row template_set userdef1 userdef2 sitepix_on_divepage sitepix_first sitepix_separate sitepix_if_no_divepix values_in_statgraphs graph_bg_transparent ignore_zero_degrees ignore_zero_degrees_comment hide_schedule_table temp_stat_interval";
-                          # which settings may be adjusted via the
-                          # diver/*/system.conf - space separated values
 
  #----------------------------------------------------[ Geographical Stuff ]---
  $mapsite = "Google";     # Where to show the dive site in a map. Possible
@@ -94,6 +91,15 @@
  $pdf_max_notechars = 1900;         # restrict notes length so it fits on page
  $pdf_chars_per_pix = 10;           # 10px height make one row - so for each 10px
                                     # we lose ~100 chars, which means 10 chars per pixel
+
+ #-----------------------------[ configuration overrides by divers logbook ]---
+ $override_protection = "explicit"; # "implicit": all except for $allow_override
+                                    # "explicit": none except for $protected_options
+ $allow_override = "";              # which settings may be adjusted via the
+                                    # diver/*/system.conf - space separated values
+ $protected_options = "enable_index default_page default_user pwd_file transfer_dir tcpdf_path pdf_enable debug_level debug_show debug_log";
+                                    # space separated values
+                                    # ignored when $override_protection=implicit
 
  #------------------------------------------------------------------[ misc ]---
  $debug_level = "EW";     # What shall be logged: [E]rrors, [W]arnings,
