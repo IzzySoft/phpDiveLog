@@ -509,8 +509,6 @@ class graph {
 
     for ($i=0;$i<=$max;++$i) {
       if (empty($sum[$i*DEPTH_STAT_INTERVAL])) { --$rows; ++$missing; continue; }
-      if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && count($sum)>8)) $dispval = "";
-      else $dispval = $sum[$i*DEPTH_STAT_INTERVAL];
       # Pie (XCenter,YCenter,Offset,Radius,Angle0,Angle1,Color[,tooltip]
       $angle1 = $sum[$i*DEPTH_STAT_INTERVAL] * 100/$dc;
       $tooltip = ($i-1)*DEPTH_STAT_INTERVAL ."-". $i*DEPTH_STAT_INTERVAL . $unit .": ".$sum[$i*DEPTH_STAT_INTERVAL];
@@ -601,8 +599,6 @@ class graph {
 
     for ($i=0;$i<=$max;++$i) {
       if (empty($sum[$i*TEMP_STAT_INTERVAL])) { --$rows; ++$missing; continue; }
-      if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && count($sum)>8)) $dispval = "";
-      else $dispval = $sum[$i*TEMP_STAT_INTERVAL];
       # Pie (XCenter,YCenter,Offset,Radius,Angle0,Angle1,Color[,tooltip]
       $angle1 = $sum[$i*TEMP_STAT_INTERVAL] * 100/($dc-$ignored);
       if ($i>0) {
@@ -662,14 +658,15 @@ class graph {
     $datastr = explode(" ",$data[0]["divetime"]);
     $unit    = $datastr[1];
     $max_time = floatval($data[$dc-1]["divetime"]);
-    $ceil = $rceil = ceil(floatval($max_time)/10)*10;
+    $ceil = $rceil = ceil(floatval($max_time)/TIME_STAT_INTERVAL)*TIME_STAT_INTERVAL;
     $min_time = floatval($data[0]["divetime"]);
-    $floor = $rfloor = floor(floatval($min_temp)/10)*10;
+    $floor = $rfloor = floor(floatval($min_time)/TIME_STAT_INTERVAL)*TIME_STAT_INTERVAL;
 
     // calculate base data
-    $sum[$rfloor] = $ignored = 0;
+    $sum[$rfloor] = 0;
     for ($i=0;$i<$dc;++$i) {
       $val = floatval($data[$i]["divetime"]);
+      if ($val==0) ++$val; // shift Robs 0' dives to be ~1'
       while ($val > $rfloor && $rfloor < 130) { $rfloor += TIME_STAT_INTERVAL; $sum[$rfloor] = 0; }
       ++$sum[$rfloor];
     }
@@ -692,26 +689,26 @@ class graph {
     // Setup Labels
     $D->BFont = 3;
     // Draw Graph
-    $max = $ceil/TIME_STAT_INTERVAL;
-    $angle0 = 1;
-    $rows = $max; $missing = 0;
+    $angle0 = 0; #*!*
+    $max = count($sum);
+    $rows = 0;
+    for ($i=0;$i<$max;++$i) { // get real row count
+      if (!empty($sum[$i*TIME_STAT_INTERVAL])) ++$rows;
+    }
+    $missing = 0;
 
-    for ($i=0;$i<=$max;++$i) {
-      if (empty($sum[$i*TIME_STAT_INTERVAL])) { --$rows; ++$missing; continue; }
-      if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && count($sum)>8)) $dispval = "";
-      else $dispval = $sum[$i*TIME_STAT_INTERVAL];
+    for ($i=0;$i<$max;++$i) {
+      if (empty($sum[($i+1)*TIME_STAT_INTERVAL])) { ++$missing; continue; }
       # Pie (XCenter,YCenter,Offset,Radius,Angle0,Angle1,Color[,tooltip]
-      $angle1 = $sum[$i*TIME_STAT_INTERVAL] * 100/($dc-$ignored);
-      if ($i>0) {
-        $tooltip = ($i-1)*TIME_STAT_INTERVAL ."-". $i*TIME_STAT_INTERVAL . " $unit: ". $sum[$i*TIME_STAT_INTERVAL];
-      } else {
-        $tooltip = "<=". $i*TIME_STAT_INTERVAL . " $unit: ". $sum[$i*TIME_STAT_INTERVAL];
-      }
-      $D->Pie($base,$base,0,$base*0.9,$angle0*3.6,($angle0+$angle1)*3.6,$color[$i*TIME_STAT_INTERVAL],$tooltip);
+      $angle1 = $sum[($i+1)*TIME_STAT_INTERVAL] * 100/$dc;
+      if ( ($i+1)*TIME_STAT_INTERVAL == 130 ) $tooltip = "&gt; 120 $unit: ". $sum[($i+1)*TIME_STAT_INTERVAL];
+      else $tooltip = ($i)*TIME_STAT_INTERVAL ."-". ($i+1)*TIME_STAT_INTERVAL . " $unit: ". $sum[($i+1)*TIME_STAT_INTERVAL];
+      $D->Pie($base,$base,0,$base*0.9,$angle0*3.6,($angle0+$angle1)*3.6,$color[($i+1)*TIME_STAT_INTERVAL],$tooltip);
       # Bar(left,top,right,bottom,color,text,textcolor)
       $adjustY = ($height - (($rows+1)*15) +15)/2;
       $row = $i - $missing;
-      $D->Bar($height+20,($row-1)*20+$adjustY,$height+120,($row-1)*20+15+$adjustY,$color[$i*TIME_STAT_INTERVAL],str_replace("Â°","°",$tooltip),$tcolor[$i*TIME_STAT_INTERVAL]);
+      $D->Bar($height+20,($row-1)*18+$adjustY,$height+120,($row-1)*18+15+$adjustY,$color[($i+1)*TIME_STAT_INTERVAL],str_replace('&gt;','>',$tooltip),$tcolor[($i+1)*TIME_STAT_INTERVAL]);
+      # Bar(20px from cake,15px bar +3px space,100px width,add 15px bar,color...) // for BFont=3
       $angle0 += $angle1;
     }
     // Save Image & Data
