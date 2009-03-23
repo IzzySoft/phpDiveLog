@@ -505,8 +505,10 @@ class graph {
                     "95" => "#ffffff", "95" => "#ffffff", "100" => "#ffffff", "105" => "#000000",
                     "110" => "#000000", "115" => "#000000", "120" => "#000000",
                     "125" => "#ffffff", "130" => "#ffffff"); // text colors
-    for ($i=1;$i<=$max;++$i) {
-      if (empty($sum[$i*DEPTH_STAT_INTERVAL])) continue;
+    $rows = $max; $missing = 0;
+
+    for ($i=0;$i<=$max;++$i) {
+      if (empty($sum[$i*DEPTH_STAT_INTERVAL])) { --$rows; ++$missing; continue; }
       if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && count($sum)>8)) $dispval = "";
       else $dispval = $sum[$i*DEPTH_STAT_INTERVAL];
       # Pie (XCenter,YCenter,Offset,Radius,Angle0,Angle1,Color[,tooltip]
@@ -514,8 +516,9 @@ class graph {
       $tooltip = ($i-1)*DEPTH_STAT_INTERVAL ."-". $i*DEPTH_STAT_INTERVAL . $unit .": ".$sum[$i*DEPTH_STAT_INTERVAL];
       $D->Pie($base,$base,0,$base*0.9,$angle0*3.6,($angle0+$angle1)*3.6,$color[$i*DEPTH_STAT_INTERVAL],$tooltip);
       # Bar(left,top,right,bottom,color,text,textcolor)
-      $adjustY = ($height - (($max+1)*20) +15)/2;
-      $D->Bar($height+20,($i-1)*20+$adjustY,$height+120,($i-1)*20+15+$adjustY,$color[$i*DEPTH_STAT_INTERVAL],$tooltip,$tcolor[$i*DEPTH_STAT_INTERVAL]);
+      $adjustY = ($height - (($rows+1)*15) +15)/2;
+      $row = $i - $missing;
+      $D->Bar($height+20,($row-1)*20+$adjustY,$height+120,($row-1)*20+15+$adjustY,$color[$i*DEPTH_STAT_INTERVAL],$tooltip,$tcolor[$i*DEPTH_STAT_INTERVAL]);
       $angle0 += $angle1;
     }
 
@@ -523,7 +526,8 @@ class graph {
     ImagePng($D->Img,$profilepng);
     if (!empty($D->ImgMapData)) file_put_contents($profilemap,$D->ImgMapData);
     ImageDestroy($D->Img); 
-  }
+
+  } // end depth
 
 #------------------------------------------------------[ Temperature Stats ]---
   /** Generate temperature graph
@@ -593,9 +597,10 @@ class graph {
     // Draw Graph
     $max = $ceil/TEMP_STAT_INTERVAL;
     $angle0 = 1;
+    $rows = $max; $missing = 0;
 
     for ($i=0;$i<=$max;++$i) {
-      if (empty($sum[$i*TEMP_STAT_INTERVAL])) continue;
+      if (empty($sum[$i*TEMP_STAT_INTERVAL])) { --$rows; ++$missing; continue; }
       if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && count($sum)>8)) $dispval = "";
       else $dispval = $sum[$i*TEMP_STAT_INTERVAL];
       # Pie (XCenter,YCenter,Offset,Radius,Angle0,Angle1,Color[,tooltip]
@@ -607,8 +612,9 @@ class graph {
       }
       $D->Pie($base,$base,0,$base*0.9,$angle0*3.6,($angle0+$angle1)*3.6,$color[$i*TEMP_STAT_INTERVAL],$tooltip);
       # Bar(left,top,right,bottom,color,text,textcolor)
-      $adjustY = ($height - ($max*20) +15)/2;
-      $D->Bar($height+20,($i-1)*20+$adjustY,$height+120,($i-1)*20+15+$adjustY,$color[$i*TEMP_STAT_INTERVAL],str_replace("Â°","°",$tooltip),$tcolor[$i*TEMP_STAT_INTERVAL]);
+      $adjustY = ($height - (($rows+1)*15) +15)/2;
+      $row = $i - $missing;
+      $D->Bar($height+20,($row-1)*20+$adjustY,$height+120,($row-1)*20+15+$adjustY,$color[$i*TEMP_STAT_INTERVAL],str_replace("Â°","°",$tooltip),$tcolor[$i*TEMP_STAT_INTERVAL]);
       $angle0 += $angle1;
     }
     // Save Image & Data
@@ -688,9 +694,10 @@ class graph {
     // Draw Graph
     $max = $ceil/TIME_STAT_INTERVAL;
     $angle0 = 1;
+    $rows = $max; $missing = 0;
 
     for ($i=0;$i<=$max;++$i) {
-      if (empty($sum[$i*TIME_STAT_INTERVAL])) continue;
+      if (empty($sum[$i*TIME_STAT_INTERVAL])) { --$rows; ++$missing; continue; }
       if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && count($sum)>8)) $dispval = "";
       else $dispval = $sum[$i*TIME_STAT_INTERVAL];
       # Pie (XCenter,YCenter,Offset,Radius,Angle0,Angle1,Color[,tooltip]
@@ -702,8 +709,9 @@ class graph {
       }
       $D->Pie($base,$base,0,$base*0.9,$angle0*3.6,($angle0+$angle1)*3.6,$color[$i*TIME_STAT_INTERVAL],$tooltip);
       # Bar(left,top,right,bottom,color,text,textcolor)
-      $adjustY = ($height - ($max*20) +15)/2;
-      $D->Bar($height+20,($i-1)*20+$adjustY,$height+120,($i-1)*20+15+$adjustY,$color[$i*TIME_STAT_INTERVAL],str_replace("Â°","°",$tooltip),$tcolor[$i*TIME_STAT_INTERVAL]);
+      $adjustY = ($height - (($rows+1)*15) +15)/2;
+      $row = $i - $missing;
+      $D->Bar($height+20,($row-1)*20+$adjustY,$height+120,($row-1)*20+15+$adjustY,$color[$i*TIME_STAT_INTERVAL],str_replace("Â°","°",$tooltip),$tcolor[$i*TIME_STAT_INTERVAL]);
       $angle0 += $angle1;
     }
     // Save Image & Data

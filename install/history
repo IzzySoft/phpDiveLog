@@ -8,6 +8,7 @@ v0.4.1
 * implemented new configuration override protection rules
 + new statistics graph: Dives by Duration
 * depth graph interval now configurable
+* improved legend adjustment for cake diagrams
 
 v0.4.0 (22.03.2009)
 -------------------
