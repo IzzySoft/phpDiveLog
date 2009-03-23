@@ -127,55 +127,62 @@
     */
    function read_divedata($sort="",$order="",$where="") {
      GLOBAL $pdl;
-     if (isset($this->dives)) return; // prevent multiple reads
-     switch ($pdl->config->db_type) {
-       case "csv"  :
-       default     :
-         $csv = new csv(";",'"',TRUE);
-         if (file_exists($pdl->config->divedata)) {
-           $csv->import($pdl->config->divedata);
-           switch($sort) {
-	     case "id"    :
-             case "date"  : $sort = "dive#"; $type="num"; break;
-             case "time"  : $type="num"; $this->divedat_time2num($csv); break;
-             case "location" :
-             case "place" :
-             case "rating":
-             case "buddy" : $type = "str"; break;
-	     case "watertemp" :
-             case "depth" :
-	     case "divetime" : $type="num";
-	          $datastr = explode(" ",$csv->data[0][$sort]);
-		  $unit    = $datastr[1];
-		  $this->divedat2num($csv,$sort);
-	          break;
-           }
-	   if ( is_array($where) ) {
-             $ac = count($where);
-             for ($i=0;$i<$ac;++$i) {
-               if ( in_array($where[$i]["column"],array("time","dive#","site_id","depth","divetime","tank#","tank_id","visibility","watertemp","airtemp","suit_id","weight","rating")) )
-                 $csv->where($where[$i]["column"],$where[$i]["compare"],$where[$i]["value"],"num");
-               else
-                 $csv->where($where[$i]["column"],$where[$i]["compare"],$where[$i]["value"]);
-             }
-	   }
-           if (!empty($sort)) {
-             $csv->sort($sort,$order,$type);
-           }
-	   switch($sort) {
-	     case "watertemp":
-	     case "depth"    :
-	     case "divetime" : $this->divedat2str(&$csv,$sort,$unit); break;
-	     case "time"     : $this->divedat_num2time($csv); break;
-	     default         : break;
-	   }
-           $this->divedata = $csv->data;
-           $this->dives    = count($this->divedata);
-           $this->setup_dive_records();
-           $csv->clear_data();
-         }
+     static $last_where = array();
+     static $last_order = "";
+     static $last_sort = "";
+     $csv = new csv(";",'"',TRUE);
+     if (!isset($this->dives)) { // prevent multiple reads
+       if (file_exists($pdl->config->divedata)) {
+         $csv->import($pdl->config->divedata);
+       }
+     } else {
+       $csv->data = $this->divedata;
      }
-   }
+     if ( is_array($where) && $where != $last_where ) {
+       $last_where = $where;
+       $ac = count($where);
+       for ($i=0;$i<$ac;++$i) {
+         if ( in_array($where[$i]["column"],array("time","dive#","site_id","depth","divetime","tank#","tank_id","visibility","watertemp","airtemp","suit_id","weight","rating")) )
+           $csv->where($where[$i]["column"],$where[$i]["compare"],$where[$i]["value"],"num");
+         else
+           $csv->where($where[$i]["column"],$where[$i]["compare"],$where[$i]["value"]);
+       }
+       $restricted = TRUE;
+     } else {
+       $restricted = FALSE;
+     }
+     if ( !empty($sort) && ($sort != $last_sort || $restricted) ) {
+       switch($sort) {
+         case "id"    :
+         case "date"  : $sort = "dive#"; $type="num"; break;
+         case "time"  : $type="num"; $this->divedat_time2num($csv); break;
+         case "location" :
+         case "place" :
+         case "rating":
+         case "buddy" : $type = "str"; break;
+         case "watertemp" :
+         case "depth" :
+         case "divetime" : $type="num";
+              $datastr = explode(" ",$csv->data[0][$sort]);
+              $unit    = $datastr[1];
+              $this->divedat2num($csv,$sort);
+	      break;
+       }
+       $csv->sort($sort,$order,$type);
+       switch($sort) {
+         case "watertemp":
+         case "depth"    :
+         case "divetime" : $this->divedat2str(&$csv,$sort,$unit); break;
+         case "time"     : $this->divedat_num2time($csv); break;
+         default         : break;
+       }
+     }
+     $this->divedata = $csv->data;
+     $this->dives    = count($this->divedata);
+     $this->setup_dive_records();
+     $csv->clear_data();
+
+   } // end read_divedata
 
    function setup_dive_records() {
      for ($i=0;$i<$this->dives;++$i) {
