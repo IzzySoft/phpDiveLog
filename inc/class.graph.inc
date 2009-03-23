@@ -446,6 +446,7 @@ class graph {
     $sum[$rceil] = 0;
     for ($i=0;$i<$dc;++$i) {
       $val = floatval($data[$i]["depth"]);
+      if ($val==0) ++$val; // shift Robs special dives (0' at 0m)
       while ($val > $rfloor && $rfloor < 130) { $rfloor += DEPTH_STAT_INTERVAL; $sum[$rfloor] = 0; }
       ++$sum[$rfloor];
     }
