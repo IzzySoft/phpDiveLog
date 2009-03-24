@@ -12,6 +12,7 @@ v0.4.1
 * Norwegian translations updated
 ! when CSV was updated, only the 1st graph on the stats page has been recreated
   correctly - subsequent cake graphs failed
+! in the generated KML files, the URL fo the icon had been broken
 
 v0.4.0 (22.03.2009)
 -------------------

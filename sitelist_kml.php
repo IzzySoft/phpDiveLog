@@ -19,7 +19,7 @@
 
  #-=[ Get base URL for images ]=-
  $pdl_url = $pdl->link->get_baseurl();
- $img_url = $pdl_url."/".$pdl->config->tpl_url."images/";
+ $img_url = $pdl_url . "/" . substr($pdl->config->tpl_url."images/",strlen($pdl->config->base_url));
 
  #-=[ Setup Template ]=-
  $t = new Template($pdl->config->tpl_path);

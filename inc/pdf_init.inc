@@ -35,14 +35,10 @@ define ('PDF_MARGIN_TOP_NOHEAD',10); // PDL specific constant
 define ('K_PATH_IMAGES', $pdl->config->tpl_path.'images/');
 define ('PDF_PAGE_FORMAT', config_value("pdf_page_format",'/^(LETTER|(A|B)[0..5])$/i','A5',1));
 define ('PDF_PAGE_ORIENTATION', config_value("pdf_page_orientation",'/^[PL]$/i','P',1)); // 'P'ortrait / 'L'andscape
-# define ('PDF_CREATOR', 'phpDiveLog/TCPDF');
 define ('PDF_AUTHOR', $pdl->config->user_name);
 define ('PDF_HEADER_TITLE', 'phpdiveLog of '.PDF_AUTHOR);
 define ('PDF_HEADER_STRING',"");
 define ('PDF_HEADER_LOGO', 'logo.gif');
-# define ('PDF_FONT_NAME_MAIN', 'helvetica');
-# define ('PDF_FONT_NAME_DATA', 'helvetica');
-# define ('PDF_FONT_NAME_PRE', 'courier');
 if (PAGE_GUTTER_LEFT) {
   define ('PDF_MARGIN_LEFT', 25);
   define ('PDF_MARGIN_RIGHT', 5);
