@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.4.1
+v0.4.1 (25.03.2009)
 -------------------
 * implemented new configuration override protection rules
 + new statistics graph: Dives by Duration
