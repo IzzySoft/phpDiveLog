@@ -84,6 +84,10 @@
  $pdf_page_format = "A5";           # paper size: A0..5, B0..5, or LETTER
  $pdf_page_orientation = "P";       # (P)ortrait or (L)andscape. Recommended
                                     # combinations: A5+P, A4+L
+ $pdf_multipage_format = "A4";      # paper size when printing multiple pages
+ $pdf_multipage_orientation = "L";  # see $pdf_page_orientation
+ $pdf_page_gutter = 25;             # margin for the gutter
+ $pdf_page_margin = 5;              # margin for the opposite page side
  $pdf_no_profile = "dummy";         # what to use if we have no profile: "dummy"
                                     # for a dummy profile, "blank" for nothing
  $pdf_with_fotos = TRUE;            # include photos in the PDF files? URL

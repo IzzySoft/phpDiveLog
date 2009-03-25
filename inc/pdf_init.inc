@@ -33,13 +33,20 @@ if (K_PATH_MAIN == '') {
 #----------------------------------------------------[ some TCPDF settings ]---
 define ('PDF_MARGIN_TOP_NOHEAD',10); // PDL specific constant
 define ('K_PATH_IMAGES', $pdl->config->tpl_path.'images/');
-define ('PDF_PAGE_FORMAT', config_value("pdf_page_format",'/^(LETTER|(A|B)[0..5])$/i','A5',1));
-define ('PDF_PAGE_ORIENTATION', config_value("pdf_page_orientation",'/^[PL]$/i','P',1)); // 'P'ortrait / 'L'andscape
+#if (MULTI_PAGE) {
+#  define ('PDF_PAGE_FORMAT', config_value("pdf_multipage_format",'/^(LETTER|(A|B)[0..5])$/i','A4',1));
+#  define ('PDF_PAGE_ORIENTATION', config_value("pdf_multipage_orientation",'/^[PL]$/i','L',1)); // 'P'ortrait / 'L'andscape
+#} else {
+  define ('PDF_PAGE_FORMAT', config_value("pdf_page_format",'/^(LETTER|(A|B)[0..5])$/i','A5',1));
+  define ('PDF_PAGE_ORIENTATION', config_value("pdf_page_orientation",'/^[PL]$/i','P',1)); // 'P'ortrait / 'L'andscape
+#}
 define ('PDF_AUTHOR', $pdl->config->user_name);
 define ('PDF_HEADER_TITLE', 'phpdiveLog of '.PDF_AUTHOR);
 define ('PDF_HEADER_STRING',"");
 define ('PDF_HEADER_LOGO', 'logo.gif');
-if (PAGE_GUTTER_LEFT) {
+define ('PDF_PAGE_GUTTER', config_value("pdf_page_gutter",'/^[1-9][0-9]*$/',25,1));
+define ('PDF_PAGE_MARGIN', config_value("pdf_page_margin",'/^[1-9][0-9]*$/',5,1));
+if (PAGE_GUTTER_LEFT) { // should be removed when site is prepared for MULTI_PAGE as well
   define ('PDF_MARGIN_LEFT', 25);
   define ('PDF_MARGIN_RIGHT', 5);
 } else {
