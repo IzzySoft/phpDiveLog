@@ -59,6 +59,13 @@ $t->set_block("template","topleftblock","topleft");
 $t->set_block("template","toprightblock","topright");
 
 #==========================================================[ Process Pages ]===
+#-------------------------------------[ shift one page for duplex printing ]---
+if (MULTI_PAGE && $start%2 && preg_match('!^.{1}5$!',PDF_PAGE_FORMAT)) {
+  $pdf->setPrintFooter(FALSE);
+  $pdf->SetMargins(PDF_PAGE_MARGIN, PDF_MARGIN_TOP_NOHEAD, PDF_PAGE_GUTTER);
+  $pdf->AddPage();
+}
+
 for ($nr=$start;$nr<=$end;++$nr) {
 #----------------------------------------------------------[ Retrieve Data ]---
   $title .= ": ".lang("dive#")." $nr";
@@ -71,7 +78,7 @@ for ($nr=$start;$nr<=$end;++$nr) {
   $t->set_var("date",$dive["date"]);
   $t->set_var("location",$dive["location"]);
   $t->set_var("place",$dive["place"]);
-  if (PAGE_GUTTER_LEFT) {
+  if ($nr%2) {
     $t->parse("topleft","topleftblock");
     $t->set_var("topright","");
   } else {
@@ -208,6 +215,7 @@ for ($nr=$start;$nr<=$end;++$nr) {
   if ($nr%2) $pdf->SetMargins(PDF_PAGE_GUTTER, PDF_MARGIN_TOP_NOHEAD, PDF_PAGE_MARGIN);
   else $pdf->SetMargins(PDF_PAGE_MARGIN, PDF_MARGIN_TOP_NOHEAD, PDF_PAGE_GUTTER);
   $pdf->AddPage();
+  $pdf->setPrintFooter(TRUE);
   $pdf->writeHTML($out,true,0,true,0);
 }
 

@@ -33,13 +33,8 @@ if (K_PATH_MAIN == '') {
 #----------------------------------------------------[ some TCPDF settings ]---
 define ('PDF_MARGIN_TOP_NOHEAD',10); // PDL specific constant
 define ('K_PATH_IMAGES', $pdl->config->tpl_path.'images/');
-#if (MULTI_PAGE) {
-#  define ('PDF_PAGE_FORMAT', config_value("pdf_multipage_format",'/^(LETTER|(A|B)[0..5])$/i','A4',1));
-#  define ('PDF_PAGE_ORIENTATION', config_value("pdf_multipage_orientation",'/^[PL]$/i','L',1)); // 'P'ortrait / 'L'andscape
-#} else {
-  define ('PDF_PAGE_FORMAT', config_value("pdf_page_format",'/^(LETTER|(A|B)[0..5])$/i','A5',1));
-  define ('PDF_PAGE_ORIENTATION', config_value("pdf_page_orientation",'/^[PL]$/i','P',1)); // 'P'ortrait / 'L'andscape
-#}
+define ('PDF_PAGE_FORMAT', config_value("pdf_page_format",'/^(LETTER|(A|B)[0..5])$/i','A5',1));
+define ('PDF_PAGE_ORIENTATION', config_value("pdf_page_orientation",'/^[PL]$/i','P',1)); // 'P'ortrait / 'L'andscape
 define ('PDF_AUTHOR', $pdl->config->user_name);
 define ('PDF_HEADER_TITLE', 'phpdiveLog of '.PDF_AUTHOR);
 define ('PDF_HEADER_STRING',"");
