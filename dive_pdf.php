@@ -59,11 +59,14 @@ $t->set_block("template","topleftblock","topleft");
 $t->set_block("template","toprightblock","topright");
 
 #==========================================================[ Process Pages ]===
-#-------------------------------------[ shift one page for duplex printing ]---
-if (MULTI_PAGE && $start%2 && preg_match('!^.{1}5$!',PDF_PAGE_FORMAT)) {
+#-------[ Starting with even page number? Shift pages for duplex printing! ]---
+if (MULTI_PAGE && !($start%2) && preg_match('!^.{1}5$!',PDF_PAGE_FORMAT)) {
   $pdf->setPrintFooter(FALSE);
   $pdf->SetMargins(PDF_PAGE_MARGIN, PDF_MARGIN_TOP_NOHEAD, PDF_PAGE_GUTTER);
-  $pdf->AddPage();
+  for ($i=0;$i<3;++$i) {
+    $pdf->AddPage();
+    $pdf->writeHTML("<BR />",true,0,true,0);
+  }
 }
 
 for ($nr=$start;$nr<=$end;++$nr) {
@@ -205,9 +208,6 @@ for ($nr=$start;$nr<=$end;++$nr) {
 
 #=======================================================[ Generate Content ]===
   $out = $t->parse("out","template");
-  #echo($out);
-  #echo "<pre>";die(htmlentities($out));
-  #exit;
   $out = preg_replace('|\s+|',' ',$out); // TCPDF treats all spaces as hard spaces
   $out = preg_replace('|\s+<T|i','<T',$out);// TCPDF converts each table cell into a separate "box"
   $out = preg_replace('|\s+</T|i','</T',$out);// TCPDF converts each table cell into a separate "box"
@@ -220,6 +220,35 @@ for ($nr=$start;$nr<=$end;++$nr) {
 }
 
 #=========================================================[ Create the PDF ]===
+#-----------------------------------------[ Shuffle pages for Duplex Print ]---
+if (MULTI_PAGE) {
+  if ($start%2) $init = 1; // odd numbers, target: 1-3-4-2
+  else $init = 1;
+  $pages = $pdf->getNumPages();
+  for ($i=$init;$i<=$pages;$i+=4) { // step 4 pages (A5 duplex on A4)
+    switch($pages-$i) {
+      case  0: break; // a single page does not matter where to go
+      case  1: // last 2 pages
+        $pdf->AddPage();
+        $pdf->setPrintFooter(FALSE);
+        $pdf->writeHTML("<BR />",true,0,true,0);
+        $pdf->movePage($i+2,$i);
+        break;
+      case  2: // last 3 pages
+        $pdf->AddPage();
+        $pdf->setPrintFooter(FALSE);
+        $pdf->writeHTML("<BR />",true,0,true,0);
+        $pdf->movePage($i+3,$i);
+        break;
+      default: // we still have at least 4 pages
+        $pdf->movePage($i+2,$i+1);
+        $pdf->movePage($i+3,$i+2);
+        break;
+    }
+  }
+}
+
+#-------------------------------------------------------------[ Output PDF ]---
 if ($start==$end) $pdf->Output("dive_${start}.pdf", 'I');
 else $pdf->Output("dives.pdf", 'I');
 
