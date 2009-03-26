@@ -69,10 +69,15 @@ if (MULTI_PAGE && !($start%2) && preg_match('!^.{1}5$!',PDF_PAGE_FORMAT)) {
   }
 }
 
-for ($nr=$start;$nr<=$end;++$nr) {
 #----------------------------------------------------------[ Retrieve Data ]---
+$records = $pdl->db->get_dives("","",FALSE,"id","ASC");
+$dc = count($records);
+for ($i=0;$i<$dc;++$i) $dives[$records[$i]["dive#"]] = $records[$i];
+unset($records);
+
+for ($nr=$start;$nr<=$end;++$nr) {
   $title .= ": ".lang("dive#")." $nr";
-  $dive = $pdl->db->get_dive($nr);
+  $dive = $dives[$nr];
 
 #-----------------------------------------------------------[ Setup Header ]---
   $t->set_var("divenr",lang("dive#"));
