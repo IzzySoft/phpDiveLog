@@ -41,13 +41,6 @@ define ('PDF_HEADER_STRING',"");
 define ('PDF_HEADER_LOGO', 'logo.gif');
 define ('PDF_PAGE_GUTTER', config_value("pdf_page_gutter",'/^[1-9][0-9]*$/',25,1));
 define ('PDF_PAGE_MARGIN', config_value("pdf_page_margin",'/^[1-9][0-9]*$/',5,1));
-if (PAGE_GUTTER_LEFT) { // should be removed when site is prepared for MULTI_PAGE as well
-  define ('PDF_MARGIN_LEFT', 25);
-  define ('PDF_MARGIN_RIGHT', 5);
-} else {
-  define ('PDF_MARGIN_LEFT', 5);
-  define ('PDF_MARGIN_RIGHT', 25);
-}
 define ('PDF_MAX_NOTECHARS', config_value("pdf_max_notechars",'/^[0-9]+$/',1900,1));
 define ('PDF_CHARS_PER_PIX', config_value("pdf_chars_per_pix",'/^[0-9]+$/',10,1));
 $pdf_no_profile = strtolower($pdf_no_profile);
@@ -59,11 +52,13 @@ require_once(K_PATH_MAIN.'tcpdf.php');
 
 #=========================================================[ Extend the Api ]===
 /** PDL extension for TCPDF
+ * @package Api
  * @class pdlPDF
  * @extends TCPDF
  */
 class pdlPDF extends TCPDF {
   /** Custom Footer for PDL
+   * @class pdlPDF
    * @method Footer
    */
   public function Footer() {
@@ -73,6 +68,7 @@ class pdlPDF extends TCPDF {
     $this->Cell(0, 10, "Created by phpDiveLog v".$pdl->config->version, 0, 0, 'C', 0, "http://projects.izzysoft.de/trac/phpdivelog/");
   }
   /** Override the Error method to log its message according to PDL settings
+   * @class pdlPDF
    * @method Error
    * @param string error message
    */
@@ -81,6 +77,7 @@ class pdlPDF extends TCPDF {
     die('<strong>TCPDF ERROR: </strong> A serious error forced this cript to be halted. Details can be found in the error log.');
   }
   /** Adjust HTML code (TCPDF only accepts 100% XHTML and does not handle certain elements)
+   * @class pdlPDF
    * @method htmlAdjust
    * @param ref string HTML text to check
    */
@@ -108,6 +105,7 @@ class pdlPDF extends TCPDF {
    *  export using the markers <code>&lt;!-- PDF_START --&gt;</code> and
    *  <code>&lt;!-- PDF_END --&gt;</code>. If (one of) these markers is missing,
    *  it is "assumed" to be at the very start/end of the full comment
+   * @class pdlPDF
    * @method notesSubset
    * @param ref string HTML to check
    */
@@ -121,6 +119,7 @@ class pdlPDF extends TCPDF {
     if ($pdf_s) $html = "<p>$html";
   }
   /** Restrict length of notes so they fit on the page
+   * @class pdlPDF
    * @method notesRestrictLen
    * @param ref string HTML to check
    */
@@ -140,6 +139,7 @@ class pdlPDF extends TCPDF {
     }
   }
   /** Initialize duplex set (push in empty pages if needed)
+   * @class pdlPDF
    * @method duplexInit
    * @param integer start number of first page
    * @param integer end number of last page

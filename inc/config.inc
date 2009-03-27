@@ -91,7 +91,6 @@
                                     # for a dummy profile, "blank" for nothing
  $pdf_with_fotos = TRUE;            # include photos in the PDF files? URL
                                     # override: pdfwithfotos=0|1
- $pdf_pageno_from_diveno = TRUE;    # use the dive# as page# to calculate gutter?
  $pdf_enable = TRUE;                # enable PDF support?
  $pdf_max_notechars = 1900;         # restrict notes length so it fits on page
  $pdf_chars_per_pix = 10;           # 10px height make one row - so for each 10px

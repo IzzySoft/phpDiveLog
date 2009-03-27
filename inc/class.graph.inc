@@ -690,7 +690,7 @@ class graph {
     // Setup Labels
     $D->BFont = 3;
     // Draw Graph
-    $angle0 = 0; #*!*
+    $angle0 = 0;
     $max = count($sum);
     $rows = 0;
     for ($i=0;$i<$max;++$i) { // get real row count
