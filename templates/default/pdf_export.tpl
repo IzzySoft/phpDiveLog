@@ -28,12 +28,12 @@
 <table class="outer" cellpadding="2" cellspacing="0" align="center" style="margin-top:4px">
  <tr><th class="head" valign="middle" colspan="2"><img src="{icon_src}" width="{icon_width}" height="{icon_height}" alt="{icon_alt}"> {segment_name}</th></tr>
  <tr title="{pages_bubble}"><td>{fsel_name}</td><td><input type="text" name="from" size="4">&nbsp;-&nbsp;<input type="text" name="to" size="4"></td></tr>
- <tr><td title="{output_bubble}">{foutput_name}</td><td><input type="radio" name="duplex" value="off" {foutput_viewcheck} title="{output_view_bubble}">&nbsp;{foutput_viewname}<br>
-     <input type="radio" name="duplex" value="inner" {foutput_innercheck} title="{output_innergutter_bubble}">&nbsp;{foutput_innername}<br>
-     <input type="radio" name="duplex" value="outer" {foutput_outercheck} title="{output_outergutter_bubble}">&nbsp;{foutput_outername}<br>
-     <input type="radio" name="duplex" value="side" {foutput_sidecheck} title="{output_sidegutter_bubble}">&nbsp;{foutput_sidename}</td></tr>
- <tr><td title="{foto_bubble}">{ffoto_name}</td><td><input type="radio" name="foto" value="1" {ffoto_yescheck} title="{foto_yes_bubble}">&nbsp;{fyes}&nbsp;
-     <input type="radio" name="foto" value="0" {ffoto_nocheck} title="{foto_no_bubble}">&nbsp;{fno}</td></tr>
+ <tr><td title="{output_bubble}">{foutput_name}</td><td><span title="{output_view_bubble}"><input type="radio" name="duplex" value="off" {foutput_viewcheck}>&nbsp;{foutput_viewname}</span><br>
+     <span title="{output_innergutter_bubble}"><input type="radio" name="duplex" value="inner" {foutput_innercheck}>&nbsp;{foutput_innername}</span><br>
+     <span title="{output_outergutter_bubble}"><input type="radio" name="duplex" value="outer" {foutput_outercheck}>&nbsp;{foutput_outername}</span><br>
+     <span title="{output_sidegutter_bubble}"><input type="radio" name="duplex" value="side" {foutput_sidecheck}>&nbsp;{foutput_sidename}</span></td></tr>
+ <tr><td title="{foto_bubble}">{ffoto_name}</td><td><span title="{foto_yes_bubble}"><input type="radio" name="foto" value="1" {ffoto_yescheck}>&nbsp;{fyes}&nbsp;</span>
+     <span title="{foto_no_bubble}"><input type="radio" name="foto" value="0" {ffoto_nocheck}>&nbsp;{fno}</span></td></tr>
  <tr><td colspan="2" align="center"><input type="submit" name="{submit_name}" value="{submit1_value}">&nbsp;<input type="submit" name="{submit_name}" value="{submit2_value}"></td></tr>
 </table>
 </form>
