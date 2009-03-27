@@ -175,7 +175,12 @@ class pdlPDF extends TCPDF {
       case "inner": // 4-1-2-3
          for ($i=1;$i<=$pages;$i+=4) { // step 4 pages (A5 duplex on A4)
            switch($pages-$i) {
-             case  0: break; // a single page does not matter where to go
+             case  0: // a single page needs to be shifted once
+               $this->AddPage();
+               $this->setPrintFooter(FALSE);
+               $this->writeHTML("<BR />",true,0,true,0);
+               $this->movePage($i+1,$i);
+               break;
              case  1: // last 2 pages
                $this->AddPage();
                $this->setPrintFooter(FALSE);
@@ -194,11 +199,29 @@ class pdlPDF extends TCPDF {
            }
          }
          break;
-      case "outer":
+      case "outer": // 1-4-3-2
+         for ($i=1;$i<=$pages;$i+=4) { // step 4 pages (A5 duplex on A4)
+           switch($pages-$i) {
+             case  0: break; // a single page already is in place
+             case  1: // last 2 pages
+               $this->AddPage();
+               $this->setPrintFooter(FALSE);
+               $this->writeHTML("<BR />",true,0,true,0);
+             case  2: // last 3 pages
+               $this->AddPage();
+               $this->setPrintFooter(FALSE);
+               $this->writeHTML("<BR />",true,0,true,0);
+             default: // we still have at least 4 pages
+               $this->movePage($i+2,$i+1);
+               $this->movePage($i+3,$i+1);
+               break;
+           }
+         }
+         break;
       case "side": // 1-3-4-2
          for ($i=1;$i<=$pages;$i+=4) { // step 4 pages (A5 duplex on A4)
            switch($pages-$i) {
-             case  0: break; // a single page does not matter where to go
+             case  0: break; // a single page already is in place
              case  1: // last 2 pages
                $this->AddPage();
                $this->setPrintFooter(FALSE);
