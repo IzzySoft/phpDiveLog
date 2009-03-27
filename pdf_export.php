@@ -30,6 +30,16 @@
      header("Location: $url");
      exit;
      break;
+   case lang("export_sites") :
+     if ( empty($_POST["from"]) || empty($_POST["to"]) ) {
+       $sites = $pdl->db->get_sites("","",FALSE,"id","ASC");
+       if ( empty($_POST["from"]) ) $_POST["from"] = $sites[0]["id"];
+       if ( empty($_POST["to"]) )   $_POST["to"]   = $sites[$pdl->db->sites-1]["id"];
+     }
+     $url = $pdl->link->slink("site_pdf.php?nr=".$_POST["from"]."&lastnr=".$_POST["to"]."&duplex=".$_POST["duplex"]."&pdfwithfotos=".$_POST["foto"]);
+     header("Location: $url");
+     exit;
+     break;
  }
 
  #===================================================[ Initialize template ]===
@@ -81,12 +91,13 @@
 
  #============================================================[ Dives Form ]===
  $t->set_var("formname","dives");
- $t->set_var("icon_src",$pdl->config->base_url."templates/aqua/images/tab_buddylist.gif");
+ $t->set_var("icon_src",$pdl->config->base_url."templates/aqua/images/tab_dives.gif");
  $t->set_var("icon_width","30");
  $t->set_var("icon_height","15");
- $t->set_var("icon_alt",lang("dives"));
- $t->set_var("segment_name",lang("dives"));
- $t->set_var("submit_value",lang("export_dives"));
+ $t->set_var("icon_alt",lang("dives")." / ".lang("sites"));
+ $t->set_var("segment_name",lang("dives")." / ".lang("sites"));
+ $t->set_var("submit1_value",lang("export_dives"));
+ $t->set_var("submit2_value",lang("export_sites"));
  $t->parse("form","formblock");
 
  #===========================================================[ End of Page ]===

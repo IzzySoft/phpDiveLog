@@ -35,7 +35,7 @@
      <input type="radio" name="duplex" value="side" {foutput_sidecheck} title="{output_sidegutter_bubble}">&nbsp;{foutput_sidename}</td></tr>
  <tr><td title="{foto_bubble}">{ffoto_name}</td><td><input type="radio" name="foto" value="1" {ffoto_yescheck} title="{foto_yes_bubble}">&nbsp;{fyes}&nbsp;
      <input type="radio" name="foto" value="0" {ffoto_nocheck} title="{foto_no_bubble}">&nbsp;{fno}</td></tr>
- <tr><td colspan="2" align="center"><input type="submit" name="{submit_name}" value="{submit_value}"></td></tr>
+ <tr><td colspan="2" align="center"><input type="submit" name="{submit_name}" value="{submit1_value}">&nbsp;<input type="submit" name="{submit_name}" value="{submit2_value}"></td></tr>
 </table>
 </form>
 <!-- END formblock -->

@@ -41,7 +41,7 @@ $pdf->SetFont('freesans', '', 10); // provides better UTF8 capabilities
 
 #-----------------------------------------------[ Set Document Information ]---
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Itzchak Rehberg');
+$pdf->SetAuthor(ucfirst($pdl->params->diver));
 $pdf->SetTitle($title);
 $pdf->SetSubject($title);
 $pdf->SetKeywords($dive["location"].', '.$dive["place"].', '.$pdl->params->diver.', dive');
@@ -63,7 +63,7 @@ $t->set_block("template","toprightblock","topright");
 if (MULTI_PAGE && preg_match('!^.{1}5$!',PDF_PAGE_FORMAT)) $pdf->duplexInit($start,$end,$_REQUEST["duplex"]);
 
 #----------------------------------------------------------[ Retrieve Data ]---
-$records = $pdl->db->get_dives("","",FALSE,"id","ASC");
+$records = $pdl->db->get_dives($start-1,$end+1-$start,FALSE,"id","ASC");
 $dc = count($records);
 for ($i=0;$i<$dc;++$i) $dives[$records[$i]["dive#"]] = $records[$i];
 unset($records);
