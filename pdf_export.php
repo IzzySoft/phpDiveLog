@@ -47,11 +47,11 @@
  #===============================[ set up the table header and field names ]===
  $t->set_var("ptitle",lang("pdf_export"));
  $t->set_var("fsel_name",lang("pdf_select_pages").":");
- $t->set_var("foutput_name",lang("pdf_output_type").":");
- $t->set_var("foutput_viewname",lang("pdf_output_view"));
- $t->set_var("foutput_innername",lang("pdf_output_duplexprint_inner"));
- $t->set_var("foutput_outername",lang("pdf_output_duplexprint_outer"));
- $t->set_var("foutput_sidename",lang("pdf_output_duplexprint_side"));
+ $t->set_var("foutput_name",lang("pdf_duplex_type").":");
+ $t->set_var("foutput_viewname",lang("pdf_duplex_none"));
+ $t->set_var("foutput_innername",lang("pdf_duplex_inner"));
+ $t->set_var("foutput_outername",lang("pdf_duplex_outer"));
+ $t->set_var("foutput_sidename",lang("pdf_duplex_side"));
  $t->set_var("ffoto_name",lang("pdf_include_fotos").":");
  $t->set_var("fyes",lang("yes"));
  $t->set_var("fno",lang("no"));
@@ -70,11 +70,11 @@
  }
  $t->set_var("submit_name","submit");
  $t->set_var("pages_bubble",lang("pdf_select_pages_desc"));
- $t->set_var("output_bubble",lang("pdf_output_type_desc"));
- $t->set_var("output_view_bubble",lang("pdf_output_view_desc"));
- $t->set_var("output_innergutter_bubble",lang("pdf_output_duplex_innergutter_desc"));
- $t->set_var("output_outergutter_bubble",lang("pdf_output_duplex_outergutter_desc"));
- $t->set_var("output_sidegutter_bubble",lang("pdf_output_duplex_sidegutter_desc"));
+ $t->set_var("output_bubble",lang("pdf_duplex_type_desc"));
+ $t->set_var("output_view_bubble",lang("pdf_duplex_none_desc"));
+ $t->set_var("output_innergutter_bubble",lang("pdf_duplex_inner_desc"));
+ $t->set_var("output_outergutter_bubble",lang("pdf_duplex_outer_desc"));
+ $t->set_var("output_sidegutter_bubble",lang("pdf_duplex_side_desc"));
  $t->set_var("foto_bubble",lang("pdf_include_fotos_desc"));
  $t->set_var("foto_yes_bubble",lang("pdf_include_fotos_yes"));
  $t->set_var("foto_no_bubble",lang("pdf_include_fotos_no"));
