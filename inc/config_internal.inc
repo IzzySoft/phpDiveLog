@@ -12,7 +12,7 @@
 
  /* $Id$ */
 
- $pdl->config->version = "0.4.1";
+ $pdl->config->version = "0.4.1+svn";
  $pdl->config->site_title = $title;
 
  #=============================================================[ Debugging ]===

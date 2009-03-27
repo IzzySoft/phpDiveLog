@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -32,6 +32,7 @@
      if ($pdl->config->display_personal)
        $this->add_tab("person","person.php","tab_person.gif");
      $this->add_tab("prefs","prefs.php","tab_preferences.gif");
+     $this->add_tab("pdf_export","pdf_export.php","apdf.png");
      $this->add_tab("help","visitor.php","tab_help.gif",1);
      $t->set_block("template","tabblock","tab");
    }

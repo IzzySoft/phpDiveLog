@@ -139,6 +139,69 @@ class pdlPDF extends TCPDF {
       $html = substr($html,0,$pos)." ...</p>";
     }
   }
+  /** Initialize duplex set (push in empty pages if needed)
+   * @method duplexInit
+   * @param integer start number of first page
+   * @param integer end number of last page
+   * @param string gutter arrangement for gutter (inner|outer|side)
+   */
+  function duplexInit($start,$end,$gutter) {
+    if ($start==$end) return; // nothing to do for a single record
+    switch($gutter) {
+      case "inner":
+      case "outer":
+      case "side":
+         if (MULTI_PAGE && !($start%2) && preg_match('!^.{1}5$!',PDF_PAGE_FORMAT)) {
+           $this->setPrintFooter(FALSE);
+           $this->SetMargins(PDF_PAGE_MARGIN, PDF_MARGIN_TOP_NOHEAD, PDF_PAGE_GUTTER);
+           for ($i=0;$i<3;++$i) {
+             $this->AddPage();
+             $this->writeHTML("<BR />",true,0,true,0);
+           }
+         }
+         break;
+      default: break;
+    } // end switch
+  } // end duplexInit
+  /** Finish duplex set (shuffle pages for duplex printing)
+   * @param integer start number of first page
+   * @param integer end number of last page
+   * @param string gutter arrangement for gutter (inner|outer|side)
+   */
+  function duplexFinish($start,$end,$gutter) {
+    if ($start==$end) return; // nothing to do for a single record
+    switch($gutter) {
+      case "inner":
+      case "outer":
+      case "side":
+         if ($start%2) $init = 1; // odd numbers, target: 1-3-4-2
+         else $init = 1;
+         $pages = $this->getNumPages();
+         for ($i=$init;$i<=$pages;$i+=4) { // step 4 pages (A5 duplex on A4)
+           switch($pages-$i) {
+             case  0: break; // a single page does not matter where to go
+             case  1: // last 2 pages
+               $this->AddPage();
+               $this->setPrintFooter(FALSE);
+               $this->writeHTML("<BR />",true,0,true,0);
+               $this->movePage($i+2,$i);
+               break;
+             case  2: // last 3 pages
+               $this->AddPage();
+               $this->setPrintFooter(FALSE);
+               $this->writeHTML("<BR />",true,0,true,0);
+               $this->movePage($i+3,$i);
+               break;
+             default: // we still have at least 4 pages
+               $this->movePage($i+2,$i+1);
+               $this->movePage($i+3,$i+2);
+               break;
+           }
+         }
+         break;
+      default: break;
+    } // end switch
+  } // end duplexFinish
 }
 
 ?>
