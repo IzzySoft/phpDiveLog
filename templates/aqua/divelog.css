@@ -65,6 +65,9 @@
    border-collapse: separate;
    background-image:url(images/aqua.jpg);
   }
+  .nav tr {
+    background-image:url(images/aqua-light.jpg);
+  }
   TABLE.transp {
    background-image:url(images/aqua.jpg);
    border-spacing:0;
@@ -104,7 +107,7 @@
   .td_transp {
    background-color: transparent;
    background-image:url(images/aqua.jpg);
-   text-color:#ffffff;
+   color:#ffffff;
   }
   .tab_active, .tab_inactive {
    border: 0;
@@ -140,7 +143,6 @@
     background-color: white;
     font-size:70%;
   }
-
 
 /* === Links === */
 
@@ -187,4 +189,3 @@
     margin-right:0.5em;
   }
   IMG { border:0; }
-//--></style>
