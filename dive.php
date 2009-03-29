@@ -17,6 +17,10 @@
  include("inc/includes.inc");
  $nr = $pdl->params->nr;
  $title .= ": ".lang("dive#")." $nr";
+ if (USE_DYN_PROFILE_PNG) {
+   include("inc/class.graph.inc");
+   $graph = new graph();
+ }
  include("inc/header.inc");
 
  $t = new Template($pdl->config->tpl_path);
@@ -161,19 +165,8 @@
  $profilemap = $pdl->config->user_path . "profiles/dive${nr}_profile.map";
  $schedulepng = $pdl->config->user_path . "profiles/dive${nr}_schedule.png";
  $schedulepng_url = $pdl->config->user_url . "profiles/dive${nr}_schedule.png";
- if ($use_dyn_profile_png) {
-   // generate dynamic profile/schedule graphs
-   if (!file_exists($profilepng) || filemtime($profilepng) < filemtime($csvfile)) {
-     include_once("inc/class.graph.inc");
-     $graph = new graph();
-     $graph->profile($nr);
-   }
-   if ((($schedule_graph=="integrated" && !file_exists($profilepng)) || $schedule_graph=="separate")
-      && (!file_exists($schedulepng) || filemtime($schedulepng) < filemtime($schedulecsv))) {
-     include_once("inc/class.graph.inc");
-     $graph = new graph();
-     $graph->schedule($nr);
-   }
+ if (USE_DYN_PROFILE_PNG) {
+   $graph->profileCheck($nr);
    // use dynamic profile if exists
    if (file_exists($profilepng)) {
      $t->set_var("prof_name",lang("profile"));

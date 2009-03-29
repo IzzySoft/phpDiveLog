@@ -95,6 +95,9 @@
  $pdf_max_notechars = 1900;         # restrict notes length so it fits on page
  $pdf_chars_per_pix = 10;           # 10px height make one row - so for each 10px
                                     # we lose ~100 chars, which means 10 chars per pixel
+ $pdf_create_missing_graph = 1;     # if $use_dyn_profile_png is TRUE, shall we
+                                    # create missing (and update outdated) graphs
+                                    # when generating PDFs? This may slowdown the process
 
  #-----------------------------[ configuration overrides by divers logbook ]---
  $override_protection = "explicit"; # "implicit": all except for $allow_override

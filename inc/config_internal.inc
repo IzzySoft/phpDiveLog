@@ -130,6 +130,9 @@
  define("TEMP_STAT_INTERVAL",request_value("tempstatinterval",'/^(5|10)$/',$temp_stat_interval,10,TRUE));
  define("TIME_STAT_INTERVAL",request_value("timestatinterval",'/^(10|20|30)$/',$time_stat_interval,10,TRUE));
  define("PDF_WITH_FOTOS",request_value("pdfwithfotos",'/^(0|1)$/',$pdf_with_fotos,TRUE,TRUE));
+ define("USE_DYN_PROFILE_PNG",request_value("usedynprofilepng",'/^(0|1)$/',$use_dyn_profile_png,TRUE,TRUE));
+ define("SCHEDULE_GRAPH",request_value("schedulegraph",'/^(integrated|separate|none)$/i',$schedule_graph,"integrated",TRUE));
+ define("PDF_CREATE_MISSING_GRAPH",request_value("pdfcreatemissinggraph",'/^(0|1)$/',$pdf_create_missing_graph,TRUE,TRUE));
 
  #==========================================================[ preferences ]===
  $pdl->config->display_limit = DISPLAY_LIMIT;

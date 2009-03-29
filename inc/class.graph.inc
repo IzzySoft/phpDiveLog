@@ -70,6 +70,28 @@ class graph {
   }
 
 #----------------------------------------------------------[ Dive Profiles ]---
+  /** Check whether to update a given profile and do it if necessary
+   * @method profileCheck
+   * @param integer nr (dive number)
+   */
+  function profileCheck($no) {
+    GLOBAL $pdl;
+    $nr = str_pad($no,5,"0",STR_PAD_LEFT);
+    $csvfile = $pdl->config->datadir."dive${nr}_profile.csv";
+    $schedulecsv = $pdl->config->datadir."dive${nr}_schedule.csv";
+    $profilepng = $pdl->config->user_path . "profiles/dive${nr}_profile.png";
+    $schedulepng = $pdl->config->user_path . "profiles/dive${nr}_schedule.png";
+    if (USE_DYN_PROFILE_PNG) { // generate dynamic profile/schedule graphs
+      if (!file_exists($profilepng) || filemtime($profilepng) < filemtime($csvfile)) {
+        $this->profile($nr);
+      }
+      if (((SCHEDULE_GRAPH=="integrated" && !file_exists($profilepng)) || $schedule_graph=="separate")
+         && (!file_exists($schedulepng) || filemtime($schedulepng) < filemtime($schedulecsv))) {
+        $this->schedule($nr);
+      }
+    }
+  }
+
   /** Generate dive profile graph
    * @method profile
    * @param integer divenr dive number

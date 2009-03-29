@@ -13,6 +13,10 @@
 
 #=============================================[ Initialize & Setup PDF Api ]===
 require_once(dirname(__FILE__)."/inc/includes.inc");
+if (USE_DYN_PROFILE_PNG && PDF_CREATE_MISSING_GRAPH) {
+  include("inc/class.graph.inc");
+  $graph = new graph();
+}
 #------------------------------------------[ DiveRecord specific constants ]---
 if (isset($_REQUEST["pageno"]) && preg_match('!^[1-9][0-9]*$!',$_REQUEST["pageno"])) $pagenr = $_REQUEST["pageno"];
 else $pagenr = $_REQUEST["nr"];
@@ -104,7 +108,8 @@ for ($nr=$start;$nr<=$end;++$nr) {
   $t->set_var("item_data","<img src='".$pdl->config->base_url."templates/aqua/images/".$dive["rating"]."star.gif"."' alt='Rating:".$dive["rating"]."' HEIGHT='8px' WIDTH='${starwid}px' />");
   $t->parse("sum","sumblock",TRUE);
   $nrpad = str_pad($nr,5,"0",STR_PAD_LEFT);
-  if (file_exists($pdl->config->user_path . "profiles/dive${nrpad}_profile.png"))
+  if (USE_DYN_PROFILE_PNG && PDF_CREATE_MISSING_GRAPH) $graph->profileCheck($nr);
+  if (USE_DYN_PROFILE_PNG && file_exists($pdl->config->user_path . "profiles/dive${nrpad}_profile.png"))
     $t->set_var("prof_img",$pdl->config->user_url . "profiles/dive${nrpad}_profile.png");
   elseif ( strlen($prof_img=$pdl->file->getProfPic($nr)) ) {
     $t->set_var("prof_img",$prof_img);

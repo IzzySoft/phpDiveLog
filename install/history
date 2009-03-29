@@ -6,6 +6,8 @@ History for phpDiveLog
 v0.4.2
 -------------------
 + added possibility to export multiple dives/sites at once to PDF
++ missing dynamic profiles are now created on PDF generation (depending on
+  configuration)
 
 v0.4.1 (25.03.2009)
 -------------------
