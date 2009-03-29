@@ -114,7 +114,7 @@
  #==================================================[ URL config overrides ]===
  function request_value($varname,$regexp,$config,$default,$neg=FALSE) {
    if ( $neg ) {
-     if ( !empty($_REQUEST[$varname]) && preg_match($regexp,$_REQUEST[$varname]) ) return $_REQUEST[$varname];
+     if ( preg_match($regexp,$_REQUEST[$varname]) ) return $_REQUEST[$varname];
      elseif ( preg_match($regexp,$config) ) return $config;
      else return $default;
    }

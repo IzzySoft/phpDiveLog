@@ -26,7 +26,7 @@
        if ( empty($_POST["from"]) ) $_POST["from"] = $dives[0]["dive#"];
        if ( empty($_POST["to"]) )   $_POST["to"]   = $dives[$pdl->db->dives-1]["dive#"];
      }
-     $url = $pdl->link->slink("dive_pdf.php?nr=".$_POST["from"]."&lastnr=".$_POST["to"]."&duplex=".$_POST["duplex"]."&pdfwithfotos=".$_POST["foto"]);
+     $url = $pdl->link->slink("dive_pdf.php?nr=".$_POST["from"]."&lastnr=".$_POST["to"]."&duplex=".$_POST["duplex"]."&pdfwithfotos=".$_POST["foto"]."&pdfcreatemissinggraph=".$_POST["graph"]);
      header("Location: $url");
      exit;
      break;
