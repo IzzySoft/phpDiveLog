@@ -118,7 +118,7 @@
      elseif ( preg_match($regexp,$config) ) return $config;
      else return $default;
    }
-   elseif (!preg_match($regexp,$_REQUEST[$varname])) return $_REQUEST[$varname];
+   elseif (! ((empty($_REQUEST[$varname]) && $_REQUEST[$varname]!==0) || preg_match($regexp,$_REQUEST[$varname])) ) return $_REQUEST[$varname];
    if ( empty($config) && $config!==0 ) return $default;
    return $config;
  }

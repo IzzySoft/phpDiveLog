@@ -39,7 +39,8 @@
  <tr><td title="{missing_bubble}">{fmissing_name}</td><td><span title="{missing_yes_bubble}"><input type="radio" name="graph" value="1" {fmissing_check}>&nbsp;{fyes}&nbsp;</span>
      <span title="{missing_no_bubble}"><input type="radio" name="graph" value="0" {fmissing_nocheck}>&nbsp;{fno}</span></td></tr>
 <!-- END missingblock -->
- <tr><td colspan="2" align="center"><input type="submit" name="{submit_name}" value="{submit1_value}">&nbsp;<input type="submit" name="{submit_name}" value="{submit2_value}"></td></tr>
+ <tr><td colspan="2" align="center"><input type="submit" name="{submit_name}" value="{submit1_value}">&nbsp;<input type="submit" name="{submit_name}" value="{submit2_value}"><BR>
+     <input type="submit" name="{submit_name}" value="{submit3_value}"></td></tr>
 </table>
 </form>
 <!-- END formblock -->

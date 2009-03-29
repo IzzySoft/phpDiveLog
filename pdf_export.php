@@ -40,6 +40,11 @@
      header("Location: $url");
      exit;
      break;
+   case lang("export_stats") :
+     $url = $pdl->link->slink("stats_pdf.php?duplex=".$_POST["duplex"]."&pdfwithfotos=".$_POST["foto"]);
+     header("Location: $url");
+     exit;
+     break;
  }
 
  #===================================================[ Initialize template ]===
@@ -115,6 +120,7 @@
  $t->set_var("segment_name",lang("dives")." / ".lang("sites"));
  $t->set_var("submit1_value",lang("export_dives"));
  $t->set_var("submit2_value",lang("export_sites"));
+ $t->set_var("submit3_value",lang("export_stats"));
  $t->parse("form","formblock");
 
  #===========================================================[ End of Page ]===
