@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -57,82 +57,63 @@ $t->set_var("item_name",lang("avg_dives_per_site").":");
 $t->set_var("item_data",round($stats["num_dives"] / $pdl->db->sites,3));
 $t->parse("sum","sumblock",TRUE);
 
- #========================================================[ Include Graphs ]===
- if (function_exists("imagepng") && is_writable($pdl->config->user_path . "profiles")) {
-   $t->set_var("graph_width","160");
-   $t->set_var("graph_height","97");
-   $csvfile   = $pdl->config->datadir."logbook.csv";
-   #------------------------------------------------------[ Dives per Year ]---
-   $graphfile = $pdl->config->user_path . "profiles/divestat.png";
-   $mapfile   = $pdl->config->user_path . "profiles/divestat.map";
-   if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
-     include_once("inc/class.graph.inc");
-     $graph = new graph();
-     $graph->dives();
-   }
-   $t->set_var("graph_name",lang("year_stat"));
-   $t->set_var("graph_src",$pdl->config->user_url."profiles/divestat.png");
-   $t->set_var("graph_alt","YearStat");
-   $t->parse("lgraph","lgraphblock");
+#========================================================[ Include Graphs ]===
+if (function_exists("imagepng") && is_writable($pdl->config->user_path . "profiles")) {
+  include_once("inc/class.graph.inc");
+  $graph = new graph();
+  $t->set_var("graph_width","160");
+  $t->set_var("graph_height","97");
+  #------------------------------------------------------[ Dives per Year ]---
+  $graphfile = $pdl->config->user_path . "profiles/divestat.png";
+  $mapfile   = $pdl->config->user_path . "profiles/divestat.map";
+  $graph->divesCheck();
+  $t->set_var("graph_name",lang("year_stat"));
+  $t->set_var("graph_src",$pdl->config->user_url."profiles/divestat.png");
+  $t->set_var("graph_alt","YearStat");
+  $t->parse("lgraph","lgraphblock");
 
-   #---------------------------------------------------[ DiveTime per Year ]---
-   $graphfile = $pdl->config->user_path . "profiles/timestat.png";
-   $mapfile   = $pdl->config->user_path . "profiles/timestat.map";
-   if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
-     include_once("inc/class.graph.inc");
-     $graph = new graph();
-     $graph->divetime();
-   }
-   $t->set_var("graph_name",lang("time_stat"));
-   $t->set_var("graph_src",$pdl->config->user_url."profiles/timestat.png");
-   $t->set_var("graph_alt","TimeStat");
-   $t->parse("lgraph","lgraphblock",TRUE);
+  #---------------------------------------------------[ DiveTime per Year ]---
+  $graphfile = $pdl->config->user_path . "profiles/timestat.png";
+  $mapfile   = $pdl->config->user_path . "profiles/timestat.map";
+  $graph->divetimeCheck();
+  $t->set_var("graph_name",lang("time_stat"));
+  $t->set_var("graph_src",$pdl->config->user_url."profiles/timestat.png");
+  $t->set_var("graph_alt","TimeStat");
+  $t->parse("lgraph","lgraphblock",TRUE);
 
-   #-----------------------------------------------------[ Dives per Depth ]---
-   $graphfile = $pdl->config->user_path . "profiles/depthstat.png";
-   $mapfile   = $pdl->config->user_path . "profiles/depthstat.map";
-   if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
-     include_once("inc/class.graph.inc");
-     $graph = new graph();
-     $graph->depth();
-   }
-   $t->set_var("graph_name",lang("depth_stat"));
-   $t->set_var("graph_src",$pdl->config->user_url."profiles/depthstat.png");
-   $t->set_var("graph_alt","DepthStat");
-   $t->parse("rgraph","rgraphblock",TRUE);
+  #-----------------------------------------------------[ Dives per Depth ]---
+  $graphfile = $pdl->config->user_path . "profiles/depthstat.png";
+  $mapfile   = $pdl->config->user_path . "profiles/depthstat.map";
+  $graph->depthCheck();
+  $t->set_var("graph_name",lang("depth_stat"));
+  $t->set_var("graph_src",$pdl->config->user_url."profiles/depthstat.png");
+  $t->set_var("graph_alt","DepthStat");
+  $t->parse("rgraph","rgraphblock",TRUE);
 
-   #-----------------------------------------------[ Dives per Temperature ]---
-   $graphfile = $pdl->config->user_path . "profiles/tempstat.png";
-   $mapfile   = $pdl->config->user_path . "profiles/tempstat.map";
-   if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
-     include_once("inc/class.graph.inc");
-     $graph = new graph();
-     $graph->temperature();
-   }
-   $t->set_var("graph_name",lang("temp_stat"));
-   $t->set_var("graph_src",$pdl->config->user_url."profiles/tempstat.png");
-   $t->set_var("graph_alt","TemperatureStat");
-   if ($ignore_zero_degrees && $ignore_zero_degrees_comment) {
-     $comment = lang("stat_ignored_zero_degrees");
-   } else {
-     $comment = "";
-   }
-   $t->parse("rgraph","rgraphblock",TRUE);
+  #-----------------------------------------------[ Dives per Temperature ]---
+  $graphfile = $pdl->config->user_path . "profiles/tempstat.png";
+  $mapfile   = $pdl->config->user_path . "profiles/tempstat.map";
+  $graph->temperatureCheck();
+  $t->set_var("graph_name",lang("temp_stat"));
+  $t->set_var("graph_src",$pdl->config->user_url."profiles/tempstat.png");
+  $t->set_var("graph_alt","TemperatureStat");
+  if ($ignore_zero_degrees && $ignore_zero_degrees_comment) {
+    $comment = lang("stat_ignored_zero_degrees");
+  } else {
+    $comment = "";
+  }
+  $t->parse("rgraph","rgraphblock",TRUE);
 
-   #--------------------------------------------------[ Dives per Duration ]---
-   $graphfile = $pdl->config->user_path . "profiles/durastat.png";
-   $mapfile   = $pdl->config->user_path . "profiles/durastat.map";
-   if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
-     include_once("inc/class.graph.inc");
-     $graph = new graph();
-     $graph->duration();
-   }
-   $t->set_var("graph_name",lang("dura_stat"));
-   $t->set_var("graph_src",$pdl->config->user_url."profiles/durastat.png");
-   $t->set_var("graph_alt","DurationStat");
-   $t->parse("rgraph","rgraphblock",TRUE);
+  #--------------------------------------------------[ Dives per Duration ]---
+  $graphfile = $pdl->config->user_path . "profiles/durastat.png";
+  $mapfile   = $pdl->config->user_path . "profiles/durastat.map";
+  $graph->durationCheck();
+  $t->set_var("graph_name",lang("dura_stat"));
+  $t->set_var("graph_src",$pdl->config->user_url."profiles/durastat.png");
+  $t->set_var("graph_alt","DurationStat");
+  $t->parse("rgraph","rgraphblock",TRUE);
 
- } // end function_exists(imagepng)
+} // end function_exists(imagepng)
 
 #================================================[ create new PDF document ]===
 require_once(dirname(__FILE__)."/inc/pdf_init.inc");

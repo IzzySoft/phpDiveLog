@@ -267,6 +267,19 @@ class graph {
   } // end method schedule
 
 #---------------------------------------------------------[ Dives per Year ]---
+  /** Check whether to update the dive stats graph do it if necessary
+   * @method divesCheck
+   */
+  function divesCheck() {
+    GLOBAL $pdl;
+    $csvfile   = $pdl->config->datadir."logbook.csv";
+    $graphfile = $pdl->config->user_path . "profiles/divestat.png";
+    $mapfile   = $pdl->config->user_path . "profiles/divestat.map";
+    if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
+      $this->dives();
+    }
+  }
+
   /** Generate dive stats graph
    * @method dives
    */
@@ -351,6 +364,19 @@ class graph {
   }
 
 #------------------------------------------------------[ Divetime per Year ]---
+  /** Check whether to update the divetime stats graph do it if necessary
+   * @method divetimeCheck
+   */
+  function divetimeCheck() {
+    GLOBAL $pdl;
+    $csvfile   = $pdl->config->datadir."logbook.csv";
+    $graphfile = $pdl->config->user_path . "profiles/timestat.png";
+    $mapfile   = $pdl->config->user_path . "profiles/timestat.map";
+    if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
+      $this->divetime();
+    }
+  }
+
   /** Generate dive stats graph
    * @method divetime
    */
@@ -444,6 +470,19 @@ class graph {
   }
 
 #------------------------------------------------------------[ Depth Stats ]---
+  /** Check whether to update the depth stats graph do it if necessary
+   * @method depthCheck
+   */
+  function depthCheck() {
+    GLOBAL $pdl;
+    $csvfile   = $pdl->config->datadir."logbook.csv";
+    $graphfile = $pdl->config->user_path . "profiles/depthstat.png";
+    $mapfile   = $pdl->config->user_path . "profiles/depthstat.map";
+    if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
+      $this->depth();
+    }
+  }
+
   /** Generate depth graph
    * @method depth
    */
@@ -551,6 +590,19 @@ class graph {
   } // end depth
 
 #------------------------------------------------------[ Temperature Stats ]---
+  /** Check whether to update the temperature stats graph do it if necessary
+   * @method temperatureCheck
+   */
+  function temperatureCheck() {
+    GLOBAL $pdl;
+    $csvfile   = $pdl->config->datadir."logbook.csv";
+    $graphfile = $pdl->config->user_path . "profiles/tempstat.png";
+    $mapfile   = $pdl->config->user_path . "profiles/tempstat.map";
+    if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
+      $this->temperature();
+    }
+  }
+
   /** Generate temperature graph
    * @method temperature
    */
@@ -644,6 +696,19 @@ class graph {
   } // end temperature
 
 #-----------------------------------------------------[ DiveDuration Stats ]---
+  /** Check whether to update the duration stats graph do it if necessary
+   * @method durationCheck
+   */
+  function durationCheck() {
+    GLOBAL $pdl;
+    $csvfile   = $pdl->config->datadir."logbook.csv";
+    $graphfile = $pdl->config->user_path . "profiles/durastat.png";
+    $mapfile   = $pdl->config->user_path . "profiles/durastat.map";
+    if (!file_exists($graphfile) || filemtime($graphfile) < filemtime($csvfile)) {
+      $this->duration();
+    }
+  }
+
   /** Generate graph for dive duration
    * @method duration
    */

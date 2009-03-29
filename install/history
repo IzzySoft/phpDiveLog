@@ -8,7 +8,7 @@ v0.4.2
 + added possibility to export multiple dives/sites at once to PDF
 + missing dynamic profiles are now created on PDF generation (depending on
   configuration)
-+ Added Statistik export to PDF
++ Added Statistics export to PDF
 
 v0.4.1 (25.03.2009)
 -------------------
