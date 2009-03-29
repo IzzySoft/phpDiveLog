@@ -47,6 +47,7 @@
  $t = new Template($pdl->config->tpl_path);
  $t->set_file(array("template"=>"pdf_export.tpl"));
  $t->set_block("template","formblock","form");
+ $t->set_block("formblock","missingblock","missing");
 
  #=============================================[ set up the navigation bar ]===
  include("inc/tab_setup.inc");
@@ -90,6 +91,22 @@
  $t->set_var("foto_no_bubble",lang("pdf_include_fotos_no"));
 
  #============================================================[ Dives Form ]===
+ if (USE_DYN_PROFILES_PNG) {
+   $t->set_var("missing_bubble",lang("pdf_create_missing_graph_desc"));
+   $t->set_var("fmissing_name",lang("pdf_create_missing_graph").":");
+   $t->set_var("missing_yes_bubble",lang("pdf_create_missing_graph_yes"));
+   $t->set_var("missing_no_bubble",lang("pdf_create_missing_graph_no"));
+   if (PDF_CREATE_MISSING_GRAPH) {
+     $t->set_var("fmissing_check","CHECKED");
+     $t->set_var("fmissing_nocheck","");
+   } else {
+     $t->set_var("missing_nocheck","CHECKED");
+     $t->set_var("missing_check","");
+   }
+   $t->parse("missing","missingblock");
+ } else {
+   $t->set_var("missing","");
+ }
  $t->set_var("formname","dives");
  $t->set_var("icon_src",$pdl->config->base_url."templates/aqua/images/tab_dives.gif");
  $t->set_var("icon_width","30");

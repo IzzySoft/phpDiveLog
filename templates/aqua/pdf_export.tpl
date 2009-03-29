@@ -35,6 +35,10 @@
      <span title="{output_sidegutter_bubble}"><input type="radio" name="duplex" value="side" {foutput_sidecheck}>&nbsp;{foutput_sidename}</span></td></tr>
  <tr><td title="{foto_bubble}">{ffoto_name}</td><td><span title="{foto_yes_bubble}"><input type="radio" name="foto" value="1" {ffoto_yescheck}>&nbsp;{fyes}&nbsp;</span>
      <span title="{foto_no_bubble}"><input type="radio" name="foto" value="0" {ffoto_nocheck}>&nbsp;{fno}</span></td></tr>
+<!-- BEGIN missingblock -->
+ <tr><td title="{missing_bubble}">{fmissing_name}</td><td><span title="{missing_yes_bubble}"><input type="radio" name="pdfcreatemissinggraph" value="1" {fmissing_check}>&nbsp;{fyes}&nbsp;</span>
+     <span title="{missing_no_bubble}"><input type="radio" name="pdfcreatemissinggraph" value="0" {fmissing_nocheck}>&nbsp;{fno}</span></td></tr>
+<!-- END missingblock -->
  <tr><td colspan="2" align="center"><input type="submit" name="{submit_name}" value="{submit1_value}">&nbsp;<input type="submit" name="{submit_name}" value="{submit2_value}"></td></tr>
 </table>
 </form>
