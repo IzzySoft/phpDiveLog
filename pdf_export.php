@@ -72,7 +72,7 @@
  $t->set_var("fyes",lang("yes"));
  $t->set_var("fno",lang("no"));
  $t->set_var("formmethod","POST");
- $t->set_var("formtarget",$_SERVER["PHP_SELF"]);
+ $t->set_var("formtarget",$_SERVER["REQUEST_URI"]);
  $t->set_var("foutput_viewcheck","");
  $t->set_var("foutput_innercheck","CHECKED");
  $t->set_var("foutput_outercheck","");
