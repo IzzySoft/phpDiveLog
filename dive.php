@@ -58,7 +58,7 @@
  $ctx_iconstyle = "style='margin-top:1px;'";
  if (K_PATH_MAIN!='') $ctxnav .= " ".$pdl->link->linkurl("dive_pdf.php?nr=$nr","<img src='".$pdl->config->icons["pdf"]."' width='16' height='16' title='".lang("export_dive_pdf")."' alt='PDF' $ctx_iconstyle>");
  if (!empty($dive["buddy"])) {
-   $arr = urlencode("buddy|eq|".$dive["buddy"]);
+   $arr = urlencode("buddy|~|".$dive["buddy"]);
    $ctxnav .= " ".$pdl->link->linkurl("index.php?filter=$arr","<img src='".$pdl->config->icons["buddy"]."' width='16' height='16' title='".lang("dives_with_this_buddy")."' alt='Buddy' $ctx_iconstyle>");
  }
  if (!empty($dive["location"])) {
