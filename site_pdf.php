@@ -16,6 +16,7 @@ require_once(dirname(__FILE__)."/inc/includes.inc");
 #------------------------------------------[ DiveRecord specific constants ]---
 if (isset($_REQUEST["pageno"])) $pagenr = $_REQUEST["pageno"];
 else $pagenr = $_REQUEST["nr"];
+if ($pagenr<1) $pagenr = 1;
 $start = $pagenr;
 if (isset($_REQUEST["lastnr"]) && preg_match('!^[1-9][0-9]*$!',$_REQUEST["lastnr"])) {
   $end = $_REQUEST["lastnr"];
@@ -43,6 +44,7 @@ $pdf->SetFont('freesans', '', 10); // provides better UTF8 capabilities
 $records = $pdl->db->get_sites($start-1,$end+1-$start,FALSE,"id","ASC");
 $dc = count($records);
 for ($i=0;$i<$dc;++$i) $sites[$records[$i]["id"]] = $records[$i];
+if ($end>$records[$dc-1]["id"]) $end = $records[$dc-1]["id"];
 unset($records);
 
 #-----------------------------------------------[ Set Document Information ]---

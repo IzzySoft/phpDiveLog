@@ -20,6 +20,7 @@ if (USE_DYN_PROFILE_PNG && PDF_CREATE_MISSING_GRAPH) {
 #------------------------------------------[ DiveRecord specific constants ]---
 if (isset($_REQUEST["pageno"]) && preg_match('!^[1-9][0-9]*$!',$_REQUEST["pageno"])) $pagenr = $_REQUEST["pageno"];
 else $pagenr = $_REQUEST["nr"];
+if ($pagenr<1) $pagenr = 1;
 $start = $pagenr;
 if (isset($_REQUEST["lastnr"]) && preg_match('!^[1-9][0-9]*$!',$_REQUEST["lastnr"])) {
   $end = $_REQUEST["lastnr"];
@@ -70,6 +71,7 @@ if (MULTI_PAGE && preg_match('!^.{1}5$!',PDF_PAGE_FORMAT)) $pdf->duplexInit($sta
 $records = $pdl->db->get_dives($start-1,$end+1-$start,FALSE,"id","ASC");
 $dc = count($records);
 for ($i=0;$i<$dc;++$i) $dives[$records[$i]["dive#"]] = $records[$i];
+if ($end>$records[$dc-1]["dive#"]) $end = $records[$dc-1]["dive#"];
 unset($records);
 
 for ($nr=$start;$nr<=$end;++$nr) {
