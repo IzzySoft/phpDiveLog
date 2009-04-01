@@ -13,6 +13,7 @@
  # $Id$
 
  #================================================[ Initialize environment ]===
+ $helppage = "pdf";
  include("inc/includes.inc");
  $id = $_GET["id"];
  $title .= ": ".lang("pdf_export");

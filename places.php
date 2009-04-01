@@ -12,6 +12,7 @@
 
  # $Id$
 
+ $helppage = "globalsites";
  include("inc/includes.inc");
  if (isset($_REQUEST["place"])) $showPlace = $_REQUEST["place"];
  else $showPlace = "";

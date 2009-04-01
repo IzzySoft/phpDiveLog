@@ -12,70 +12,30 @@
 
  # $Id$
 
- class tabs {
-   function tabs() {
-     GLOBAL $t,$pdl;
-     $t->set_block("template","homeblock","home");
-     if ( $pdl->config->enable_index ){ // switch-button
-       $img = $pdl->link->linkurl("buddylist.php","<img src='".$pdl->config->tpl_url."images/tab_switch.gif' alt='switch'>");
-       $t->set_var("home_ref",$img);
-       $t->parse("home","homeblock");
-     }
-     if ( $pdl->config->user_pwd ) { // import-button
-       $img = $pdl->link->linkurl("import.php","<img src='".$pdl->config->tpl_url."images/tab_import.gif' alt='import'>");
-       $t->set_var("home_ref",$img);
-       $t->parse("home","homeblock",TRUE);
-     }
-     $this->add_tab("dives","index.php","tab_dives.gif");
-     $this->add_tab("stats","stats.php","tab_stats.gif");
-     $this->add_tab("sites","sitelist.php","tab_sites.gif");
-     if ($pdl->config->display_personal)
-       $this->add_tab("person","person.php","tab_person.gif");
-     $this->add_tab("prefs","prefs.php","tab_preferences.gif");
-     $this->add_tab("pdf_export","pdf_export.php","apdf.png");
-     $this->add_tab("help","visitor.php","tab_help.gif",1);
-     $t->set_block("template","tabblock","tab");
-   }
-
-   function add_tab($name,$url,$img,$jswin=FALSE) {
-     $this->tab[$name]->url     = $url;
-     $this->tab[$name]->active  = FALSE;
-     $this->tab[$name]->hideurl = FALSE;
-     $this->tab[$name]->img     = $img;
-     if ($jswin) $this->tab[$name]->jswin = TRUE;
-     $this->tabnames[] = $name;
-   }
-
-   function activate($name,$hideurl=FALSE) {
-     $this->tab[$name]->active = TRUE;
-     if ($hideurl) $this->tab[$name]->hideurl = TRUE;
-   }
-
-   function parse() {
-     GLOBAL $t,$pdl;
-     $tc = count($this->tabnames);
-     for ($i=0;$i<$tc;++$i) {
-       if ($this->tab[$this->tabnames[$i]]->active) {
-         $class = "tab_active"; } else { $class = "tab_inactive"; }
-       $t->set_var("tab_class","$class");
-       $name = $this->tabnames[$i];
-       if ($name=="person") { $sname = ucfirst($pdl->config->user_name);
-       } else { $sname = lang("tab_".$name); }
-       $t->set_var("tab_img",$this->tab[$name]->img);
-       if (!$this->tab[$name]->hideurl) {
-         if (isset($this->tab[$name]->jswin)) {
-           $name = "<A HREF='JavaScript:open_help(\"".$this->tab[$name]->url."\")'>$sname</A>";
-         } else
-           $name = $pdl->link->linkurl($this->tab[$name]->url,$sname);
-       } else { $name = lang("tab_".$name); }
-       $t->set_var("tab_name",$name);
-       $t->parse("tab","tabblock",$i);
-     }
-   }
+ #======================================================[ Set the help URL ]===
+ $help_url = "http://projects.izzysoft.de/trac/phpdivelog/wiki/UserManual/";
+ switch($helppage) {
+   case "dive"     : $help_url .= "LogBook/DiveDetails"; break;
+   case "divelist" : $help_url .= "LogBook/DiveList"; break;
+   case "pdf"      : $help_url .= "PdfExport"; break;
+   case "prefs"    : $help_url .= "Preferences"; break;
+   case "site"     : $help_url .= "Sites/SiteDetails"; break;
+   case "sitelist" : $help_url .= "Sites/SiteList"; break;
  }
 
  #================================================[ set up navigation tabs ]===
+ require_once(dirname(__FILE__)."/class.tabs.inc");
  $t->set_var("tpl_dir",$pdl->config->tpl_url);
  $pdl->tabs = new tabs;
+
+ $pdl->tabs->add_tab("dives","index.php","tab_dives.gif");
+ $pdl->tabs->add_tab("stats","stats.php","tab_stats.gif");
+ $pdl->tabs->add_tab("sites","sitelist.php","tab_sites.gif");
+ if ($pdl->config->display_personal)
+   $pdl->tabs->add_tab("person","person.php","tab_person.gif");
+ $pdl->tabs->add_tab("prefs","prefs.php","tab_preferences.gif");
+ $pdl->tabs->add_tab("pdf_export","pdf_export.php","apdf.png");
+ $pdl->tabs->add_tab("help",$help_url,"tab_help.gif",1);
+ $t->set_block("template","tabblock","tab");
 
 ?>

@@ -12,6 +12,7 @@
 
  # $Id$
 
+ $helppage = "prefs";
  include("inc/includes.inc");
  $title .= ": ".lang("preferences");
  if ( !empty($_GET["tab2"]) ) {

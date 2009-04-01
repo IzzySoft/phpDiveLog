@@ -13,6 +13,7 @@
  # $Id$
 
  #================================================[ Initialize environment ]===
+ $helppage = "dive";
  $listtype = "logbook";
  include("inc/includes.inc");
  $nr = $pdl->params->nr;

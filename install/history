@@ -12,6 +12,7 @@ v0.4.2
 * changing the "dives with this buddy" to a "like '%buddy%'" search - so
   it also finds dives whith multiple buddies
 ! minor fix to page navigation
+* help tab now links to the corresponding page in the projects wiki
 
 v0.4.1 (25.03.2009)
 -------------------

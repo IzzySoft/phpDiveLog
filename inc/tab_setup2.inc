@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -12,61 +12,23 @@
 
  # $Id$
 
- class tabs {
-   function tabs() {
-     GLOBAL $t,$pdl,$default_page;
-     $t->set_block("template","homeblock","home");
-     if ( !empty($_GET["diver"]) || $default_page=="user" ) {
-       $img = $pdl->link->linkurl("index.php","<img src='".$pdl->config->tpl_url."images/tab_switch2.gif' alt='switch'>");
-       $t->set_var("home_ref",$img);
-       $t->parse("home","homeblock");
-     }
-     $this->add_tab("diver","buddylist.php","tab_buddylist.gif");
-     $this->add_tab("sites","places.php","tab_sites.gif");
-     $this->add_tab("prefs","prefs.php?tab2=1","tab_preferences.gif");
-     $this->add_tab("help","visitor.php","tab_help.gif",1);
-     $t->set_block("template","tabblock","tab");
-   }
-
-   function add_tab($name,$url,$img,$jswin=FALSE) {
-     $this->tab[$name]->url     = $url;
-     $this->tab[$name]->active  = FALSE;
-     $this->tab[$name]->hideurl = FALSE;
-     $this->tab[$name]->img     = $img;
-     if ($jswin) $this->tab[$name]->jswin = TRUE;
-     $this->tabnames[] = $name;
-   }
-
-   function activate($name,$hideurl=FALSE) {
-     $this->tab[$name]->active = TRUE;
-     if ($hideurl) $this->tab[$name]->hideurl = TRUE;
-   }
-
-   function parse() {
-     GLOBAL $t,$pdl;
-     $tc = count($this->tabnames);
-     for ($i=0;$i<$tc;++$i) {
-       if ($this->tab[$this->tabnames[$i]]->active) {
-         $class = "tab_active"; } else { $class = "tab_inactive"; }
-       $t->set_var("tab_class","$class");
-       $name = $this->tabnames[$i];
-       if ($name=="person") { $sname = ucfirst($pdl->config->user_name);
-       } else { $sname = lang("tab_".$name); }
-       $t->set_var("tab_img",$this->tab[$name]->img);
-       if (!$this->tab[$name]->hideurl) {
-         if (isset($this->tab[$name]->jswin)) {
-           $name = "<A HREF='JavaScript:open_help(\"".$this->tab[$name]->url."\")'>$sname</A>";
-         } else
-           $name = $pdl->link->linkurl($this->tab[$name]->url,$sname);
-       } else { $name = lang("tab_".$name); }
-       $t->set_var("tab_name",$name);
-       $t->parse("tab","tabblock",$i);
-     }
-   }
+ #======================================================[ Set the help URL ]===
+ $help_url = "http://projects.izzysoft.de/trac/phpdivelog/wiki/UserManual/";
+ switch($helppage) {
+   case "buddylist"  : $help_url .= "GlobalMode/Divers"; break;
+   case "globalsites": $help_url .= "GlobalMode/Sites"; break;
+   case "prefs"      : $help_url .= "Preferences"; break;
  }
 
  #================================================[ set up navigation tabs ]===
+ require_once(dirname(__FILE__)."/class.tabs.inc");
  $t->set_var("tpl_dir",$pdl->config->tpl_url);
- $pdl->tabs = new tabs;
+ $pdl->tabs = new tabs(1);
+
+ $pdl->tabs->add_tab("diver","buddylist.php","tab_buddylist.gif");
+ $pdl->tabs->add_tab("sites","places.php","tab_sites.gif");
+ $pdl->tabs->add_tab("prefs","prefs.php?tab2=1","tab_preferences.gif");
+ $pdl->tabs->add_tab("help",$help_url,"tab_help.gif",1);
+ $t->set_block("template","tabblock","tab");
 
 ?>

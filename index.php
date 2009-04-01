@@ -13,6 +13,7 @@
  # $Id$
 
  $listtype = "logbook";
+ $helppage = "divelist";
  include("inc/includes.inc");
  $title .= ": DiveIndex";
  include("inc/header.inc");

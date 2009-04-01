@@ -13,6 +13,7 @@
  # $Id$
 
  #================================================[ Initialize environment ]===
+ $helppage = "site";
  include("inc/includes.inc");
  $id = $_GET["id"];
  $title .= ": Site# $id";
