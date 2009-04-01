@@ -259,7 +259,11 @@
   function pages($records,$start) {
     GLOBAL $pdl;
     $count = ceil($records/$pdl->config->display_limit);
-    $current = floor($start/$pdl->config->display_limit) +1;
+    if ($start + $pdl->config->display_limit >= $records) { // last page
+      $current = floor($records/$pdl->config->display_limit)+1;
+    } else {
+      $current = floor($start/$pdl->config->display_limit)+1;
+    }
     $links = "";
     if ($count>30) { // reduce links
       $parts = ceil($count/10);
@@ -291,6 +295,34 @@
       $this->page_links($links,1,$count,$current);
     }
     return substr($links,6); // skip initial "&nbsp;"
+  }
+
+  /** Links to previous/next and first/last
+   * @method prevNext
+   * @param ref integer records count of records
+   * @param ref integer start current page start
+   */
+  function prevNext(&$records,&$start) {
+    GLOBAL $pdl, $t;
+    $arrowheight = "height='9px'";
+    $start2 = ceil($start/$pdl->config->display_limit)*$pdl->config->display_limit;
+    if ($start) {
+      $prev = $start2 - $pdl->config->display_limit;
+      if ($prev<0) $prev=0;
+      $first = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=0","<img src='".$pdl->config->tpl_url."images/first.gif' $arrowheight>");
+      $t->set_var("nav_left",$first.$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$prev","<img src='".$pdl->config->tpl_url."images/left.gif' $arrowheight>"));
+    } else {
+      $first = "<img src='".$pdl->config->tpl_url."images/first-grey.gif' $arrowheight>";
+      $t->set_var("nav_left","$first<img src='".$pdl->config->tpl_url."images/left-grey.gif' $arrowheight>");
+    }
+    if ($start + $pdl->config->display_limit >= $records) { // last page
+      $last = "<img src='".$pdl->config->tpl_url."images/last-grey.gif' $arrowheight>";
+      $t->set_var("nav_right","<img src='".$pdl->config->tpl_url."images/right-grey.gif' $arrowheight>$last");
+    } else {
+      $last = $pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=".($records-$pdl->config->display_limit),"<img src='".$pdl->config->tpl_url."images/last.gif' $arrowheight>");
+      $next = $start + $pdl->config->display_limit;
+      $t->set_var("nav_right",$pdl->link->linkurl($_SERVER["SCRIPT_NAME"]."?start=$next","<img src='".$pdl->config->tpl_url."images/right.gif' $arrowheight>$last"));
+    }
   }
 
  } // end class common

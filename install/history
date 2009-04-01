@@ -11,6 +11,7 @@ v0.4.2
 + Added Statistics export to PDF
 * changing the "dives with this buddy" to a "like '%buddy%'" search - so
   it also finds dives whith multiple buddies
+! minor fix to page navigation
 
 v0.4.1 (25.03.2009)
 -------------------
