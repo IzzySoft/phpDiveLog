@@ -90,6 +90,29 @@ $wikitext = preg_replace('!<p>\s*</p>!ms','',$wikitext);
 if (isset($name)) $title = "Help: ".lang($name);
 else $title = "Help";
 include("inc/header.inc");
-echo $wikitext;
+#-------------------------------------------------[ set up navigation tabs ]---
+require_once("inc/class.tabs.inc");
+$t = new Template($pdl->config->tpl_path);
+$t->set_var("tpl_dir",$pdl->config->tpl_url);
+$t->set_file(array("template"=>"help.tpl"));
+if ( in_array($_REQUEST["topic"],array("buddylist","globalsites")) ) {
+  $pdl->tabs = new tabs("globalhelp");
+  $pdl->tabs->add_tab("diver",$_SERVER["PHP_SELF"]."?topic=buddylist","tab_buddylist.gif");
+  $pdl->tabs->add_tab("sites",$_SERVER["PHP_SELF"]."?topic=globalsites","tab_sites.gif");
+  $pdl->tabs->add_tab("prefs",$_SERVER["PHP_SELF"]."?topic=prefs","tab_preferences.gif");
+} else {
+  $pdl->tabs = new tabs("loghelp");
+  $pdl->tabs->add_tab("dives",$_SERVER["PHP_SELF"]."?topic=dive","tab_dives.gif");
+  $pdl->tabs->add_tab("stats",$_SERVER["PHP_SELF"]."?topic=stats","tab_stats.gif");
+  $pdl->tabs->add_tab("sites",$_SERVER["PHP_SELF"]."?topic=sitelist","tab_sites.gif");
+  $pdl->tabs->add_tab("prefs",$_SERVER["PHP_SELF"]."?topic=prefs","tab_preferences.gif");
+  $pdl->tabs->add_tab("pdf_export",$_SERVER["PHP_SELF"]."?topic=pdf","apdf.png");
+}
+$t->set_block("template","tabblock","tab");
+#$pdl->tabs->activate(xxx);
+$pdl->tabs->parse();
+$t->pparse("out","template");
+
+echo "<BR>$wikitext";
 include("inc/footer.inc");
 ?>

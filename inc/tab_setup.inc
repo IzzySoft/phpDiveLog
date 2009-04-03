@@ -15,7 +15,7 @@
  #================================================[ set up navigation tabs ]===
  require_once(dirname(__FILE__)."/class.tabs.inc");
  $t->set_var("tpl_dir",$pdl->config->tpl_url);
- $pdl->tabs = new tabs;
+ $pdl->tabs = new tabs("logbook");
 
  $pdl->tabs->add_tab("dives","index.php","tab_dives.gif");
  $pdl->tabs->add_tab("stats","stats.php","tab_stats.gif");

@@ -21,12 +21,16 @@
  class tabs {
    /** Constructor does all the job
     * @constructor tabs
-    * @param optional boolean global Global list (TRUE) or dive index (FALSE, default)?
+    * @param string segment (logbook|global|loghelp|globalhelp)
     */
-   function tabs($global=FALSE) {
+   function tabs($segment) {
      GLOBAL $t,$pdl;
-     if ($global) $url = "index.php";
-     else $url = "buddylist.php";
+     switch(strtolower($segment)) {
+       case "logbook" : $url = "buddylist.php"; break;
+       case "global"  : $url = "index.php"; break;
+       case "loghelp" : $url = "help.php?topic=buddylist"; break;
+       case "globalhelp" : $url = "help.php?topic=dive"; break;
+     }
      $t->set_block("template","homeblock","home");
      if ( $pdl->config->enable_index ){ // switch-button
        $img = $pdl->link->linkurl($url,"<img src='".$pdl->config->tpl_url."images/tab_switch.gif' alt='switch'>");
