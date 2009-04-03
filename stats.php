@@ -12,6 +12,7 @@
 
  # $Id$
 
+$helppage = "stats";
 include("inc/includes.inc");
 $title .= ": ".lang("statistics");
 include("inc/header.inc");

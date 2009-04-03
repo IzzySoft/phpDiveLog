@@ -23,6 +23,7 @@ install: installdirs
 	$(INSTALL_DATA) install/*.txt $(datadir)/install
 	cp -pr doc/* $(datadir)/doc
 	cp -pr diver/demo/* $(datadir)/diver/demo
+	touch $(datadir)/cache/.placeholder
 	if [ ! -e $(LINKTO) ]; then ln -s $(datadir) $(LINKTO); fi
 
 installdirs:
@@ -38,6 +39,7 @@ installdirs:
 	mkdir -p $(datadir)/diver/demo/fotos/dive
 	mkdir -p $(datadir)/diver/demo/fotos/site
 	mkdir -p $(datadir)/diver/demo/images
+	mkdir -p $(datadir)/cache
 	if [ ! -e $(WEBROOT) ]; then mkdir -p $(WEBROOT); fi
 
 uninstall:

@@ -83,7 +83,7 @@
        $t->set_var("tab_img",$this->tab[$name]->img);
        if (!$this->tab[$name]->hideurl) {
          if (isset($this->tab[$name]->newwin)) {
-           $name = "<A HREF='".$this->tab[$name]->url."' TARGET='_blank'>$sname</A>";
+           $name = "<A HREF='JavaScript:open_help(\"".$this->tab[$name]->url."\")'>$sname</A>";
          } else
            $name = $pdl->link->linkurl($this->tab[$name]->url,$sname);
        } else { $name = lang("tab_".$name); }
