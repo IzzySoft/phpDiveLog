@@ -42,6 +42,13 @@
   .footer a:visited { color: #dddddd; }
   .footer a:hover { color: #000000; }
   .notes { text-align: justify; }
+  DIV.wiki {
+   background-image:url(images/aqua-light.jpg);
+   background-attachment:fixed;
+  }
+  DIV.wiki H1, DIV.wiki H2, DIV.wiki H3, DIV.wiki H4, DIV.wiki H5, DIV.wiki H6 {
+   background-image:url(images/sand-light.jpg);
+  }
 
 /* === Tables === */
 
@@ -52,7 +59,7 @@
    border:0;
    border-spacing:0;
   }
-  TABLE.outer, TABLE.nav {
+  TABLE.outer, TABLE.nav, TABLE.wiki, TABLE.wiki TD, TABLE.wiki TH {
    border-style: ridge;
    border-width: 2;
    border-color: #3399ff;
@@ -67,6 +74,12 @@
   }
   .nav tr {
     background-image:url(images/aqua-light.jpg);
+  }
+  TABLE.wiki {
+   border-collapse: collapse;
+   max-width: 97%;
+   margin-left: auto;
+   margin-right: auto;
   }
   TABLE.transp {
    background-image:url(images/aqua.jpg);
