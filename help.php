@@ -81,8 +81,21 @@ if ($cache_version != $prog_version) { // cache expired: new PDL version
   file_put_contents("$cache_dir/.version",$pdl->config->version);
 }
 
+#===========================================[ Get user preferred languages ]===
+$langsupp = array("en","de","nl"); // what we provide in the wiki
+$langs = explode(",",$_SERVER["HTTP_ACCEPT_LANGUAGE"]); // what the user wants
+$lc = count($langs);
+for ($i=0;$i<$lc;++$i) {
+  $ext = substr($langs[$i],0,2);
+  if (in_array($ext,$langsupp)) {
+    $nego = $ext;
+    break;
+  }
+}
+if (empty($nego)) $nego = "en"; // fallback
+
 #======================================================[ Get the help file ]===
-$file = "$cache_dir/$name";
+$file = "$cache_dir/${name}.$nego";
 if (!empty($url) && !file_exists($file)) {
   $html = file_get_contents($url);
   file_put_contents($file,$html);
