@@ -67,7 +67,21 @@ switch($_REQUEST["topic"]) {
     break;
 }
 
-#=======[ check if the file is in cache and not expired, else get it there ]===
+#==========================================[ check if the cache is expired ]===
+if (!file_exists("$cache_dir/.version")) file_put_contents("$cache_dir/.version",$pdl->config->version);
+preg_match('!^([0-9\.]+)!',file_get_contents("$cache_dir/.version"),$match);
+$cache_version = $match[1];
+preg_match('!^([0-9\.]+)!',$pdl->config->version,$match);
+$prog_version = $match[1];
+if ($cache_version != $prog_version) { // cache expired: new PDL version
+  $dir = dir($cache_dir);
+  while (false !== $entry = $dir->read()) {
+    if (substr($entry,0,1)!=".") unlink("$cache_dir/$entry");
+  }
+  file_put_contents("$cache_dir/.version",$pdl->config->version);
+}
+
+#======================================================[ Get the help file ]===
 $file = "$cache_dir/$name";
 if (!empty($url) && !file_exists($file)) {
   $html = file_get_contents($url);
