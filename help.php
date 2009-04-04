@@ -15,6 +15,16 @@
 #================================================[ Initialize environment ]===
 include("inc/includes.inc");
 
+#=============================[ Check whether we have the Cache available ]===
+$cache_dir = $pdl->config->base_path."cache";
+if (!is_dir($cache_dir) || !is_writeable($cache_dir)) {
+  include("inc/header.inc");
+  if (!is_dir($cache_dir)) $pdl->common->alert(lang("no_cache_dir"));
+  else $pdl->common->alert(lang("cache_dir_readonly"));
+  include("inc/footer.inc");
+  exit;
+}
+
 #=======================================[ find out which page URL we need ]===
 $project_site = "http://projects.izzysoft.de/";
 $wiki_url = "${project_site}trac/phpdivelog/wiki/UserManual/";
@@ -58,13 +68,13 @@ switch($_REQUEST["topic"]) {
 }
 
 #=======[ check if the file is in cache and not expired, else get it there ]===
-if (!empty($url) && !file_exists("cache/$name")) {
+$file = "$cache_dir/$name";
+if (!empty($url) && !file_exists($file)) {
   $html = file_get_contents($url);
-  file_put_contents("cache/$name",$html);
+  file_put_contents($file,$html);
 }
 
 #============================================[ extract the content we need ]===
-$file = "cache/$name";
 $doc = new DOMDocument();
 $doc->loadHTMLFile($file);
 $wiki = $doc->getElementById("content");
