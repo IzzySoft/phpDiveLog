@@ -32,6 +32,7 @@ switch($_REQUEST["topic"]) {
   case "buddylist" :
     $url  = "${wiki_url}GlobalMode/Divers";
     $name = "buddylist";
+    $tactive = "diver";
     break;
   case "dive" :
     $url  = "${wiki_url}LogBook/DiveDetails";
@@ -40,10 +41,12 @@ switch($_REQUEST["topic"]) {
   case "divelist" :
     $url  = "${wiki_url}LogBook/DiveList";
     $name = "divelist";
+    $tactive = "dives";
     break;
   case "globalsites":
     $url  = "${wiki_url}GlobalMode/Sites";
     $name = "globalsites";
+    $tactive = "sites";
     break;
   case "pdf" :
     $url  = "${wiki_url}PdfExport";
@@ -52,6 +55,7 @@ switch($_REQUEST["topic"]) {
   case "prefs"    :
     $url  = "${wiki_url}Preferences";
     $name = "preferences";
+    $tactive = "prefs";
     break;
   case "site" :
     $url  = "${wiki_url}Sites/SiteDetails";
@@ -60,12 +64,15 @@ switch($_REQUEST["topic"]) {
   case "sitelist" :
     $url  = "${wiki_url}Sites/SiteList";
     $name = "sitelist";
+    $tactive = "sites";
     break;
   case "stats":
     $url  = "${wiki_url}Statistics";
     $name = "statistics";
+    $tactive = "stats";
     break;
 }
+if (empty($tactive)) $tactive = $name;
 
 #==========================================[ check if the cache is expired ]===
 if (!file_exists("$cache_dir/.version")) file_put_contents("$cache_dir/.version",$pdl->config->version);
@@ -117,6 +124,7 @@ $wikitext = preg_replace('!\s*<div class="wiki-toc">.*?</div>!ims','',$wikitext)
 # Kick off LastModified
 $wikitext = preg_replace('!\s*<div class="lastmodified">.*?</div>!ims','',$wikitext);
 # Links open in new window/tab
+$wikitext = preg_replace('!(<img.*?src=")/!i','$1'.$project_site,$wikitext);
 $wikitext = preg_replace('!(href=")/!i','$1'.$project_site,$wikitext);
 $wikitext = preg_replace('!\s+(href=)!i',' target="izzysoft" $1',$wikitext);
 # CleanUp
@@ -146,7 +154,7 @@ if ( in_array($_REQUEST["topic"],array("buddylist","globalsites")) ) {
   $pdl->tabs->add_tab("pdf_export",$_SERVER["PHP_SELF"]."?topic=pdf","apdf.png");
 }
 $t->set_block("template","tabblock","tab");
-#$pdl->tabs->activate(xxx);
+$pdl->tabs->activate($tactive);
 $pdl->tabs->parse();
 $t->pparse("out","template");
 
