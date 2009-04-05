@@ -104,7 +104,21 @@ if (empty($nego)) $nego = "en"; // fallback
 #======================================================[ Get the help file ]===
 $file = "$cache_dir/${name}.$nego";
 if (!empty($url) && !file_exists($file)) {
-  $html = file_get_contents($url);
+  if (function_exists("curl_init")) { // use Curl to have negotiation available
+    $str = "Accept-Language: ".$_SERVER["HTTP_ACCEPT_LANGUAGE"]."\r\n"
+         . "Accept-Charset: utf-8\r\n";
+    $ch = curl_init($url);
+    $fh = fopen($file,'w');
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array($str));
+    curl_setopt($ch, CURLOPT_FILE, $fh );
+    $res = curl_exec ($ch);
+    curl_close ($ch);
+    fclose($fh);
+    $html = file_get_contents($file);
+  } else { // no negotiation - get the default page
+    $html = file_get_contents($url);
+  }
+  $html = preg_replace('!(<head>)!i','$1'."\n".'<meta http-equiv="Content-Type" content="text/html; charset=utf-8">',$html);
   file_put_contents($file,$html);
 }
 
