@@ -289,6 +289,8 @@
        }
        $block1 = FALSE;
      }
+   } else {
+     $block1 = FALSE;
    }
    $fc  = parse_fotos($fotos,$sfc);
    if ($fc>0 && $sfc>0 && $sitepix_separate) {

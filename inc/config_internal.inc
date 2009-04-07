@@ -114,12 +114,13 @@
  #==================================================[ URL config overrides ]===
  function request_value($varname,$regexp,$config,$default,$neg=FALSE) {
    if ( $neg ) {
-     if ( preg_match($regexp,$_REQUEST[$varname]) ) return $_REQUEST[$varname];
-     elseif ( preg_match($regexp,$config) ) return $config;
+     if ( isset($_REQUEST[$varname]) && preg_match($regexp,$_REQUEST[$varname]) ) return $_REQUEST[$varname];
+     elseif ( isset($config) && preg_match($regexp,$config) ) return $config;
      else return $default;
    }
-   elseif (! ((empty($_REQUEST[$varname]) && $_REQUEST[$varname]!==0) || preg_match($regexp,$_REQUEST[$varname])) ) return $_REQUEST[$varname];
-   if ( empty($config) && $config!==0 ) return $default;
+   elseif (isset($_REQUEST[$varname]) && !((empty($_REQUEST[$varname]) && $_REQUEST[$varname]!==0) 
+           || preg_match($regexp,$_REQUEST[$varname])) ) return $_REQUEST[$varname];
+   if ( isset($config) && empty($config) && $config!==0 ) return $default;
    return $config;
  }
  define("PIX_PER_ROW",request_value("pixinrow",'|[^\d]|',$pix_per_row,3));

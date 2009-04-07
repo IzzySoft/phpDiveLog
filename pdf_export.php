@@ -15,11 +15,10 @@
  #================================================[ Initialize environment ]===
  $helppage = "pdf";
  include("inc/includes.inc");
- $id = $_GET["id"];
  $title .= ": ".lang("pdf_export");
 
  #================================================[ Process submitted form ]===
- switch($_POST["submit"]) {
+ if (isset($_POST["submit"])) switch($_POST["submit"]) {
  #----------------------------------------------------------[ Export Dives ]---
    case lang("export_dives") :
      if ( empty($_POST["from"]) || empty($_POST["to"]) ) {
@@ -97,7 +96,7 @@
  $t->set_var("foto_no_bubble",lang("pdf_include_fotos_no"));
 
  #============================================================[ Dives Form ]===
- if (USE_DYN_PROFILES_PNG) {
+ if (USE_DYN_PROFILE_PNG) {
    $t->set_var("missing_bubble",lang("pdf_create_missing_graph_desc"));
    $t->set_var("fmissing_name",lang("pdf_create_missing_graph").":");
    $t->set_var("missing_yes_bubble",lang("pdf_create_missing_graph_yes"));

@@ -144,7 +144,7 @@
    } else {
      $t->set_var("pix","&nbsp;");
    }
-   $t->parse("item","itemblock",TRUE);
+   $t->parse("item","itemblock",$i);
  }
  $t->pparse("out","template");
 
