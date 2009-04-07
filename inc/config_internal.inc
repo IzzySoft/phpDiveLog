@@ -21,7 +21,7 @@
    $pdbug = error_reporting();
    error_reporting($pdbug | $level);
  }
- if ( strpos(strtoupper($debug_level),"A")!==false ) set_phpdebug(E_LL);
+ if ( strpos(strtoupper($debug_level),"A")!==false ) set_phpdebug(E_ALL);
  else {
    if ( strpos(strtoupper($debug_level),"E")!==false ) set_phpdebug(E_ERROR);
    if ( strpos(strtoupper($debug_level),"W")!==false ) set_phpdebug(E_WARNING);
