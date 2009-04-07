@@ -104,10 +104,13 @@ if (empty($nego)) $nego = "en"; // fallback
 #======================================================[ Get the help file ]===
 $file = "$cache_dir/${name}.$nego";
 if (!empty($url) && !file_exists($file)) {
+  $pos = strpos($_SERVER["SERVER_PROTOCOL"],"/");
+  $me = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,$pos))."://".$_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"];
   $opts = array('http' =>
       array(
           'method'  => 'GET',
-          'header'  => "Accept-Language: ".$_SERVER["HTTP_ACCEPT_LANGUAGE"]."\r\nAccept-Charset: utf-8\r\n"
+          'header'  => "Accept-Language: ".$_SERVER["HTTP_ACCEPT_LANGUAGE"]."\r\nAccept-Charset: utf-8\r\nReferer: $me\r\n",
+          'user_agent' => $_SERVER["HTTP_USER_AGENT"]
       )
   );
   $context  = stream_context_create($opts);
