@@ -14,6 +14,8 @@ v0.4.2
 ! minor fix to page navigation
 * help pages now retrieve their content from the corresponding page in the
   projects wiki
++ added a script to check for missing translations (install/missing.php).
+  You need to copy it to the "lang/" directory to run it, it's intended for CLI.
 
 v0.4.1 (25.03.2009)
 -------------------
