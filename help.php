@@ -104,20 +104,14 @@ if (empty($nego)) $nego = "en"; // fallback
 #======================================================[ Get the help file ]===
 $file = "$cache_dir/${name}.$nego";
 if (!empty($url) && !file_exists($file)) {
-  if (function_exists("curl_init")) { // use Curl to have negotiation available
-    $str = "Accept-Language: ".$_SERVER["HTTP_ACCEPT_LANGUAGE"]."\r\n"
-         . "Accept-Charset: utf-8\r\n";
-    $ch = curl_init($url);
-    $fh = fopen($file,'w');
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array($str));
-    curl_setopt($ch, CURLOPT_FILE, $fh );
-    $res = curl_exec ($ch);
-    curl_close ($ch);
-    fclose($fh);
-    $html = file_get_contents($file);
-  } else { // no negotiation - get the default page
-    $html = file_get_contents($url);
-  }
+  $opts = array('http' =>
+      array(
+          'method'  => 'GET',
+          'header'  => "Accept-Language: ".$_SERVER["HTTP_ACCEPT_LANGUAGE"]."\r\nAccept-Charset: utf-8\r\n"
+      )
+  );
+  $context  = stream_context_create($opts);
+  $html = file_get_contents('http://projects.izzysoft.de/trac/phpdivelog/wiki/UserManual/GlobalMode/Divers', false, $context);
   $html = preg_replace('!(<head>)!i','$1'."\n".'<meta http-equiv="Content-Type" content="text/html; charset=utf-8">',$html);
   file_put_contents($file,$html);
 }
