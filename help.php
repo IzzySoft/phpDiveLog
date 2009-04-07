@@ -114,7 +114,7 @@ if (!empty($url) && !file_exists($file)) {
       )
   );
   $context  = stream_context_create($opts);
-  $html = file_get_contents('http://projects.izzysoft.de/trac/phpdivelog/wiki/UserManual/GlobalMode/Divers', false, $context);
+  $html = file_get_contents($url, false, $context);
   $html = preg_replace('!(<head>)!i','$1'."\n".'<meta http-equiv="Content-Type" content="text/html; charset=utf-8">',$html);
   file_put_contents($file,$html);
 }
