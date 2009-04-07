@@ -52,6 +52,7 @@
      $this->txt  = $txt;
      $this->trim = $trim;
      $this->recode = $recode;
+     $this->data = array();
    }
 
    /** Import CSV file
