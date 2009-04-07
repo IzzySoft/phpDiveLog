@@ -48,6 +48,17 @@
   }
   DIV.wiki H1, DIV.wiki H2, DIV.wiki H3, DIV.wiki H4, DIV.wiki H5, DIV.wiki H6 {
    background-image:url(images/sand-light.jpg);
+   margin-top: 0;
+  }
+  .wiki {
+   border-style: ridge;
+   border-width: 2;
+   border-color: #3399ff;
+   margin-top: 15px;
+  }
+  .wikipage > P {
+   margin-left:5px;
+   margin-right:5px;
   }
 
 /* === Tables === */
