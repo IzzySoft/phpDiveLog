@@ -19,6 +19,10 @@ if (empty($argv[1])) {
   die("You must pass the translation file to check as the first parameter.\n");
 } elseif ($argv[1]=="trans.en") {
   die("Hey, what you are doing? 'trans.en' is the reference file :-)\n");
+} elseif(!file_exists($argv[1])) {
+  die("The file you specified (".$argv[1].") could not be found.\n");
+} elseif(!file_exists("trans.en")) {
+  die("The reference file (trans.en) could not be found.\nPlease make sure you run this script from inside the 'lang/' directory!\n");
 }
 
 #======================================================[ Helper Functions ]===

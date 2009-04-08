@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.4.2
+v0.4.2 (08.04.2009)
 -------------------
 + added possibility to export multiple dives/sites at once to PDF
 + missing dynamic profiles are now created on PDF generation (depending on
