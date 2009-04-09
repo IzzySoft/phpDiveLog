@@ -109,6 +109,7 @@
     * @return string language (ISO language code) - empty if we can't support any
     */
    function get_browserlang() {
+     if (!isset($_SERVER["HTTP_ACCEPT_LANGUAGE"])) return ""; // prevent notice
      $langs = explode(",",$_SERVER["HTTP_ACCEPT_LANGUAGE"]);
      $lc    = count($langs);
      for ($i=0;$i<$lc;++$i) { // check if we have a suitable file

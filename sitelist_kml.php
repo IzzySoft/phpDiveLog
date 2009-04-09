@@ -27,9 +27,14 @@
  $t->set_block("template","itemblock","item");
 
  #==============================================[ Import dive data from DB ]===
- $sort = $_REQUEST["sort"]; $order = $_REQUEST["order"];
- if (!in_array($sort,array("location","place","depth"))) $sort = "";
- if (!in_array($order,array("desc","asc"))) $order = "";
+ if (isset($_REQUEST["sort"])) {
+   $sort = $_REQUEST["sort"];
+   if (!in_array($sort,array("location","place","depth"))) $sort = "";
+ }
+ if (isset($_REQUEST["order"])) {
+   $order = $_REQUEST["order"];
+   if (!in_array($order,array("desc","asc"))) $order = "";
+ }
  if (empty($sort) && !empty($pdl->config->sitelist_default_sort)) {
    $sort  = $pdl->config->sitelist_default_sort;
    $order = $pdl->config->sitelist_default_order;
@@ -64,7 +69,7 @@
    foreach($details AS $detail) {
      $t->set_var("$detail",$sites[$i][$detail]);
    }
-   $t->parse("item","itemblock",TRUE);
+   $t->parse("item","itemblock",$i);
  }
 
  #====================================================[ Send the .kml file ]===
