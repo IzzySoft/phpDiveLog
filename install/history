@@ -6,6 +6,7 @@ History for phpDiveLog
 v0.4.3
 -------------------
 ! cleanup some more notices breaking the KML stuff when debug level has "A" or "N"
+* some code reorganization
 
 v0.4.2 (08.04.2009)
 -------------------

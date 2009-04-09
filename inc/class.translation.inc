@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2007 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -14,22 +14,22 @@
 
  /** Translation handling methods
   * @package Api
-  * @class trans
+  * @class translation
   * @author Izzy (izzysoft AT qumran DOT org)
-  * @copyright (c) 2004-2007 by Itzchak Rehberg and IzzySoft
+  * @copyright (c) 2004-2009 by Itzchak Rehberg and IzzySoft
   */
- class trans {
+ class translation {
 
    /** Initialize
-    * @constructor trans
+    * @constructor translation
     */
-   function trans() {
+   function translation() {
      $this->avail        = $this->avail();
      $this->browserpref  = $this->get_browserlang();
    }
 
    /** read the translations
-    * @class trans
+    * @class translation
     * @method get_translations
     * @param string lang_id ISO code of the prefered language
     */
@@ -40,7 +40,7 @@
    }
 
    /** Get list of available language files
-    * @class trans
+    * @class translation
     * @method favail
     * @return array lang_keys ( n=&gt;key )
     */
@@ -59,7 +59,7 @@
    }
 
    /** Get list of available languages
-    * @class trans
+    * @class translation
     * @method avail
     * @return array lang_keys ( n=&gt;key )
     */
@@ -70,7 +70,7 @@
    /** translate a given reference
     *  if no translation is found, the content of the passed param $key is
     *  returned instead
-    * @class trans
+    * @class translation
     * @method trans
     * @param string key translation key
     * @param optional array m1 replace placeholder (%1..%10 in translations)
@@ -86,7 +86,7 @@
    }
 
    /** build the translations (helper func to method trans)
-    * @class trans
+    * @class translation
     * @method translate
     * @param string key translation key
     * @param optional array vars array of replacement strings (see function lang)
@@ -104,7 +104,7 @@
    }
 
    /** retrieve users prefered languages from browser info
-    * @class trans
+    * @class translation
     * @method get_browserlang
     * @return string language (ISO language code) - empty if we can't support any
     */
@@ -123,15 +123,15 @@
    }
 
    /** Visitors prefered language according to browser info
-    * @class trans
+    * @class translation
     * @attribute string browserpref
     */
    /** Translations
-    * @class trans
+    * @class translation
     * @attribute array translations
     */
    /** Available languages
-    * @class trans
+    * @class translation
     * @attribute array avail
     */
 

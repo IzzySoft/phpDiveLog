@@ -143,5 +143,4 @@
 
  } // end class link
 
- $pdl->link = new link;
 ?>

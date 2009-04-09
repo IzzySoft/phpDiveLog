@@ -107,8 +107,9 @@
        $t->set_var("bigref","");
      }
      $t->set_var("foto",$fotos[$i]->url);
-     $t->set_var("fdesc",$pdl->common->tagreplace($fotos[$i]->desc));
-     $t->parse("pic","fotoitemblock",TRUE);
+     if (isset($fotos[$i]->desc)) $t->set_var("fdesc",$pdl->common->tagreplace($fotos[$i]->desc));
+     else $t->set_var("fdesc","");
+     $t->parse("pic","fotoitemblock",$i);
      if ( ($i+1)%PIX_PER_ROW==0 && $fc>PIX_PER_ROW && $i+1!=$fc ) {
        $t->parse("pic","multifotoblock",TRUE);
      }

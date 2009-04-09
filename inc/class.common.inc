@@ -327,5 +327,4 @@
 
  } // end class common
 
- $pdl->common = new common;
 ?>
