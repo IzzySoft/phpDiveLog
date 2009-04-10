@@ -43,6 +43,10 @@ switch($_REQUEST["topic"]) {
     $name = "divelist";
     $tactive = "dives";
     break;
+  case "filter" :
+    $url  = "${wiki_url}Filter";
+    $name = "filter";
+    break;
   case "globalsites":
     $url  = "${wiki_url}GlobalMode/Sites";
     $name = "globalsites";
@@ -163,6 +167,7 @@ if ( in_array($_REQUEST["topic"],array("buddylist","globalsites")) ) {
   $pdl->tabs->add_tab("sites",$_SERVER["PHP_SELF"]."?topic=sitelist","tab_sites.gif");
   $pdl->tabs->add_tab("prefs",$_SERVER["PHP_SELF"]."?topic=prefs","tab_preferences.gif");
   $pdl->tabs->add_tab("pdf_export",$_SERVER["PHP_SELF"]."?topic=pdf","apdf.png");
+  $pdl->tabs->add_tab("filter",$_SERVER["PHP_SELF"]."?topic=filter","filter.png");
 }
 $t->set_block("template","tabblock","tab");
 $pdl->tabs->activate($tactive);
