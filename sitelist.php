@@ -19,6 +19,16 @@
  $start = $pdl->params->start;
  $end = $start + $pdl->config->display_limit;
 
+ if (isset($_REQUEST["filter"])) {
+   $arr = explode("|",$_REQUEST["filter"]);
+   $ac = count($arr);
+   for ($i=0;$i<$ac;$i+=3) {
+     $filter[] = array("column"=>$arr[$i],"compare"=>$arr[$i+1],"value"=>$arr[$i+2]);
+   }
+ } else {
+   $filter = "";
+ }
+
  $t = new Template($pdl->config->tpl_path);
  $t->set_file(array("template"=>"sitelist.tpl"));
  $t->set_block("template","itemblock","item");
@@ -31,7 +41,7 @@
    $sort  = $pdl->config->sitelist_default_sort;
    $order = $pdl->config->sitelist_default_order;
  }
- $sites = $pdl->db->get_sites($start,$pdl->config->display_limit,FALSE,$sort,$order);
+ $sites = $pdl->db->get_sites($start,$pdl->config->display_limit,FALSE,$sort,$order,$filter);
  $max   = count($sites);
  $records = $pdl->db->sites;
 

@@ -123,7 +123,7 @@
     * @param optional string order sort order (asc or desc)
     * @param optional array [0..n] where restricts the result set.
     *        Array structure: fields column, compare, value. All strings.
-    *        compare must be one of "&lt;", "&gt;", "=", "!=", "&lt;&gt;", "&lt;=", "&gt;="
+    *        compare must be one of "lt", "gt", "eq", "ne", "~", "le", "ge"
     */
    function read_divedata($sort="",$order="",$where="") {
      GLOBAL $pdl;
@@ -235,7 +235,7 @@
     * @param optional string order sort order (asc or desc)
     * @param optional array [0..n] where restricts the result set.
     *        Array structure: fields column, compare, value. All strings.
-    *        compare must be one of "lt", "gt", "eq", "ne"
+    *        compare must be one of "lt", "gt", "eq", "ne", "~", "le", "ge"
     * @return array divedata (either array of dive records or single record)
     */
    function get_dives($start="",$end="",$id=FALSE,$sort="",$order="",$where="") {
@@ -289,31 +289,49 @@
     * @class db_text
     * @param optional string sort column to sort by
     * @param optional string order sort order (asc or desc)
+    * @param optional array [0..n] where restricts the result set.
+    *        Array structure: fields column, compare, value. All strings.
+    *        compare must be one of "lt", "gt", "eq", "ne", "~", "le", "ge"
     * @method read_sitedata
     */
-   function read_sitedata($sort="",$order="") {
+   function read_sitedata($sort="",$order="",$where="") {
      GLOBAL $pdl;
-     if (isset($this->sites)) return; // prevent multiple reads
-     switch ($pdl->config->db_type) {
-       case "csv"  :
-       default     :
-         $csv = new csv(";",'"',TRUE);
-	 if (file_exists($pdl->config->sites)) {
-           $csv->import($pdl->config->sites);
-           switch ($sort) {
-	     case "id"       : $sort="id"; $type="num"; break;
-             case "location" : $sort="loc"; $type="str"; break;
-             case "place"    :
-             case "depth"    : $type="str"; break;
-           }
-           if (!empty($sort)) {
-             $csv->sort($sort,$order,$type);
-           }
-           $this->sitedata = $csv->data;
-           $this->sites    = count($this->sitedata);
-           $this->setup_site_records(); // temporary - see func *!*
-         }
+     static $last_where = array();
+     static $last_order = "";
+     static $last_sort = "";
+     $csv = new csv(";",'"',TRUE);
+     if (!isset($this->sites)) { // prevent multiple reads
+       if (file_exists($pdl->config->sites)) {
+         $csv->import($pdl->config->sites);
+       }
+     } else {
+       $csv->data = $this->divedata;
      }
+     if ( is_array($where) && $where != $last_where ) {
+       $last_where = $where;
+       $ac = count($where);
+       for ($i=0;$i<$ac;++$i) {
+         if ( in_array($where[$i]["column"],array("id","depth")) )
+           $csv->where($where[$i]["column"],$where[$i]["compare"],$where[$i]["value"],"num");
+         else
+           $csv->where($where[$i]["column"],$where[$i]["compare"],$where[$i]["value"]);
+       }
+       $restricted = TRUE;
+     } else {
+       $restricted = FALSE;
+     }
+     if ( !empty($sort) && ($sort != $last_sort || $restricted) ) {
+       switch ($sort) {
+         case "id"       : $sort="id"; $type="num"; break;
+         case "location" : $sort="loc"; $type="str"; break;
+         case "place"    :
+         case "depth"    : $type="str"; break;
+       }
+       $csv->sort($sort,$order,$type);
+     }
+     $this->sitedata = $csv->data;
+     $this->sites    = count($this->sitedata);
+     $this->setup_site_records(); // temporary - see func *!*
    }
 
    function setup_site_records() { // temporary: we need an ID for reference
@@ -340,10 +358,13 @@
     *  record set (FALSE), defaults to FALSE
     * @param optional string sort column to sort by
     * @param optional string order sort order (asc or desc)
+    * @param optional array [0..n] where restricts the result set.
+    *        Array structure: fields column, compare, value. All strings.
+    *        compare must be one of "lt", "gt", "eq", "ne", "~", "le", "ge"
     * @return array sitedata (either array of site records or single record)
     */
-   function get_sites($start="",$end="",$id=FALSE,$sort="",$order="") {
-     $this->read_sitedata($sort,$order);
+   function get_sites($start="",$end="",$id=FALSE,$sort="",$order="",$filter="") {
+     $this->read_sitedata($sort,$order,$filter);
      if ($start==="") { // all records
        return $this->sitedata;
      } else {

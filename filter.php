@@ -35,7 +35,7 @@
      }
      break;
    case lang("filter_sites") :
-     $fields = array("location","place","depth");
+     $fields = array("loc","place","depth");
      $filter = "";
      foreach ($fields as $field) {
        if ( isset($_POST[$field]) && !empty($_POST[$field]) ) {
@@ -155,8 +155,8 @@
  $t->set_var("name_bubble",lang("filter_location_desc"));
  $t->set_var("val_bubble",lang("filter_location_val_desc"));
  $t->set_var("name",lang("location"));
- $t->set_var("comp","location_comp");
- $t->set_var("input","location");
+ $t->set_var("comp","loc_comp");
+ $t->set_var("input","loc");
  $t->set_var("value","");
  $t->parse("item","itemblock");
  // Place
