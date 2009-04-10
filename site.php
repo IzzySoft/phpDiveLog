@@ -40,6 +40,8 @@
  $ctx_iconstyle = "style='margin-top:1px;'";
  if (K_PATH_MAIN!='') $ctxnav .= " ".$pdl->link->linkurl("site_pdf.php?nr=$id","<img src='".$pdl->config->icons["pdf"]."' width='16' height='16' title='".lang("export_dive_pdf")."' alt='PDF' $ctx_iconstyle>");
  if (!empty($site["loc"])) {
+   $arr = urlencode("loc|eq|".$site["loc"]);
+   $ctxnav .= " ".$pdl->link->linkurl("sitelist.php?filter=$arr","<img src='".$pdl->config->tpl_url."images/globe.gif' width='16' height='16' title='".lang("sites_at_this_location")."' alt='Location' $ctx_iconstyle>");
    $arr = urlencode("location|eq|".$site["loc"]);
    $ctxnav .= " ".$pdl->link->linkurl("index.php?filter=$arr","<img src='".$pdl->config->icons["location"]."' width='16' height='16' title='".lang("dives_at_this_location")."' alt='Location' $ctx_iconstyle>");
  }
