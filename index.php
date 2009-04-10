@@ -24,6 +24,7 @@
    $arr = explode("|",$_REQUEST["filter"]);
    $ac = count($arr);
    for ($i=0;$i<$ac;$i+=3) {
+     if ($arr[$i]=="loc") $arr[$i] = "location";
      $filter[] = array("column"=>$arr[$i],"compare"=>$arr[$i+1],"value"=>$arr[$i+2]);
    }
  } else {

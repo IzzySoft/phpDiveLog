@@ -144,7 +144,7 @@
        for ($i=0;$i<$ac;++$i) {
          if ( in_array($where[$i]["column"],array("time","dive#","site_id","depth","divetime","tank#","tank_id","visibility","watertemp","airtemp","suit_id","weight","rating")) )
            $csv->where($where[$i]["column"],$where[$i]["compare"],$where[$i]["value"],"num");
-         else
+         elseif ( in_array($where[$i]["column"],array("date","location","place","buddy","notes")) )
            $csv->where($where[$i]["column"],$where[$i]["compare"],$where[$i]["value"]);
        }
        $restricted = TRUE;
@@ -311,9 +311,9 @@
        $last_where = $where;
        $ac = count($where);
        for ($i=0;$i<$ac;++$i) {
-         if ( in_array($where[$i]["column"],array("id","depth")) )
+         if ( in_array($where[$i]["column"],array("id","depth","altitude")) )
            $csv->where($where[$i]["column"],$where[$i]["compare"],$where[$i]["value"],"num");
-         else
+         elseif ( in_array($where[$i]["column"],array("loc","place","type","water","description")) )
            $csv->where($where[$i]["column"],$where[$i]["compare"],$where[$i]["value"]);
        }
        $restricted = TRUE;
