@@ -24,6 +24,11 @@
    $pdl->tabs->add_tab("person","person.php","tab_person.gif");
  $pdl->tabs->add_tab("prefs","prefs.php","tab_preferences.gif");
  $pdl->tabs->add_tab("pdf_export","pdf_export.php","apdf.png");
+ if (basename($_SERVER["PHP_SELF"])=="filter.php") {
+   $pdl->tabs->add_tab("filter","filter.php?filter=","filterstop.png");
+ } else {
+   $pdl->tabs->add_tab("filter","filter.php","filter.png");
+ }
  if (!empty($helppage)) $pdl->tabs->add_tab("help",$helppage,"tab_help.gif",1);
  $t->set_block("template","tabblock","tab");
 

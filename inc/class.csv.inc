@@ -255,7 +255,8 @@
        }
      }
      unset($this->data);
-     $this->data = $data;
+     if (isset($data)) $this->data = $data;
+     else $this->data = array();
    }
 
  } // end class csv

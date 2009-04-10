@@ -262,7 +262,8 @@
 	   for ($i=$start;$i<$max;++$i) {
 	     $data[] = $this->divedata[$i];
 	   }
-	   return $data;
+	   if (isset($data)) return $data;
+           else return array();
 	 } else {
 	   return $this->divedata[$start];
 	 }
