@@ -155,6 +155,14 @@
       }
       $newText .= "$line\n";
     }
+    if (defined('EMOTICON_FILE')) {
+      $csv = new csv(";",'"',TRUE);
+      $csv->import(EMOTICON_FILE);
+      foreach ($csv->data as $emo) {
+        $preg = '|(\s)'.str_replace("(","\(",str_replace(")","\)",str_replace("|","\|",$emo["code"]))).'(\s)|i';
+        $newText = preg_replace($preg,'$1<img src="'.$emo["url"].'" alt="'.$emo["code"].'">$2',$newText);
+      }
+    }
     return $newText;
   }
 

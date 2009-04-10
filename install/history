@@ -9,6 +9,7 @@ v0.4.3
 * some code reorganization
 + added filter/search facility
 + added "sites at this location" to context navigation
++ added emoticon support
 
 v0.4.2 (08.04.2009)
 -------------------

@@ -163,6 +163,10 @@
  $pdl->config->icons["buddy"]    = $pdl->config->base_url."templates/aqua/images/buddy.png";
  $pdl->config->icons["location"] = $pdl->config->base_url."templates/aqua/images/fingerpost.gif";
  $pdl->config->icons["place"]    = $pdl->config->base_url."templates/aqua/images/anchor.png";
+ if ( isset($emoticon_file) && !empty($emoticon_file) ) {
+   if (substr($emoticon_file,0,1)!= "/") $emoticon_file = $pdl->config->base_path.$emoticon_file;
+   if (file_exists($emoticon_file)) define('EMOTICON_FILE',$emoticon_file);
+ }
 
  #=============================================================[ clean up ]===
  unset($database,$display_limit,$pix_per_row,$allow_override,$enable_index,
