@@ -8,6 +8,7 @@ v0.4.3
 ! cleanup some more notices breaking the KML stuff when debug level has "A" or "N"
 * some code reorganization
 + added filter/search facility
++ added "sites at this location" to context navigation
 
 v0.4.2 (08.04.2009)
 -------------------

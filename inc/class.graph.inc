@@ -85,7 +85,7 @@ class graph {
       if (!file_exists($profilepng) || filemtime($profilepng) < filemtime($csvfile)) {
         $this->profile($nr);
       }
-      if (((SCHEDULE_GRAPH=="integrated" && !file_exists($profilepng)) || $schedule_graph=="separate")
+      if (((SCHEDULE_GRAPH=="integrated" && !file_exists($profilepng)) || SCHEDULE_GRAPH=="separate")
          && (!file_exists($schedulepng) || filemtime($schedulepng) < filemtime($schedulecsv))) {
         $this->schedule($nr);
       }

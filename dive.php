@@ -63,6 +63,8 @@
    $ctxnav .= " ".$pdl->link->linkurl("index.php?filter=$arr","<img src='".$pdl->config->icons["buddy"]."' width='16' height='16' title='".lang("dives_with_this_buddy")."' alt='Buddy' $ctx_iconstyle>");
  }
  if (!empty($dive["location"])) {
+   $arr = urlencode("loc|eq|".$dive["location"]);
+   $ctxnav .= " ".$pdl->link->linkurl("sitelist.php?filter=$arr","<img src='".$pdl->config->tpl_url."images/globe.gif' width='16' height='16' title='".lang("sites_at_this_location")."' alt='Location' $ctx_iconstyle>");
    $arr = urlencode("location|eq|".$dive["location"]);
    $ctxnav .= " ".$pdl->link->linkurl("index.php?filter=$arr","<img src='".$pdl->config->icons["location"]."' width='16' height='16' title='".lang("dives_at_this_location")."' alt='Location' $ctx_iconstyle>");
  }
@@ -254,7 +256,8 @@
 	 $t->set_var("bigref","");
        }
        $t->set_var("foto",$fotos[$i]->url);
-       $t->set_var("fdesc",$fotos[$i]->desc);
+       if (isset($fotos[$i]->desc)) $t->set_var("fdesc",$fotos[$i]->desc);
+       else $t->set_var("fdesc","");
        $t->parse("pic","fotoitemblock",$i+$start);
        if ( ($start+$i+1)%PIX_PER_ROW==0 && $i+1<$fc) {
          $t->parse("pic","multifotoblock",TRUE);
