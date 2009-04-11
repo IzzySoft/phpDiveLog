@@ -132,7 +132,7 @@
            $name = $this->field[$i]->name;
            if ($this->field[$i]->txt) {
              if ($i+1<$fc) {
-               $pos = strpos($this->text,$this->txt.$this->sep);
+               $pos = strpos($this->text,$this->txt.$this->sep,1);
              } else {
 	       $pos = strpos($this->text,$this->txt."\n");
              }
