@@ -49,7 +49,7 @@ $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor(ucfirst($pdl->params->diver));
 $pdf->SetTitle($title);
 $pdf->SetSubject($title);
-$pdf->SetKeywords($dive["location"].', '.$dive["place"].', '.$pdl->params->diver.', dive');
+if (MULTI_PAGE) $pdf->SetKeywords('divelog, '.$pdl->params->diver.', dive');
 
 #=======================================================[ Prepare the Page ]===
 #---------------------------------------------------------[ Template Setup ]---
@@ -145,12 +145,12 @@ for ($nr=$start;$nr<=$end;++$nr) {
   $t->set_var("item_data",$dive["suittype"].", ".$dive["suitname"]);
   $t->parse("equi","equiblock");
   if (!empty($userdef1) && !empty($dive["userdef1"])) {
-    $t->set_var("item_name",lang($userdef1).":");
+    $t->set_var("item_name","${userdef1}:");
     $t->set_var("item_data",$dive["userdef1"]);
     $t->parse("equi","equiblock",TRUE);
   }
   if (!empty($userdef2) && !empty($dive["userdef2"])) {
-    $t->set_var("item_name",lang($userdef2).":");
+    $t->set_var("item_name","${userdef2}:");
     $t->set_var("item_data",$dive["userdef2"]);
     $t->parse("equi","equiblock",TRUE);
   }

@@ -128,12 +128,12 @@
  $t->set_var("item_data",$dive["suittype"].", ".$dive["suitname"]);
  $t->parse("equi","equiblock");
  if (!empty($userdef1) && !empty($dive["userdef1"])) {
-   $t->set_var("item_name",lang($userdef1).":");
+   $t->set_var("item_name","${userdef1}:");
    $t->set_var("item_data",$dive["userdef1"]);
    $t->parse("equi","equiblock",TRUE);
  }
  if (!empty($userdef2) && !empty($dive["userdef2"])) {
-   $t->set_var("item_name",lang($userdef2).":");
+   $t->set_var("item_name","${userdef2}:");
    $t->set_var("item_data",$dive["userdef2"]);
    $t->parse("equi","equiblock",TRUE);
  }

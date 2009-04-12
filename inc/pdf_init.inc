@@ -16,7 +16,7 @@ require_once(dirname(__FILE__)."/includes.inc");
 #===========================================================[ Helper funcs ]===
 function config_value($varname,$regexp,$default,$neg=FALSE) {
   GLOBAL ${$varname};
-  if ( $neg ) { if ( isset(${varname}) && preg_match($regexp,${$varname}) ) return ${$varname}; }
+  if ( $neg ) { if ( isset(${$varname}) && preg_match($regexp,${$varname}) ) return ${$varname}; }
   elseif (! (!isset(${$varname}) || preg_match($regexp,${$varname})) ) return ${$varname};
   return $default;
 }
