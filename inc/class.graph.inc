@@ -45,8 +45,8 @@ class graph {
     } else {
       ImageColorAllocate($D->Img, 200,200,200); // background color
     }
-    $D->SetFrame(50, 30, $width-10, $height-30); 
-    $D->SetBorder(UTC(2000,01,01,0,0,0), UTC(2000,01,01,0,0,$divetime+20), $max_depth+1, 0); 
+    $D->SetFrame(50, 10, $width-10, $height-30); 
+    $D->SetBorder(UTC(2000,01,01,0,0,0), UTC(2000,01,01,0,0,$divetime*1.1), $max_depth*1.1, 0); 
     // Setup Grid
     $D->XGridDelta = 300; // 5 min
     if ($divetime > 3900) $D->XGridDelta = 600; // 10' Grid for > 70' divetime
@@ -311,7 +311,8 @@ class graph {
     $year_in_s = 365 * 24 * 3600;
     for ($i=$min_date,$k=0;$i<=$max_date;++$i,++$k) {
       $time[$k] = ($i * $year_in_s - 0.5 * $year_in_s) - (1970 * $year_in_s);
-      $data[$k] = $dives[$i];
+      if (isset($dives[$i])) $data[$k] = $dives[$i];
+      else $data[$k] = 0;
       $year[$k] = $i;
       if ($data[$k]>$max_dives) $max_dives = $data[$k];
     }
@@ -327,11 +328,11 @@ class graph {
     } else {
       ImageColorAllocate($D->Img, 200,200,200); // background color
     }
-    $D->SetFrame(60, 30, $width-20, $height-30);
+    $D->SetFrame(60, 10, $width-20, $height-30);
     if ($years<5)
-      $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($min_date+4,12,31,0,0,0), 0, $max_dives+1); 
+      $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($min_date+4,12,31,0,0,0), 0, $max_dives*1.1);
     else
-      $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($max_date-1,12,31,0,0,0), 0, $max_dives+1); 
+      $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($max_date-1,12,31,0,0,0), 0, $max_dives*1.1); 
     $D->XSubGrids = 1;
     $D->YSubGrids = 1;
     // Setup Labels
@@ -348,10 +349,12 @@ class graph {
       $boxborder = 1;
       $D->BFont = 4;
     }
-    if ($years>20) $D->BFont = 1;
+    if ($years>30) $D->BFont = -1;
+    elseif ($years>25) $D->BFont = -2;
+    elseif ($years>20) $D->BFont = 1;
     elseif ($years>15) $D->BFont = 2;
     for($i=1;$i<$years;$i++) {
-      if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && $years>25)) $dispval = "";
+      if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && $years>35)) $dispval = "";
       else $dispval = $data[$i-1];
       $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",$dispval,"ffffff","$boxborder","",$year[$i-1].": ".$data[$i-1]);
     }
@@ -408,7 +411,8 @@ class graph {
     $year_in_s = 365 * 24 * 3600;
     for ($i=$min_date,$k=0;$i<=$max_date;++$i,++$k) {
       $time[$k] = ($i * $year_in_s - 0.5 * $year_in_s) - (1970 * $year_in_s);
-      $data[$k] = $divetime[$i];
+      if (isset($divetime[$i])) $data[$k] = $divetime[$i];
+      else $data[$k] = 0;
       $year[$k] = $i;
       if ($data[$k]>$max_time) $max_time = $data[$k];
     }
@@ -424,15 +428,15 @@ class graph {
     } else {
       ImageColorAllocate($D->Img, 200,200,200); // background color
     }
-    $D->SetFrame(60, 30, $width-20, $height-30);
+    $D->SetFrame(60, 10, $width-20, $height-30);
     if ($years<5) $edate = $min_date +4;
     else $edate = $max_date -1;
     if ($max_time < 600) {
       $D->YScale = "'";
-      $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($edate,12,31,0,0,0), 0, $max_time+60);
+      $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($edate,12,31,0,0,0), 0, $max_time*1.1);
     } else {
       $D->YScale = "h";
-      $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($edate,12,31,0,0,0), 0, ($max_time+60)/60);
+      $D->SetBorder(UTC($min_date-1,01,01,0,0,0), UTC($edate,12,31,0,0,0), 0, ($max_time*1.1)/60);
     }
     $D->XSubGrids = 1;
     $D->YSubGrids = 1;
@@ -450,14 +454,16 @@ class graph {
       $boxborder = 1;
       $D->BFont = 2;
     }
-    if ($years>15) $D->BFont = 1;
+    if ($years>25) $D->BFont = -1;
+    elseif ($years>15) $D->BFont = -2;
+    elseif ($years>10) $D->BFont = 1;
     for($i=1;$i<$years;$i++) {
       if ($max_time < 600) {
-        if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && $years>25)) $dispval = "";
+        if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && $years>35)) $dispval = "";
         else $dispval = $data[$i-1];
         $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY($data[$i-1]),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",$dispval,"ffffff","$boxborder","",$year[$i-1].": ".$data[$i-1]."min");
       } else {
-        if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && $years>25)) $dispval = "";
+        if ($pdl->config->values_in_statgraphs == "no" || ($pdl->config->values_in_statgraphs == "auto" && $years>35)) $dispval = "";
         else $dispval = round($data[$i-1]/60,1);
         $D->Box($D->ScreenX($time[$i-1]+0.05*$year_in_s),$D->ScreenY(round($data[$i-1]/60,1)),$D->ScreenX($time[$i]-0.05*$year_in_s),$D->ScreenY(0),"3333ff",$dispval,"ffffff","$boxborder","",$year[$i-1].": ".round($data[$i-1]/60,1)."h");
       }

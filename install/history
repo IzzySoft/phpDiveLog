@@ -10,6 +10,7 @@ v0.4.3
 + added filter/search facility
 + added "sites at this location" to context navigation
 + added emoticon support
+* some adjustments to the graph stuff
 
 v0.4.2 (08.04.2009)
 -------------------
