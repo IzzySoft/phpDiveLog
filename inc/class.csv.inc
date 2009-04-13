@@ -106,10 +106,8 @@
     * @param string filename file to read
     */
    function read_file($filename) {
-     $fp = fopen($filename, "rb");
-     if ($fp===FALSE) trigger_error("Could not open '$filename' for read",E_USER_NOTICE);
-     $buffer = fread($fp, filesize($filename));
-     fclose($fp);
+     if ( !file_exists($filename) || !is_readable($filename) ) trigger_error("Failed to open '$filename' for read",E_USER_NOTICE);
+     $buffer = file_get_contents($filename);
      $this->text = preg_replace("/\r?\n|\r/", "\n", $buffer);
    }
 

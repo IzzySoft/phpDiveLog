@@ -3,6 +3,10 @@ $Id$
 History for phpDiveLog
 ======================
 
+v0.4.4
+-------------------
+* some code optimization. Amongst others, tags/macros now can span multiple lines.
+
 v0.4.3 (13.04.2009)
 -------------------
 ! cleanup some more notices breaking the KML stuff when debug level has "A" or "N"
