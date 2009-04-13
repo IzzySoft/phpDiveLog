@@ -510,7 +510,7 @@ class graph {
     $ceil = $rceil = ceil(floatval($max_depth)/10)*10;
 
     // calculate base data
-    $sum[$rceil] = 0;
+    $sum[$rceil] = $rfloor = 0;
     for ($i=0;$i<$dc;++$i) {
       $val = floatval($data[$i]["depth"]);
       if ($val==0) ++$val; // shift Robs special dives (0' at 0m)
@@ -533,9 +533,6 @@ class graph {
 
     // Graph
     $base=$height/2;
-    // Setup Labels
-    $D->BFont = 3;
-    // Draw Graph
     $max = $ceil/DEPTH_STAT_INTERVAL;
     $angle0 = 1;
     // Graph colors
@@ -573,18 +570,37 @@ class graph {
                     "95" => "#ffffff", "95" => "#ffffff", "100" => "#ffffff", "105" => "#000000",
                     "110" => "#000000", "115" => "#000000", "120" => "#000000",
                     "125" => "#ffffff", "130" => "#ffffff"); // text colors
-    $rows = $max; $missing = 0;
+    $rows = $missing = 0;
+    for ($i=0;$i<$max;++$i) { // get real row count
+      if (!empty($sum[$i*DEPTH_STAT_INTERVAL])) ++$rows;
+    }
+    if ($rows>15) $D->BFont = 1;
+    elseif ($rows>11) $D->BFont = 2;
+    else $D->BFont = 3;
 
     for ($i=0;$i<=$max;++$i) {
-      if (empty($sum[$i*DEPTH_STAT_INTERVAL])) { --$rows; ++$missing; continue; }
+      if (empty($sum[$i*DEPTH_STAT_INTERVAL])) { ++$missing; continue; }
       # Pie (XCenter,YCenter,Offset,Radius,Angle0,Angle1,Color[,tooltip]
       $angle1 = $sum[$i*DEPTH_STAT_INTERVAL] * 100/$dc;
       $tooltip = ($i-1)*DEPTH_STAT_INTERVAL ."-". $i*DEPTH_STAT_INTERVAL . $unit .": ".$sum[$i*DEPTH_STAT_INTERVAL];
       $D->Pie($base,$base,0,$base*0.9,$angle0*3.6,($angle0+$angle1)*3.6,$color[$i*DEPTH_STAT_INTERVAL],$tooltip);
       # Bar(left,top,right,bottom,color,text,textcolor)
-      $adjustY = ($height - (($rows+1)*15) +15)/2;
       $row = $i - $missing;
-      $D->Bar($height+20,($row-1)*20+$adjustY,$height+120,($row-1)*20+15+$adjustY,$color[$i*DEPTH_STAT_INTERVAL],$tooltip,$tcolor[$i*DEPTH_STAT_INTERVAL]);
+      switch($D->BFont) {
+        case 3 :
+          $adjustY = ($height - (($rows+1)*15) +15)/2;
+          $D->Bar($height+20,($row-1)*18+$adjustY,$height+120,($row-1)*18+15+$adjustY,$color[$i*DEPTH_STAT_INTERVAL],$tooltip,$tcolor[$i*DEPTH_STAT_INTERVAL]);
+          # Bar(20px from cake,15px bar +3px space,100px width,add 15px bar,color...) // for BFont=3
+          break;
+        case 2:
+          $adjustY = ($height - (($rows+1)*14) +14)/2;
+          $D->Bar($height+20,($row-1)*17+$adjustY,$height+120,($row-1)*17+14+$adjustY,$color[$i*DEPTH_STAT_INTERVAL],$tooltip,$tcolor[$i*DEPTH_STAT_INTERVAL]);
+          break;
+        case 1:
+          $adjustY = ($height - (($rows+1)*10) +10)/2;
+          $D->Bar($height+20,($row-1)*13+$adjustY,$height+120,($row-1)*13+10+$adjustY,$color[$i*DEPTH_STAT_INTERVAL],$tooltip,$tcolor[$i*DEPTH_STAT_INTERVAL]);
+          break;
+      }
       $angle0 += $angle1;
     }
 
@@ -671,15 +687,18 @@ class graph {
 
     // Graph
     $base=$height/2;
-    // Setup Labels
-    $D->BFont = 3;
-    // Draw Graph
     $max = $ceil/TEMP_STAT_INTERVAL;
     $angle0 = 1;
-    $rows = $max; $missing = 0;
+    $rows = $missing = 0;
+    for ($i=0;$i<$max;++$i) { // get real row count
+      if (!empty($sum[$i*TEMP_STAT_INTERVAL])) ++$rows;
+    }
+    if ($rows>15) $D->BFont = 1;
+    elseif ($rows>11) $D->BFont = 2;
+    else $D->BFont = 3;
 
     for ($i=0;$i<=$max;++$i) {
-      if (empty($sum[$i*TEMP_STAT_INTERVAL])) { --$rows; ++$missing; continue; }
+      if (empty($sum[$i*TEMP_STAT_INTERVAL])) { ++$missing; continue; }
       # Pie (XCenter,YCenter,Offset,Radius,Angle0,Angle1,Color[,tooltip]
       $angle1 = $sum[$i*TEMP_STAT_INTERVAL] * 100/($dc-$ignored);
       if ($i>0) {
@@ -689,9 +708,22 @@ class graph {
       }
       $D->Pie($base,$base,0,$base*0.9,$angle0*3.6,($angle0+$angle1)*3.6,$color[$i*TEMP_STAT_INTERVAL],$tooltip);
       # Bar(left,top,right,bottom,color,text,textcolor)
-      $adjustY = ($height - (($rows+1)*15) +15)/2;
       $row = $i - $missing;
-      $D->Bar($height+20,($row-1)*20+$adjustY,$height+120,($row-1)*20+15+$adjustY,$color[$i*TEMP_STAT_INTERVAL],str_replace("Â°","°",$tooltip),$tcolor[$i*TEMP_STAT_INTERVAL]);
+      switch($D->BFont) {
+        case 3 :
+          $adjustY = ($height - (($rows+1)*15) +15)/2;
+          $D->Bar($height+20,($row-1)*18+$adjustY,$height+120,($row-1)*18+15+$adjustY,$color[$i*TEMP_STAT_INTERVAL],str_replace("Â°","°",$tooltip),$tcolor[$i*TEMP_STAT_INTERVAL]);
+          # Bar(20px from cake,15px bar +3px space,100px width,add 15px bar,color...) // for BFont=3
+          break;
+        case 2:
+          $adjustY = ($height - (($rows+1)*14) +14)/2;
+          $D->Bar($height+20,($row-1)*17+$adjustY,$height+120,($row-1)*17+14+$adjustY,$color[$i*TEMP_STAT_INTERVAL],str_replace("Â°","°",$tooltip),$tcolor[$i*TEMP_STAT_INTERVAL]);
+          break;
+        case 1:
+          $adjustY = ($height - (($rows+1)*10) +10)/2;
+          $D->Bar($height+20,($row-1)*13+$adjustY,$height+120,($row-1)*13+10+$adjustY,$color[$i*TEMP_STAT_INTERVAL],str_replace("Â°","°",$tooltip),$tcolor[$i*TEMP_STAT_INTERVAL]);
+          break;
+      }
       $angle0 += $angle1;
     }
     // Save Image & Data
@@ -780,9 +812,6 @@ class graph {
 
     // Graph
     $base=$height/2;
-    // Setup Labels
-    $D->BFont = 3;
-    // Draw Graph
     $angle0 = 0;
     $max = count($sum);
     $rows = 0;
@@ -790,6 +819,9 @@ class graph {
       if (!empty($sum[$i*TIME_STAT_INTERVAL])) ++$rows;
     }
     $missing = 0;
+    if ($rows>15) $D->BFont = 1;
+    elseif ($rows>11) $D->BFont = 2;
+    else $D->BFont = 3;
 
     for ($i=0;$i<$max;++$i) {
       if (empty($sum[($i+1)*TIME_STAT_INTERVAL])) { ++$missing; continue; }
@@ -799,10 +831,22 @@ class graph {
       else $tooltip = ($i)*TIME_STAT_INTERVAL ."-". ($i+1)*TIME_STAT_INTERVAL . " $unit: ". $sum[($i+1)*TIME_STAT_INTERVAL];
       $D->Pie($base,$base,0,$base*0.9,$angle0*3.6,($angle0+$angle1)*3.6,$color[($i+1)*TIME_STAT_INTERVAL],$tooltip);
       # Bar(left,top,right,bottom,color,text,textcolor)
-      $adjustY = ($height - (($rows+1)*15) +15)/2;
       $row = $i - $missing;
-      $D->Bar($height+20,($row-1)*18+$adjustY,$height+120,($row-1)*18+15+$adjustY,$color[($i+1)*TIME_STAT_INTERVAL],str_replace('&gt;','>',$tooltip),$tcolor[($i+1)*TIME_STAT_INTERVAL]);
-      # Bar(20px from cake,15px bar +3px space,100px width,add 15px bar,color...) // for BFont=3
+      switch($D->BFont) {
+        case 3 :
+          $adjustY = ($height - (($rows+1)*15) +15)/2;
+          $D->Bar($height+20,($row-1)*18+$adjustY,$height+120,($row-1)*18+15+$adjustY,$color[($i+1)*TIME_STAT_INTERVAL],str_replace('&gt;','>',$tooltip),$tcolor[($i+1)*TIME_STAT_INTERVAL]);
+          # Bar(20px from cake,15px bar +3px space,100px width,add 15px bar,color...) // for BFont=3
+          break;
+        case 2:
+          $adjustY = ($height - (($rows+1)*14) +14)/2;
+          $D->Bar($height+20,($row-1)*17+$adjustY,$height+120,($row-1)*17+14+$adjustY,$color[($i+1)*TIME_STAT_INTERVAL],str_replace('&gt;','>',$tooltip),$tcolor[($i+1)*TIME_STAT_INTERVAL]);
+          break;
+        case 1:
+          $adjustY = ($height - (($rows+1)*10) +10)/2;
+          $D->Bar($height+20,($row-1)*13+$adjustY,$height+120,($row-1)*13+10+$adjustY,$color[($i+1)*TIME_STAT_INTERVAL],str_replace('&gt;','>',$tooltip),$tcolor[($i+1)*TIME_STAT_INTERVAL]);
+          break;
+      }
       $angle0 += $angle1;
     }
     // Save Image & Data

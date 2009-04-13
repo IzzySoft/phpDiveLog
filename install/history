@@ -6,6 +6,8 @@ History for phpDiveLog
 v0.4.4
 -------------------
 * some code optimization. Amongst others, tags/macros now can span multiple lines.
++ font-size in the legend of cake graphs (stats page) now auto-adjusts to
+  amount of rows
 
 v0.4.3 (13.04.2009)
 -------------------
