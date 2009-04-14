@@ -9,6 +9,8 @@ v0.4.4
 + font-size in the legend of cake graphs (stats page) now auto-adjusts to
   amount of rows
 * Norwegian translations updated again (thank you, Nils-Fredrik!)
+* in filters, comparision modes "ge" and "le" had been used but not fully
+  implemented, so they had no effect - now they are working as expected
 
 v0.4.3 (13.04.2009)
 -------------------

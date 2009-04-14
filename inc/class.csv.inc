@@ -246,8 +246,12 @@
 	 case "gt"  : if ($type=="num") { $val = $this->data[$i][$column]; if (bccomp($value,floatval($val),2)<0) $data[] = $this->data[$i]; }
 	              else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))<0) $data[] = $this->data[$i]; }
 		      break;
-	 case "le"  : break;
-	 case "ge"  : break;
+	 case "le"  : if ($type=="num") { $val = $this->data[$i][$column]; if (bccomp($value,floatval($val),2)>=0) $data[] = $this->data[$i]; }
+	              else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))>=0) $data[] = $this->data[$i]; }
+		      break;
+	 case "ge"  : if ($type=="num") { $val = $this->data[$i][$column]; if (bccomp($value,floatval($val),2)<=0) $data[] = $this->data[$i]; }
+	              else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))<=0) $data[] = $this->data[$i]; }
+		      break;
 	 case "ne"  : if ($this->data[$column]!=$value) $data[] = $this->data[$i]; break;
          case "~"   : if ( preg_match('|'.str_replace("%",".*",$value).'|i',$this->data[$i][$column]) ) $data[] = $this->data[$i]; break;
        }
