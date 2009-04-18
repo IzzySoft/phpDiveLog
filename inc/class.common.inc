@@ -130,7 +130,7 @@
     if ( preg_match_all("/\[img\].+?\[\/img\]/ims",$data,$matches) ) {
       for ($i=0;$i<count($matches[0]);++$i) {
         $link  = $this->dirReplace( eregi_replace("\[img\]([^|]+)\|{0,1}(.*)\[\/img\]","\\1",$matches[0][$i]), TRUE );
-        $sub  = eregi_replace("\[img\]([^|]+)\|{0,1}(.*)\[\/imsmg\]","<SPAN CLASS='thumbnail-left'><IMG ALIGN='center' SRC='$link'><BR>\\2</SPAN>",$matches[0][$i]);
+        $sub  = eregi_replace("\[img\]([^|]+)\|{0,1}(.*)\[\/img\]","<SPAN CLASS='thumbnail-left'><IMG ALIGN='center' SRC='$link'><BR>\\2</SPAN>",$matches[0][$i]);
         $data = str_replace($matches[0][$i],$sub,$data);
       }
     }
