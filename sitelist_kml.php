@@ -50,7 +50,7 @@
  $t->set_var("foldername","DiveSites of ".ucfirst($diver));
  $t->set_var("viewingdistance","1000");
  $details = array ("altitude","description");
- for ($i=0;$i<$max;++$i) {
+ for ($i=0,$k=0;$i<$max;++$i) {
    $latitude  = $pdl->link->coord2dec($sites[$i]["latitude"]);
    $longitude = $pdl->link->coord2dec($sites[$i]["longitude"]);
    if ($latitude == 0 || $longitude == 0) continue;
@@ -69,11 +69,12 @@
    foreach($details AS $detail) {
      $t->set_var("$detail",$sites[$i][$detail]);
    }
-   $t->parse("item","itemblock",$i);
+   $t->parse("item","itemblock",$k);
+   ++$k;
  }
 
  #====================================================[ Send the .kml file ]===
  header("Content-Type: application/vnd.google-earth.kml+xml");
- header("Content-Disposition: attachment; filename=$filename");
+ header("Content-Disposition: attachment; filename=\"$filename\"");
  $t->pparse("out","template");
 ?>
