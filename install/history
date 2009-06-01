@@ -3,6 +3,10 @@ $Id$
 History for phpDiveLog
 ======================
 
+v0.4.5
+-------------------
+! fixed tagreplace in image descriptions
+
 v0.4.4 (19.04.2009)
 -------------------
 * some code optimization. Amongst others, tags/macros now can span multiple lines.

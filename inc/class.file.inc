@@ -160,7 +160,7 @@
 	     }
 	     break;
            case "txt" :
-             $list[$pic]->desc = file_get_contents($pdl->config->user_path."fotos/$type/$file");
+             $list[$pic]->desc = $pdl->common->nl2br( file_get_contents($pdl->config->user_path."fotos/$type/$file") );
              break;
          }
        }
