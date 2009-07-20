@@ -20,7 +20,7 @@ if (USE_DYN_PROFILE_PNG && PDF_CREATE_MISSING_GRAPH) {
 #------------------------------------------[ DiveRecord specific constants ]---
 if (isset($_REQUEST["pageno"]) && preg_match('!^[1-9][0-9]*$!',$_REQUEST["pageno"])) $pagenr = $_REQUEST["pageno"];
 else $pagenr = $_REQUEST["nr"];
-if ($pagenr<1) $pagenr = 1;
+#if ($pagenr<1) $pagenr = 1;
 $start = $pagenr;
 if (isset($_REQUEST["lastnr"]) && preg_match('!^[1-9][0-9]*$!',$_REQUEST["lastnr"])) {
   $end = $_REQUEST["lastnr"];
@@ -29,6 +29,8 @@ if (isset($_REQUEST["lastnr"]) && preg_match('!^[1-9][0-9]*$!',$_REQUEST["lastnr
 }
 if ($start==$end) define('MULTI_PAGE',FALSE); // just a single page or the entire book?
 else define('MULTI_PAGE',TRUE);
+
+if ($start==0 && $end==0) $pdf_no_profile = 'blank'; // empty sheet
 
 #------------------------------------------------[ create new PDF document ]---
 require_once(dirname(__FILE__)."/inc/pdf_init.inc");
@@ -68,19 +70,29 @@ $t->set_block("template","toprightblock","topright");
 if (MULTI_PAGE && preg_match('!^.{1}5$!',PDF_PAGE_FORMAT)) $pdf->duplexInit($start,$end,$_REQUEST["duplex"]);
 
 #----------------------------------------------------------[ Retrieve Data ]---
-$records = $pdl->db->get_dives($start-1,$end+1-$start,FALSE,"id","ASC");
-$dc = count($records);
-for ($i=0;$i<$dc;++$i) $dives[$records[$i]["dive#"]] = $records[$i];
-if ($end>$records[$dc-1]["dive#"]) $end = $records[$dc-1]["dive#"];
-unset($records);
+if ($pagenr>0) {
+  $records = $pdl->db->get_dives($start-1,$end+1-$start,FALSE,"id","ASC");
+  $dc = count($records);
+  for ($i=0;$i<$dc;++$i) $dives[$records[$i]["dive#"]] = $records[$i];
+  if ($end>$records[$dc-1]["dive#"]) $end = $records[$dc-1]["dive#"];
+  unset($records);
+} else { // empty sheet
+  $dives[0] = array('time'=>'','date'=>'','location'=>'','place'=>'','depth'=>'',
+                    'divetime'=>'','buddy'=>'','rating'=>'','visibility'=>'',
+		    'watertemp'=>'','airtemp'=>'','current'=>'','workload'=>'',
+		    'suittype'=>'','suitname'=>'','weight'=>'','notes'=>'',
+		    'tank'=>array());
+}
 
 for ($nr=$start;$nr<=$end;++$nr) {
   $title .= ": ".lang("dive#")." $nr";
   $dive = $dives[$nr];
 
+
 #-----------------------------------------------------------[ Setup Header ]---
   $t->set_var("divenr",lang("dive#"));
-  $t->set_var("dive#",$nr);
+  if ($nr==0) $t->set_var("dive#",''); // empty sheet
+  else $t->set_var("dive#",$nr);
   $t->set_var("time",$dive["time"]);
   $t->set_var("date",$dive["date"]);
   $t->set_var("location",$dive["location"]);
@@ -105,9 +117,13 @@ for ($nr=$start;$nr<=$end;++$nr) {
   $t->set_var("item_data",$dive["buddy"]);
   $t->parse("sum","sumblock",TRUE);
   $t->set_var("item_name",lang("rating").":");
-  if ($dive["rating"]=="-")  $starwid = 8;
-  else $starwid = $dive["rating"]*8;
-  $t->set_var("item_data","<img src='".$pdl->config->base_url."templates/aqua/images/".$dive["rating"]."star.gif"."' alt='Rating:".$dive["rating"]."' HEIGHT='8px' WIDTH='${starwid}px' />");
+  if (empty($dive["rating"])) {
+    $t->set_var("item_data",'');
+  } else {
+    if ($dive["rating"]=="-")  $starwid = 8;
+    else $starwid = $dive["rating"]*8;
+    $t->set_var("item_data","<img src='".$pdl->config->base_url."templates/aqua/images/".$dive["rating"]."star.gif"."' alt='Rating:".$dive["rating"]."' HEIGHT='8px' WIDTH='${starwid}px' />");
+  }
   $t->parse("sum","sumblock",TRUE);
   $nrpad = str_pad($nr,5,"0",STR_PAD_LEFT);
   if (USE_DYN_PROFILE_PNG && PDF_CREATE_MISSING_GRAPH) $graph->profileCheck($nr);
@@ -167,7 +183,16 @@ for ($nr=$start;$nr<=$end;++$nr) {
   $t->set_var("pressure",lang("pressure"));
   $t->set_var("tank_in_name",lang("tank_in"));
   $t->set_var("tank_out_name",lang("tank_out"));
-  for ($i=0;$i<$tc;++$i) {
+  if ($tc==0) { // empty sheet
+    $t->set_var("tank_nr",'');
+    $t->set_var("tank_name",'');
+    $t->set_var("tank_gas",'');
+    $t->set_var("tank_type",'');
+    $t->set_var("tank_volume",'');
+    $t->set_var("tank_in",'');
+    $t->set_var("tank_out",'');
+    $t->parse("tank","tankblock",FALSE);
+  } else for ($i=0;$i<$tc;++$i) {
     $t->set_var("tank_nr",$dive["tank"][$i]->nr);
     $t->set_var("tank_name",$dive["tank"][$i]->name);
     $t->set_var("tank_gas",$dive["tank"][$i]->gas);
@@ -196,7 +221,10 @@ for ($nr=$start;$nr<=$end;++$nr) {
     for ($i=0;$i<$fc;++$i) {
       if ($i>2) break;
       $t->set_var("foto",$fotos[$i]->url);
-      $t->set_var("foto_text",$fotos[$i]->desc);
+      if (isset($fotos[$i]->desc))
+        $t->set_var("foto_text",preg_replace('|^<p>(.*)</p>$|ims','$1',$fotos[$i]->desc));
+      else
+        $t->set_var("foto_text",'');
       $t->parse("fotos","fotoblock",$i);
     }
     $t->set_var("nofotos","");
@@ -217,7 +245,7 @@ for ($nr=$start;$nr<=$end;++$nr) {
   $out = preg_replace('|\s+<T|i','<T',$out);// TCPDF converts each table cell into a separate "box"
   $out = preg_replace('|\s+</T|i','</T',$out);// TCPDF converts each table cell into a separate "box"
 
-  if ($nr%2) $pdf->SetMargins(PDF_PAGE_GUTTER, PDF_MARGIN_TOP_NOHEAD, PDF_PAGE_MARGIN);
+  if ($nr%2 || $nr==0) $pdf->SetMargins(PDF_PAGE_GUTTER, PDF_MARGIN_TOP_NOHEAD, PDF_PAGE_MARGIN);
   else $pdf->SetMargins(PDF_PAGE_MARGIN, PDF_MARGIN_TOP_NOHEAD, PDF_PAGE_GUTTER);
   $pdf->AddPage();
   $pdf->setPrintFooter(TRUE);

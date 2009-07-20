@@ -6,6 +6,9 @@ History for phpDiveLog
 v0.4.5
 -------------------
 ! fixed tagreplace in image descriptions
+! photos w/o description broke PDF - fixed
++ providing PDF creation for empty dive sheets (for now by manually altering the URL
+  and setting "nr=0")
 
 v0.4.4 (19.04.2009)
 -------------------
