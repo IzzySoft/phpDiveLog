@@ -9,6 +9,7 @@ v0.4.5
 ! photos w/o description broke PDF - fixed
 + providing PDF creation for empty dive sheets (for now by manually altering the URL
   and setting "nr=0")
+* some corrections for TCPDF 4.6.*
 
 v0.4.4 (19.04.2009)
 -------------------

@@ -117,7 +117,10 @@ for ($nr=$start;$nr<=$end;++$nr) {
     for ($i=0;$i<$fc;++$i) {
       if ($i>2) break;
       $t->set_var("foto",$fotos[$i]->url);
-      $t->set_var("foto_text",$fotos[$i]->desc);
+      if (isset($fotos[$i]->desc))
+        $t->set_var("foto_text",$fotos[$i]->desc);
+      else
+        $t->set_var("foto_text",'');
       $t->parse("fotos","fotoblock",$i);
     }
     $t->set_var("nofotos","");

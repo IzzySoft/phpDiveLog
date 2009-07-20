@@ -88,7 +88,7 @@ if (function_exists("imagepng") && is_writable($pdl->config->user_path . "profil
   $t->set_var("graph_name",lang("depth_stat"));
   $t->set_var("graph_src",$pdl->config->user_url."profiles/depthstat.png");
   $t->set_var("graph_alt","DepthStat");
-  $t->parse("rgraph","rgraphblock",TRUE);
+  $t->parse("rgraph","rgraphblock");
 
   #-----------------------------------------------[ Dives per Temperature ]---
   $graphfile = $pdl->config->user_path . "profiles/tempstat.png";

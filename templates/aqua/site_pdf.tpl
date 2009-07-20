@@ -4,7 +4,7 @@
 /* === Common === */
   BODY {
    font-family: Verdana,Arial,Helvetica,sans-serif;
-   font-size: 8px;
+   font-size: 8;
    background-color: #ffffff;
    color: #0000ee;
   }
@@ -22,7 +22,7 @@
    border-spacing:0;
   }
   TD,TH {
-   font-size: 8px;
+   font-size: 8;
    font-family: Verdana,Arial,Helvetica,sans-serif;
   }
 
@@ -33,18 +33,18 @@
 </HEAD><BODY>
 
 
-<TABLE WIDTH="328" BORDER="0" STYLE="empty-cells: show; border-spacing:0; font-size:8px; table-layout:fixed;">
+<TABLE WIDTH="328" BORDER="0" STYLE="empty-cells: show; border-spacing:0; font-size:8; table-layout:fixed;">
  <TR><!-- First row: Header -->
   <TD COLSPAN="2"><TABLE WIDTH="328" STYLE="border:1px solid black;padding-bottom:10px;"><TR><TD><TABLE WIDTH="328" BORDER="0"><TR>
 <!-- BEGIN topleftblock -->
-     <TD WIDTH="32" STYLE="font-size:12px;" ALIGN="right">&nbsp;</TD>
-     <TD WIDTH="264" STYLE="font-size:10px;"><DIV ALIGN="center"><B>{location} / {place}</B></DIV></TD>
-     <TD WIDTH="32" STYLE="font-size:10px;" ALIGN="right"><B>#{id}</B>&nbsp;</TD>
+     <TD WIDTH="32" STYLE="font-size:12;" ALIGN="right">&nbsp;</TD>
+     <TD WIDTH="264" STYLE="font-size:10;"><DIV ALIGN="center"><B>{location} / {place}</B></DIV></TD>
+     <TD WIDTH="32" STYLE="font-size:10;" ALIGN="right"><B>#{id}</B>&nbsp;</TD>
 <!-- END topleftblock -->
 <!-- BEGIN toprightblock -->
-     <TD WIDTH="32" STYLE="font-size:10px;">&nbsp;<B>#{id}</B></TD>
-     <TD WIDTH="296" STYLE="font-size:10px;"><DIV ALIGN="center"><B>{location} / {place}</B></DIV></TD>
-     <TD WIDTH="32" STYLE="font-size:12px;" ALIGN="right">&nbsp;</TD>
+     <TD WIDTH="32" STYLE="font-size:10;">&nbsp;<B>#{id}</B></TD>
+     <TD WIDTH="296" STYLE="font-size:10;"><DIV ALIGN="center"><B>{location} / {place}</B></DIV></TD>
+     <TD WIDTH="32" STYLE="font-size:12;" ALIGN="right">&nbsp;</TD>
 <!-- END toprightblock -->
     </TR></TABLE></TD></TR></TABLE></TD>
  </TR>
@@ -76,7 +76,7 @@
    <TR><TH WIDTH="328" BGCOLOR="#eeeeee"><DIV ALIGN="center"><B>{fotos_name}</B></DIV></TH></TR>
    <TR><TD><TABLE WIDTH="328" CELLPADDING="5" BORDER="0"><TR>
 <!-- BEGIN fotoblock -->
-    <TD STYLE="font-size:7px;" HEIGHT="120"><DIV ALIGN="center"><IMG SRC="{foto}" ALIGN="center" WIDTH="100" HEIGTH="75" /><BR />{foto_text}</DIV></TD>
+    <TD STYLE="font-size:7;" HEIGHT="120"><DIV ALIGN="center"><IMG SRC="{foto}" ALIGN="center" WIDTH="100" HEIGTH="75" /><BR />{foto_text}</DIV></TD>
 <!-- END fotoblock -->
 <!-- BEGIN nofotoblock -->
     <TD HEIGHT="120"></TD>

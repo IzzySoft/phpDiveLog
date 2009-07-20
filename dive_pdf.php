@@ -20,7 +20,6 @@ if (USE_DYN_PROFILE_PNG && PDF_CREATE_MISSING_GRAPH) {
 #------------------------------------------[ DiveRecord specific constants ]---
 if (isset($_REQUEST["pageno"]) && preg_match('!^[1-9][0-9]*$!',$_REQUEST["pageno"])) $pagenr = $_REQUEST["pageno"];
 else $pagenr = $_REQUEST["nr"];
-#if ($pagenr<1) $pagenr = 1;
 $start = $pagenr;
 if (isset($_REQUEST["lastnr"]) && preg_match('!^[1-9][0-9]*$!',$_REQUEST["lastnr"])) {
   $end = $_REQUEST["lastnr"];
@@ -122,7 +121,7 @@ for ($nr=$start;$nr<=$end;++$nr) {
   } else {
     if ($dive["rating"]=="-")  $starwid = 8;
     else $starwid = $dive["rating"]*8;
-    $t->set_var("item_data","<img src='".$pdl->config->base_url."templates/aqua/images/".$dive["rating"]."star.gif"."' alt='Rating:".$dive["rating"]."' HEIGHT='8px' WIDTH='${starwid}px' />");
+    $t->set_var("item_data",'<img src="'.$pdl->config->base_url."templates/aqua/images/".$dive["rating"]."star.gif".'" alt="Rating:'.$dive["rating"].'" HEIGHT="8px" WIDTH="'.$starwid.'px" />');
   }
   $t->parse("sum","sumblock",TRUE);
   $nrpad = str_pad($nr,5,"0",STR_PAD_LEFT);
