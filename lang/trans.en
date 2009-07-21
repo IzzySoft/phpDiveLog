@@ -139,7 +139,6 @@ divelist;"Dives Index"
 sitelist;"Site Index"
 buddylist;"Global Diver/Buddy List"
 globalsites;"Global Site Index"
-
 filter;"Filter/Search"
 tab_filter;"Filter"
 filter_comp_desc;"Select the most suitable comparision method for your current requirements."
@@ -163,3 +162,5 @@ filter_divetime_val_desc;"Enter the desired dive time in minutes - this must be 
 filter_buddy_desc;"Select records by buddy."
 filter_buddy_val_desc;"Enter a partial or full buddy name."
 sites_at_this_location;"Sites at this Location"
+create_empty;"Create..."
+export_empty_dives;"empty dive sheets"

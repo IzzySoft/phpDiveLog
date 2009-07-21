@@ -109,7 +109,6 @@ cache_dir_readonly;"Das Cache-Verzeichnis (<code>cache/</code>) muss Lese- und S
 divelist;"Tauchgangs-Index"
 buddylist;"Globale Buddy-Liste"
 globalsites;"Globaler Site-Index"
-
 filter;"Filter/Suche"
 tab_filter;"Filter"
 filter_comp_desc;"Hier den Vergleichs-Operator auswählen"
@@ -133,3 +132,5 @@ filter_divetime_val_desc;"Gesuchte Tauchzeit in Minuten - numerischer Wert, ohne
 filter_buddy_desc;"Tauchgänge nach Buddy einschränken"
 filter_buddy_val_desc;"Einen Teil des Buddy-Namens bzw. vollständigen Namen eingeben"
 sites_at_this_location;"Tauchplätze an diesem Ort"
+create_empty;"Erstelle..."
+export_empty_dives;"leere Tauchgangs-Seiten"

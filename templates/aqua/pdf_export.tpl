@@ -41,6 +41,9 @@
 <!-- END missingblock -->
  <tr><td colspan="2" align="center"><input type="submit" name="{submit_name}" value="{submit1_value}">&nbsp;<input type="submit" name="{submit_name}" value="{submit2_value}"><BR>
      <input type="submit" name="{submit_name}" value="{submit3_value}"></td></tr>
+ <tr><th class="sub" colspan="2">{empty_head}</th></tr>
+ <tr><td colspan="2" align="center"><input type="text" name="dsheets" size="4">&nbsp;
+     <input type="submit" name="{submit_name}" value="{submit4_value}"></td></tr>
 </table>
 </form>
 <!-- END formblock -->

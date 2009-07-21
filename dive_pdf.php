@@ -28,6 +28,8 @@ if (isset($_REQUEST["lastnr"]) && preg_match('!^[1-9][0-9]*$!',$_REQUEST["lastnr
 }
 if ($start==$end) define('MULTI_PAGE',FALSE); // just a single page or the entire book?
 else define('MULTI_PAGE',TRUE);
+if ( empty($_REQUEST["count"]) || preg_match('|\D|',$_REQUEST["count"]) ) $sheets = 1;
+else $sheets = $_REQUEST["count"];
 
 if ($start==0 && $end==0) $pdf_no_profile = 'blank'; // empty sheet
 
@@ -83,6 +85,7 @@ if ($pagenr>0) {
 		    'tank'=>array());
 }
 
+for ($sheet=0;$sheet<$sheets;++$sheet)
 for ($nr=$start;$nr<=$end;++$nr) {
   $title .= ": ".lang("dive#")." $nr";
   $dive = $dives[$nr];

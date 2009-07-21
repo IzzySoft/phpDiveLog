@@ -45,6 +45,11 @@
      header("Location: $url");
      exit;
      break;
+   case lang("export_empty_dives") :
+     $url = $pdl->link->slink("dive_pdf.php?nr=0&count=".$_POST["dsheets"]."&duplex=".$_POST["duplex"]."&pdfwithfotos=".$_POST["foto"]."&pdfcreatemissinggraph=".$_POST["graph"]);
+     header("Location: $url");
+     exit;
+     break;
  }
 
  #===================================================[ Initialize template ]===
@@ -121,6 +126,8 @@
  $t->set_var("submit1_value",lang("export_dives"));
  $t->set_var("submit2_value",lang("export_sites"));
  $t->set_var("submit3_value",lang("export_stats"));
+ $t->set_var("empty_head",lang("create_empty"));
+ $t->set_var("submit4_value",lang("export_empty_dives"));
  $t->parse("form","formblock");
 
  #===========================================================[ End of Page ]===
