@@ -20,7 +20,7 @@
  #================================================[ Process submitted form ]===
  if (isset($_POST["submit"])) switch($_POST["submit"]) {
  #----------------------------------------------------------[ Export Dives ]---
-   case lang("export_dives") :
+   case lang("dives") :
      if ( empty($_POST["from"]) || empty($_POST["to"]) ) {
        $dives = $pdl->db->get_dives("","",FALSE,"id","ASC");
        if ( empty($_POST["from"]) ) $_POST["from"] = $dives[0]["dive#"];
@@ -30,7 +30,7 @@
      header("Location: $url");
      exit;
      break;
-   case lang("export_sites") :
+   case lang("sites") :
      if ( empty($_POST["from"]) || empty($_POST["to"]) ) {
        $sites = $pdl->db->get_sites("","",FALSE,"id","ASC");
        if ( empty($_POST["from"]) ) $_POST["from"] = $sites[0]["id"];
@@ -40,7 +40,7 @@
      header("Location: $url");
      exit;
      break;
-   case lang("export_stats") :
+   case lang("dive_stats") :
      $url = $pdl->link->slink("stats_pdf.php?duplex=".$_POST["duplex"]."&pdfwithfotos=".$_POST["foto"]);
      header("Location: $url");
      exit;
@@ -99,6 +99,9 @@
  $t->set_var("foto_bubble",lang("pdf_include_fotos_desc"));
  $t->set_var("foto_yes_bubble",lang("pdf_include_fotos_yes"));
  $t->set_var("foto_no_bubble",lang("pdf_include_fotos_no"));
+ $t->set_var("create_head",lang("create_empty"));
+ $t->set_var("export_head",lang("export_stuff"));
+ $t->set_var("export_options",lang("options"));
 
  #============================================================[ Dives Form ]===
  if (USE_DYN_PROFILE_PNG) {
@@ -123,11 +126,14 @@
  $t->set_var("icon_height","15");
  $t->set_var("icon_alt",lang("dives")." / ".lang("sites"));
  $t->set_var("segment_name",lang("dives")." / ".lang("sites"));
- $t->set_var("submit1_value",lang("export_dives"));
- $t->set_var("submit2_value",lang("export_sites"));
- $t->set_var("submit3_value",lang("export_stats"));
- $t->set_var("empty_head",lang("create_empty"));
+ $t->set_var("submit1_value",lang("dives"));
+ $t->set_var("submit1_title",lang("export_dives_desc"));
+ $t->set_var("submit2_value",lang("sites"));
+ $t->set_var("submit2_title",lang("export_sites_desc"));
+ $t->set_var("submit3_value",lang("dive_stats"));
+ $t->set_var("submit3_title",lang("export_stats_desc"));
  $t->set_var("submit4_value",lang("export_empty_dives"));
+ $t->set_var("empty_divesheet_bubble",lang("export_empty_dives_desc"));
  $t->parse("form","formblock");
 
  #===========================================================[ End of Page ]===

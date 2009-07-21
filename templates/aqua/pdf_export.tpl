@@ -29,6 +29,7 @@
 <table class="outer" cellpadding="2" cellspacing="0" align="center" style="margin-top:4px">
  <tr><th class="head" valign="middle" colspan="2"><img src="{icon_src}" width="{icon_width}" height="{icon_height}" alt="{icon_alt}"> {segment_name}</th></tr>
  <tr title="{pages_bubble}"><td>{fsel_name}</td><td><input type="text" name="from" size="4">&nbsp;-&nbsp;<input type="text" name="to" size="4"></td></tr>
+ <tr><th class="sub" colspan="2">{export_options}</th></tr>
  <tr><td title="{output_bubble}">{foutput_name}</td><td><span title="{output_view_bubble}"><input type="radio" name="duplex" value="off" {foutput_viewcheck}>&nbsp;{foutput_viewname}</span><br>
      <span title="{output_innergutter_bubble}"><input type="radio" name="duplex" value="inner" {foutput_innercheck}>&nbsp;{foutput_innername}</span><br>
      <span title="{output_outergutter_bubble}"><input type="radio" name="duplex" value="outer" {foutput_outercheck}>&nbsp;{foutput_outername}</span><br>
@@ -39,10 +40,10 @@
  <tr><td title="{missing_bubble}">{fmissing_name}</td><td><span title="{missing_yes_bubble}"><input type="radio" name="graph" value="1" {fmissing_check}>&nbsp;{fyes}&nbsp;</span>
      <span title="{missing_no_bubble}"><input type="radio" name="graph" value="0" {fmissing_nocheck}>&nbsp;{fno}</span></td></tr>
 <!-- END missingblock -->
- <tr><td colspan="2" align="center"><input type="submit" name="{submit_name}" value="{submit1_value}">&nbsp;<input type="submit" name="{submit_name}" value="{submit2_value}"><BR>
-     <input type="submit" name="{submit_name}" value="{submit3_value}"></td></tr>
- <tr><th class="sub" colspan="2">{empty_head}</th></tr>
- <tr><td colspan="2" align="center"><input type="text" name="dsheets" size="4">&nbsp;
+ <tr><th class="sub" colspan="2">{export_head}</th></tr>
+ <tr><td colspan="2" align="center"><input type="submit" name="{submit_name}" value="{submit1_value}" title="{submit1_title}">&nbsp;<input type="submit" name="{submit_name}" value="{submit2_value}" title="{submit2_title}">&nbsp;<input type="submit" name="{submit_name}" value="{submit3_value}" title="{submit3_title}"></td></tr>
+ <tr><th class="sub" colspan="2">{create_head}</th></tr>
+ <tr><td title="{empty_divesheet_bubble}" colspan="2" align="center"><input type="text" name="dsheets" size="4">&nbsp;
      <input type="submit" name="{submit_name}" value="{submit4_value}"></td></tr>
 </table>
 </form>
