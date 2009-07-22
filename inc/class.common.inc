@@ -228,6 +228,18 @@
     if ($ret) return $str;
   }
 
+  /** Create a string containing a number of hard spaces (&nbsp)
+   * @method nbsp
+   * @param optional integer count of nbsp to create (default: 1)
+   * @param optional string char char to use (default: &amp;nbsp;)
+   * @return string
+   */
+  function nbsp($num=1,$char='&nbsp;') {
+    $str = '';
+    for ($i=0;$i<$num;++$i) $str .= $char;
+    return $str;
+  }
+
 #=======================================================[ Navigation Stuff ]===
   /** Create page links (helper to pages())
    * @method private page_links

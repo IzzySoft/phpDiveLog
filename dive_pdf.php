@@ -160,7 +160,10 @@ for ($nr=$start;$nr<=$end;++$nr) {
 #--------------------------------------------------------[ Setup Equipment ]---
   $t->set_var("equi_name",lang("equipment"));
   $t->set_var("item_name",lang("suit").":");
-  $t->set_var("item_data",$dive["suittype"].", ".$dive["suitname"]);
+  if ($pagenr==0)
+    $t->set_var("item_data",'');
+  else
+    $t->set_var("item_data",$dive["suittype"].", ".$dive["suitname"]);
   $t->parse("equi","equiblock");
   if (!empty($userdef1) && !empty($dive["userdef1"])) {
     $t->set_var("item_name","${userdef1}:");
@@ -187,11 +190,11 @@ for ($nr=$start;$nr<=$end;++$nr) {
   $t->set_var("tank_out_name",lang("tank_out"));
   if ($tc==0) { // empty sheet
     $t->set_var("tank_nr",'');
-    $t->set_var("tank_name",'');
+    $t->set_var("tank_name",$pdl->common->nbsp(15));
     $t->set_var("tank_gas",'');
-    $t->set_var("tank_type",'');
+    $t->set_var("tank_type",$pdl->common->nbsp(15));
     $t->set_var("tank_volume",'');
-    $t->set_var("tank_in",'');
+    $t->set_var("tank_in",$pdl->common->nbsp(5));
     $t->set_var("tank_out",'');
     $t->parse("tank","tankblock",FALSE);
   } else for ($i=0;$i<$tc;++$i) {
