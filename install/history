@@ -3,7 +3,7 @@ $Id$
 History for phpDiveLog
 ======================
 
-v0.4.5
+v0.4.5 (23.07.2009)
 -------------------
 ! fixed tagreplace in image descriptions
 ! photos w/o description broke PDF - fixed
