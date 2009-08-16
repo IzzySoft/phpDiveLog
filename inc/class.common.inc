@@ -113,6 +113,14 @@
     if(empty($data)) {
       return $data;
     }
+    if ( preg_match_all('|\[gps\](.+?);\s*(.+)\s*\|(.*)\[/gps\]|ims',$data,$matches) ) {
+      for ($i=0;$i<count($matches[0]);++$i) {
+        if ( preg_match('|(.+);([^\|]+)|',$matches[2][$i],$match) ) $link = $pdl->link->map($matches[1][$i],$match[1],$match[2]);
+        else $link = $pdl->link->map($matches[1][$i],$matches[2][$i]);
+        $sub  = preg_replace('|\[gps\].*(\|.*)\[/gps\]|ims',"[url]$link".'$1[/url]',$matches[0][$i]);
+        $data = str_replace($matches[0][$i],$sub,$data);
+      }
+    }
     if ( preg_match_all("/\[href\]\S+?\[\/href\]/ims",$data,$matches) ) {
       for ($i=0;$i<count($matches[0]);++$i) {
         $sub  = eregi_replace("\[href\](.*)\[\/href\]","<A HREF=\"\\1\" TARGET=\"_blank\">\\1</A>",$matches[0][$i]);
