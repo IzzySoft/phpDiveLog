@@ -51,6 +51,8 @@
  }
 
  #===================================================[ Initialize template ]===
+ $robots_index   = ROBOTS_INDEX_PREFS;
+ $robots_revisit = ROBOTS_REVISIT_PREFS;
  include("inc/header.inc");
  $t = new Template($pdl->config->tpl_path);
  $t->set_file(array("template"=>"filter.tpl"));

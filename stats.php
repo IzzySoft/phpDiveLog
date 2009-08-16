@@ -15,6 +15,8 @@
 $helppage = "stats";
 include("inc/includes.inc");
 $title .= ": ".lang("statistics");
+$robots_index   = ROBOTS_INDEX_PAGES;
+$robots_revisit = ROBOTS_REVISIT_PAGES;
 include("inc/header.inc");
 
 $t = new Template($pdl->config->tpl_path);

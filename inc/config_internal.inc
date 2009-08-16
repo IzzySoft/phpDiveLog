@@ -12,7 +12,7 @@
 
  /* $Id$ */
 
- $pdl->config->version = "0.4.5";
+ $pdl->config->version = "0.4.4+svn";
  $pdl->config->site_title = $title;
 
  #=============================================================[ Debugging ]===
@@ -168,8 +168,17 @@
    if (file_exists($emoticon_file)) define('EMOTICON_FILE',$emoticon_file);
  }
 
+ #===============================================================[ Robots ]===
+ define("ROBOTS_INDEX_LISTS",$robots_index_lists);
+ define("ROBOTS_INDEX_PAGES",$robots_index_pages);
+ define("ROBOTS_INDEX_PREFS",$robots_index_prefs);
+ define("ROBOTS_REVISIT_LISTS",$robots_revisit_lists);
+ define("ROBOTS_REVISIT_PAGES",$robots_revisit_pages);
+ define("ROBOTS_REVISIT_PREFS",$robots_revisit_prefs);
+
  #=============================================================[ clean up ]===
  unset($database,$display_limit,$pix_per_row,$allow_override,$enable_index,
        $uconf,$allowed,$ac,$pwdfile,$transfer_dir,$values_in_statgraphs,
-       $global_kml);
+       $global_kml,$robots_index_lists,$robots_index_pages,$robots_index_prefs,
+       $robots_revisit_lists,$robots_revisit_pages,$robots_revisit_prefs);
 ?>

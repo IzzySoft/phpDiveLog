@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -22,6 +22,8 @@
    $tab2 = FALSE;
    $urladd = "";
  }
+ $robots_index   = ROBOTS_INDEX_PREFS;
+ $robots_revisit = ROBOTS_REVISIT_PREFS;
  include("inc/header.inc");
 
  $t = new Template($pdl->config->tpl_path);

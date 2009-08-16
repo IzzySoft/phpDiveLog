@@ -149,6 +149,8 @@ $wikitext = preg_replace('!<p>\s*</p>!ms','',$wikitext);
 #============================================================[ Output wiki ]===
 if (isset($name)) $title = "Help: ".lang($name);
 else $title = "Help";
+$robots_index   = ROBOTS_INDEX_PREFS;
+$robots_revisit = ROBOTS_REVISIT_PREFS;
 include("inc/header.inc");
 #-------------------------------------------------[ set up navigation tabs ]---
 require_once("inc/class.tabs.inc");

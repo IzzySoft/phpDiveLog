@@ -108,6 +108,19 @@
                                     # space separated values
                                     # ignored when $override_protection=implicit
 
+ #----------------------------------------------------------------[ robots ]---
+ $robots_index_lists = "index,follow"; # how robots shall handle lists. Valid are
+                                    # combinations of [no]index and [no]follow,
+                                    # where "index" means to index the page, and
+                                    # "follow" means to follow links
+ $robots_index_pages = "index,nofollow"; # same for the pages. "nofollow" shall
+                                    # prevent stupid recursion
+ $robots_index_prefs = "noindex,nofollow"; # same for settings/preference related pages
+ $robots_revisit_lists = 14;        # after how many days robots may return to
+                                    # check for changes (values in days)
+ $robots_revisit_pages = 60;        # same for the detail pages
+ $robots_revisit_prefs = 9999;      # and for settings/preference related pages
+
  #------------------------------------------------------------------[ misc ]---
  $emoticon_file = "inc/emoticons.csv"; # Use emoticons? From where?
  $debug_level = "EW";     # What shall be logged: [E]rrors, [W]arnings,

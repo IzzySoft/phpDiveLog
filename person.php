@@ -1,6 +1,6 @@
 <?
  #############################################################################
- # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -15,6 +15,8 @@
  #================================================[ Initialize environment ]===
  include("inc/includes.inc");
  if ( !empty($_GET["diver"]) ) $title .= ": ".ucfirst($_GET["diver"]);
+ $robots_index   = ROBOTS_INDEX_PAGES;
+ $robots_revisit = ROBOTS_REVISIT_PAGES;
  include("inc/header.inc");
  if (!$pdl->config->display_personal) {
    $pdl->common->alert(lang("personal_no_public"));

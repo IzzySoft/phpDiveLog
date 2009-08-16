@@ -15,6 +15,8 @@
  $helppage = "sitelist";
  include("inc/includes.inc");
  $title .= ": SiteIndex";
+ $robots_index   = ROBOTS_INDEX_LISTS;
+ $robots_revisit = ROBOTS_REVISIT_LISTS;
  include("inc/header.inc");
  $start = $pdl->params->start;
  $end = $start + $pdl->config->display_limit;

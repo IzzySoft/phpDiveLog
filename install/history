@@ -3,6 +3,10 @@ $Id$
 History for phpDiveLog
 ======================
 
+v0.4.6
+-------------------
++ added options to handle search engine crawlers (and minimize their traversals)
+
 v0.4.5 (23.07.2009)
 -------------------
 ! fixed tagreplace in image descriptions

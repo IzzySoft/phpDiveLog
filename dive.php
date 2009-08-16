@@ -22,6 +22,8 @@
    include("inc/class.graph.inc");
    $graph = new graph();
  }
+ $robots_index   = ROBOTS_INDEX_PAGES;
+ $robots_revisit = ROBOTS_REVISIT_PAGES;
  include("inc/header.inc");
 
  $t = new Template($pdl->config->tpl_path);

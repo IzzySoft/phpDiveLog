@@ -15,6 +15,8 @@
  $helppage = "buddylist";
  include("inc/includes.inc");
  $title .= ": BuddyList";
+ $robots_index   = ROBOTS_INDEX_LISTS;
+ $robots_revisit = ROBOTS_REVISIT_LISTS;
  include("inc/header.inc");
  if ( !$pdl->config->enable_index ) {
    $pdl->common->alert(lang("index_disabled"));
