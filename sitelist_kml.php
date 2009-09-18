@@ -18,6 +18,7 @@
  $start = 0;
 
  #-=[ Get base URL for images ]=-
+ $root_url = $pdl->link->get_rooturl();
  $pdl_url = $pdl->link->get_baseurl();
  $img_url = $pdl_url . "/" . substr($pdl->config->tpl_url."images/",strlen($pdl->config->base_url));
 
@@ -63,8 +64,9 @@
    $sites[$i]["description"] = $pdl->common->nl2br($sites[$i]["description"]);
    if ($include_firstpic) {
      $fotos = $pdl->file->getSitePix($sites[$i]["id"]);
-     if (!empty($fotos[0]->url))
-       $sites[$i]["description"] = "<IMG ALIGN='right' ALT='' SRC='$pdl_url/".$fotos[0]->url."'>".$sites[$i]["description"];
+     if (!empty($fotos[0]->url)) {
+       $sites[$i]["description"] = "<IMG ALIGN='right' ALT='' SRC='$root_url".$fotos[0]->url."'>".$sites[$i]["description"];
+     }
    }
    foreach($details AS $detail) {
      $t->set_var("$detail",$sites[$i][$detail]);
@@ -74,7 +76,11 @@
  }
 
  #====================================================[ Send the .kml file ]===
+ $out = $t->finish($t->parse("out","template"));
+# $out = $t->parse("out","template");
+ $len = strlen($out);
+ header("Content-Length: $len");
  header("Content-Type: application/vnd.google-earth.kml+xml");
  header("Content-Disposition: attachment; filename=\"$filename\"");
- $t->pparse("out","template");
+ echo $out;
 ?>

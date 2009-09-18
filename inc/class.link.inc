@@ -129,17 +129,24 @@
     return($url);
   }
 
+  /** Evaluate the servers root URL (e.g. 'http://www.server.com')
+   * @method get_rooturl
+   * @return string url
+   */
+  function get_rooturl() {
+    $pdl_url = strtolower($_SERVER["SERVER_PROTOCOL"]);
+    $pos = strpos ($pdl_url,"/");
+    $pdl_url = substr($pdl_url,0,$pos)."://".$_SERVER["HTTP_HOST"];
+    if ($_SERVER["SERVER_PORT"]!=80) $pdl_url .= ":".$_SERVER["SERVER_PORT"];
+    return $pdl_url;
+  }
+
   /** Evaluate the base URL of PDL
    * @method get_baseurl
    * @return string url
    */
   function get_baseurl() {
-    $pdl_url = strtolower($_SERVER["SERVER_PROTOCOL"]);
-    $pos = strpos ($pdl_url,"/");
-    $pdl_url = substr($pdl_url,0,$pos)."://".$_SERVER["HTTP_HOST"];
-    if ($_SERVER["SERVER_PORT"]!=80) $pdl_url .= ":".$_SERVER["SERVER_PORT"];
-    $pdl_url .= dirname($_SERVER["PHP_SELF"]);
-    return $pdl_url;
+    return $this->get_rooturl() . dirname($_SERVER["PHP_SELF"]);;
   }
 
  } // end class link
