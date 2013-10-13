@@ -31,6 +31,7 @@
    * @constructor common
    */
   function common() {
+    $this->dir = new stdClass();
     $this->dir->diverroot = "diver/";
     $this->dir->sitepix   = "fotos/site";
     $this->dir->divepix   = "fotos/dive";

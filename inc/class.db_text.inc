@@ -172,7 +172,7 @@
        switch($sort) {
          case "watertemp":
          case "depth"    :
-         case "divetime" : $this->divedat2str(&$csv,$sort,$unit); break;
+         case "divetime" : $this->divedat2str($csv,$sort,$unit); break;
          case "time"     : $this->divedat_num2time($csv); break;
          default         : break;
        }
@@ -198,6 +198,7 @@
        $tank_out     = explode(":",$this->divedata[$i]["tank_out"]);
        $tank_count   = count($tank_nr);
        for ($k=0;$k<$tank_count;++$k) {
+         $tank = new stdClass();
          $tank->nr     = $tank_nr[$k];
          $tank->id     = $tank_id[$k];
          $tank->name   = $tank_name[$k];
@@ -207,7 +208,7 @@
          $tank->in     = $tank_in[$k];
          $tank->out    = $tank_out[$k];
          $this->divedata[$i]["tank"][$k] = $tank;
-	 unset ($tank);
+         unset ($tank);
        }
        unset ($this->divedata[$i]["tank#"],$this->divedata[$i]["tank_id"],
               $this->divedata[$i]["tank_name"],$this->divedata[$i]["tank_volume"],
@@ -426,16 +427,17 @@
          for ($k=0;$k<$sitecount;++$k) {
            if ( !empty($showPlace) ) {
              if ( $showPlace != $csv->data[$k]["loc"] ) continue;
+             $data = new stdClass();
              $data->name     = $csv->data[$k]["loc"];
              $data->sitename = $csv->data[$k]["place"];
              $data->diver    = $udirs[$i];
              $data->id       = $csv->data[$k]["id"];
              $place[] = $data;
-	     unset($data);
+             unset($data);
            } else {
              $place[] = $csv->data[$k]["loc"];
              if (isset($cnum[$csv->data[$k]["loc"]])) ++$cnum[$csv->data[$k]["loc"]];
-	     else $cnum[$csv->data[$k]["loc"]] = 1;
+             else $cnum[$csv->data[$k]["loc"]] = 1;
            }
          }
        }

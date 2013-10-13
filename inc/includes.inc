@@ -12,6 +12,7 @@
 
  /* $Id$ */
 
+ $pdl = new stdClass();
  include("inc/vul_check.inc");
  if (!empty($_GET["diver"])) $diver = $_GET["diver"];
  if (!empty($_GET["lang"])) $lang  = $_GET["lang"];

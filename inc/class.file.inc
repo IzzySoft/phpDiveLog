@@ -45,7 +45,7 @@
        if (!mkdir($target)) {
          $pdl->common->add_error(lang("mkdir_failed",basename($target)));
          trigger_error("Unable to create directory '$target'",E_USER_NOTICE);
-	 return FALSE;
+         return FALSE;
        }
      }
      $dir = dir($src);
@@ -154,12 +154,14 @@
            case "jpg" :
            case "gif" :
            case "png" :
+             if (!isset($list[$pic])) $list[$pic] = new stdClass();
              $list[$pic]->url = $pdl->config->user_url."fotos/$type/$file";
-	     if ( file_exists($pdl->config->user_path."fotos/$type/large/$file") ) {
+             if ( file_exists($pdl->config->user_path."fotos/$type/large/$file") ) {
                $list[$pic]->bigurl = $pdl->image->mkPopup($pdl->config->user_path."fotos/$type/large/",$pdl->config->user_url."fotos/$type/large/",$file);
-	     }
-	     break;
+             }
+             break;
            case "txt" :
+             if (!isset($list[$pic])) $list[$pic] = new stdClass();
              $list[$pic]->desc = $pdl->common->nl2br( file_get_contents($pdl->config->user_path."fotos/$type/$file") );
              break;
          }

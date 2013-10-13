@@ -53,6 +53,7 @@
              opening it in a new window/tab. Defaults to FALSE
     */
    function add_tab($name,$url,$img,$newwin=FALSE) {
+     $this->tab[$name]          = new stdClass();
      $this->tab[$name]->url     = $url;
      $this->tab[$name]->active  = FALSE;
      $this->tab[$name]->hideurl = FALSE;

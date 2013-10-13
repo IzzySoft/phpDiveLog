@@ -14,6 +14,7 @@
 
  #=========================================================[ helper funcs ]===
  function vul_kick() {
+   GLOBAL $pdl;
    $protocol = $_SERVER['SERVER_PROTOCOL'];
    header("$protocol 403 Forbidden");
    header("Status: 403 Forbidden");

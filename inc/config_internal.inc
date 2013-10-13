@@ -12,6 +12,7 @@
 
  /* $Id$ */
 
+ $pdl->config = new stdClass();
  $pdl->config->version = "0.4.5+svn";
  $pdl->config->site_title = $title;
 
@@ -34,6 +35,8 @@
 
  #===========================================================[ Diver Setup ]===
  $pdl->config->enable_index = $enable_index;
+ $pdl->params = new stdClass();
+ $pdl->params->diver = new stdClass();
  if (!empty($_REQUEST["diver"])) $pdl->params->diver = $_REQUEST["diver"];
  elseif (strtolower($default_page) == "user") $pdl->params->diver = $default_user;
  elseif (strtolower($default_page) == "index") {

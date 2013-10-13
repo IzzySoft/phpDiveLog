@@ -8,6 +8,7 @@ v0.4.6
 + added options to handle search engine crawlers (and minimize their traversals)
 + new tag: [gps]lat;lon;name|desc[/gps] - is handled like [url]
 ! image URLs in KML export had been broken (duplicate path)
+! fixed a "pass-by-reference" which made PDL crash on PHP 5.4+, and fixed a bunch of PHP Notices along
 
 v0.4.5 (23.07.2009)
 -------------------
