@@ -3,6 +3,10 @@ $Id$
 History for phpDiveLog
 ======================
 
+v0.4.7
+-------------------
+* vul_check: fixed preg_match to deal correctly with UTF8 characters like "ø"
+
 v0.4.6 (13.10.2013)
 -------------------
 + added options to handle search engine crawlers (and minimize their traversals)

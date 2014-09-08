@@ -21,6 +21,7 @@
    header("Connection: close");
    $pdl_vul = TRUE;
    $title = "Access Denied!";
+   if (!isset($pdl->config)) $pdl->config = new stdClass();
    $pdl->config->tpl_url = "templates/aqua/";
    include("inc/header.inc");
    echo "<DIV STYLE='border: 1px solid black;background-image:url(templates/aqua/images/aqua-light.jpg)'><IMG SRC='templates/aqua/images/stop.gif' ALIGN='right'><IMG SRC='templates/aqua/images/stop.gif' ALIGN='left'><H2><FONT COLOR='#f00'>$title</FONT></H2><P ALIGN='justify'>Access to this page was denied due to wrong parameters. The intrusion detection of this application triggered an alert: Looks like you want to attack the system and place your own code here. We don't like that, so we aborted your request. If you think that's not your fault (i.e. you did not intentionally manipulate the URL string or POST data, but used the application in a \"normal way\" only), you may want to report this to the author(s) to fix the problem.</P></DIV></BODY></HTML>";
@@ -35,9 +36,9 @@
  }
  function vul_alnum($var) {
    if (!empty($_GET[$var])) {
-     if (preg_match("/[^\w\s- ,\(\)]/",$_GET[$var])) vul_kick(); }
+     if (preg_match("/[^\w\s- ,\(\)]/u",$_GET[$var])) vul_kick(); }
    if (!empty($_REQUEST[$var])) {
-     if (preg_match("/[^\w\s- ,\(\)]/",$_REQUEST[$var])) vul_kick(); }
+     if (preg_match("/[^\w\s- ,\(\)]/u",$_REQUEST[$var])) vul_kick(); }
  }
 
  #==========================================================[ common vars ]===
