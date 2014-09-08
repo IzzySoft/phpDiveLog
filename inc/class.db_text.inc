@@ -453,6 +453,7 @@
      }
      foreach ($place as $key => $val) $tmp[$key] = serialize($val);
      foreach (array_unique($tmp) as $key => $val) {
+       $p = new stdClass();
        $p->name = $place[$key];
        $p->num  = $cnum[$place[$key]];
        $splace[] = $p;
