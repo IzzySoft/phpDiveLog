@@ -179,13 +179,9 @@
    function recode ($string) {
      switch ($this->recode) {
        case "lat1..utf-8" :
-         return preg_replace("/([\x80-\xFF])/e",
-             "chr(0xC0|ord('\\1')>>6).chr(0x80|ord('\\1')&0x3F)",
-             $string); break;
+         return preg_replace_callback("/([\x80-\xFF])/",function ($m) { return chr(0xC0|ord($m[1])>>6).chr(0x80|ord($m[1])&0x3F); },$string); break;
        case "utf-8..lat1" :
-         return preg_replace("([\xC2\xC3])([\x80-\xBF])/e",
-             "chr(ord('\\1')<<6&0xC0|ord('\\2')&0x3F)",
-             $string); break;
+         return preg_replace_callback("([\xC2\xC3])([\x80-\xBF])/",function ($m) { return chr(0xC0|ord($m[1])>>6).chr(0x80|ord($m[1])&0x3F); },$string); break;
        default: return($string);
      }
    }
