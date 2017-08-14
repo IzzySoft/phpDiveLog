@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2017 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -80,9 +80,9 @@ if ($pagenr>0) {
 } else { // empty sheet
   $dives[0] = array('time'=>'','date'=>'','location'=>'','place'=>'','depth'=>'',
                     'divetime'=>'','buddy'=>'','rating'=>'','visibility'=>'',
-		    'watertemp'=>'','airtemp'=>'','current'=>'','workload'=>'',
-		    'suittype'=>'','suitname'=>'','weight'=>'','notes'=>'',
-		    'tank'=>array());
+                    'watertemp'=>'','airtemp'=>'','current'=>'','workload'=>'',
+                    'suittype'=>'','suitname'=>'','weight'=>'','notes'=>'',
+                    'tank'=>array());
 }
 
 for ($sheet=0;$sheet<$sheets;++$sheet)

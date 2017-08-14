@@ -1,6 +1,6 @@
 <?php
 #############################################################################
-# phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
+# phpDiveLog                               (c) 2004-2017 by Itzchak Rehberg #
 # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
 # http://www.izzysoft.de/                                                   #
 # ------------------------------------------------------------------------- #
@@ -235,7 +235,7 @@ class graph {
       $csv->data[$i]['runtime'] = $x[0]*60 + $x[1];
       if (!preg_match("|[0123456789]|",$csv->data[$i]['depth'])) { // Ascent
         $s_depth = $csv->data[$i-1]['depth'];
-	$e_depth = floatval($csv->data[$i+1]['depth']);
+        $e_depth = floatval($csv->data[$i+1]['depth']);
       } else { // normal
         $s_depth = $e_depth = floatval($csv->data[$i]['depth']);
       }
@@ -245,20 +245,20 @@ class graph {
                $D->ScreenY($e_depth),
                "99ccff",$base,"","");
       $D->Line($D->ScreenX($toff+$csv->data[$i]['runtime']-$csv->data[$i]['time']),
-	       $D->ScreenY($s_depth),
-	       $D->ScreenX($toff+$csv->data[$i]["runtime"]),
-	       $D->ScreenY($e_depth),
-	       "00BBBB",3,"","");
+               $D->ScreenY($s_depth),
+               $D->ScreenX($toff+$csv->data[$i]["runtime"]),
+               $D->ScreenY($e_depth),
+               "00BBBB",3,"","");
       if ($i+1<$dc) {
         if (preg_match("|[1234567890]|",$csv->data[$i+1]['depth'])) $end = $csv->data[$i+1]['depth'];
-	else continue;
+        else continue;
       } else $end = 0;
       if ($s_depth==$e_depth)
         $D->Line($D->ScreenX($toff+$csv->data[$i]["runtime"]),
-	         $D->ScreenY($e_depth),
-	         $D->ScreenX($toff+$csv->data[$i]["runtime"]),
-	         $D->ScreenY($end),
-	         "00BBBB",1,"","");
+                 $D->ScreenY($e_depth),
+                 $D->ScreenX($toff+$csv->data[$i]["runtime"]),
+                 $D->ScreenY($end),
+                 "00BBBB",1,"","");
     }
 
     // Save Image & Data

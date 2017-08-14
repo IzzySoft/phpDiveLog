@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2008 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2017 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -77,7 +77,7 @@ function DateFormat($vv, $ii, $ttype)
   }
   if ($ii>=60)//1 min
   { if ($ttype==6) ;//You can add your own date format here
- 		if ($ttype==5) return(intval($hh)*60 + intval($nn)."'");
+    if ($ttype==5) return(intval($hh)*60 + intval($nn)."'");
     if ($ttype==4) return((intval($hh)<=12) ? $hh.".".$nn."am" : intval($hh)%12 .".".$nn."pm");
     if ($nn=="00") $nn="";
     else $nn=":".$nn;
@@ -117,7 +117,7 @@ class Diagram
   var $LastImgColorIndex=0;
   var $ImgMapData="";
   var $Img;
-    
+
   function GetImgColorIndex($theColor)
   { if ($theColor==$this->LastColor) return($this->LastImgColorIndex);
     GetRGB($theColor,$rr,$gg,$bb);
@@ -135,14 +135,14 @@ class Diagram
     $this->top    = $theTop;
     $this->bottom = $theBottom;
   }
-  
+
   function SetBorder($theLeftX, $theRightX, $theBottomY, $theTopY)
   { $this->xmin = $theLeftX;
     $this->xmax = $theRightX;
     $this->ymin = $theBottomY;
     $this->ymax = $theTopY;
   }
-  
+
   function SetText($theScaleX, $theScaleY, $theTitle)
   { $this->xtext=$theScaleX;
     $this->ytext=$theScaleY;
@@ -155,19 +155,19 @@ class Diagram
     if ($theSubGridColor!="undefined")
     { $this->XSubGridColor=$theSubGridColor;
       $this->YSubGridColor=$theSubGridColor;
-    }  
+    }
   }
-  
+
   function SetXGridColor($theGridColor, $theSubGridColor="undefined")
   { $this->XGridColor=$theGridColor;
     if ($theSubGridColor!="undefined") $this->XSubGridColor=$theSubGridColor;
   }
-  
+
   function SetYGridColor($theGridColor, $theSubGridColor="undefined")
   { $this->YGridColor=$theGridColor;
     if ($theSubGridColor!="undefined") $this->YSubGridColor=$theSubGridColor;
   }
-  
+
   function ScreenX($theRealX)
   { return(round(($theRealX-$this->xmin)/($this->xmax-$this->xmin)*($this->right-$this->left)+$this->left));
   }
@@ -255,7 +255,7 @@ class Diagram
     if ($vv>=$bb) return($bb/5); //2 secs
     return($bb/10); //1 sec
   }
-  
+
   function GetXGrid()
   { $dx=($this->xmax-$this->xmin);
     if (abs($dx)>0)
@@ -290,7 +290,7 @@ class Diagram
     }
     return($this->XGrid);
   }
-  
+
   function GetYGrid()
   { $dy=$this->ymax-$this->ymin;
     if (abs($dy)>0)
@@ -325,7 +325,7 @@ class Diagram
     }
     return($this->YGrid);
   }
-  
+
   function Draw($theDrawColor="", $theTextColor="000000", $isScaleText=false, $theTooltipText="", $theOnClickAction="", $theOnMouseoverAction="", $theOnMouseoutAction="")
   { if ($theDrawColor!="")
     { if (($ee=strchr($theDrawColor,"."))!="")
@@ -348,7 +348,7 @@ class Diagram
     if ($this->YGridColor!="") $ccGridY=$this->GetImgColorIndex($this->YGridColor);
     if ($this->XSubGridColor!="") $ccSubGridX=$this->GetImgColorIndex($this->XSubGridColor);
     if ($this->YSubGridColor!="") $ccSubGridY=$this->GetImgColorIndex($this->YSubGridColor);
-    
+
     if (($this->XScale==1)||(is_string($this->XScale)))
     { $u="";
       $fn="";
@@ -619,7 +619,7 @@ class Diagram
       $tmpMapData=$tmpMapData.">\n";
       $this->ImgMapData=$tmpMapData.$this->ImgMapData;
     }
-  }    
+  }
 
   function Bar($theLeft, $theTop, $theRight, $theBottom, $theDrawColor, $theText="", $theTextColor="000000", $theTooltipText="", $theOnClickAction="", $theOnMouseoverAction="", $theOnMouseoutAction="")
   { if ($theText!="") $dd=imagefontwidth(abs($this->BFont))*strlen($theText)-2;
@@ -682,7 +682,7 @@ class Diagram
       { $cc=$this->GetImgColorIndex($theDrawColor); 
         imagefilledrectangle($this->Img,$ll,$theTop,$rr,$theBottom,$cc);
       }
-    }  
+    }
     $cc=$this->GetImgColorIndex($theBorderColor); 
     for ($i=0; $i<$theBorderWidth; $i++)
       imagerectangle($this->Img,$ll+$i,$theTop+$i,$rr-$i,$theBottom-$i,$cc);
@@ -699,7 +699,7 @@ class Diagram
       if ($theOnMouseoutAction!="") $tmpMapData=$tmpMapData." onMouseout='".$theOnMouseoutAction."'";
       $tmpMapData=$tmpMapData.">\n";
       $this->ImgMapData=$tmpMapData.$this->ImgMapData;
-    }     
+    }
   }
 
   function Dot($theX, $theY, $theSize, $theType, $theColor, $theTooltipText="", $theOnClickAction="", $theOnMouseoverAction="", $theOnMouseoutAction="")
@@ -755,7 +755,7 @@ class Diagram
       if ($theOnMouseoutAction!="") $tmpMapData=$tmpMapData." onMouseout='".$theOnMouseoutAction."'";
       $tmpMapData=$tmpMapData.">\n";
       $this->ImgMapData=$tmpMapData.$this->ImgMapData;
-    }     
+    }
   }
 
   function Pixel($theX, $theY, $theColor)
@@ -780,7 +780,7 @@ class Diagram
       if ($theOnMouseoutAction!="") $tmpMapData=$tmpMapData." onMouseout='".$theOnMouseoutAction."'";
       $tmpMapData=$tmpMapData.">\n";
       $this->ImgMapData=$tmpMapData.$this->ImgMapData;
-    }     
+    }
   }
 
   function Area($theX0, $theY0, $theX1, $theY1, $theColor, $theBase=0, $theTooltipText="", $theOnClickAction="", $theOnMouseoverAction="", $theOnMouseoutAction="")
@@ -795,7 +795,7 @@ class Diagram
       if ($theOnMouseoutAction!="") $tmpMapData=$tmpMapData." onMouseout='".$theOnMouseoutAction."'";
       $tmpMapData=$tmpMapData.">\n";
       $this->ImgMapData=$tmpMapData.$this->ImgMapData;  
-    }     
+    }
   }
 
   function Arrow($theX0, $theY0, $theX1, $theY1, $theColor, $theSize=1, $theTooltipText="", $theOnClickAction="", $theOnMouseoverAction="", $theOnMouseoutAction="")
@@ -822,9 +822,9 @@ class Diagram
       if ($theOnMouseoutAction!="") $tmpMapData=$tmpMapData." onMouseout='".$theOnMouseoutAction."'";
       $tmpMapData=$tmpMapData.">\n";
       $this->ImgMapData=$tmpMapData.$this->ImgMapData;  
-    }         
+    }
   }
-  
+
   function Pie($theXCenter, $theYCenter, $theOffset, $theRadius, $theAngle0, $theAngle1, $theColor, $theTooltipText="", $theOnClickAction="", $theOnMouseoverAction="", $theOnMouseoutAction="")
   { $cc=$this->GetImgColorIndex($theColor);
     $aa0=$theAngle0;

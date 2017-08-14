@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2017 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -73,7 +73,7 @@ class Template {
    * @method set_root
    * @param string root new template directory
    * @return boolean success
-   */  
+   */
   function set_root($root) {
     if (!is_dir($root)) {
       $this->halt("set_root: $root is not a directory.");
@@ -139,7 +139,7 @@ class Template {
     $this->set_var($handle, $m[1][0]);
     $this->set_var($parent, $str);
   }
-  
+
   /** define the content of one {var} inside the template
    *  Alternatively to passing two strings, they can be passed as a array
    *  of pairs name,value
@@ -182,7 +182,7 @@ class Template {
     $str = @preg_replace($this->varkeys, $this->varvals, $str);
     return $str;
   }
-  
+
   /** Substitute variables
    * @package Api
    * @class Template
@@ -236,7 +236,7 @@ class Template {
     print $this->finish( $this->parse($target, $handle, $append) );
     return false;
   }
-  
+
   /** Retrieve all set vars
    * @package Api
    * @class Template
@@ -250,7 +250,7 @@ class Template {
     }
     return $result;
   }
-  
+
   /** Retrieve variable contents
    * @package Api
    * @class Template
@@ -292,7 +292,7 @@ class Template {
       if (!isset($this->varkeys[$v]))
         $result[$v] = $v;
     }
-    
+
     if (count($result))
       return $result;
     else
@@ -346,13 +346,13 @@ class Template {
     if (substr($filename, 0, 1) != "/") {
       $filename = $this->root."/".$filename;
     }
-    
+
     if (!file_exists($filename))
       $this->halt("filename: file $filename does not exist.");
 
     return $filename;
   }
-  
+
   /* private: varname($varname)
    * varname: name of a replacement variable to be protected.
    */
@@ -380,7 +380,7 @@ class Template {
     }
 
     $this->set_var($handle, $str);
-    
+
     return true;
   }
 
@@ -390,16 +390,16 @@ class Template {
    */
   function halt($msg) {
     $this->last_error = $msg;
-    
+
     if ($this->halt_on_error != "no")
       $this->haltmsg($msg);
-    
+
     if ($this->halt_on_error == "yes")
       die("<b>Halted.</b>");
-    
+
     return false;
   }
-  
+
   /* public, override: haltmsg($msg)
    * msg: error message to show.
    */

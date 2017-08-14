@@ -1,6 +1,6 @@
-<?
+<?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2017 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -16,7 +16,7 @@
   * @package Api
   * @class tabs
   * @author Izzy (izzysoft AT qumran DOT org)
-  * @copyright (c) 2001-2009 by Itzchak Rehberg and IzzySoft
+  * @copyright (c) 2001-2017 by Itzchak Rehberg and IzzySoft
   */
  class tabs {
    /** Constructor does all the job

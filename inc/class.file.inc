@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpApi                                   (c) 2004-2009 by Itzchak Rehberg #
+ # phpApi                                   (c) 2004-2017 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -16,7 +16,7 @@
   * @package Api
   * @class file
   * @author Izzy (izzysoft AT qumran DOT org)
-  * @copyright (c) 2004-2009 by Itzchak Rehberg and IzzySoft
+  * @copyright (c) 2004-2017 by Itzchak Rehberg and IzzySoft
   */
  class file {
 
@@ -299,7 +299,7 @@
        $uc  = count($csv->data);
        for ($i=0;$i<$uc;++$i) {
          if ( $csv->data[$i]["user"] == $pdl->config->user_name )
-	   return $csv->data[$i]["pwd"];
+           return $csv->data[$i]["pwd"];
        }
        return "";
      } else {

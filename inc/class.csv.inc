@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpApi                                   (c) 2004-2009 by Itzchak Rehberg #
+ # phpApi                                   (c) 2004-2017 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -16,7 +16,7 @@
   * @package Api
   * @class csv
   * @author Izzy (izzysoft AT qumran DOT org)
-  * @copyright (c) 2004-2009 by Itzchak Rehberg and IzzySoft
+  * @copyright (c) 2004-2017 by Itzchak Rehberg and IzzySoft
   */
  class csv {
 
@@ -133,7 +133,7 @@
              if ($i+1<$fc) {
                $pos = strpos($this->text,$this->txt.$this->sep,1);
              } else {
-	       $pos = strpos($this->text,$this->txt."\n");
+               $pos = strpos($this->text,$this->txt."\n");
              }
              $data[$name] = substr($this->text,1,$pos-1);
              $this->text = substr($this->text,$pos+2);
@@ -147,7 +147,7 @@
              $this->text = substr($this->text,$pos+1);
            }
            if ($this->trim) $data[$name] = trim($data[$name]);
-	   $data[$name] = $this->recode($data[$name]);
+           $data[$name] = $this->recode($data[$name]);
            $this->data[$rec] = $data;
          } // record end
        }
@@ -181,11 +181,11 @@
        case "lat1..utf-8" :
          return preg_replace("/([\x80-\xFF])/e",
              "chr(0xC0|ord('\\1')>>6).chr(0x80|ord('\\1')&0x3F)",
-	     $string); break;
+             $string); break;
        case "utf-8..lat1" :
          return preg_replace("([\xC2\xC3])([\x80-\xBF])/e",
-	     "chr(ord('\\1')<<6&0xC0|ord('\\2')&0x3F)",
-	     $string); break;
+             "chr(ord('\\1')<<6&0xC0|ord('\\2')&0x3F)",
+             $string); break;
        default: return($string);
      }
    }
@@ -242,18 +242,18 @@
        switch($compare) {
          case "eq"  : if ($this->data[$i][$column]==$value) $data[] = $this->data[$i]; break;
          case "lt"  : if ($type=="num") { $val = $this->data[$i][$column]; if (bccomp($value,floatval($val),2)>0) $data[] = $this->data[$i]; }
-	              else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))>0) $data[] = $this->data[$i]; }
-		      break;
-	 case "gt"  : if ($type=="num") { $val = $this->data[$i][$column]; if (bccomp($value,floatval($val),2)<0) $data[] = $this->data[$i]; }
-	              else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))<0) $data[] = $this->data[$i]; }
-		      break;
-	 case "le"  : if ($type=="num") { $val = $this->data[$i][$column]; if (bccomp($value,floatval($val),2)>=0) $data[] = $this->data[$i]; }
-	              else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))>=0) $data[] = $this->data[$i]; }
-		      break;
-	 case "ge"  : if ($type=="num") { $val = $this->data[$i][$column]; if (bccomp($value,floatval($val),2)<=0) $data[] = $this->data[$i]; }
-	              else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))<=0) $data[] = $this->data[$i]; }
-		      break;
-	 case "ne"  : if ($this->data[$column]!=$value) $data[] = $this->data[$i]; break;
+                      else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))>0) $data[] = $this->data[$i]; }
+                      break;
+         case "gt"  : if ($type=="num") { $val = $this->data[$i][$column]; if (bccomp($value,floatval($val),2)<0) $data[] = $this->data[$i]; }
+                      else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))<0) $data[] = $this->data[$i]; }
+                      break;
+         case "le"  : if ($type=="num") { $val = $this->data[$i][$column]; if (bccomp($value,floatval($val),2)>=0) $data[] = $this->data[$i]; }
+                      else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))>=0) $data[] = $this->data[$i]; }
+                      break;
+         case "ge"  : if ($type=="num") { $val = $this->data[$i][$column]; if (bccomp($value,floatval($val),2)<=0) $data[] = $this->data[$i]; }
+                      else { if (strcmp(strtolower($value),strtolower($this->data[$i][$column]))<=0) $data[] = $this->data[$i]; }
+                      break;
+         case "ne"  : if ($this->data[$column]!=$value) $data[] = $this->data[$i]; break;
          case "~"   : if ( preg_match('|'.str_replace("%",".*",$value).'|i',$this->data[$i][$column]) ) $data[] = $this->data[$i]; break;
        }
      }

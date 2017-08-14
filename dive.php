@@ -1,6 +1,6 @@
-<?
+<?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2017 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -252,10 +252,10 @@
      for ($i=0;$i<$fc;++$i) {
        if (!empty($fotos[$i]->bigurl)) {
          $t->set_var("unref","</a>");
-	 $t->set_var("bigref","<a href=\"".$fotos[$i]->bigurl."\">");
+         $t->set_var("bigref","<a href=\"".$fotos[$i]->bigurl."\">");
        } else {
          $t->set_var("unref","");
-	 $t->set_var("bigref","");
+         $t->set_var("bigref","");
        }
        $t->set_var("foto",$fotos[$i]->url);
        if (isset($fotos[$i]->desc)) $t->set_var("fdesc",$fotos[$i]->desc);

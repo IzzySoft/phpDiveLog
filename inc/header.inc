@@ -1,4 +1,4 @@
-<?
+<?php
  header('Content-type: text/html; charset=utf-8');
  if ( !isset($robots_revisit) || empty($robots_revisit) && $robots_revisit!==0 ) $robots_revisit = 60;
  if ( !isset($robots_index)   || empty($robots_index) ) $robots_index = "index,follow";

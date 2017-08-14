@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2017 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -59,13 +59,13 @@
  switch ($listtype) {
    case "logbook" : set_param("order",$logbook_default_order);
                     set_param("sort",$logbook_default_sort);
-		    break;
+                    break;
    case "sitelist": set_param("order",$sitelist_default_order);
                     set_param("sort",$sitelist_default_sort);
-		    break;
+                    break;
    default        : set_param("order","asc");
                     set_param("sort","");
-		    break;
+                    break;
  }
  set_param("nr",0);
 

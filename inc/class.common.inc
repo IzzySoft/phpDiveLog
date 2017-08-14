@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2017 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -16,7 +16,7 @@
   * @package Api
   * @class common
   * @author Izzy (izzysoft AT qumran DOT org)
-  * @copyright (c) 2004-2009 by Itzchak Rehberg and IzzySoft
+  * @copyright (c) 2004-2017 by Itzchak Rehberg and IzzySoft
   */
  class common {
 
@@ -92,10 +92,10 @@
       }
       switch(substr($string,1,1)) {
         case "d" : $root.=$this->dir->divepix; break;
-	case "n" : $root.=$this->dir->notes; break;
-	case "p" : $root.=$this->dir->privpix; break;
-	case "s" : $root.=$this->dir->sitepix; break;
-	case "t" : $root.=$this->dir->text; break;
+        case "n" : $root.=$this->dir->notes; break;
+        case "p" : $root.=$this->dir->privpix; break;
+        case "s" : $root.=$this->dir->sitepix; break;
+        case "t" : $root.=$this->dir->text; break;
       }
       return $root.substr($string,$pos);
     }

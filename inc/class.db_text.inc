@@ -1,6 +1,6 @@
 <?php
  #############################################################################
- # phpDiveLog                               (c) 2004-2009 by Itzchak Rehberg #
+ # phpDiveLog                               (c) 2004-2017 by Itzchak Rehberg #
  # written by Itzchak Rehberg <izzysoft AT qumran DOT org>                   #
  # http://www.izzysoft.de/                                                   #
  # ------------------------------------------------------------------------- #
@@ -16,7 +16,7 @@
   * @package Api
   * @class db_text
   * @author Izzy (izzysoft@qumran.org)
-  * @copyright (c) 2004-2009 by Itzchak Rehberg and IzzySoft
+  * @copyright (c) 2004-2017 by Itzchak Rehberg and IzzySoft
   */
  class db_text {
    var $divedata;
@@ -58,12 +58,12 @@
        case "csv"  :
        default     :
          $csv = new csv(";",'"',TRUE,FALSE);
-	 $csv->import($filename);
+         $csv->import($filename);
          $dc = count($csv->data);
-	 for ($i=0;$i<$dc;++$i) {
-	   $trans[$csv->data[$i]["ref"]] = $csv->data[$i]["trans"];
-	 }
-	 return $trans;
+         for ($i=0;$i<$dc;++$i) {
+           $trans[$csv->data[$i]["ref"]] = $csv->data[$i]["trans"];
+         }
+         return $trans;
      }
    }
 
@@ -85,7 +85,7 @@
          $csv = new csv(";",'"',TRUE);
          $csv->import($file);
          return $csv->data;
-     }    
+     }
   }
 
   #============================================================[ Dive Data ]===
@@ -166,7 +166,7 @@
               $datastr = explode(" ",$csv->data[0][$sort]);
               $unit    = $datastr[1];
               $this->divedat2num($csv,$sort);
-	      break;
+              break;
        }
        $csv->sort($sort,$order,$type);
        switch($sort) {
@@ -248,26 +248,26 @@
              if (($this->divedata[$i]["dive#"] >= $start) && ($this->divedata[$i]["dive#"] <= $end)) {
                $data[] = $this->divedata[$i];
              }
-	   }
+           }
            return $data;
          } else { // single record
            for ($i=0;$i<$this->dives;++$i) {
-	     if ($this->divedata[$i]["dive#"] == $start)
-	       return $this->divedata[$i];
-	   }
+             if ($this->divedata[$i]["dive#"] == $start)
+               return $this->divedata[$i];
+           }
          }
        } else { // identify by record
          if ($end!=="") {
-	   $max = $start + $end;
-	   if ($max > $this->dives) $max = $this->dives;
-	   for ($i=$start;$i<$max;++$i) {
-	     $data[] = $this->divedata[$i];
-	   }
-	   if (isset($data)) return $data;
+           $max = $start + $end;
+           if ($max > $this->dives) $max = $this->dives;
+           for ($i=$start;$i<$max;++$i) {
+             $data[] = $this->divedata[$i];
+           }
+           if (isset($data)) return $data;
            else return array();
-	 } else {
-	   return $this->divedata[$start];
-	 }
+         } else {
+           return $this->divedata[$start];
+         }
        }
      } else { // all records
        return $this->divedata;
@@ -375,24 +375,24 @@
              if (($this->sitedata[$i]["id"] >= $start) && ($this->sitedata[$i]["id"] <= $end)) {
                $data[] = $this->sitedata[$i];
              }
-	   }
+           }
            return $data;
          } else { // single record
            for ($i=0;$i<$this->sites;++$i) {
-	     if ($this->sitedata[$i]["id"] == $start)
-	       return $this->sitedata[$i];
-	   }
+             if ($this->sitedata[$i]["id"] == $start)
+               return $this->sitedata[$i];
+           }
          }
        } else { // identify by record
          if ($end==="") {
            return $this->sitedata[$start];
-	 } else {
-	   $max = $start + $end;
-	   if ($max > $this->sites) $max = $this->sites;
-	   for ($i=$start;$i<$max;++$i) {
-	     $data[] = $this->sitedata[$i];
-	   }
-	   return $data;
+         } else {
+           $max = $start + $end;
+           if ($max > $this->sites) $max = $this->sites;
+           for ($i=$start;$i<$max;++$i) {
+             $data[] = $this->sitedata[$i];
+           }
+           return $data;
          }
        }
      }
