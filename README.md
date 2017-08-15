@@ -19,6 +19,9 @@ Additionally, you also can export your dive and site information to PDF - in ord
 ### What are the requirements to use phpDiveLog?
 For data conversion from AquaDiveLog you need to have a Java interpreter installed (refer to the AquaDiveLog documentation for details). phpDiveLog itself only requires a running web server with PHP (version 4 or higher) support.
 
+### What license is used?
+*phpDiveLog* uses the [Gnu Public License v2](https://github.com/IzzySoft/phpDiveLog/blob/master/install/LICENSE).
+
 ### Where can I find more information?
 * in the [Demo](https://www.izzysoft.de/software/demos/phpdivelog/)
 * within the downloaded  files
