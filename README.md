@@ -24,5 +24,6 @@ For data conversion from AquaDiveLog you need to have a Java interpreter install
 
 ### Where can I find more information?
 * in the [Demo](https://www.izzysoft.de/software/demos/phpdivelog/)
-* within the downloaded  files
+* in the [Wiki](https://github.com/IzzySoft/phpDiveLog/wiki)
+* within the downloaded files
 * on the [AquaDiveLog Homepage](http://www.aquadivelog.org/)
