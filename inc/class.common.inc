@@ -124,39 +124,39 @@
     }
     if ( preg_match_all("/\[href\]\S+?\[\/href\]/ims",$data,$matches) ) {
       for ($i=0;$i<count($matches[0]);++$i) {
-        $sub  = eregi_replace("\[href\](.*)\[\/href\]","<A HREF=\"\\1\" TARGET=\"_blank\">\\1</A>",$matches[0][$i]);
+        $sub  = preg_replace("!\[href\](.*)\[\/href\]!i","<A HREF=\"\\1\" TARGET=\"_blank\">\\1</A>",$matches[0][$i]);
         $data = str_replace($matches[0][$i],$sub,$data);
       }
     }
     if ( preg_match_all("/\[file\].+?\[\/file\]/ims",$data,$matches) ) {
       for ($i=0;$i<count($matches[0]);++$i) {
-        $link = $this->dirReplace( eregi_replace("\[file\](.*)\[\/file\]","\\1",$matches[0][$i]) );
+        $link = $this->dirReplace( preg_replace("!\[file\](.*)\[\/file\]!i","\\1",$matches[0][$i]) );
         $text = $this->tagreplace( $pdl->file->read_file($link) );
-        $sub  = eregi_replace("\[file\](.*)\[\/file\]",$text,$matches[0][$i]);
+        $sub  = preg_replace("!\[file\](.*)\[\/file\]!i",$text,$matches[0][$i]);
         $data = str_replace($matches[0][$i],$sub,$data);
       }
     }
     if ( preg_match_all("/\[img\].+?\[\/img\]/ims",$data,$matches) ) {
       for ($i=0;$i<count($matches[0]);++$i) {
-        $link  = $this->dirReplace( eregi_replace("\[img\]([^|]+)\|{0,1}(.*)\[\/img\]","\\1",$matches[0][$i]), TRUE );
-        $sub  = eregi_replace("\[img\]([^|]+)\|{0,1}(.*)\[\/img\]","<SPAN CLASS='thumbnail-left'><IMG ALIGN='center' SRC='$link'><BR>\\2</SPAN>",$matches[0][$i]);
+        $link  = $this->dirReplace( preg_replace("!\[img\]([^|]+)\|{0,1}(.*)\[\/img\]!i","\\1",$matches[0][$i]), TRUE );
+        $sub  = preg_replace("!\[img\]([^|]+)\|{0,1}(.*)\[\/img\]!i","<SPAN CLASS='thumbnail-left'><IMG ALIGN='center' SRC='$link'><BR>\\2</SPAN>",$matches[0][$i]);
         $data = str_replace($matches[0][$i],$sub,$data);
       }
     }
     if ( preg_match_all("/\[imgr\].+?\[\/imgr\]/ims",$data,$matches) ) {
       for ($i=0;$i<count($matches[0]);++$i) {
-        $link  = $this->dirReplace( eregi_replace("\[imgr\]([^|]+)\|{0,1}(.*)\[\/imgr\]","\\1",$matches[0][$i]), TRUE );
-        $sub  = eregi_replace("\[imgr\]([^|]+)\|{0,1}(.*)\[\/imgr\]","<SPAN CLASS='thumbnail-right'><IMG ALIGN='center' SRC='$link'><BR>\\2</SPAN>",$matches[0][$i]);
+        $link  = $this->dirReplace( preg_replace("!\[imgr\]([^|]+)\|{0,1}(.*)\[\/imgr\]!i","\\1",$matches[0][$i]), TRUE );
+        $sub  = preg_replace("!\[imgr\]([^|]+)\|{0,1}(.*)\[\/imgr\]!i","<SPAN CLASS='thumbnail-right'><IMG ALIGN='center' SRC='$link'><BR>\\2</SPAN>",$matches[0][$i]);
         $data = str_replace($matches[0][$i],$sub,$data);
       }
     }
-    $data = eregi_replace("\[imgr\](.*)\[\/img\]","<IMG ALIGN=\"right\" SRC=\"\\1\">",$data);
+    $data = preg_replace("!\[imgr\](.*)\[\/img\]!i","<IMG ALIGN=\"right\" SRC=\"\\1\">",$data);
     if ( preg_match_all("/\[url\].+?\[\/url\]/ims",$data,$matches) ) {
       for ($i=0;$i<count($matches[0]);++$i) {
-        $link  = $this->dirReplace( eregi_replace("\[url\]([^|]+)\|{0,1}(.*)\[\/url\]","\\1",$matches[0][$i]), TRUE );
-        $text  = $this->dirReplace( eregi_replace("\[url\]([^|]+)\|{0,1}(.*)\[\/url\]","\\2",$matches[0][$i]), TRUE );
+        $link  = $this->dirReplace( preg_replace("!\[url\]([^|]+)\|{0,1}(.*)\[\/url\]!i","\\1",$matches[0][$i]), TRUE );
+        $text  = $this->dirReplace( preg_replace("!\[url\]([^|]+)\|{0,1}(.*)\[\/url\]!i","\\2",$matches[0][$i]), TRUE );
         if (empty($text)) $text = $link;
-        $sub  = eregi_replace("\[url\]([^|]+)\|{0,1}(.*)\[\/url\]","<A HREF='$link' TARGET='_blank'>$text</A>",$matches[0][$i]);
+        $sub  = preg_replace("!\[url\]([^|]+)\|{0,1}(.*)\[\/url\]!i","<A HREF='$link' TARGET='_blank'>$text</A>",$matches[0][$i]);
         $data = str_replace($matches[0][$i],$sub,$data);
       }
     }
