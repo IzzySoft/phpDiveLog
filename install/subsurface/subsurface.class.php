@@ -24,7 +24,7 @@ class subsurface {
     if ( file_exists($this->sitemap_file) ) return [1, "Sitemap file '".$this->sitemap_file."' already exists, aborting,"];
     $i = 1; $map = new stdClass;
     foreach ( $this->data['divesites']['site'] as $site ) {
-      $map->{$site['attr']['uuid']} = (object) [ 'id'=>$i, 'name'=>$site['attr']['name'], 'water'=>'', 'type'=>'', 'rating'=>0 ];
+      $map->{$site['attr']['uuid']} = (object) [ 'id'=>$i, 'name'=>$site['attr']['name'], 'water'=>'', 'type'=>'', 'depth'=>'', 'rating'=>0 ];
       ++$i;
     }
     if ( file_put_contents( $this->sitemap_file, json_encode($map, JSON_PRETTY_PRINT) ) )
@@ -51,7 +51,7 @@ class subsurface {
     $changed = false;
     foreach ( $this->data['divesites']['site'] as $site ) {
       if ( !property_exists($map,$site['attr']['uuid']) ) {
-        $map->{$site['attr']['uuid']} = (object) [ 'id'=>++$i, 'name'=>$site['attr']['name'], 'water'=>'', 'type'=>'', 'rating'=>0 ];
+        $map->{$site['attr']['uuid']} = (object) [ 'id'=>++$i, 'name'=>$site['attr']['name'], 'water'=>'', 'type'=>'', 'depth'=>'', 'rating'=>0 ];
         $changed = true;
       }
     }
