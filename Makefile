@@ -18,6 +18,7 @@ install: installdirs
 	$(INSTALL_DATA) lang/* $(datadir)/lang
 	cp -pr templates/* $(datadir)/templates
 	cp -pr install/adl/* $(datadir)/install/adl
+	cp -pr install/subsurface/* $(datadir)/install/adl
 	$(INSTALL_DATA) install/LICENSE $(datadir)/install
 	$(INSTALL_DATA) install/README $(datadir)/install
 	$(INSTALL_DATA) install/history $(datadir)/install
@@ -31,6 +32,7 @@ installdirs:
 	mkdir -p $(datadir)/templates/aqua/images
 	mkdir -p $(datadir)/templates/default/images
 	mkdir -p $(datadir)/install/adl/template
+	mkdir -p $(datadir)/install/subsurface
 	mkdir -p $(datadir)/lang
 	mkdir -p $(datadir)/inc
 	mkdir -p $(datadir)/diver/demo/data
