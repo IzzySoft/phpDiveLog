@@ -104,7 +104,7 @@ class subsurface {
         $csv .= '"'.$this->gps2str($tmp[0],'lat').'";"'.$this->gps2str($tmp[1],'lon').'";';
         if ( empty($tmp[2]) ) $csv .= '"0";';
         else $csv .= '"'.$tmp[2].'";"';
-      } else $csv .= '"";"";';
+      } else $csv .= '"";"";"";';
       if ( property_exists($map->{$site['attr']['uuid']},'depth') ) $csv .= '"'.$map->{$site['attr']['uuid']}->depth.'";';
       else $csv .= '"";';
       //$csv .= '"";'; // depth missing/lost in Subsurface ?
