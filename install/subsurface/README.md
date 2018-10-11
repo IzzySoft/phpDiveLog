@@ -18,8 +18,7 @@ placed. Copy/symlink Subvert's files here (or place them into your `$PATH` – o
 they are and specify the `/full/path/to/your.xml` via the `-f` parameter), then you're ready to go.
 First you need to create above mentioned mapping files:
 
-    ./subvert.php -f divelog.xml -1 Accessories sitemap create
-    ./subvert.php -f divelog.xml -1 Accessories divemap create
+    ./subvert.php -f divelog.xml -1 Accessories create
 
 (Of course replace `divelog.xml` with the name of your XML file). This will create two files in the
 directory `divelog.xml` resides: `divelog.sites.map` and `divelog_dives.map`, containing the data
@@ -28,8 +27,7 @@ creating those maps you want to edit and adjust them with the values from your d
 logged using ADL/PDL. Later, when you've added more dives in Subsurface, you can easily append those
 to the map files with
 
-    ./subvert.php -f divelog.xml -1 Accessories sitemap update
-    ./subvert.php -f divelog.xml -1 Accessories divemap update
+    ./subvert.php -f divelog.xml -1 Accessories update
 
 After that, you only need to adjust the new records. That done, you can create the CSV files for PDL:
 
