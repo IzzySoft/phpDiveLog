@@ -17,7 +17,10 @@ As for now, phpDiveLog offers you no features to edit these data. But it provide
 Additionally, you also can export your dive and site information to PDF - in order to maintain a "paper version" of your logbook.
 
 ### What are the requirements to use phpDiveLog?
-For data conversion from AquaDiveLog you need to have a Java interpreter installed (refer to the AquaDiveLog documentation for details). phpDiveLog itself only requires a running web server with PHP (version 4 or higher) support.
+* For data conversion from AquaDiveLog (see `install/adl/`) you need to have a Java interpreter installed (refer to the AquaDiveLog documentation for details).
+* For data conversion from Subsurface (see `install/subsurface/`) you'll need a PHP CLI interpreter.
+
+phpDiveLog itself only requires a running web server with PHP (version 4 or higher) support.
 
 ### What license is used?
 *phpDiveLog* uses the [Gnu Public License v2](https://github.com/IzzySoft/phpDiveLog/blob/master/install/LICENSE).
