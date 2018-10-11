@@ -21,6 +21,7 @@ class subsurface {
 /* ============================================================[ divesites ]=== */
   // create a fresh site map file
   function create_sitemap() {
+    if ( file_exists($this->sitemap_file) ) return [1, "Sitemap file '".$this->sitemap_file."' already exists, aborting,"];
     $i = 1; $map = new stdClass;
     foreach ( $this->data['divesites']['site'] as $site ) {
       $map->{$site['attr']['uuid']} = (object) [ 'id'=>$i, 'name'=>$site['attr']['name'], 'water'=>'', 'type'=>'', 'rating'=>0 ];
@@ -29,7 +30,7 @@ class subsurface {
     if ( file_put_contents( $this->sitemap_file, json_encode($map, JSON_PRETTY_PRINT) ) )
       return[0,"Sitemap file '".$this->sitemap_file."' created."];
     else
-      return[1,"Failed to write sitemap file '".$this->sitemap_file."'!"];
+      return[2,"Failed to write sitemap file '".$this->sitemap_file."'!"];
   }
 
 
@@ -123,6 +124,7 @@ class subsurface {
 /* ================================================================[ dives ]=== */
   // create a fresh dive map file
   function create_divemap() {
+    if ( file_exists($this->divemap_file) ) return [1, "Divemap file '".$this->divemap_file."' already exists, aborting."];
     $i = 1; $map = new stdClass;
     foreach ( $this->data['dives']['dive'] as $dive ) {
       if ( array_key_exists('description',$dive['cylinder']['attr']) ) $name = preg_replace('!\x{2113}!u','L',$dive['cylinder']['attr']['description']); // \u2113 = "script small l" unicode, used by Subsurface in names like "15L 200 bar"
@@ -139,7 +141,7 @@ class subsurface {
     if ( file_put_contents( $this->divemap_file, json_encode($map, JSON_PRETTY_PRINT) ) )
       return[0,"Divemap file '".$this->divemap_file."' created."];
     else
-      return[1,"Failed to write divemap file '".$this->divemap_file."'!"];
+      return[2,"Failed to write divemap file '".$this->divemap_file."'!"];
   }
 
 

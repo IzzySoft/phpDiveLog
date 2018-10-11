@@ -59,9 +59,7 @@ Just call `./subvert.php` without any parameters, and it will tell you it
 
 
 ### Open Issues
-* Subvert isn't really "fool proof". While it will complain if it doesn't find something it needs,
-  it will e.g. overwrite files (on `sitemap create`, `divemap create` and `export`) without asking
-  or creating backups.
+* Subvert isn't really "fool proof". It doesn't safe-guard against all possible mistakes or errors.
 * Subvert might throw some errors here and there. That is because it's not (yet) thoroughly
   tested (I had only my own data to play with). If you encounter any of those, please report them
   in the issue tracker. If you can provide me with your XML file (and maybe also with the map
