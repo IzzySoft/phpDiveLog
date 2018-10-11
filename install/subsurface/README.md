@@ -44,8 +44,11 @@ Subvert also generates the dive profile `*.csv` files from your Subversion XML. 
 Subversion also creates a „dummy profile“ if you manually add a dive and don't have profile data
 collected with any dive computer (or by other means). You probably don't want to copy such dummies
 to your PDL dive log. They are easy to spot, though, usually being smaller than 200 bytes while a
-„real profile“ rarely is smaller than 2 kbytes (unless it was a very short dive). So it's up to
-you which profiles you „copy over”.
+„real profile“ rarely is smaller than 2 kbytes (unless it was a very short dive).
+
+So it's up to you which profiles you „copy over”. You can even tell `subvert.php` to not export them
+in the first place, using the `-i` option: to my experience, they always have exactly 4 records, so
+with `-i 5` they shouldn't be exported at all.
 
 
 ### Syntax

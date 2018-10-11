@@ -10,16 +10,18 @@ function syntax() {
   echo $TBOLD."Examples:".$TNORMAL."\n  ".$GLOBALS['argv'][0]." -f foobar.xml -1 Accessories sitemap create\n  ".$GLOBALS['argv'][0]." -f foobar.xml divemap update\n  ".$GLOBALS['argv'][0]." -f foobar.xml export dives\n";
   echo $TBOLD."Options:".$TNORMAL."\n"
      . "  -f <file_name>: name of the Subsurface XML file to read (MUST be specified)\n"
-     . "  -1 <userdef1>: name of the 'userdef1' column\n"
-     . "  -2 <userdef2>: name of the 'userdef2' column\n"
+     . "  -1 <userdef1> : name of the 'userdef1' column\n"
+     . "  -2 <userdef2> : name of the 'userdef2' column\n"
+     . "  -i <num>      : ignore dive profiles shorter than <num> on export"
      . "\n";
 }
 
-$opts = getopt("f:1:2:");
+$opts = getopt("f:1:2:i:");
 $optind = 1;
 if ( isset($opts['f']) && !empty($opts['f']) ) { ++$optind; ++$optind; $file = $opts['f']; } else { syntax(); exit; }
 if ( isset($opts['1']) ) { ++$optind; ++$optind; $userdef1 = $opts['1']; } else $userdef1 = '';
 if ( isset($opts['2']) ) { ++$optind; ++$optind; $userdef2 = $opts['2']; } else $userdef2 = '';
+if ( isset($opts['i']) ) { ++$optind; ++$optind; $min_prof_len = $opts['i']; } else $min_prof_len = 0;
 
 switch($argv[$optind]) {
   case 'sitemap':
@@ -43,7 +45,7 @@ switch($argv[$optind]) {
       echo $res[1]."\n";
     }
     if ( empty($argv[$optind +1]) || $argv[$optind +1]=='dives' ) {
-      $res = $sub->export_dives();
+      $res = $sub->export_dives($min_prof_len);
       echo $res[1]."\n";
     }
     break;

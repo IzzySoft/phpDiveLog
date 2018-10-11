@@ -180,7 +180,7 @@ class subsurface {
 
   // create PDL logbook.csv
   // !!!TODO:!!! DiveProfiles
-  function export_dives() {
+  function export_dives($min_profile_len=0) {
     // Load divemap
     if ( !file_exists($this->divemap_file) ) {
       return [1, "Could not find divemap file '".$this->divemap_file."', please create one first."];
@@ -301,6 +301,7 @@ class subsurface {
       // dive profile
       if ( array_key_exists('divecomputer',$dive) && array_key_exists('sample',$dive['divecomputer']) ) {
         $prof = '"time";"depth";"gas";tank#;"warning"' ."\n";
+        if ( $min_profile_len > 0 && count($dive['divecomputer']['sample']) < $min_profile_len ) continue; // skip dummy profiles
         foreach ( $dive['divecomputer']['sample'] as $sample ) {
           $tmp = explode(' ',$sample['attr']['time']);
           $prof .= '"'.$tmp[0].'";"'.$sample['attr']['depth'].'";"'.$dmap->{$dive['attr']['number']}->tank_gas.'";1;""' . "\n";
