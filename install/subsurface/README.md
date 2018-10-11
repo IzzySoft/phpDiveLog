@@ -14,7 +14,8 @@ uses mapping files you can modify.
 
 ### Recommended Usage
 It is recommended to start with a separate, empty directory in which a copy of Subsurface's XML file is
-placed. Copy/symlink Subvert's files here (or place them into your `$PATH`), then you're ready to go.
+placed. Copy/symlink Subvert's files here (or place them into your `$PATH` – or use them from where
+they are and specify the `/full/path/to/your.xml` via the `-f` parameter), then you're ready to go.
 First you need to create above mentioned mapping files:
 
     ./subvert.php -f divelog.xml -1 Accessories sitemap create
@@ -38,6 +39,15 @@ Which will generate the three files `divesites.csv`, `logbook.csv` and `global.c
 final step, you copy into your diver's PDL `data/` directory.
 
 
+### Dive Profiles
+Subvert also generates the dive profile `*.csv` files from your Subversion XML. Keep in mind that
+Subversion also creates a „dummy profile“ if you manually add a dive and don't have profile data
+collected with any dive computer (or by other means). You probably don't want to copy such dummies
+to your PDL dive log. They are easy to spot, though, usually being smaller than 200 bytes while a
+„real profile“ rarely is smaller than 2 kbytes (unless it was a very short dive). So it's up to
+you which profiles you „copy over”.
+
+
 ### Syntax
 Just call `./subvert.php` without any parameters, and it will tell you it
 
@@ -48,7 +58,6 @@ Just call `./subvert.php` without any parameters, and it will tell you it
 
 
 ### Open Issues
-* Subvert does not yet create the `diveprofile*.csv` files. This hopefully will follow later
 * Subvert isn't really "fool proof". While it will complain if it doesn't find something it needs,
   it will e.g. overwrite files (on `sitemap create`, `divemap create` and `export`) without asking
   or creating backups.

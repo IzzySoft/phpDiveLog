@@ -200,6 +200,7 @@ class subsurface {
     }
 
     $depths = $times = []; // store array of depths and dive times for global.csv here
+    $profs = 0;            // number of exported dive profiles
 
     // create CSV
     $csv = 'dive#;"date";"time";site_id;"location";"place";"depth";"divetime";tank#;"tank_id";"tank_name";"tank_volume";"tank_gas";'
@@ -296,9 +297,21 @@ class subsurface {
 
       // finito, save logbook
       $csv .= "\n";
+
+      // dive profile
+      if ( array_key_exists('divecomputer',$dive) && array_key_exists('sample',$dive['divecomputer']) ) {
+        $prof = '"time";"depth";"gas";tank#;"warning"' ."\n";
+        foreach ( $dive['divecomputer']['sample'] as $sample ) {
+          $tmp = explode(' ',$sample['attr']['time']);
+          $prof .= '"'.$tmp[0].'";"'.$sample['attr']['depth'].'";"'.$dmap->{$dive['attr']['number']}->tank_gas.'";1;""' . "\n";
+        }
+        $tmp = 'dive'.str_pad($dive['attr']['number'],5,'0',STR_PAD_LEFT).'_profile.csv';
+        $prof = recode_string('utf8..lat1',$prof);
+        if ( file_put_contents($this->dir.DIRECTORY_SEPARATOR.$tmp,$prof) ) ++$profs;
+      }
     }
     $csv = recode_string('utf8..lat1',$csv); // PDL expects this in Latin-1 CRLF, as from ADL conduit
-    if ( file_put_contents($this->dir.DIRECTORY_SEPARATOR.'/logbook.csv',$csv) ) return [0,"Divelog stored in '".$this->dir.DIRECTORY_SEPARATOR.'logbook.csv'."'."];
+    if ( file_put_contents($this->dir.DIRECTORY_SEPARATOR.'logbook.csv',$csv) ) return [0,"Divelog stored in '".$this->dir.DIRECTORY_SEPARATOR.'logbook.csv'."'. ${profs} dive profiles exported along."];
     else return [5,"Could not write '".$this->dir.DIRECTORY_SEPARATOR.'logbook.csv'."'!"];
 
     // statistics (global.csv) from depths[] and times[]
