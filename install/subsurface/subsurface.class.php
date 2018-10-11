@@ -1,5 +1,5 @@
 <?php
-require_once('xml2array.php');
+require_once(__DIR__.'/xml2array.php');
 
 class subsurface {
 
