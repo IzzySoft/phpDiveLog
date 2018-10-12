@@ -1,15 +1,17 @@
 ## Subsurface Convertor
 This directory holds a simple tool to import your divelogs from [Subsurface](https://subsurface-divelog.org/).
 The convertor is not only far from being perfect, it currently is also incomplete. It works for simple
-dive logs, but e.g. doesn't cater for multi-tank dives or using Trimix, for example.
+dive logs, but e.g. doesn't cater for multi-tank dives, multiple dive computers, or using Trimix, for example.
 
 (For those who don't know: Subsurface is an open source divelog program for recreational, tech, and free-divers
 that runs on Windows, Mac and Linux.)
 
-Subsurface provides several fields unknown to AquaDiveLog (ADL) / phpDiveLog (PDL), like "suitweight",
+Subsurface provides several fields unknown to AquaDiveLog (ADL) / phpDiveLog (PDL), like „suitweight“,
+geo-categories (eg. Country), what kind of weight system (eg. „integrated“) or dive computer was used –
 which this convertor ignores. But then there are several fields in ADL/PDL which Subsurface doesn't
-know – but especially those having used ADL/PDL in the past don't want to lose. For those, "Subvert"
-uses mapping files you can modify.
+know – but especially those having used ADL/PDL in the past don't want to lose. Moreover, Subsurface
+uses „HEX“ values for divesite IDs while ADL/PDL use integers. For those things, "Subvert" uses
+„mapping files“ you can modify: match the correct divesite IDs, provide additional details.
 
 
 ### Recommended Usage
@@ -33,8 +35,10 @@ After that, you only need to adjust the new records. That done, you can create t
 
     ./subvert.php -f divelog.xml -1 Accessories export
 
-Which will generate the three files `divesites.csv`, `logbook.csv` and `global.csv` – which in a
-final step, you copy into your diver's PDL `data/` directory.
+Which will generate the three files `divesites.csv`, `logbook.csv` and `global.csv` along with (if the
+corresponding data does exist) a bundle of `dive*_profile.csv` files (see below) – which in a final
+step, you copy into your diver's PDL `data/` directory (please make a backup of existing `*.csv` files
+first, just in case: Subvert is far from having been thoroughly tested, things might go wrong).
 
 
 ### Dive Profiles
@@ -54,8 +58,8 @@ Just call `./subvert.php` without any parameters, and it will tell you it
 
 * requires `-f` followed by the (path and) name of your XML file as first parameter
 * optionally takes the parameters `-1` and `-2` to define the `userdef1` and `userdef2` columns you might have used with ADL/PDL
-* knows the commands `sitemap`, `divemap` (each with the parameters `create` and `update`, from which you'll pick one) and `export`
-* knows an optional parameter to its `export` command in case you want to only create the sitemap or only the logbook.
+* knows the commands `create`, `update` (for the mapping files) and `export` – each with an optional parameter which can be
+  either `dives` or `sites` (if not specified, both will be dealt with)
 
 
 ### Open Issues
