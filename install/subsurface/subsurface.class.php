@@ -180,7 +180,7 @@ class subsurface {
   }
 
 
-  // create PDL logbook.csv
+  // create PDL logbook.csv and dive*_profile.csv
   // !!!TODO:!!! DiveProfiles
   function export_dives($min_profile_len=0) {
     // Load divemap
@@ -301,10 +301,16 @@ class subsurface {
       $csv .= "\n";
 
       // dive profile
-      if ( array_key_exists('divecomputer',$dive) && array_key_exists('sample',$dive['divecomputer']) ) {
+      $samples = [];
+      if ( array_key_exists('divecomputer',$dive) && array_key_exists(0,$dive['divecomputer']) && array_key_exists('sample',$dive['divecomputer'][0]) ) {  // real profile is in first record
+        $samples = $dive['divecomputer'][0]['sample'];
+      } elseif ( array_key_exists('divecomputer',$dive) && array_key_exists('sample',$dive['divecomputer']) ) {
+        $samples = $dive['divecomputer']['sample'];
+      }
+      if ( !empty($samples) ) {
         $prof = '"time";"depth";"gas";tank#;"warning"' ."\n";
-        if ( $min_profile_len > 0 && count($dive['divecomputer']['sample']) < $min_profile_len ) continue; // skip dummy profiles
-        foreach ( $dive['divecomputer']['sample'] as $sample ) {
+        if ( $min_profile_len > 0 && count($samples) < $min_profile_len ) continue; // skip dummy profiles
+        foreach ( $samples as $sample ) {
           $tmp = explode(' ',$sample['attr']['time']);
           $prof .= '"'.$tmp[0].'";"'.$sample['attr']['depth'].'";"'.$dmap->{$dive['attr']['number']}->tank_gas.'";1;""' . "\n";
         }
