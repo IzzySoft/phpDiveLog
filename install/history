@@ -6,6 +6,9 @@ History for phpDiveLog
 v0.4.7
 -------------------
 * vul_check: fixed preg_match to deal correctly with UTF8 characters like "ø"
+* replacing PHP short-open (?) tags by full open tags (?php)
+! replacing obsoleted eregi_replace and some other obsoleted preg_replace calls so it works with PHP7
++ added simple Subsurface to PDL convertor ("Subvert")
 
 v0.4.6 (13.10.2013)
 -------------------
