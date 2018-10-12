@@ -28,8 +28,8 @@
      switch(strtolower($segment)) {
        case "logbook" : $url = "buddylist.php"; break;
        case "global"  : $url = "index.php"; break;
-       case "loghelp" : $url = "help.php?topic=buddylist"; break;
-       case "globalhelp" : $url = "help.php?topic=dive"; break;
+       case "loghelp" : $url = $pdl->config->help_base."#global-diverbuddy-list"; break;
+       case "globalhelp" : $url = $pdl->config->help_base."#dive-details"; break;
      }
      $t->set_block("template","homeblock","home");
      if ( $pdl->config->enable_index ){ // switch-button
@@ -88,7 +88,7 @@
        $t->set_var("tab_img",$this->tab[$name]->img);
        if (!$this->tab[$name]->hideurl) {
          if (isset($this->tab[$name]->newwin)) {
-           $name = "<A HREF='JavaScript:open_help(\"".$this->tab[$name]->url."\")'>$sname</A>";
+           $name = "<a href='".$this->tab[$name]->url."' target='_blank'>${sname}</a>";
          } else
            $name = $pdl->link->linkurl($this->tab[$name]->url,$sname);
        } else { $name = lang("tab_".$name); }

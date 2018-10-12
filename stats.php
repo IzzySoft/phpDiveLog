@@ -10,9 +10,7 @@
  # Dive Statistics                                                           #
  #############################################################################
 
- # $Id$
-
-$helppage = "stats";
+$helppage = "statistics";
 include("inc/includes.inc");
 $title .= ": ".lang("statistics");
 $robots_index   = ROBOTS_INDEX_PAGES;

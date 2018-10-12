@@ -10,10 +10,8 @@
  # Display a single site record                                              #
  #############################################################################
 
- # $Id$
-
  #================================================[ Initialize environment ]===
- $helppage = "site";
+ $helppage = "site-details";
  include("inc/includes.inc");
  $id = $_GET["id"];
  $title .= ": Site# $id";

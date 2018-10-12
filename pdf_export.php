@@ -10,10 +10,8 @@
  # Initial form for multi-page PDF generation                                #
  #############################################################################
 
- # $Id$
-
  #================================================[ Initialize environment ]===
- $helppage = "pdf";
+ $helppage = "pdf-export";
  include("inc/includes.inc");
  $title .= ": ".lang("pdf_export");
 

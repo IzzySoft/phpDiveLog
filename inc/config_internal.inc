@@ -13,8 +13,10 @@
  /* $Id$ */
 
  $pdl->config = new stdClass();
- $pdl->config->version = "0.4.5+svn";
+ $pdl->config->version = "0.4.7";
  $pdl->config->site_title = $title;
+ $pdl->config->project_site = "https://github.com/IzzySoft/phpDiveLog"; // currently only used for help_base
+ $pdl->config->help_base = $pdl->config->project_site . "/wiki/UserManual";
 
  #=============================================================[ Debugging ]===
  error_reporting(0); // initially turn all off

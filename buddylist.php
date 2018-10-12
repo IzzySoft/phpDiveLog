@@ -12,7 +12,7 @@
 
  # $Id$
 
- $helppage = "buddylist";
+ $helppage = "global-diverbuddy-list";
  include("inc/includes.inc");
  $title .= ": BuddyList";
  $robots_index   = ROBOTS_INDEX_LISTS;

@@ -10,10 +10,8 @@
  # Display a single dive record                                              #
  #############################################################################
 
- # $Id$
-
  #================================================[ Initialize environment ]===
- $helppage = "dive";
+ $helppage = "dive-details";
  $listtype = "logbook";
  include("inc/includes.inc");
  $nr = $pdl->params->nr;

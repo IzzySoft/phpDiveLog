@@ -20,7 +20,7 @@
  $pdl->tabs->add_tab("diver","buddylist.php","tab_buddylist.gif");
  $pdl->tabs->add_tab("sites","places.php","tab_sites.gif");
  $pdl->tabs->add_tab("prefs","prefs.php?tab2=1","tab_preferences.gif");
- if (!empty($helppage)) $pdl->tabs->add_tab("help",$helppage,"tab_help.gif",1);
+ if (!empty($helppage)) $pdl->tabs->add_tab("help",$pdl->config->help_base."#${helppage}","tab_help.gif",1);
  $t->set_block("template","tabblock","tab");
 
 ?>

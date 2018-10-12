@@ -10,9 +10,7 @@
  # Global Sites Index                                                        #
  #############################################################################
 
- # $Id$
-
- $helppage = "globalsites";
+ $helppage = "global-site-index";
  include("inc/includes.inc");
  if (isset($_REQUEST["place"])) $showPlace = $_REQUEST["place"];
  else $showPlace = "";

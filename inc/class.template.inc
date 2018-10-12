@@ -12,8 +12,6 @@
  #                    Kristian Koehntopp                                     #
  #############################################################################
 
- /* $Id$ */
-
  /** Template processing
   * @package Api
   * @class Template
@@ -41,10 +39,10 @@ class Template {
   # "comment" => replace undefined variables with comments
   # "keep"    => keep undefined variables
   var $unknowns = "remove";
-  
+
   # "yes" => halt, "report" => report error, continue, "no" => ignore error quietly
   var $halt_on_error  = "yes";
-  
+
   # last error message is retained here
   var $last_error     = "";
 
@@ -62,7 +60,7 @@ class Template {
     $this->set_var("tpl_dir",str_replace($pdl->config->base_path,$pdl->config->base_url,$pdl->config->tpl_path)."/");
     $this->set_var("logoff_link",$pdl->config->base_url."login.php?logout=1");
     $this->set_var("page_id",$page_id);
-    $this->set_var("help_link","open_help('$page_id')");
+    // $this->set_var("help_link","open_help('$page_id')");
     $this->set_var("home_link",$pdl->config->base_url."index.php");
     $this->set_var("search_link",$pdl->config->base_url."search.php");
   }

@@ -10,10 +10,8 @@
  # Logbook index                                                             #
  #############################################################################
 
- # $Id$
-
  $listtype = "logbook";
- $helppage = "divelist";
+ $helppage = "dives-index";
  include("inc/includes.inc");
  $title .= ": DiveIndex";
  $robots_index   = ROBOTS_INDEX_LISTS;

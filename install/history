@@ -1,5 +1,3 @@
-$Id$
-
 History for phpDiveLog
 ======================
 
@@ -9,6 +7,7 @@ v0.4.7
 * replacing PHP short-open (?) tags by full open tags (?php)
 ! replacing obsoleted eregi_replace and some other obsoleted preg_replace calls so it works with PHP7
 + added simple Subsurface to PDL convertor ("Subvert")
+! help links broke when the old project server shut down. Fixed and replaced JS popup by "new tab"
 
 v0.4.6 (13.10.2013)
 -------------------

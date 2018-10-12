@@ -10,9 +10,7 @@
  # Sites Index                                                               #
  #############################################################################
 
- # $Id$
-
- $helppage = "sitelist";
+ $helppage = "site-index";
  include("inc/includes.inc");
  $title .= ": SiteIndex";
  $robots_index   = ROBOTS_INDEX_LISTS;

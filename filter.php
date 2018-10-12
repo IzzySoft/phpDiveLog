@@ -13,7 +13,7 @@
  # $Id$
 
  #================================================[ Initialize environment ]===
- $helppage = "filter";
+ $helppage = "filtersearch";
  include("inc/includes.inc");
  $title .= ": ".lang("filter");
 

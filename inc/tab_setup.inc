@@ -29,7 +29,7 @@
  } else {
    $pdl->tabs->add_tab("filter","filter.php","filter.png");
  }
- if (!empty($helppage)) $pdl->tabs->add_tab("help",$helppage,"tab_help.gif",1);
+ if (!empty($helppage)) $pdl->tabs->add_tab("help",$pdl->config->help_base."#${helppage}","tab_help.gif",1);
  $t->set_block("template","tabblock","tab");
 
 ?>

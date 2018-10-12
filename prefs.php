@@ -10,9 +10,7 @@
  # Dive Statistics                                                           #
  #############################################################################
 
- # $Id$
-
- $helppage = "prefs";
+ $helppage = "preferences";
  include("inc/includes.inc");
  $title .= ": ".lang("preferences");
  if ( !empty($_GET["tab2"]) ) {
