@@ -164,8 +164,8 @@
       $csv = new csv(";",'"',TRUE);
       $csv->import(EMOTICON_FILE);
       foreach ($csv->data as $emo) {
-        $preg = '|(\s)'.str_replace("(","\(",str_replace(")","\)",str_replace("|","\|",$emo["code"]))).'(\s)|i';
-        $data = preg_replace($preg,'$1<img src="'.$emo["url"].'" alt="'.$emo["code"].'">$2',$data);
+        $preg = '!(\s)'.str_replace("(","\(",str_replace(")","\)",str_replace("|","\|",$emo["code"]))).'(\s|$)!i';
+        $data = preg_replace($preg,'$1<img border="0" src="'.$emo["url"].'" alt="'.$emo["code"].'">$2',$data);
       }
     }
     return $data;

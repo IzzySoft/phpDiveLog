@@ -122,7 +122,7 @@
  $robots_revisit_prefs = 9999;      # and for settings/preference related pages
 
  #------------------------------------------------------------------[ misc ]---
- $emoticon_file = "inc/emoticons.csv"; # Use emoticons? From where?
+ // $emoticon_file = "inc/emoticons.csv"; # Use emoticons? From where?
  $debug_level = "EW";     # What shall be logged: [E]rrors, [W]arnings,
                           # [N]otices, [A]ll?
  $debug_show = 0;         # Show errors on screen (1) or not (0)
