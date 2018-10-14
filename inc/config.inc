@@ -36,9 +36,9 @@
                           # must be a valid account (subdir diver/<user>)
 
  #----------------------------------------------------[ Geographical Stuff ]---
- $mapsite = "Google";     # Where to show the dive site in a map. Possible
+ $mapsite = "OSM   ";     # Where to show the dive site in a map. Possible
                           # values: "Mapquest" (old style), "Google" (Google Maps),
-			  # "Yahoo" (Yahoo Maps)
+                          # "Yahoo" (Yahoo Maps), "OSM" (Open Street Map)
  $global_kml = TRUE;      # Offer links to global KML files (TRUE) on the global
                           # places list or not (FALSE)
 

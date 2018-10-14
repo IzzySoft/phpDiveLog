@@ -24,10 +24,12 @@
    * @constructor link
    */
   function link() {
-    $this->mapurl["Mapquest"] = "http://www.mapquest.com/maps/map.adp?latlongtype=decimal&latitude={lat}&longitude={long}";
-    $this->mapurl["Google"]   = "http://maps.google.com/?ll={lat},{long}&q={lat},{long}+({desc})&t=h";
-    $this->mapurl["Yahoo"]    = "http://maps.yahoo.com/#mvt=h&lat={lat}&lon={long}";
-    $this->mapsite            = $GLOBALS["mapsite"];
+    $this->mapurl["Mapquest"] = "https://www.mapquest.com/maps/map.adp?latlongtype=decimal&latitude={lat}&longitude={long}";
+    $this->mapurl["Google"]   = "https://maps.google.com/?ll={lat},{long}&q={lat},{long}+({desc})&t=h";
+    $this->mapurl["Yahoo"]    = "https://maps.yahoo.com/#mvt=h&lat={lat}&lon={long}";
+    $this->mapurl["OSM"]      = "https://www.openstreetmap.org/?mlat={lat}&mlon={long}&zoom=15&layers=C";
+    if ( !array_key_exists("mapsite",$GLOBALS) || !array_key_exists($GLOBALS["mapsite"],$this->mapurl) ) $this->mapsite = "OSM";
+    else $this->mapsite            = $GLOBALS["mapsite"];
   }
 
   /** Provide a link with session info, if necessary
