@@ -38,6 +38,18 @@
   <th>&nbsp;</th>
   <th style="text-align:right">{md_name}</th> <td>{depth}</td>
   <th>&nbsp;</th>
+ </tr><tr>
+  <th>&nbsp;</th>
+  <th style="text-align:right">{water_name}</th> <td>{water}</td>
+  <th>&nbsp;</th>
+  <th style="text-align:right">{divetype_name}</th> <td>{type}</td>
+  <th>&nbsp;</th>
+ </tr><tr>
+  <th>&nbsp;</th>
+  <th style="text-align:right">{rating_name}</th> <td>{rating}</td>
+  <th>&nbsp;</th>
+  <th style="text-align:right">&nbsp;</th> <td>&nbsp;</td>
+  <th>&nbsp;</th>
  </tr>
 </table>
 <!-- BEGIN notesblock -->

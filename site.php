@@ -67,13 +67,17 @@
  $t->set_var("long_name",lang("longitude").":");
  $t->set_var("alt_name",lang("altitude").":");
  $t->set_var("md_name",lang("max_depth").":");
+ $t->set_var("water_name",lang("water").":");
+ $t->set_var("divetype_name",lang("divetype").":");
+ $t->set_var("rating_name",lang("rating").":");
  $t->set_var("notes_name",lang("notes").":");
 
  #============================[ Walk through the list and set up the table ]===
- $details = array ("id","loc","place","depth","latitude","longitude","altitude");
+ $details = array ("id","loc","place","depth","latitude","longitude","altitude","water","type");
  foreach($details AS $detail) {
    $t->set_var("$detail",$site[$detail]);
  }
+ $t->set_var("rating","<img src='".$pdl->config->tpl_url."images/".$site["rating"]."star.gif"."' alt='Rating:".$site["rating"]."'>");
  $maplink = $pdl->link->map($site["latitude"],$site["longitude"],$site["loc"].": ".$site["place"]);
  if ( empty($maplink) ) {
    $t->set_var("anim","");
