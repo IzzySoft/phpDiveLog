@@ -92,7 +92,7 @@
  $t->set_var("md_name",lang("max_depth")."&nbsp;".$sortimg["up"]["depth"].$sortimg["down"]["depth"]);
  $t->set_var("rating_name",lang("rating"));
  $pdl_url = $pdl->link->get_baseurl()."/sitelist_kml.php?diver=$diver";
- $t->set_var("dl_kml",lang("show_kml")." [<a href='sitelist_kml.php?diver=$diver'>Google Earth</a> | <a href='http://maps.google.com/?q=".urlencode($pdl_url)."' TARGET='_blank'>Google Maps</a>]");
+ $t->set_var("dl_kml","[<a href='sitelist_kml.php?diver=$diver'>".lang("download_kml")."</a> | <a href='".$pdl->link->kml($pdl_url)."' TARGET='_blank'>".lang("show_kml_in",$pdl->link->kmlsite)."</a>]");
 
  #============================[ Walk through the list and set up the table ]===
  $details = array ("id","loc","place","depth");

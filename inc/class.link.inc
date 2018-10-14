@@ -30,6 +30,11 @@
     $this->mapurl["OSM"]      = "https://www.openstreetmap.org/?mlat={lat}&mlon={long}&zoom=15&layers=C";
     if ( !array_key_exists("mapsite",$GLOBALS) || !array_key_exists($GLOBALS["mapsite"],$this->mapurl) ) $this->mapsite = "OSM";
     else $this->mapsite            = $GLOBALS["mapsite"];
+
+    $this->kmlurl["Google"]   = "https://maps.google.com/?q={kml}";
+    $this->kmlurl["OSM"]      = "https://osm.quelltextlich.at/viewer-js.html?kml_url={kml}";
+    if ( !array_key_exists("mapsite",$GLOBALS) || !array_key_exists($GLOBALS["mapsite"],$this->kmlurl) ) $this->kmlsite = "OSM";
+    else $this->kmlsite            = $GLOBALS["mapsite"];
   }
 
   /** Provide a link with session info, if necessary
@@ -129,6 +134,16 @@
     if ($desc!="") $desc = "+(".urlencode(str_replace($search,$replace,$desc)).")";
     $url  = str_replace(array("{lat}","{long}","+({desc})"),array($lat,$long,$desc),$this->mapurl[$this->mapsite]);
     return($url);
+  }
+
+  /** Create link for external KML viewer
+   * @class link
+   * @method kml
+   * @param string url  URL of the KML file
+   * @return string url
+   */
+  function kml($url) {
+    return str_replace("{kml}",urlencode($url),$this->kmlurl[$this->mapsite]);
   }
 
   /** Evaluate the servers root URL (e.g. 'http://www.server.com')
