@@ -77,7 +77,9 @@
  foreach($details AS $detail) {
    $t->set_var("$detail",$site[$detail]);
  }
- $t->set_var("rating","<img src='".$pdl->config->tpl_url."images/".$site["rating"]."star.gif"."' alt='Rating:".$site["rating"]."'>");
+ if ( $site["rating"] > 0 )
+   $t->set_var("rating","<img src='".$pdl->config->tpl_url."images/".$site["rating"]."star.gif"."' alt='Rating:".$site["rating"]."'>");
+ else $t->set_var("rating","");
  $maplink = $pdl->link->map($site["latitude"],$site["longitude"],$site["loc"].": ".$site["place"]);
  if ( empty($maplink) ) {
    $t->set_var("anim","");
