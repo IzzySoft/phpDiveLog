@@ -90,6 +90,7 @@
  $t->set_var("loc_name",lang("location")."&nbsp;".$sortimg["up"]["location"].$sortimg["down"]["location"]);
  $t->set_var("place_name",lang("place")."&nbsp;".$sortimg["up"]["place"].$sortimg["down"]["place"]);
  $t->set_var("md_name",lang("max_depth")."&nbsp;".$sortimg["up"]["depth"].$sortimg["down"]["depth"]);
+ $t->set_var("rating_name",lang("rating"));
  $pdl_url = $pdl->link->get_baseurl()."/sitelist_kml.php?diver=$diver";
  $t->set_var("dl_kml",lang("show_kml")." [<a href='sitelist_kml.php?diver=$diver'>Google Earth</a> | <a href='http://maps.google.com/?q=".urlencode($pdl_url)."' TARGET='_blank'>Google Maps</a>]");
 
@@ -105,7 +106,9 @@
      $t->set_var("depth",$sites[$i]["depth"]);
    }
    $t->set_var("site_ref",$pdl->link->linkurl("site.php?id=".$sites[$i]["id"],$sites[$i]["id"]));
-#   $t->set_var("rating",$pdl->config->tpl_url."images/".$sites[$i]["rating"]."star.gif");
+   if ( $sites[$i]["rating"] > 0 )
+     $t->set_var("rating","<img src='".$pdl->config->tpl_url."images/".$sites[$i]["rating"]."star.gif' alt='".$sites[$i]["rating"]."'></img>");
+   else $t->set_var("rating","");
    if ( $pdl->file->havePix($sites[$i]["id"],"site") ) {
      $t->set_var("pix",'<img src="'.$pdl->config->tpl_url.'images/camera.gif" valign="middle">');
    } else {

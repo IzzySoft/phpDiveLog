@@ -22,17 +22,18 @@
 </table>
 
 <table border="1" cellpadding="2" align="center" style="margin-top:7;">
- <tr><th></th><th>{loc_name}</th><th>{place_name}</th><th>{md_name}</th><th>&nbsp;</th></tr>
+ <tr><th></th><th>{loc_name}</th><th>{place_name}</th><th>{md_name}</th><th>{rating_name}</th><th>&nbsp;</th></tr>
 
 <!-- BEGIN itemblock -->
  <tr><td align="right">{site_ref}</td>
   <td align="center">{loc}</td>
   <td align="center">{place}</td>
   <td align="right">{depth}</td>
+  <td>{rating}</td>
   <td align="center">{pix}</td>
  </tr>
 <!-- END itemblock -->
- <tr><td colspan="5" align="center">{dl_kml}</td></tr>
+ <tr><td colspan="6" align="center">{dl_kml}</td></tr>
 </table>
 
 <table class="pagetab" border="0" cellpadding="0" align="center" style="margin-top:7;min-width:400px;">
