@@ -102,7 +102,9 @@
  $t->set_var("item_data",$dive["buddy"]);
  $t->parse("sum","sumblock",TRUE);
  $t->set_var("item_name",lang("rating").":");
- $t->set_var("item_data","<img src='".$pdl->config->tpl_url."images/".$dive["rating"]."star.gif"."' alt='Rating:".$dive["rating"]."'>");
+ if ( $dive["rating"] > 0 )
+   $t->set_var("item_data","<img src='".$pdl->config->tpl_url."images/".$dive["rating"]."star.gif"."' alt='Rating:".$dive["rating"]."'>");
+ else $t->set_var("item_data","");
  $t->parse("sum","sumblock",TRUE);
  $t->set_var("item_name","&nbsp;"); // dummy empty line to match the
  $t->set_var("item_data","&nbsp;"); // neighbour table
